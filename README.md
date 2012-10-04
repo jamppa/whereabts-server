@@ -1,6 +1,6 @@
 # loccify
 
-A location based micro blogging web app
+	backend and rest-service for loccify.
 
 ## Usage
 
