@@ -1,6 +1,6 @@
 # loccify
 
-	backend and rest-service for loccify.
+backend and rest-service for loccify.
 
 ## Usage
 
