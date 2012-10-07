@@ -1,0 +1,1 @@
+(ns loccify.model.loccage)
