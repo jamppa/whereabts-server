@@ -14,7 +14,8 @@
 		(db-insert user-collection-name user)))
 
 (defn find-user-by-id [id]
-	(db-find (create-query-details :find-one {:_id (ObjectId. id)} user-collection-name)))
+	(db-find 
+		(create-query-details :find-one {:_id (ObjectId. id)} user-collection-name)))
 
 (defn- create-query-details [type query collection-name]
 	{:find-type type :query query :collection collection-name})
