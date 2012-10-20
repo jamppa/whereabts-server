@@ -1,6 +1,7 @@
 (ns loccify.db-test
 	(:use [midje.sweet])
 	(:use [loccify.db])
+	(:use [midje.util :only [testable-privates]])
 	(:require [monger.core :as monger]
 			  [monger.collection :as monger-collection]))
 
@@ -8,6 +9,8 @@
 (def query-find-one {:find-type :find-one :collection "coll" :query "query"})
 (def query-find-many (assoc query-find-one :find-type :find-many))
 (def query-result {:key "val"})
+
+(testable-privates loccify.db merge-obj-id)
 
 (fact "should insert object to collection and return it"
 	(db-insert "loccify" obj-to-insert) => obj-to-insert
@@ -20,3 +23,6 @@
 (fact "should find many as maps from collection by given query-details"
 	(db-find query-find-many) => query-result
 	(provided (monger-collection/find-maps "coll" "query") => query-result :times 1))
+
+(fact "should merge mongo object id to persistable object"
+	(contains? (merge-obj-id {}) :_id) => truthy)
