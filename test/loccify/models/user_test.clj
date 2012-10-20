@@ -1,0 +1,1 @@
+(ns loccify.models.user-test)
