@@ -24,5 +24,5 @@
 	(db-find query-find-many) => query-result
 	(provided (monger-collection/find-maps "coll" "query") => query-result :times 1))
 
-(fact "should merge mongo object id to persistable object"
+(fact "should merge mongo object-id to persistable object"
 	(contains? (merge-obj-id {}) :_id) => truthy)
