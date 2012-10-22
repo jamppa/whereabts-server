@@ -20,3 +20,7 @@
 (fact "should not save invalid user to db"
 	(save-user invalid-user) => nil
 	(provided (db-insert "users" invalid-user) => nil :times 0))
+
+(fact "should find user by id from db"
+	(find-user-by-id "50719f30300426140c2a549b") => valid-user
+	(provided (db-find anything) => valid-user :times 1))
