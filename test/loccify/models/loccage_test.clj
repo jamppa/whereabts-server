@@ -5,7 +5,7 @@
 	(:import [org.bson.types ObjectId]))
 
 (defn create-valid-loccage []
-	{:user_id (ObjectId.) :message "dägä" :location {:lon 1.123 :lat 1.123}})
+	{:user_id (ObjectId.) :message "dägä" :location [1.234 2.345]})
 
 (defn create-invalid-loccage []
 	{:message "dägä"})

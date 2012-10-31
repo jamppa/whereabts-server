@@ -7,8 +7,7 @@
 	(validation-set
 		(presence-of :message)
 		(presence-of :user_id)
-		(presence-of [:location :lon])
-		(presence-of [:location :lat])))
+		(presence-of :location)))
 
 (def loccage-collection-name "loccages")
 
