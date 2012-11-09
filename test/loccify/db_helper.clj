@@ -5,7 +5,7 @@
 
 (def test-db-name "loccify_test")
 (def test-obj-a {:_id (ObjectId. "509d513f61395f0ebbd5e32a") :a "a" :b "b"})
-(def test-obj-b {:_id (ObjectId. "509d513f61395f0ebbd5e32b") :a "aa" :b "bb"})
+(def test-obj-b {:_id (ObjectId. "509d513f61395f0ebbd5e32b") :a "aa" :b "b"})
 
 (defn connect-to-test-db []
 	(monger/connect!)

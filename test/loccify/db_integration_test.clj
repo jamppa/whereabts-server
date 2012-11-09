@@ -12,3 +12,6 @@
 (fact "should find one object from database by query-details"
 	(db-find 
 		(query-details :find-one "docs" {:_id (ObjectId. "509d513f61395f0ebbd5e32a")})) => test-obj-a)
+
+(fact "should find many objects from database by query-details"
+	(db-find (query-details :find-many "docs" {:b "b"})) => [test-obj-a test-obj-b])
