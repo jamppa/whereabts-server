@@ -1,28 +1,20 @@
 (ns loccify.db-test
-	(:use [midje.sweet])
 	(:use [loccify.db])
-	(:use [midje.util :only [testable-privates]])
-	(:require [monger.core :as monger]
-			  [monger.collection :as monger-collection]))
+	(:use [loccify.db-helper])
+	(:use [midje.sweet])
+	(:import [org.bson.types ObjectId]))
 
-(def obj-to-insert {:somekey "someval"})
-(def query-find-one {:find-type :find-one :collection "coll" :query "query"})
-(def query-find-many (assoc query-find-one :find-type :find-many))
-(def query-result {:key "val"})
+(defn- query-details [type coll query]
+	{:find-type type :collection coll :query query})
 
-(testable-privates loccify.db merge-obj-id)
+(background (before :facts (setup-test-db)))
 
-(fact "should insert object to collection and return it"
-	(db-insert "loccify" obj-to-insert) => obj-to-insert
-	(provided (monger-collection/insert-and-return "loccify" anything) => obj-to-insert :times 1 ))
+(fact "should find one object from database by query-details"
+	(db-find (query-details :find-one "docs" {:_id (ObjectId. "509d513f61395f0ebbd5e32a")})) => test-obj-a)
 
-(fact "should find one as map from collection by given query-details"
-	(db-find query-find-one) => query-result
-	(provided (monger-collection/find-one-as-map "coll" "query") => query-result :times 1))
+(fact "should find many objects from database by query-details"
+	(db-find (query-details :find-many "docs" {:b "b"})) => [test-obj-a test-obj-b])
 
-(fact "should find many as maps from collection by given query-details"
-	(db-find query-find-many) => query-result
-	(provided (monger-collection/find-maps "coll" "query") => query-result :times 1))
-
-(fact "should merge mongo object-id to persistable object"
-	(contains? (merge-obj-id {}) :_id) => truthy)
+(fact "should insert object to database with object-id"
+	(let [inserted-obj (db-insert "docs" {:a "aaa" :b "bbb"})]
+		(= inserted-obj (db-find (query-details :find-one "docs" {:_id (:_id inserted-obj)}))) => truthy))
