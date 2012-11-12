@@ -1,26 +1,20 @@
 (ns loccify.models.user-test
-	(:use [midje.sweet])
-	(:use [midje.util :only [testable-privates]])
 	(:use [loccify.models.user])
-	(:use [loccify.db]))
+	(:use [loccify.db-helper])
+	(:use [midje.sweet])
+	(:import [org.bson.types ObjectId]))
 
-(testable-privates loccify.models.user create-query-details)
+(background (before :facts (setup-test-db)))
 
-(def expected-query-details {:find-type :find-one :query {:key "val"} :collection "coll"})
-(def valid-user {:name "teppo" :email "teppo@test.fi"})
-(def invalid-user {:name "teppo"})
+(def invalid-user {:name "sefsdf"})
+(def valid-user {:name "asdasd" :email "asds@asds.fi"})
 
-(fact "should create correct query details map"
-	(create-query-details :find-one {:key "val"} "coll") => expected-query-details)
+(fact "should find user by id"
+	(find-user-by-id "509d513f61395f0ebbd5e33a") => test-user-a)
 
-(fact "should save valid user to db and return it"
-	(save-user valid-user) => valid-user
-	(provided (db-insert "users" valid-user) => valid-user :times 1))
+(fact "should not save invalid user"
+	(save-user invalid-user) => nil)
 
-(fact "should not save invalid user to db"
-	(save-user invalid-user) => nil
-	(provided (db-insert "users" invalid-user) => nil :times 0))
-
-(fact "should find user by id from db"
-	(find-user-by-id "50719f30300426140c2a549b") => valid-user
-	(provided (db-find anything) => valid-user :times 1))
+(fact "should save valid user"
+	(let [saved-usr (save-user valid-user)]
+		(find-user-by-id (.toString (:_id saved-usr))) => saved-usr))
