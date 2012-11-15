@@ -15,6 +15,7 @@
 (defn populate-test-db []
 	(monger-col/remove "docs")
 	(monger-col/remove "users")
+	(monger-col/remove "loccages")
 	(monger-col/insert "docs" test-obj-a)
 	(monger-col/insert "docs" test-obj-b)
 	(monger-col/insert "users" test-user-a))
