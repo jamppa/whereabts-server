@@ -18,3 +18,6 @@
 (fact "should save valid loccage"
 	(let [saved-loccage (save-loccage valid-loccage)]
 		(find-loccage-by-id (.toString (:_id saved-loccage))) => saved-loccage))
+
+(fact "should not save invalid loccage"
+	(save-loccage invalid-loccage) => nil)
