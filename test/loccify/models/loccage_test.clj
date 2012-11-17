@@ -11,3 +11,6 @@
 
 (fact "should find loccage by id"
 	(find-loccage-by-id "509d513f61395f0ebbd5e34a") => test-loccage-a)
+
+(fact "should return nil when trying to find loccage by id which doesnt exist"
+	(find-loccage-by-id "509d513f61395f0ebbd5e34f") => nil)
