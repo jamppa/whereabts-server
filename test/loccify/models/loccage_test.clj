@@ -14,3 +14,7 @@
 
 (fact "should return nil when trying to find loccage by id which doesnt exist"
 	(find-loccage-by-id "509d513f61395f0ebbd5e34f") => nil)
+
+(fact "should save valid loccage"
+	(let [saved-loccage (save-loccage valid-loccage)]
+		(find-loccage-by-id (.toString (:_id saved-loccage))) => saved-loccage))
