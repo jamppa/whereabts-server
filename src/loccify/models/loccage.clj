@@ -11,6 +11,12 @@
 
 (def loccage-collection-name "loccages")
 
+(defn find-loccage-by-id [id]
+	(db-find {
+		:find-type :find-one 
+		:collection loccage-collection-name 
+		:query {:_id (ObjectId. id)}}))
+
 (defn save-loccage [loccage]
 	(when (valid? (create-validation-set-for-loccage) loccage)
 		(db-insert loccage-collection-name loccage)))
