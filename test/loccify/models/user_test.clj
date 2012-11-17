@@ -12,6 +12,9 @@
 (fact "should find user by id"
 	(find-user-by-id "509d513f61395f0ebbd5e33a") => test-user-a)
 
+(fact "should return nil when trying to find user by id which doesnt exist"
+	(find-user-by-id "509d513f61395f0ebbd5e56a") => nil)
+
 (fact "should not save invalid user"
 	(save-user invalid-user) => nil)
 
