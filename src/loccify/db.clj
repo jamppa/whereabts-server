@@ -10,6 +10,9 @@
 	(monger/connect!)
 	(monger/set-db! (monger/get-db db-name)))
 
+(defn db-geospatialize [collection]
+	(monger-collection/ensure-index collection {:loc "2d"}))
+
 (defn db-insert [collection obj]
 	(let [obj-with-id (merge-obj-id obj)]
 		(monger-collection/insert-and-return collection obj-with-id)))

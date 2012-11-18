@@ -21,3 +21,9 @@
 
 (fact "should not save invalid loccage"
 	(save-loccage invalid-loccage) => nil)
+
+(fact "should create location-object"
+	(location 10.0 10.0 500) => {:lon 10.0, :lat 10.0, :dist 500})
+
+(fact "should find loccages near by location and distance of 500 meters"
+	(find-loccages-near (location 50.0 50.0 500)) => [test-loccage-a test-loccage-b])
