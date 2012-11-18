@@ -23,7 +23,7 @@
 	(db-find {
 		:find-type :find-many
 		:collection loccage-collection-name
-		:query {:loc {"$near" [(:lon location) (:lat location)], "$maxDistance" 10} }}))
+		:query {:loc {"$near" [(:lon location) (:lat location)], "$maxDistance" (meters-to-degrees (:dist location))} }}))
 
 (defn save-loccage [loccage]
 	(when (valid? (create-validation-set-for-loccage) loccage)

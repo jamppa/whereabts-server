@@ -23,5 +23,5 @@
 (fact "should not save invalid loccage"
 	(save-loccage invalid-loccage) => nil)
 
-(fact "should find loccages near by location and distance of 500 meters"
-	(find-loccages-near (location 50.0 50.0 500)) => [test-loccage-a test-loccage-b])
+(fact "should find loccages near by location and distance of 2500 meters"
+	(find-loccages-near (location 50.0 50.0 2500)) => [test-loccage-a test-loccage-b])

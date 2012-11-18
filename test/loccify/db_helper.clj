@@ -8,11 +8,11 @@
 (def test-obj-b {:_id (ObjectId. "509d513f61395f0ebbd5e32b") :a "aa" :b "b"})
 (def test-user-a {:_id (ObjectId. "509d513f61395f0ebbd5e33a") :name "dsad" :email "fdsfs@dsad.fi"})
 (def test-loccage-a {:_id (ObjectId. "509d513f61395f0ebbd5e34a") 
-						:user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.12 50.12]})
+						:user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.011 50.011]})
 (def test-loccage-b {:_id (ObjectId. "509d513f61395f0ebbd5e35a") 
-						:user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.67 50.34]})
+						:user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.012 50.012]})
 (def test-loccage-c {:_id (ObjectId. "509d513f61395f0ebbd5e36a") 
-						:user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [89.12 76.12]})
+						:user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [51.12 51.12]})
 
 (defn connect-to-test-db []
 	(monger/connect!)
