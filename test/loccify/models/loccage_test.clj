@@ -25,3 +25,6 @@
 
 (fact "should find loccages near by location and distance of 2500 meters"
 	(find-loccages-near (location 50.0 50.0 2500)) => [test-loccage-a test-loccage-b])
+
+(fact "should not find loccages when there isnt any near by"
+	(find-loccages-near (location 25.0 25.0 500)) => [])
