@@ -1,6 +1,8 @@
 (ns loccify.models.loccage
-	(:use [loccify.db]
-		  [validateur.validation])
+	(:use 
+		[loccify.db]
+		[loccify.util.geo]
+		[validateur.validation])
 	(:import [org.bson.types ObjectId]))
 
 (defn- create-validation-set-for-loccage []
@@ -10,9 +12,6 @@
 		(presence-of :loc)))
 
 (def loccage-collection-name "loccages")
-
-(defn location [lon lat dist]
-	{:lon lon :lat lat :dist dist})
 
 (defn find-loccage-by-id [id]
 	(db-find {
