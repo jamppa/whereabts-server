@@ -22,16 +22,19 @@
 	(doseq [coll collections]
 		(monger-col/ensure-index coll {:loc "2d"})))
 
+(defn insert-test-objects [coll objs]
+	(doseq [obj objs]
+		(monger-col/insert coll obj)))
+
+(defn clear-collections [colls]
+	(doseq [coll colls]
+		(monger-col/remove coll)))
+
 (defn populate-test-db []
-	(monger-col/remove "docs")
-	(monger-col/remove "users")
-	(monger-col/remove "loccages")
-	(monger-col/insert "docs" test-obj-a)
-	(monger-col/insert "docs" test-obj-b)
-	(monger-col/insert "users" test-user-a)
-	(monger-col/insert "loccages" test-loccage-a)
-	(monger-col/insert "loccages" test-loccage-b)
-	(monger-col/insert "loccages" test-loccage-c))
+	(clear-collections ["docs" "users" "loccages"])
+	(insert-test-objects "docs" [test-obj-a test-obj-b])
+	(insert-test-objects "users" [test-user-a])
+	(insert-test-objects "loccages" [test-loccage-a test-loccage-b test-loccage-c]))
 
 (defn setup-test-db []
 	(connect-to-test-db)
