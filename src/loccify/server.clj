@@ -7,7 +7,8 @@
 (def ^:dynamic *loccify-db* "loccify")
 
 (defn- init-db-connection []
-	(db-connect *loccify-db*))
+	(db-connect *loccify-db*)
+	(db-geospatialize "loccages"))
 
 (defn -main [& m]
   (let [mode (keyword (or (first m) :dev))
