@@ -1,9 +1,12 @@
 (ns loccify.util.geo)
 
+(def one-degree-in-km 111.12)
+(def one-km-in-meters 1000)
+
 (defn location [lon lat dist]
 	{:lon lon :lat lat :dist dist})
 
 (defn meters-to-degrees [m]
 	(-> m
-	(/ 1000)
-	(/ 111.12)))
+	(/ one-km-in-meters)
+	(/ one-degree-in-km)))
