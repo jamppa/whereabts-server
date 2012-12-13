@@ -30,3 +30,6 @@
 
 (defn find-user-by-name [name]
 	(db-find (create-query :find-one {:name name})))
+
+(defn find-user-by-email [email]
+	(db-find (create-query :find-one {:email email})))
