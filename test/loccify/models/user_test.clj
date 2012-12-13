@@ -27,3 +27,6 @@
 
 (fact "should not find user by email and password if one does not exist"
 	(find-user-by-email-and-pass "non@existing.fi" "blaaah") => nil)
+
+(fact "should not find user by email and password if password is wrong"
+	(find-user-by-email-and-pass "teppo@test.fi" "wrong") => nil)
