@@ -30,3 +30,9 @@
 
 (fact "should not find user by email and password if password is wrong"
 	(find-user-by-email-and-pass "teppo@test.fi" "wrong") => nil)
+
+(fact "should find user by name when one exists"
+	(find-user-by-name "teppo") => test-user-b)
+
+(fact "should not find user by name when one does not exist"
+	(find-user-by-name "seppo") => nil)

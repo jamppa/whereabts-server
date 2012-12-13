@@ -27,3 +27,6 @@
 (defn find-user-by-email-and-pass [email pass]
 	(db-find 
 		(create-query-details :find-one {:email email :password pass} user-collection-name)))
+
+(defn find-user-by-name [name]
+	(db-find (create-query-details :find-one {:name name} user-collection-name)))
