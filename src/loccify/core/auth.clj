@@ -5,5 +5,5 @@
 	(let [user (find-user-by-email-and-pass email pass)]
 		(not (nil? user))))
 
-(defn username-available? [name]
-	)
+(defn available-username? [name]
+	(nil? (find-user-by-name name)))
