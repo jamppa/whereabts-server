@@ -39,3 +39,6 @@
 
 (fact "should find user by email if one exists"
 	(find-user-by-email "teppo@test.fi") => test-user-b)
+
+(fact "should not find user by email if one does not exist"
+	(find-user-by-email "some@odd.fi") => nil)
