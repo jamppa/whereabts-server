@@ -20,3 +20,11 @@
 (fact "should not be available username if user is found by it"
 	(available-username? "teppo") => false
 	(provided (find-user-by-name "teppo") => auth-user))
+
+(fact "should be available email if user is not found by it"
+	(available-email? "teppo@test.fi") => true
+	(provided (find-user-by-email "teppo@test.fi") => nil))
+
+(fact "should not be available email if user is found by it"
+	(available-email? "teppo@test.fi") => false
+	(provided (find-user-by-email "teppo@test.fi") => auth-user))
