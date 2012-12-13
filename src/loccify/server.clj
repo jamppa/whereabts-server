@@ -1,7 +1,6 @@
 (ns loccify.server
   (:use [loccify.db]
         [loccify.api.signup]
-        [loccify.api.auth]
         [compojure.core]
         [ring.middleware.format-response :only [wrap-restful-response]]
         [ring.middleware.basic-authentication])
@@ -20,7 +19,6 @@
 
 (def server
   (-> (handler/api api-routes)
-      (wrap-restful-response)
-      (wrap-basic-authentication authenticated?)))
+      (wrap-restful-response)))
 
 	
