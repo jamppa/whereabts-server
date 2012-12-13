@@ -21,3 +21,9 @@
 (fact "should save valid user"
 	(let [saved-usr (save-user valid-user)]
 		(find-user-by-id (.toString (:_id saved-usr))) => saved-usr))
+
+(fact "should find user by email and password"
+	(find-user-by-email-and-pass "teppo@test.fi" "secret") => test-user-b)
+
+(fact "should not find user by email and password if one does not exist"
+	(find-user-by-email-and-pass "non@existing.fi" "blaaah") => nil)
