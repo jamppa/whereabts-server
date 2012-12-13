@@ -1,5 +1,6 @@
 (ns loccify.api.signup
-	(:use [compojure.core]
+	(:use [loccify.core.auth]
+			[compojure.core]
 			[ring.util.response]))
 
 (defroutes signup-routes
