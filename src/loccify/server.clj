@@ -1,19 +1,23 @@
 (ns loccify.server
-  (:require [noir.server :as server])
-  (:use [loccify.db]))
-
-(server/load-views-ns 'loccify.views)
+  (:use [loccify.db]
+        [loccify.api.signup]
+        [compojure.core]
+        [ring.middleware.format-response :only [wrap-restful-response]])
+  (:require [compojure.handler :as handler]
+            [compojure.route :as route]))
 
 (def ^:dynamic *loccify-db* "loccify")
 
-(defn- init-db-connection []
+(defn init-db-connection []
 	(db-connect *loccify-db*)
 	(db-geospatialize "loccages"))
 
-(defn -main [& m]
-  (let [mode (keyword (or (first m) :dev))
-        port (Integer. (get (System/getenv) "PORT" "8080"))]
-    (server/start port {:mode mode
-                        :ns 'loccify})
-    (init-db-connection)))
+(defroutes api-routes
+  (context "/api" [] signup-routes)
+  (route/not-found "go away!"))
+
+(def server
+  (-> (handler/api api-routes)
+      (wrap-restful-response)))
+
 	

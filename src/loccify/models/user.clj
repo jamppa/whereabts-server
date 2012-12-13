@@ -6,7 +6,9 @@
 (defn- create-validation-set-for-user []
 	(validation-set 
 		(presence-of :name)
-		(presence-of :email)))
+		(presence-of :email)
+		(presence-of :password)
+		(presence-of :type)))
 
 (defn- create-query-details [type query collection-name]
 	{:find-type type :query query :collection collection-name})
