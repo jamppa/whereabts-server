@@ -9,4 +9,4 @@
 		(response {:name name :available (available-username? name)}))
 	
 	(GET "/email/available/:email" [email]
-		(response {:email email :available true})))
+		(response {:email email :available (available-email? email)})))
