@@ -5,7 +5,7 @@
 
 (defroutes signup-routes
 	(GET "/signup/user/available/:name" [name]
-		(response {:name name :available true}))
+		(response {:name name :available (available-username? name)}))
 	
 	(GET "/signup/email/available/:email" [email]
 		(response {:email email :available true})))
