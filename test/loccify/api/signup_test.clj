@@ -4,22 +4,21 @@
 		[ring.mock.request]
 		[loccify.api.signup]
 		[loccify.core.auth]
-		[loccify.api-helper]))
+		[loccify.core.signup]
+		[loccify.api-helper])
+	(:import [loccify.exception SignUpException]))
 
 (defn- expected-res [status body]
 	{:status status :headers {} :body body})
 
-(def expected-res-for-available-username
-	(expected-res 200 {:name "teppo" :available true}))
-(def expected-res-for-not-available-username
-	(expected-res 200 {:name "seppo" :available false}))
-(def expected-res-for-available-email
-	(expected-res 200 {:email "teppo@test.fi" :available true}))
-(def expected-res-for-not-available-email
-	(expected-res 200 {:email "teppo@test.fi" :available false}))
+(def expected-res-for-available-username (expected-res 200 {:name "teppo" :available true}))
+(def expected-res-for-not-available-username (expected-res 200 {:name "seppo" :available false}))
+(def expected-res-for-available-email (expected-res 200 {:email "teppo@test.fi" :available true}))
+(def expected-res-for-not-available-email (expected-res 200 {:email "teppo@test.fi" :available false}))
 
 (def user-payload {:name "teppo" :email "teppo@test.fi" :password "secret" :type "email"})
 (def expected-res-for-signup (expected-res 200 user-payload))
+(def expected-res-for-failed-signup (expected-res 400 {:reason "Signup failed!"}))
 
 (fact "should give correct response when requesting available username availability"
 	(signup-routes (request :get "/user/available/teppo")) => expected-res-for-available-username
@@ -38,4 +37,9 @@
 	(provided (available-email? "teppo@test.fi") => false))
 
 (fact "should give correct response when requesting to signup a user with valid payload"
-	(signup-routes (loccify-request :post "/signup" user-payload)) => expected-res-for-signup)
+	(signup-routes (loccify-request :post "/signup" user-payload)) => expected-res-for-signup
+	(provided (signup user-payload) => user-payload))
+
+(fact "should give correct response when requesting to signup and it fails with exception"
+	(signup-routes (loccify-request :post "/signup" user-payload)) => expected-res-for-failed-signup
+	(provided (signup user-payload) =throws=> (SignUpException. "Signup failed!")))
