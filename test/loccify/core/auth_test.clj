@@ -3,11 +3,11 @@
 			[loccify.models.user]
 			[midje.sweet]))
 
-(def auth-user {})
+(def user {})
 
 (fact "should be authenticated user when one is found by email and password"
 	(authenticated? "teppo@test.fi" "secret") => true
-	(provided (find-user-by-email-and-pass "teppo@test.fi" "secret") => auth-user))
+	(provided (find-user-by-email-and-pass "teppo@test.fi" "secret") => user))
 
 (fact "should not be authenticated user when one is not found by email and password"
 	(authenticated? "teppo@test.fi" "secret") => false
@@ -19,7 +19,7 @@
 
 (fact "should not be available username if user is found by it"
 	(available-username? "teppo") => false
-	(provided (find-user-by-name "teppo") => auth-user))
+	(provided (find-user-by-name "teppo") => user))
 
 (fact "should be available email if user is not found by it"
 	(available-email? "teppo@test.fi") => true
@@ -27,4 +27,5 @@
 
 (fact "should not be available email if user is found by it"
 	(available-email? "teppo@test.fi") => false
-	(provided (find-user-by-email "teppo@test.fi") => auth-user))
+	(provided (find-user-by-email "teppo@test.fi") => user))
+
