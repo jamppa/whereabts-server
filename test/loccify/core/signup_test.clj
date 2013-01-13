@@ -1,0 +1,17 @@
+(ns loccify.core.signup-test
+	(:use 
+		[loccify.core.signup]
+		[loccify.core.auth]
+		[loccify.models.user]
+		[midje.sweet]))
+
+(defn- new-user [name email password type]
+	{:name name :email email :password password :type type})
+
+(def user (new-user "teppo" "teppo@testaaja.fi" "secret" :email))
+
+(fact "should signup user when name and email are available"
+	(signup user) => user
+	(provided (available-username? "teppo") => true)
+	(provided (available-email? "teppo@testaaja.fi") => true)
+	(provided (save-user user) => user))
