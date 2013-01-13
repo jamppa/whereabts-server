@@ -5,7 +5,7 @@
         [compojure.core]
         [ring.middleware.format-response :only [wrap-restful-response]]
         [ring.middleware.format-params :only [wrap-restful-params]]
-        [ring.middleware.basic-authentication])
+        [ring.middleware.http-basic-auth])
     (:require 
         [compojure.handler :as handler]
         [compojure.route :as route]))
