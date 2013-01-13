@@ -1,7 +1,8 @@
 (ns loccify.core.auth-test
-	(:use [loccify.core.auth]
-			[loccify.models.user]
-			[midje.sweet]))
+	(:use 
+		[loccify.core.auth]
+		[loccify.models.user]
+		[midje.sweet]))
 
 (def user {})
 
@@ -29,3 +30,6 @@
 	(available-email? "teppo@test.fi") => false
 	(provided (find-user-by-email "teppo@test.fi") => user))
 
+(fact "should authenticate user by finding it with email and password"
+	(authenticate "teppo@testaaja.fi" "secret") => user
+	(provided (find-user-by-email-and-pass "teppo@testaaja.fi" "secret") => user))
