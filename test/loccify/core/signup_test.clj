@@ -27,3 +27,9 @@
 	(provided (available-username? "teppo") => true)
 	(provided (available-email? "teppo@testaaja.fi") => false)
 	(provided (save-user user) => nil :times 0))
+
+(fact "should not signup a user when both email and name are not available"
+	(signup user) => nil
+	(provided (available-username? "teppo") => false)
+	(provided (available-email? "teppo@testaaja.fi") => false)
+	(provided (save-user user) => nil :times 0))
