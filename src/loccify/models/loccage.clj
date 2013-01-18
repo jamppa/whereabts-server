@@ -5,7 +5,7 @@
 		[validateur.validation])
 	(:import [org.bson.types ObjectId]))
 
-(defn- create-validation-set-for-loccage []
+(def loccage-validation-set
 	(validation-set
 		(presence-of :message)
 		(presence-of :user_id)
@@ -23,8 +23,10 @@
 	(db-find {
 		:find-type :find-many
 		:collection loccage-collection-name
-		:query {:loc {"$near" [(:lon location) (:lat location)], "$maxDistance" (meters-to-degrees (:dist location))} }}))
+		:query {:loc {
+			"$near" [(:lon location) (:lat location)] 
+			"$maxDistance" (meters-to-degrees (:dist location))}}}))
 
 (defn save-loccage [loccage]
-	(when (valid? (create-validation-set-for-loccage) loccage)
+	(when (valid? loccage-validation-set loccage)
 		(db-insert loccage-collection-name loccage)))
