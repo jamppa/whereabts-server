@@ -3,7 +3,9 @@
 		[loccify.core.auth]
 		[loccify.core.signup]
 		[compojure.core]
-		[ring.util.response])
+		[ring.util.response]
+		[monger.util]
+		[clojure.walk :only [keywordize-keys]])
 	(:import [loccify.exception SignUpException]))
 
 (defn- reason [msg] {:reason msg})
@@ -18,9 +20,12 @@
 	(GET "/email/available/:email" [email]
 		(response (email-availability email (available-email? email))))
 
-	(POST "/signup" {user-details :params}
+	(GET "/id" []
+		(response (object-id)))
+
+	(POST "/signup" [:as req]
 		(try
-			(response (signup user-details))
+			(response (signup (keywordize-keys (req :body))))
 		(catch SignUpException e
 			(-> (response (reason (.getMessage e)))
 				(status 400)))))

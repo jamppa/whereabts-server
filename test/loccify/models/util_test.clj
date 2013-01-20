@@ -5,5 +5,8 @@
 
 (def obj {})
 
-(fact "should mark object with current timestamp"
+(fact "should merge object with current timestamp"
 	(contains? (created-now obj) :created-at) => truthy)
+
+(fact "should merge object with object-id"
+	(contains? (with-obj-id obj) :_id) => truthy)

@@ -1,9 +1,11 @@
 (ns loccify.db
+	(:use 
+		[loccify.models.util]
+		[monger.result :only [ok?]])
 	(:require [monger.core :as monger]
-			  [monger.collection :as monger-collection])
+			  [monger.collection :as monger-col])
 	(:import [org.bson.types ObjectId]))
 
-(declare merge-obj-id)
 (defmulti db-find :find-type)
 
 (defn db-connect [db-name]
@@ -11,18 +13,16 @@
 	(monger/set-db! (monger/get-db db-name)))
 
 (defn db-geospatialize [collection]
-	(monger-collection/ensure-index collection {:loc "2d"}))
+	(monger-col/ensure-index collection {:loc "2d"}))
 
 (defn db-insert [collection obj]
-	(let [obj-with-id (merge-obj-id obj)]
-		(monger-collection/insert-and-return collection obj-with-id)))
+	(let [obj-with-id (with-obj-id obj)]
+		(if (ok? (monger-col/insert collection obj-with-id))
+		obj-with-id
+		(throw (Exception. "db write failed!")))))
 
 (defmethod db-find :find-one [query-details]
-	(monger-collection/find-one-as-map (:collection query-details) (:query query-details)))
+	(monger-col/find-one-as-map (:collection query-details) (:query query-details)))
 
 (defmethod db-find :find-many [query-details]
-	(monger-collection/find-maps (:collection query-details) (:query query-details)))
-
-(defn- merge-obj-id [obj]
-	(let [oid (ObjectId.)]
-		(merge obj {:_id oid})))
+	(monger-col/find-maps (:collection query-details) (:query query-details)))

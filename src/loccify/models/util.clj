@@ -1,8 +1,8 @@
 (ns loccify.models.util
-	(:require
-		[monger.joda-time]
-		[monger.json]
-		[clj-time.core :as time]))
+	(:use [monger.util]))
+
+(defn with-obj-id [obj]
+	(assoc obj :_id (object-id)))
 
 (defn created-now [obj]
-	(assoc obj :created-at (time/now)))
+	(assoc obj :created-at (System/currentTimeMillis)))

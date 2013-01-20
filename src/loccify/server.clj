@@ -3,8 +3,9 @@
         [loccify.db]
         [loccify.api.signup]
         [compojure.core]
+        [ring.middleware.json]
         [ring.middleware.format-response :only [wrap-restful-response]]
-        [ring.middleware.format-params :only [wrap-restful-params]]
+        ;[ring.middleware.format-params :only [wrap-restful-params]]
         [ring.middleware.http-basic-auth])
     (:require 
         [compojure.handler :as handler]
@@ -22,7 +23,7 @@
 
 (def server
     (-> (handler/api api-routes)
-        (wrap-restful-params)
+        (wrap-json-body)
         (wrap-restful-response)))
 
 	

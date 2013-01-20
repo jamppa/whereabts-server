@@ -10,7 +10,8 @@
 
 (defn- signup-user [usr]
 	(let [saved-usr (save-user usr)]
-		(if (nil? saved-usr) (throw (SignUpException. "Couldn't save user!"))
+		(if (nil? saved-usr) 
+			(throw (SignUpException. "Couldn't save user!"))
 			saved-usr)))
 
 (defn signup [user]
