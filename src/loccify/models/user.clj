@@ -2,8 +2,7 @@
 	(:use 
 		[loccify.db]
 		[loccify.models.util]
-		[validateur.validation])
-	(:import [org.bson.types ObjectId]))
+		[validateur.validation]))
 
 (def user-collection-name "users")
 (def user-validation-set 
@@ -25,7 +24,7 @@
 		(db-insert user-collection-name new-user))))
 
 (defn find-user-by-id [id]
-	(db-find (create-query :find-one {:_id (ObjectId. id)})))
+	(db-find (create-query :find-one {:_id (obj-id id)})))
 
 (defn find-user-by-email-and-pass [email pass]
 	(db-find (create-query :find-one {:email email :password pass})))
