@@ -1,17 +1,18 @@
 (ns loccify.models.user
-	(:use [loccify.db]
-		  [validateur.validation])
+	(:use 
+		[loccify.db]
+		[loccify.models.util]
+		[validateur.validation])
 	(:import [org.bson.types ObjectId]))
 
-(defn- create-validation-set-for-user []
+(def user-collection-name "users")
+(def user-validation-set 
 	(validation-set 
 		(presence-of :name)
 		(presence-of :email)
 		(presence-of :password)
-		(presence-of :type)))
-
-(def user-collection-name "users")
-(def user-validation-set (create-validation-set-for-user))
+		(presence-of :type)
+		(presence-of :created-at)))
 
 (defn- create-query [type query]
 	{:find-type type 
@@ -19,7 +20,7 @@
 		:collection user-collection-name})
  
 (defn save-user [user]
-	(when (valid? user-validation-set user) 
+	(when (valid? user-validation-set (created-now user)) 
 		(db-insert user-collection-name user)))
 
 (defn find-user-by-id [id]

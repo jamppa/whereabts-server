@@ -2,16 +2,18 @@
 	(:use 
 		[loccify.db]
 		[loccify.util.geo]
+		[loccify.models.util]
 		[validateur.validation])
 	(:import [org.bson.types ObjectId]))
 
+
+(def loccage-collection-name "loccages")
 (def loccage-validation-set
 	(validation-set
 		(presence-of :message)
 		(presence-of :user_id)
-		(presence-of :loc)))
-
-(def loccage-collection-name "loccages")
+		(presence-of :loc)
+		(presence-of :created-at)))
 
 (defn find-loccage-by-id [id]
 	(db-find {
@@ -28,5 +30,6 @@
 			"$maxDistance" (meters-to-degrees (:dist location))}}}))
 
 (defn save-loccage [loccage]
-	(when (valid? loccage-validation-set loccage)
-		(db-insert loccage-collection-name loccage)))
+	(let [new-loccage (created-now loccage)]
+	(when (valid? loccage-validation-set new-loccage)
+		(db-insert loccage-collection-name new-loccage))))
