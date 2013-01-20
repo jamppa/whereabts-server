@@ -20,9 +20,6 @@
 	(GET "/email/available/:email" [email]
 		(response (email-availability email (available-email? email))))
 
-	(GET "/id" []
-		(response (object-id)))
-
 	(POST "/signup" [:as req]
 		(try
 			(response (signup (keywordize-keys (req :body))))

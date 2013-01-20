@@ -2,10 +2,10 @@
             :description "Server for location based messaging service"
             :dependencies [[org.clojure/clojure "1.4.0"]
                            [compojure "1.1.3"]
-                           [ring-http-basic-auth "0.0.1"]
                            [ring-middleware-format "0.2.2"]
                            [ring/ring-json "0.1.2"]
-                           [com.novemberain/monger "1.4.2"]
+                           [ring-http-basic-auth "0.0.1"]
+                           [com.novemberain/monger "1.3.4"]
                            [midje "1.4.0"]]
             :plugins [[lein-ring "0.7.5"]]
             :ring {:handler loccify.server/server

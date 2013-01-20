@@ -3,10 +3,8 @@
         [loccify.db]
         [loccify.api.signup]
         [compojure.core]
-        [ring.middleware.json]
         [ring.middleware.format-response :only [wrap-restful-response]]
-        ;[ring.middleware.format-params :only [wrap-restful-params]]
-        [ring.middleware.http-basic-auth])
+        [ring.middleware.json :only [wrap-json-body]])
     (:require 
         [compojure.handler :as handler]
         [compojure.route :as route]))

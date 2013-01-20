@@ -1,8 +1,8 @@
 (ns loccify.models.util
-	(:use [monger.util]))
+	(:require [monger.util :as util]))
 
 (defn with-obj-id [obj]
-	(assoc obj :_id (object-id)))
+	(assoc obj :_id (util/object-id)))
 
 (defn created-now [obj]
 	(assoc obj :created-at (System/currentTimeMillis)))
