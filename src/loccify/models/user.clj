@@ -20,8 +20,9 @@
 		:collection user-collection-name})
  
 (defn save-user [user]
-	(when (valid? user-validation-set (created-now user)) 
-		(db-insert user-collection-name user)))
+	(let [new-user (created-now user)]
+	(when (valid? user-validation-set new-user) 
+		(db-insert user-collection-name new-user))))
 
 (defn find-user-by-id [id]
 	(db-find (create-query :find-one {:_id (ObjectId. id)})))
