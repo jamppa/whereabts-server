@@ -3,8 +3,7 @@
 		[loccify.core.signup]
 		[loccify.core.auth]
 		[loccify.models.user]
-		[midje.sweet])
-	(:import [loccify.exception SignUpException]))
+		[midje.sweet]))
 
 (defn- new-user [name email password type]
 	{:name name :email email :password password :type type})
@@ -18,25 +17,25 @@
 	(provided (save-user user) => user))
 
 (fact "should not signup a user when name is not available"
-	(signup user) => (throws SignUpException)
+	(signup user) => (throws IllegalArgumentException)
 	(provided (available-username? "teppo") => false)
 	(provided (available-email? "teppo@testaaja.fi") => true)
 	(provided (save-user user) => nil :times 0))
 
 (fact "should not signup a user when email is not available"
-	(signup user) => (throws SignUpException)
+	(signup user) => (throws IllegalArgumentException)
 	(provided (available-username? "teppo") => true)
 	(provided (available-email? "teppo@testaaja.fi") => false)
 	(provided (save-user user) => nil :times 0))
 
 (fact "should not signup a user when both email and name are not available"
-	(signup user) => (throws SignUpException)
+	(signup user) => (throws IllegalArgumentException)
 	(provided (available-username? "teppo") => false)
 	(provided (available-email? "teppo@testaaja.fi") => false)
 	(provided (save-user user) => nil :times 0))
 
 (fact "should throw exception if save-user for some reason returns with nil"
-	(signup user) => (throws SignUpException)
+	(signup user) => (throws IllegalArgumentException)
 	(provided (available-username? "teppo") => true)
 	(provided (available-email? "teppo@testaaja.fi") => true)
 	(provided (save-user user) => nil))

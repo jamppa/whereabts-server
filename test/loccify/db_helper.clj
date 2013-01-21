@@ -1,5 +1,6 @@
 (ns loccify.db-helper
-	(:require [monger.core :as monger] 
+	(:require 
+		[monger.core :as monger] 
 		[monger.collection :as monger-col])
 	(:import [org.bson.types ObjectId]))
 

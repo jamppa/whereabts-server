@@ -2,6 +2,7 @@
     (:use 
         [loccify.db]
         [loccify.api.signup]
+        [loccify.util.middleware]
         [compojure.core]
         [ring.middleware.format-response :only [wrap-restful-response]]
         [ring.middleware.json :only [wrap-json-body]])
@@ -22,6 +23,5 @@
 (def server
     (-> (handler/api api-routes)
         (wrap-json-body)
+        (wrap-exception-handler)
         (wrap-restful-response)))
-
-	

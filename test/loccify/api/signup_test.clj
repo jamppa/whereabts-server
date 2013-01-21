@@ -38,7 +38,3 @@
 (fact "should give correct response when requesting to signup a user with valid payload"
 	(signup-routes (loccify-request :post "/signup" user-payload)) => expected-res-for-signup
 	(provided (signup user-payload) => user-payload))
-
-(fact "should give correct response when requesting to signup and it fails with exception"
-	(signup-routes (loccify-request :post "/signup" user-payload)) => expected-res-for-failed-signup
-	(provided (signup user-payload) =throws=> (SignUpException. "Signup failed!")))

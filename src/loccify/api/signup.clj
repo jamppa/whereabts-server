@@ -21,9 +21,6 @@
 		(response (email-availability email (available-email? email))))
 
 	(POST "/signup" [:as req]
-		(try
-			(response (signup (keywordize-keys (req :body))))
-		(catch SignUpException e
-			(-> (response (reason (.getMessage e)))
-				(status 400)))))
+		(response (signup (keywordize-keys (req :body)))))
+	
 	)

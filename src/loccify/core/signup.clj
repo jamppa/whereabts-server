@@ -11,10 +11,10 @@
 (defn- signup-user [usr]
 	(let [saved-usr (save-user usr)]
 		(if (nil? saved-usr) 
-			(throw (SignUpException. "Couldn't save user!"))
+			(throw (IllegalArgumentException. "Couldn't save user!"))
 			saved-usr)))
 
 (defn signup [user]
 	(if (can-signup? user) 
 		(signup-user user) 
-		(throw (SignUpException. "Couldn't signup user, name and/or email are not available!"))))
+		(throw (IllegalArgumentException. "Couldn't signup user, name and/or email are not available!"))))
