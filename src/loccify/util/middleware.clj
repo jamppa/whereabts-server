@@ -1,15 +1,15 @@
 (ns loccify.util.middleware
-	(:use [ring.util.response]))
+    (:use [ring.util.response]))
 
 (defn- reason [msg] {:reason msg})
 (defn- err-response [res-status msg]
-	(->
-		(response (reason msg))
-		(status res-status)))
+    (->
+        (response (reason msg))
+        (status res-status)))
 
 (defn wrap-exception-handler [handler]
-	(fn [req]
-		(try
-			(handler req)
-			(catch IllegalArgumentException e
-				(err-response 400 (.getMessage e))))))
+    (fn [req]
+        (try
+            (handler req)
+            (catch IllegalArgumentException e
+                (err-response 400 (.getMessage e))))))

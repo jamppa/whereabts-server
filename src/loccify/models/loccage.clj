@@ -6,7 +6,6 @@
 		[validateur.validation])
 	(:import [org.bson.types ObjectId]))
 
-
 (def loccage-collection-name "loccages")
 (def loccage-validation-set
 	(validation-set

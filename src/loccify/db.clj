@@ -9,6 +9,9 @@
 
 (defmulti db-find :find-type)
 
+(defn db-find-details [type col query]
+    {:find-type type :collection col :query query})
+
 (defn db-connect [db-name]
     (monger/connect!)
     (monger/set-db! (monger/get-db db-name)))
@@ -22,8 +25,8 @@
         obj-with-id
         (throw (Exception. "db write failed!")))))
 
-(defmethod db-find :find-one [query-details]
-    (monger-col/find-one-as-map (:collection query-details) (:query query-details)))
+(defmethod db-find :find-one [find-details]
+    (monger-col/find-one-as-map (:collection find-details) (:query find-details)))
 
-(defmethod db-find :find-many [query-details]
-    (monger-col/find-maps (:collection query-details) (:query query-details)))
+(defmethod db-find :find-many [find-details]
+    (monger-col/find-maps (:collection find-details) (:query find-details)))
