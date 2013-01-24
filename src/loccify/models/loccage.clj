@@ -3,8 +3,7 @@
 		[loccify.db]
 		[loccify.util.geo]
 		[loccify.models.util]
-		[validateur.validation])
-	(:import [org.bson.types ObjectId]))
+		[validateur.validation]))
 
 (def loccage-collection-name "loccages")
 (def loccage-validation-set
