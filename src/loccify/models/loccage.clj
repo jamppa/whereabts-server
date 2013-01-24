@@ -15,10 +15,7 @@
 		(presence-of :created-at)))
 
 (defn find-loccage-by-id [id]
-	(db-find {
-		:find-type :find-one 
-		:collection loccage-collection-name 
-		:query {:_id (ObjectId. id)}}))
+	(db-find (db-find-details :find-one loccage-collection-name {:_id (obj-id id)})))
 
 (defn find-loccages-near [location]
 	(db-find {
