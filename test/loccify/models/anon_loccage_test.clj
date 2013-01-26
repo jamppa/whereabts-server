@@ -25,4 +25,7 @@
 	(save-anon-loccage invalid-anon-loccage) => nil)
 
 (fact "should find anonymous loccages by bounding box"
-	(find-anon-loccages-by-bbox (bounding-box [0.0 0.0] [10.0 10.0])) => [test-anon-loccage-b test-anon-loccage-a])
+	(find-anon-loccages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-loccage-b test-anon-loccage-a])
+
+(fact "should not find anonymous loccages by bounding box when there isnt any"
+	(find-anon-loccages-by-bbox (bounding-box [45 34] [23 56])) => [])
