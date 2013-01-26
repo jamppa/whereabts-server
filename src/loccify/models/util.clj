@@ -12,4 +12,4 @@
 	(assoc obj :created-at (System/currentTimeMillis)))
 
 (defn obj-id-as-str [obj]
-	(.toString obj))
+	(.toString (:_id obj)))

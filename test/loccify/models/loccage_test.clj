@@ -1,7 +1,8 @@
 (ns loccify.models.loccage-test
 	(:use [loccify.models.loccage])
 	(:use [loccify.db-helper])
-	(:use loccify.util.geo)
+	(:use [loccify.util.geo])
+	(:use [loccify.models.util])
 	(:use [midje.sweet])
 	(:import [org.bson.types ObjectId]))
 
@@ -18,7 +19,7 @@
 
 (fact "should save valid loccage"
 	(let [saved-loccage (save-loccage valid-loccage)]
-		(find-loccage-by-id (.toString (:_id saved-loccage))) => truthy))
+		(find-loccage-by-id (obj-id-as-str saved-loccage)) => truthy))
 
 (fact "should not save invalid loccage"
 	(save-loccage invalid-loccage) => nil)

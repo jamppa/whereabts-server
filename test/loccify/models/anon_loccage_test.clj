@@ -2,7 +2,8 @@
 	(:use
 		[midje.sweet]
 		[loccify.models.anon-loccage]
-		[loccify.db-helper]))
+		[loccify.db-helper]
+		[loccify.models.util]))
 
 (def valid-anon-loccage {:message "msg" :nick "Cool Guy" :loc [45.1 56.4]})
 
@@ -13,4 +14,4 @@
 
 (fact "should save valid anonymous loccage"
 	(let [saved-loccage (save-anon-loccage valid-anon-loccage)]
-		(find-anon-loccage-by-id (.toString (:_id saved-loccage))) => saved-loccage))
+		(find-anon-loccage-by-id (obj-id-as-str saved-loccage)) => saved-loccage))
