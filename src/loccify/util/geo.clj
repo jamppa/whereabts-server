@@ -10,3 +10,6 @@
 	(-> m
 	(/ one-km-in-meters)
 	(/ one-degree-in-km)))
+
+(defn bounding-box [ll-vec ur-vec]
+	{:lower-left ll-vec :upper-right ur-vec})

@@ -7,3 +7,6 @@
 
 (fact "should convert meters to degrees"
 	(meters-to-degrees 500) => (/ 0.5 111.12))
+
+(fact "should create bounding box"
+	(bounding-box [1.1 2.2] [3.3 4.4]) => {:lower-left [1.1 2.2] :upper-right [3.3 4.4]})
