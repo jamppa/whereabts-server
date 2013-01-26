@@ -14,7 +14,8 @@
 
 (defn find-anon-loccage-by-id [id-str]
 	(db-find
-		(db-find-details :find-one anon-loccage-col {:_id (obj-id id-str)})))
+		(db-find-details
+			:find-one anon-loccage-col {:_id (obj-id id-str)})))
 
 (defn save-anon-loccage [loccage]
 	(let [new-loccage (created-now loccage)]

@@ -17,9 +17,10 @@
 	(db-find (db-find-details :find-one loccage-collection-name {:_id (obj-id id)})))
 
 (defn find-loccages-near [location]
-	(db-find (db-find-details
-		:find-many loccage-collection-name
-		{:loc {"$near" [(:lon location) (:lat location)] "$maxDistance" (meters-to-degrees (:dist location))}})))
+	(db-find 
+		(db-find-details
+			:find-many loccage-collection-name 
+			{:loc {"$near" [(:lon location) (:lat location)] "$maxDistance" (meters-to-degrees (:dist location))}})))
 
 (defn save-loccage [loccage]
 	(let [new-loccage (created-now loccage)]
