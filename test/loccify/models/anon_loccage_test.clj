@@ -3,7 +3,8 @@
 		[midje.sweet]
 		[loccify.models.anon-loccage]
 		[loccify.db-helper]
-		[loccify.models.util]))
+		[loccify.models.util]
+		[loccify.util.geo]))
 
 (def valid-anon-loccage {:message "msg" :nick "Cool Guy" :loc [45.1 56.4]})
 (def invalid-anon-loccage {:message "asdasd" :loc [12.2 34.4]})
@@ -22,3 +23,6 @@
 
 (fact "should not save invalid anonymous loccage"
 	(save-anon-loccage invalid-anon-loccage) => nil)
+
+(fact "should find anonymous loccages by bounding box"
+	(find-anon-loccages-by-bbox (bounding-box [0.0 0.0] [10.0 10.0])) => [test-anon-loccage-b test-anon-loccage-a])

@@ -13,7 +13,9 @@
 (def test-loccage-b {:_id (ObjectId. "509d513f61395f0ebbd5e35a") :user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.012 50.012]})
 (def test-loccage-c {:_id (ObjectId. "509d513f61395f0ebbd5e36a") :user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [51.12 51.12]})
 
-(def test-anon-loccage-a {:_id (ObjectId. "509d513f61395f0ebbd5e36a") :nick "Cool guy" :message "Cool message" :loc [51.12 51.12]})
+(def test-anon-loccage-a {:_id (ObjectId. "509d513f61395f0ebbd5e36a") :nick "Cool guy" :message "Cool message" :loc [1.0 2.0]})
+(def test-anon-loccage-b {:_id (ObjectId. "509d513f61395f0ebbd5e36b") :nick "Cool guy" :message "Cool message" :loc [5.0 5.0]})
+(def test-anon-loccage-c {:_id (ObjectId. "509d513f61395f0ebbd5e36c") :nick "Cool guy" :message "Cool message" :loc [45.0 26.0]})
 
 (defn connect-to-test-db []
 	(monger/connect!)
@@ -36,9 +38,9 @@
 	(insert-test-objects "docs" [test-obj-a test-obj-b])
 	(insert-test-objects "users" [test-user-a test-user-b])
 	(insert-test-objects "loccages" [test-loccage-a test-loccage-b test-loccage-c])
-	(insert-test-objects "anon-loccages" [test-anon-loccage-a]))
+	(insert-test-objects "anon-loccages" [test-anon-loccage-a test-anon-loccage-b test-anon-loccage-c]))
 
 (defn setup-test-db []
 	(connect-to-test-db)
 	(populate-test-db)
-	(create-geospatial-idxs ["loccages"]))
+	(create-geospatial-idxs ["loccages" "anon-loccages"]))
