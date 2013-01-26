@@ -13,6 +13,9 @@
 (fact "should find anonymous loccage by id"
 	(find-anon-loccage-by-id "509d513f61395f0ebbd5e36a") => test-anon-loccage-a)
 
+(fact "should not find anonymous loccage by id when one does not exist"
+	(find-anon-loccage-by-id "509d513f61395f0ebbd5e666") => nil)
+
 (fact "should save valid anonymous loccage"
 	(let [saved-loccage (save-anon-loccage valid-anon-loccage)]
 		(find-anon-loccage-by-id (obj-id-as-str saved-loccage)) => saved-loccage))
