@@ -10,3 +10,6 @@
 
 (defn created-now [obj]
 	(assoc obj :created-at (System/currentTimeMillis)))
+
+(defn obj-id-as-str [obj]
+	(.toString obj))

@@ -1,7 +1,8 @@
 (ns loccify.models.util-test
 	(:use 
 		[loccify.models.util]
-		[midje.sweet]))
+		[midje.sweet])
+	(:import [org.bson.types ObjectId]))
 
 (def obj {})
 
@@ -13,3 +14,6 @@
 
 (fact "should instantiate bson object-id with given hex-string"
 	(.toString (obj-id "507f191e810c19729de860ea")) => "507f191e810c19729de860ea")
+
+(fact "should give object-id as string"
+	(obj-id-as-str (ObjectId. "507f191e810c19729de860ea")) => "507f191e810c19729de860ea")
