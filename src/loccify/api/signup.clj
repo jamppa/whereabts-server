@@ -8,7 +8,6 @@
 		[clojure.walk :only [keywordize-keys]])
 	(:import [loccify.exception SignUpException]))
 
-(defn- reason [msg] {:reason msg})
 (defn- name-availability [name is-avail] {:name name :available is-avail})
 (defn- email-availability [email is-avail] {:email email :available is-avail})
 
