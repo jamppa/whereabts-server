@@ -7,7 +7,7 @@
 (background (before :facts (setup-test-db)))
 
 (def invalid-user {:name "sefsdf"})
-(def valid-user {:name "asdasd" :email "asds@asds.fi" :type "email" :password "secret"})
+(def valid-user {:name "asdasd" :email "asds@asds.fi" :password "secret"})
 
 (fact "should find user by id"
 	(find-user-by-id "509d513f61395f0ebbd5e33a") => test-user-a)

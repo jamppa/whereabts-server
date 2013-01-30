@@ -10,7 +10,6 @@
 		(presence-of :name)
 		(presence-of :email)
 		(presence-of :password)
-		(presence-of :type)
 		(presence-of :created-at)))
 
 (defn- create-query [type query]
