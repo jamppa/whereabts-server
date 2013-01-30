@@ -7,18 +7,21 @@
         [monger.collection :as monger-col]
         [monger.json]))
 
+(def ^:dynamic *loccify-db* "loccify")
+
 (defmulti db-find :find-type)
 
 (defn db-find-details [type col query]
     {:find-type type :collection col :query query})
 
-(defn db-connect [db-name]
+(defn db-connect []
     (monger/connect!)
-    (monger/set-db! (monger/get-db db-name)))
+    (monger/set-db! (monger/get-db *loccify-db*)))
 
-(defn db-geospatialize [collection]
-    (monger-col/ensure-index collection {:loc "2d"}))
-
+(defn db-geospatialize [collections]
+    (doseq [coll collections]
+        (monger-col/ensure-index coll {:loc "2d"})))
+    
 (defn db-insert [collection obj]
     (let [obj-with-id (with-obj-id obj)]
         (if (ok? (monger-col/insert collection obj-with-id))
