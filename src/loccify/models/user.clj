@@ -4,6 +4,7 @@
 		[loccify.models.util]
 		[validateur.validation]))
 
+(def anon-loccify-user {:name "Anonymous" :email "anonymous@loccify.me" :password "ae129325a4db22faab7771f10b39a8af"})
 (def user-collection-name "users")
 (def user-validation-set 
 	(validation-set 
