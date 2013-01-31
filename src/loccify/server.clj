@@ -1,5 +1,6 @@
 (ns loccify.server
     (:use 
+        [loccify.core.auth]
         [loccify.db]
         [loccify.api.signup]
         [loccify.util.middleware]
@@ -7,7 +8,8 @@
         [loccify.models.anon-loccage]
         [compojure.core]
         [ring.middleware.format-response :only [wrap-restful-response]]
-        [ring.middleware.json :only [wrap-json-body]])
+        [ring.middleware.json :only [wrap-json-body]]
+        [ring.middleware.http-basic-auth])
     (:require 
         [compojure.handler :as handler]
         [compojure.route :as route]))
@@ -27,4 +29,7 @@
     (-> (handler/api api-routes)
         (wrap-json-body)
         (wrap-exception-handler)
-        (wrap-restful-response)))
+        (wrap-restful-response)
+        (wrap-require-auth authenticate 
+            "Authentication required!"
+            {:body "Yep, please download the app and become a user!"})))
