@@ -23,13 +23,13 @@
 
 (defroutes api-routes
     (context "/api" [] signup-routes)
-    (route/not-found "go away!"))
+    (route/not-found "Move on, nothing to see here..."))
 
 (def server
     (-> (handler/api api-routes)
         (wrap-json-body)
         (wrap-exception-handler)
         (wrap-restful-response)
-        (wrap-require-auth authenticate 
+        (wrap-require-auth authenticate
             "Authentication required!"
             {:body "Yep, please download the app and become a user!"})))
