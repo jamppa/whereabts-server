@@ -9,8 +9,8 @@
 (def test-obj-b {:_id (ObjectId. "509d513f61395f0ebbd5e32b") :a "aa" :b "b"})
 (def test-user-a {:_id (ObjectId. "509d513f61395f0ebbd5e33a") :name "dsad" :email "fdsfs@dsad.fi" :password "secret" :type "email"})
 (def test-user-b {:_id (ObjectId. "509d513f61395f0ebbd5e33b") :name "teppo" :email "teppo@test.fi" :password "secret" :type "email"})
-(def test-loccage-a {:_id (ObjectId. "509d513f61395f0ebbd5e34a") :user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.011 50.011]})
-(def test-loccage-b {:_id (ObjectId. "509d513f61395f0ebbd5e35a") :user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.012 50.012]})
+(def test-loccage-a {:_id (ObjectId. "509d513f61395f0ebbd5e34a") :user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.0 50.0]})
+(def test-loccage-b {:_id (ObjectId. "509d513f61395f0ebbd5e35a") :user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [50.0 50.0]})
 (def test-loccage-c {:_id (ObjectId. "509d513f61395f0ebbd5e36a") :user_id (ObjectId. "509d513f61395f0ebbd5e33a") :message "asd" :loc [51.12 51.12]})
 
 (def test-anon-loccage-a {:_id (ObjectId. "509d513f61395f0ebbd5e36a") :nick "Cool guy" :message "Cool message" :loc [1.0 2.0]})

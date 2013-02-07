@@ -22,8 +22,7 @@
 		(when (valid? anon-loccage-validation new-loccage)
 			(db-insert anon-loccage-col new-loccage))))
 
-(defn find-anon-loccages-by-bbox [{ll-vec :lower-left
-									ur-vec :upper-right}]
+(defn find-anon-loccages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(db-find 
 		(db-find-details
 			:find-many anon-loccage-col {:loc {"$within" {"$box" [ll-vec ur-vec]}}})))

@@ -1,13 +1,14 @@
 (ns loccify.models.loccage-test
-	(:use [loccify.models.loccage])
-	(:use [loccify.db-helper])
-	(:use [loccify.util.geo])
-	(:use [loccify.models.util])
-	(:use [midje.sweet])
+	(:use 
+		[loccify.models.loccage]
+		[loccify.db-helper]
+		[loccify.util.geo]
+		[loccify.models.util]
+		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 
 (def valid-loccage {:user_id (ObjectId.) :message "msg" :loc [12.123 12.123]})
-(def invalid-loccage {:message "fdsfd" :loc [1.123 3.323]}) ;user missing
+(def invalid-loccage {:message "fdsfd" :loc [1.123 3.323]})
 
 (background (before :facts (setup-test-db)))
 
@@ -29,3 +30,6 @@
 
 (fact "should not find loccages when there isnt any near by"
 	(find-loccages-near (location 25.0 25.0 500)) => [])
+
+(fact "should find loccages inside bouding box"
+	(find-loccages-by-bbox (bounding-box [0 0] [50 50])) => [test-loccage-a test-loccage-b])
