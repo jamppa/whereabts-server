@@ -31,5 +31,8 @@
 (fact "should not find loccages when there isnt any near by"
 	(find-loccages-near (location 25.0 25.0 500)) => [])
 
-(fact "should find loccages inside bouding box"
+(fact "should find loccages inside bounding box"
 	(find-loccages-by-bbox (bounding-box [0 0] [50 50])) => [test-loccage-a test-loccage-b])
+
+(fact "sould not find any loccages inside bounding box when there is no any"
+	(find-loccages-by-bbox (bounding-box [100 100] [125 125])) => [])
