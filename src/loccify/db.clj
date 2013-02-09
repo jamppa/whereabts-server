@@ -32,4 +32,4 @@
     (monger-col/find-one-as-map (:collection find-details) (:query find-details)))
 
 (defmethod db-find :find-many [find-details]
-    (monger-col/find-maps (:collection find-details) (:query find-details)))
+    (doall (monger-col/find-maps (:collection find-details) (:query find-details))))

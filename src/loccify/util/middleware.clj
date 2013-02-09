@@ -12,4 +12,6 @@
         (try
             (handler req)
             (catch IllegalArgumentException e
-                (err-response 400 (.getMessage e))))))
+                (err-response 400 (.getMessage e)))
+            (catch Exception e
+            	(err-response 500 (.getMessage e))))))

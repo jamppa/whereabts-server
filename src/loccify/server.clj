@@ -3,6 +3,7 @@
         [loccify.core.auth]
         [loccify.db]
         [loccify.api.signup]
+        [loccify.api.loccages]
         [loccify.util.middleware]
         [loccify.models.loccage]
         [loccify.models.anon-loccage]
@@ -22,7 +23,7 @@
     (init-db-connection))
 
 (defroutes api-routes
-    (context "/api" [] signup-routes)
+    (context "/api" [] signup-routes loccage-routes)
     (route/not-found "Move on, nothing to see here..."))
 
 (def server
