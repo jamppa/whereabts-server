@@ -24,5 +24,7 @@
 
 (defn find-anon-loccages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(db-find 
-		(db-find-details
-			:find-many anon-loccage-col {:loc {"$within" {"$box" [ll-vec ur-vec]}}})))
+		(db-find-details 
+			:find-many 
+			anon-loccage-col 
+			{:loc {"$within" {"$box" [ll-vec ur-vec]}}})))

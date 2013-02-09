@@ -29,4 +29,7 @@
 
 (defn find-loccages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(db-find
-		(db-find-details :find-many loccage-col {:loc {"$within" {"$box" [ll-vec ur-vec]}}})))
+		(db-find-details
+			:find-many
+			loccage-col
+			{:loc {"$within" {"$box" [ll-vec ur-vec]}}})))
