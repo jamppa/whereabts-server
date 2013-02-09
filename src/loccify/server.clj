@@ -32,5 +32,5 @@
         (wrap-exception-handler)
         (wrap-restful-response)
         (wrap-require-auth authenticate
-            "Authentication required!"
-            {:body "Yep, please download the app and become a user!"})))
+            "Authentication failed!"
+            {:body "Authentication failed!"})))
