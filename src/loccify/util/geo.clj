@@ -11,5 +11,10 @@
 	(/ one-km-in-meters)
 	(/ one-degree-in-km)))
 
-(defn bounding-box [ll-vec ur-vec]
-	{:lower-left ll-vec :upper-right ur-vec})
+(defn bounding-box 
+	([ll-vec ur-vec]
+		{:lower-left ll-vec :upper-right ur-vec}
+	)
+	([ll-lon ll-lat ur-lon ur-lat]
+		(bounding-box [ll-lon ll-lat] [ur-lon ur-lat])
+	))

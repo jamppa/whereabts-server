@@ -8,8 +8,6 @@
 		[loccify.api-helper])
 	(:import [loccify.exception SignUpException]))
 
-(defn- expected-res [status body] {:status status :headers {} :body body})
-
 (def expected-res-for-available-username (expected-res 200 {:name "teppo" :available true}))
 (def expected-res-for-not-available-username (expected-res 200 {:name "seppo" :available false}))
 (def expected-res-for-available-email (expected-res 200 {:email "teppo@test.fi" :available true}))
