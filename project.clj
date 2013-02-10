@@ -11,6 +11,5 @@
    :plugins [[lein-ring "0.7.5"]]
    :ring {:handler loccify.server/server
             :init loccify.server/init-db-connection}
-   :profiles {:dev {:dependencies [[ring-mock "0.1.3"]]}}
-   :aot [loccify.exception.SignUpException])
+   :profiles {:dev {:dependencies [[ring-mock "0.1.3"]]}})
 

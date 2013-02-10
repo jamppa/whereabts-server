@@ -1,8 +1,7 @@
 (ns loccify.core.signup
 	(:use
 		[loccify.core.auth]
-		[loccify.models.user])
-	(:import [loccify.exception SignUpException]))
+		[loccify.models.user]))
 
 (defn- can-signup? [user]
 	(every? true? 

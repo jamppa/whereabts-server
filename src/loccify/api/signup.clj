@@ -5,8 +5,7 @@
 		[compojure.core]
 		[ring.util.response]
 		[monger.util]
-		[clojure.walk :only [keywordize-keys]])
-	(:import [loccify.exception SignUpException]))
+		[clojure.walk :only [keywordize-keys]]))
 
 (defn- name-availability [name is-avail] {:name name :available is-avail})
 (defn- email-availability [email is-avail] {:email email :available is-avail})
