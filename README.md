@@ -1,16 +1,5 @@
-# loccify
-
-backend and rest-service for loccify.
-
-## Usage
-
-If you use cake, substitute 'lein' with 'cake' below. Everything should work fine.
-
-```bash
-lein deps
-lein run
-```
+# Whereabts
 
 ## License
 
-Copyright (C) 2012 Jani Arvonen
+Copyright (C) 2012 Whereabts Ltd.

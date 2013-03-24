@@ -4,7 +4,7 @@ pom.xml
 /classes/
 .lein-deps-sum
 .cake
-loccify.sublime-workspace
-loccify.sublime-project
+*.sublime-workspace
+*.sublime-project
 /target/
 .lein-failures
