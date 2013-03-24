@@ -1,5 +1,5 @@
 (defproject loccify "0.1.0-SNAPSHOT"
-   :description "Server for location based messaging service"
+   :description "Whereabts server and REST API"
    :dependencies 
       [[org.clojure/clojure "1.4.0"]
       [compojure "1.1.3"]
