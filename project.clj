@@ -10,5 +10,8 @@
    :plugins [[lein-ring "0.8.3"]]
    :ring {:handler loccify.server/server
             :init loccify.server/init-db-connection}
-   :profiles {:dev {:dependencies [[ring-mock "0.1.3"] [midje "1.5.1"]]}})
+   :profiles {
+      :dev {
+         :dependencies [[ring-mock "0.1.3"] [midje "1.5.1"]]
+         :plugins [[lein-midje "3.0.0"]]}})
 
