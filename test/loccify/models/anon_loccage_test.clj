@@ -19,11 +19,11 @@
 	(find-anon-loccage-by-id "509d513f61395f0ebbd5e666") => nil)
 
 (fact "should save valid anonymous message"
-	(let [saved-loccage (save-anon-loccage valid-anon-loccage)]
+	(let [saved-loccage (save-anon-message valid-anon-loccage)]
 		(find-anon-loccage-by-id (obj-id-as-str saved-loccage)) => saved-loccage))
 
 (fact "should not save invalid anonymous message"
-	(save-anon-loccage invalid-anon-loccage) => nil)
+	(save-anon-message invalid-anon-loccage) => nil)
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-loccage-b test-anon-loccage-a])
