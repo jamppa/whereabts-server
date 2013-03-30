@@ -4,6 +4,7 @@
 		[loccify.db-helper]
 		[loccify.util.geo]
 		[loccify.models.util]
+		[loccify.db-test-fixtures]
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 

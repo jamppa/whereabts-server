@@ -1,7 +1,9 @@
 (ns loccify.db-test
-	(:use [loccify.db])
-	(:use [loccify.db-helper])
-	(:use [midje.sweet])
+	(:use 
+		[loccify.db]
+		[loccify.db-helper]
+		[loccify.db-test-fixtures]
+		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 
 (defn- query-details [type coll query]

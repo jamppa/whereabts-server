@@ -1,7 +1,9 @@
 (ns loccify.models.user-test
-	(:use [loccify.models.user])
-	(:use [loccify.db-helper])
-	(:use [midje.sweet])
+	(:use 
+		[loccify.models.user]
+		[loccify.db-helper]
+		[loccify.db-test-fixtures]
+		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 
 (background (before :facts (setup-test-db)))

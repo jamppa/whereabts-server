@@ -4,7 +4,8 @@
 		[loccify.models.anon-loccage]
 		[loccify.db-helper]
 		[loccify.models.util]
-		[loccify.util.geo]))
+		[loccify.util.geo]
+		[loccify.db-test-fixtures]))
 
 (def valid-anon-loccage {:message "msg" :nick "Cool Guy" :loc [45.1 56.4]})
 (def invalid-anon-loccage {:message "asdasd" :loc [12.2 34.4]})
