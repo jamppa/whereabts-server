@@ -1,4 +1,12 @@
-# Whereabts
+# Whereabts server
+
+Server and REST API for Whereabts.
+
+# Technology
+
+Java JDK
+Leiningen 2.x
+MongoDB
 
 ## License
 
