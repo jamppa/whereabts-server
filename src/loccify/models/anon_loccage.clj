@@ -24,7 +24,7 @@
 		(when (valid? anon-loccage-validation new-loccage)
 			(db-insert anon-loccage-col new-loccage))))
 
-(defn find-anon-loccages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
+(defn find-anon-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection anon-loccage-col
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
 		(sort (sorted-map :created-at -1))

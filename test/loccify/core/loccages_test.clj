@@ -15,4 +15,4 @@
 (fact "should find all loccages by bounding box"
 	(find-all-loccages-by-bbox bbox) => expected-all-loccages
 	(provided (find-loccages-by-bbox bbox) => loccages :times 1)
-	(provided (find-anon-loccages-by-bbox bbox) => anon-loccages :times 1))
+	(provided (find-anon-messages-by-bbox bbox) => anon-loccages :times 1))
