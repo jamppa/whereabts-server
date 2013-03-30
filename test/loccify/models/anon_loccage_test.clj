@@ -25,7 +25,7 @@
 (fact "should not save invalid anonymous loccage"
 	(save-anon-loccage invalid-anon-loccage) => nil)
 
-(fact "should find anonymous loccages by bounding box"
+(fact "should find anonymous loccages by bounding box sorted by creation time"
 	(find-anon-loccages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-loccage-b test-anon-loccage-a])
 
 (fact "should not find anonymous loccages by bounding box when there isnt any"

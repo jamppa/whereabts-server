@@ -30,21 +30,21 @@
 
 (def test-anon-loccage-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36a")
-	:nick "Cool guy"
+	:nick "Anonymous A"
 	:message "Cool message"
 	:loc [1.0 2.0]
 	:created-at 1364642721968})
 
 (def test-anon-loccage-b {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36b")
-	:nick "Cool guy"
+	:nick "Anonymous B"
 	:message "Cool message"
 	:loc [5.0 5.0]
 	:created-at 1364642721969})
 
 (def test-anon-loccage-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
-	:nick "Cool guy"
+	:nick "Anonymous C"
 	:message "Cool message"
 	:loc [45.0 26.0]
 	:created-at 1364642721970})

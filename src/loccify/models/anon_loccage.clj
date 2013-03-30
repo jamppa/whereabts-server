@@ -1,8 +1,10 @@
 (ns loccify.models.anon-loccage
+	(:refer-clojure :exclude [sort find])
 	(:use
 		[loccify.db]
 		[loccify.models.util]
-		[validateur.validation]))
+		[validateur.validation]
+		[monger.query]))
 
 (def anon-loccage-col "anon-loccages")
 (def anon-loccage-validation
@@ -23,8 +25,7 @@
 			(db-insert anon-loccage-col new-loccage))))
 
 (defn find-anon-loccages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
-	(db-find 
-		(db-find-details 
-			:find-many 
-			anon-loccage-col 
-			{:loc {"$within" {"$box" [ll-vec ur-vec]}}})))
+	(with-collection anon-loccage-col
+		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
+		(sort (sorted-map :created-at -1))
+		(limit 25)))

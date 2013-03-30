@@ -34,9 +34,3 @@
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
 		(sort (sorted-map :created-at -1))
 		(limit 25)))
-	
-	;(db-find
-	;	(db-find-details
-	;		:find-many
-	;		loccage-col
-	;		{:loc {"$within" {"$box" [ll-vec ur-vec]}}})))
