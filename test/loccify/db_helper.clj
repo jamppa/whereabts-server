@@ -24,13 +24,13 @@
 		(monger-col/remove coll)))
 
 (defn populate-test-db []
-	(clear-collections ["docs" "users" "loccages" "anon-loccages"])
+	(clear-collections ["docs" "users" "loccages" "anon-messages"])
 	(insert-test-objects "docs" [test-obj-a test-obj-b])
 	(insert-test-objects "users" [test-user-a test-user-b])
 	(insert-test-objects "loccages" [test-loccage-a test-loccage-b test-loccage-c])
-	(insert-test-objects "anon-loccages" [test-anon-message-a test-anon-message-b test-anon-message-c]))
+	(insert-test-objects "anon-messages" [test-anon-message-a test-anon-message-b test-anon-message-c]))
 
 (defn setup-test-db []
 	(connect-to-test-db)
 	(populate-test-db)
-	(create-geospatial-idxs ["loccages" "anon-loccages"]))
+	(create-geospatial-idxs ["loccages" "anon-messages"]))

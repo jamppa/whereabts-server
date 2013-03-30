@@ -1,7 +1,7 @@
 (ns loccify.models.anon-message-test
 	(:use
 		[midje.sweet]
-		[loccify.models.anon-loccage]
+		[loccify.models.anon-message]
 		[loccify.db-helper]
 		[loccify.models.util]
 		[loccify.util.geo]

@@ -1,4 +1,4 @@
-(ns loccify.models.anon-loccage
+(ns loccify.models.anon-message
 	(:refer-clojure :exclude [sort find])
 	(:use
 		[loccify.db]
@@ -6,7 +6,7 @@
 		[validateur.validation]
 		[monger.query]))
 
-(def anon-message-col "anon-loccages")
+(def anon-message-col "anon-messages")
 (def anon-message-validation-set
 	(validation-set
 		(presence-of :message)

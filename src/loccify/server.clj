@@ -6,7 +6,7 @@
         [loccify.api.loccages]
         [loccify.util.middleware]
         [loccify.models.loccage]
-        [loccify.models.anon-loccage]
+        [loccify.models.anon-message]
         [compojure.core]
         [ring.middleware.format-response :only [wrap-restful-response]]
         [ring.middleware.json :only [wrap-json-body]]

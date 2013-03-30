@@ -2,7 +2,7 @@
 	(:use
 		[midje.sweet]
 		[loccify.models.loccage]
-		[loccify.models.anon-loccage]
+		[loccify.models.anon-message]
 		[loccify.core.loccages]
 		[loccify.util.geo]))
 
