@@ -27,13 +27,13 @@
 	(save-loccage invalid-loccage) => nil)
 
 (fact "should find loccages near by location and distance of 2500 meters"
-	(find-loccages-near (location 50.0 50.0 2500)) => [test-loccage-a test-loccage-b])
+	(find-loccages-near (location 50.0 50.0 2500)) => [test-loccage-b test-loccage-a])
 
 (fact "should not find loccages when there isnt any near by"
 	(find-loccages-near (location 25.0 25.0 500)) => [])
 
 (fact "should find loccages inside bounding box"
-	(find-loccages-by-bbox (bounding-box [0 0] [50 50])) => [test-loccage-a test-loccage-b])
+	(find-loccages-by-bbox (bounding-box [0 0] [50 50])) => [test-loccage-b test-loccage-a])
 
 (fact "sould not find any loccages inside bounding box when there is no any"
 	(find-loccages-by-bbox (bounding-box [100 100] [125 125])) => [])

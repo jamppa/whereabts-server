@@ -1,7 +1,9 @@
 (ns loccify.db
+    (:refer-clojure :exclude [sort find])
     (:use 
         [loccify.models.util]
-        [monger.result :only [ok?]])
+        [monger.result :only [ok?]]
+        [monger.query])
     (:require 
         [monger.core :as monger]
         [monger.collection :as monger-col]

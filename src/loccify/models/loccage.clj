@@ -1,9 +1,11 @@
 (ns loccify.models.loccage
+	(:refer-clojure :exclude [sort find])
 	(:use 
 		[loccify.db]
 		[loccify.util.geo]
 		[loccify.models.util]
-		[validateur.validation]))
+		[validateur.validation]
+		[monger.query]))
 
 (def loccage-col "loccages")
 (def loccage-validation-set
@@ -17,10 +19,10 @@
 	(db-find (db-find-details :find-one loccage-col {:_id (obj-id id)})))
 
 (defn find-loccages-near [location]
-	(db-find 
-		(db-find-details
-			:find-many loccage-col 
-			{:loc {"$near" [(:lon location) (:lat location)] "$maxDistance" (meters-to-degrees (:dist location))}})))
+	(with-collection loccage-col
+		(find {:loc {"$near" [(:lon location) (:lat location)] "$maxDistance" (meters-to-degrees (:dist location))}})
+		(sort (sorted-map :created-at -1))
+		(limit 25)))
 
 (defn save-loccage [loccage]
 	(let [new-loccage (created-now loccage)]
@@ -28,8 +30,13 @@
 		(db-insert loccage-col new-loccage))))
 
 (defn find-loccages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
-	(db-find
-		(db-find-details
-			:find-many
-			loccage-col
-			{:loc {"$within" {"$box" [ll-vec ur-vec]}}})))
+	(with-collection loccage-col
+		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
+		(sort (sorted-map :created-at -1))
+		(limit 25)))
+	
+	;(db-find
+	;	(db-find-details
+	;		:find-many
+	;		loccage-col
+	;		{:loc {"$within" {"$box" [ll-vec ur-vec]}}})))
