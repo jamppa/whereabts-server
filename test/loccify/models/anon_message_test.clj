@@ -1,4 +1,4 @@
-(ns loccify.models.anon-loccage-test
+(ns loccify.models.anon-message-test
 	(:use
 		[midje.sweet]
 		[loccify.models.anon-loccage]

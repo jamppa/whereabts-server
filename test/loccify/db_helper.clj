@@ -5,7 +5,7 @@
 	(:use [loccify.db-test-fixtures])
 	(:import [org.bson.types ObjectId]))
 
-(def test-db-name "loccify_test")
+(def test-db-name "whereabtsdb_test")
 
 (defn connect-to-test-db []
 	(monger/connect!)
