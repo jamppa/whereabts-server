@@ -13,7 +13,7 @@
 (background (before :facts (setup-test-db)))
 
 (fact "should find anonymous message by id"
-	(find-anon-message-by-id "509d513f61395f0ebbd5e36a") => test-anon-loccage-a)
+	(find-anon-message-by-id "509d513f61395f0ebbd5e36a") => test-anon-message-a)
 
 (fact "should not find anonymous message by id when one does not exist"
 	(find-anon-message-by-id "509d513f61395f0ebbd5e666") => nil)
@@ -26,7 +26,7 @@
 	(save-anon-message invalid-anon-message) => nil)
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
-	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-loccage-b test-anon-loccage-a])
+	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-message-b test-anon-message-a])
 
 (fact "should not find anonymous messages by bounding box when there isnt any"
 	(find-anon-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
