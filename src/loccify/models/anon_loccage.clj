@@ -14,7 +14,7 @@
 		(presence-of :loc)
 		(presence-of :created-at)))
 
-(defn find-anon-loccage-by-id [id-str]
+(defn find-anon-message-by-id [id-str]
 	(db-find
 		(db-find-details
 			:find-one anon-message-col {:_id (obj-id id-str)})))
