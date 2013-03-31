@@ -9,7 +9,7 @@
         [monger.collection :as monger-col]
         [monger.json]))
 
-(def ^:dynamic *loccify-db* "loccify")
+(def ^:dynamic *whereabts-db* "whereabtsdb")
 
 (defmulti db-find :find-type)
 
@@ -18,7 +18,7 @@
 
 (defn db-connect []
     (monger/connect!)
-    (monger/set-db! (monger/get-db *loccify-db*)))
+    (monger/set-db! (monger/get-db *whereabts-db*)))
 
 (defn db-geospatialize [collections]
     (doseq [coll collections]
