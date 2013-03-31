@@ -18,7 +18,7 @@
 (defn find-loccage-by-id [id]
 	(db-find (db-find-details :find-one message-col {:_id (obj-id id)})))
 
-(defn find-loccages-near [location]
+(defn find-messages-near [location]
 	(with-collection message-col
 		(find {:loc {"$near" [(:lon location) (:lat location)] "$maxDistance" (meters-to-degrees (:dist location))}})
 		(sort (sorted-map :created-at -1))
