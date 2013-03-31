@@ -19,12 +19,12 @@
 (fact "should return nil when trying to find loccage by id which doesnt exist"
 	(find-loccage-by-id "509d513f61395f0ebbd5e34f") => nil)
 
-(fact "should save valid loccage"
-	(let [saved-loccage (save-loccage valid-loccage)]
-		(find-loccage-by-id (obj-id-as-str saved-loccage)) => truthy))
+(fact "should save valid message"
+	(let [saved-message (save-message valid-loccage)]
+		(find-loccage-by-id (obj-id-as-str saved-message)) => truthy))
 
 (fact "should not save invalid loccage"
-	(save-loccage invalid-loccage) => nil)
+	(save-message invalid-loccage) => nil)
 
 (fact "should find loccages near by location and distance of 2500 meters"
 	(find-loccages-near (location 50.0 50.0 2500)) => [test-loccage-b test-loccage-a])

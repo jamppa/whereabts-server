@@ -24,10 +24,10 @@
 		(sort (sorted-map :created-at -1))
 		(limit 25)))
 
-(defn save-loccage [loccage]
-	(let [new-loccage (created-now loccage)]
-	(when (valid? message-validation-set new-loccage)
-		(db-insert message-col new-loccage))))
+(defn save-message [message]
+	(let [new-message (created-now message)]
+	(when (valid? message-validation-set new-message)
+		(db-insert message-col new-message))))
 
 (defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection message-col
