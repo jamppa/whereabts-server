@@ -1,4 +1,4 @@
-(ns loccify.models.loccage
+(ns loccify.models.message
 	(:refer-clojure :exclude [sort find])
 	(:use 
 		[loccify.db]

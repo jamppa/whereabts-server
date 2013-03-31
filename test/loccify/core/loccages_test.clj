@@ -1,7 +1,7 @@
 (ns loccify.core.loccages-test
 	(:use
 		[midje.sweet]
-		[loccify.models.loccage]
+		[loccify.models.message]
 		[loccify.models.anon-message]
 		[loccify.core.loccages]
 		[loccify.util.geo]))

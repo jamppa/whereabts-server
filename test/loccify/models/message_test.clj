@@ -1,6 +1,6 @@
 (ns loccify.models.message-test
 	(:use 
-		[loccify.models.loccage]
+		[loccify.models.message]
 		[loccify.db-helper]
 		[loccify.util.geo]
 		[loccify.models.util]

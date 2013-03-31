@@ -1,6 +1,6 @@
 (ns loccify.core.loccages
 	(:use
-		[loccify.models.loccage]
+		[loccify.models.message]
 		[loccify.models.anon-message]))
 
 (defn- all-loccages [loccages anon-loccages]

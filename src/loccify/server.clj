@@ -5,7 +5,7 @@
         [loccify.api.signup]
         [loccify.api.loccages]
         [loccify.util.middleware]
-        [loccify.models.loccage]
+        [loccify.models.message]
         [loccify.models.anon-message]
         [compojure.core]
         [ring.middleware.format-response :only [wrap-restful-response]]
