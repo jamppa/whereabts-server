@@ -1,4 +1,4 @@
-(ns loccify.models.loccage-test
+(ns loccify.models.message-test
 	(:use 
 		[loccify.models.loccage]
 		[loccify.db-helper]
