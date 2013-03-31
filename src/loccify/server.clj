@@ -17,7 +17,7 @@
 
 (defn init-db-connection []
 	(db-connect)
-	(db-geospatialize [message-col anon-message-col]))
+	(db-geospatialize [message-coll anon-message-coll]))
 
 (defn init-app []
     (init-db-connection))
