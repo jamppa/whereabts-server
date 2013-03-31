@@ -7,21 +7,21 @@
 (def test-user-a {:_id (ObjectId. "509d513f61395f0ebbd5e33a") :name "dsad" :email "fdsfs@dsad.fi" :password "secret" :type "email"})
 (def test-user-b {:_id (ObjectId. "509d513f61395f0ebbd5e33b") :name "teppo" :email "teppo@test.fi" :password "secret" :type "email"})
 
-(def test-loccage-a {
+(def test-message-a {
 		:_id (ObjectId. "509d513f61395f0ebbd5e34a")
 		:user_id (:_id test-user-a)
 		:message "I am test message A"
 		:loc [50.0 50.0]
 		:created-at 1364642721965})
 
-(def test-loccage-b {
+(def test-message-b {
 	:_id (ObjectId. "509d513f61395f0ebbd5e35a")
 	:user_id (:_id test-user-a)
 	:message "I am test message B"
 	:loc [50.0 50.0]
 	:created-at 1364642721966})
 
-(def test-loccage-c {
+(def test-message-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36a")
 	:user_id (:_id test-user-a)
 	:message "I am test message C"
