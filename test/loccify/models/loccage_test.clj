@@ -13,15 +13,15 @@
 
 (background (before :facts (setup-test-db)))
 
-(fact "should find loccage by id"
-	(find-loccage-by-id "509d513f61395f0ebbd5e34a") => test-message-a)
+(fact "should find message by its id"
+	(find-message-by-id "509d513f61395f0ebbd5e34a") => test-message-a)
 
-(fact "should return nil when trying to find loccage by id which doesnt exist"
-	(find-loccage-by-id "509d513f61395f0ebbd5e34f") => nil)
+(fact "should return nil when trying to find message by id which doesnt exist"
+	(find-message-by-id "509d513f61395f0ebbd5e34f") => nil)
 
 (fact "should save valid message"
 	(let [saved-message (save-message valid-msg)]
-		(find-loccage-by-id (obj-id-as-str saved-message)) => truthy))
+		(find-message-by-id (obj-id-as-str saved-message)) => truthy))
 
 (fact "should not save invalid message"
 	(save-message invalid-msg) => nil)

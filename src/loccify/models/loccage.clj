@@ -15,7 +15,7 @@
 		(presence-of :loc)
 		(presence-of :created-at)))
 
-(defn find-loccage-by-id [id]
+(defn find-message-by-id [id]
 	(db-find (db-find-details :find-one message-coll {:_id (obj-id id)})))
 
 (defn find-messages-near [location]
