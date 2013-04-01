@@ -8,8 +8,9 @@
       [ring-http-basic-auth "0.0.1"]
       [com.novemberain/monger "1.3.4"]]
    :plugins [[lein-ring "0.8.3"]]
-   :ring {:handler whereabts.server/server
-            :init whereabts.server/init-db-connection}
+   :ring {
+         :handler whereabts.server/server
+         :init whereabts.server/init-db-connection}
    :profiles {
       :dev {
          :dependencies [[ring-mock "0.1.3"] [midje "1.5.1"]]
