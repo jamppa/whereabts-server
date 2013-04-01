@@ -6,13 +6,13 @@
 		[loccify.core.loccages]
 		[loccify.util.geo]))
 
-(def loccages [{:message ""}])
-(def anon-loccages [{:message ""}])
-(def expected-all-loccages {:loccages loccages :anon-loccages anon-loccages})
+(def messages [{:message ""}])
+(def anon-messages [{:message ""}])
+(def expected-all-messages {:messages messages :anon-messages anon-messages})
 
 (def bbox (bounding-box [1 1] [1 1]))
 
-(fact "should find all loccages by bounding box"
-	(find-all-messages-by-bbox bbox) => expected-all-loccages
-	(provided (find-messages-by-bbox bbox) => loccages :times 1)
-	(provided (find-anon-messages-by-bbox bbox) => anon-loccages :times 1))
+(fact "should find all messages by bounding box"
+	(find-all-messages-by-bbox bbox) => expected-all-messages
+	(provided (find-messages-by-bbox bbox) => messages :times 1)
+	(provided (find-anon-messages-by-bbox bbox) => anon-messages :times 1))
