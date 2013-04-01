@@ -1,4 +1,4 @@
-(ns loccify.api.loccages
+(ns loccify.api.messages-api
 	(:use
 		[compojure.core]
 		[ring.util.response]

@@ -3,7 +3,7 @@
         [loccify.core.auth]
         [loccify.db]
         [loccify.api.signup]
-        [loccify.api.loccages]
+        [loccify.api.messages-api]
         [loccify.util.middleware]
         [loccify.models.message]
         [loccify.models.anon-message]
