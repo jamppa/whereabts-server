@@ -1,4 +1,4 @@
-(ns loccify.util.middleware-test
+(ns whereabts.util.middleware-test
 	(:use 
 		[loccify.util.middleware]
 		[midje.sweet]

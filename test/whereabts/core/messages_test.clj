@@ -1,4 +1,4 @@
-(ns loccify.core.messages-test
+(ns whereabts.core.messages-test
 	(:use
 		[midje.sweet]
 		[loccify.models.message]

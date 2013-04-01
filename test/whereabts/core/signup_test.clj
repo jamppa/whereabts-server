@@ -1,4 +1,4 @@
-(ns loccify.core.signup-test
+(ns whereabts.core.signup-test
 	(:use 
 		[loccify.core.signup]
 		[loccify.core.auth]

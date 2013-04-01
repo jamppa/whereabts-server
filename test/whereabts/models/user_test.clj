@@ -1,8 +1,8 @@
-(ns loccify.models.user-test
+(ns whereabts.models.user-test
 	(:use 
 		[loccify.models.user]
-		[loccify.db-helper]
-		[loccify.db-test-fixtures]
+		[whereabts.db-helper]
+		[whereabts.db-test-fixtures]
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 

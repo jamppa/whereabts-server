@@ -1,4 +1,4 @@
-(ns loccify.util.geo-test
+(ns whereabts.util.geo-test
 	(:use [loccify.util.geo])
 	(:use [midje.sweet]))
 

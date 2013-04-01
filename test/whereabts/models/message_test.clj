@@ -1,10 +1,10 @@
-(ns loccify.models.message-test
+(ns whereabts.models.message-test
 	(:use 
 		[loccify.models.message]
-		[loccify.db-helper]
+		[whereabts.db-helper]
 		[loccify.util.geo]
 		[loccify.models.util]
-		[loccify.db-test-fixtures]
+		[whereabts.db-test-fixtures]
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 

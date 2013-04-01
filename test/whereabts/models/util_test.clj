@@ -1,4 +1,4 @@
-(ns loccify.models.util-test
+(ns whereabts.models.util-test
 	(:use 
 		[loccify.models.util]
 		[midje.sweet])

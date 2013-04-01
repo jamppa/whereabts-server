@@ -1,11 +1,11 @@
-(ns loccify.api.signup-test
+(ns whereabts.api.signup-test
 	(:use 
 		[midje.sweet]
 		[ring.mock.request]
 		[loccify.api.signup]
 		[loccify.core.auth]
 		[loccify.core.signup]
-		[loccify.api-helper]))
+		[whereabts.api-helper]))
 
 (def expected-res-for-available-username (expected-res 200 {:name "teppo" :available true}))
 (def expected-res-for-not-available-username (expected-res 200 {:name "seppo" :available false}))

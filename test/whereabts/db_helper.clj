@@ -1,8 +1,8 @@
-(ns loccify.db-helper
+(ns whereabts.db-helper
 	(:require 
 		[monger.core :as monger] 
 		[monger.collection :as monger-col])
-	(:use [loccify.db-test-fixtures])
+	(:use [whereabts.db-test-fixtures])
 	(:import [org.bson.types ObjectId]))
 
 (def test-db-name "whereabtsdb_test")

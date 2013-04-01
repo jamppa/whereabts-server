@@ -1,10 +1,10 @@
-(ns loccify.api.messages-api-test
+(ns whereabts.api.messages-api-test
 	(:use
 		[loccify.api.messages-api]
 		[loccify.core.messages]
 		[midje.sweet]
 		[ring.mock.request]
-		[loccify.api-helper]
+		[whereabts.api-helper]
 		[loccify.util.geo]))
 
 (def bbox (bounding-box [1.23 1.23] [5.0 5.0]))

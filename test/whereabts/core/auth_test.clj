@@ -1,4 +1,4 @@
-(ns loccify.core.auth-test
+(ns whereabts.core.auth-test
 	(:use 
 		[loccify.core.auth]
 		[loccify.models.user]
