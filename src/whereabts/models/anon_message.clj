@@ -1,8 +1,8 @@
-(ns loccify.models.anon-message
+(ns whereabts.models.anon-message
 	(:refer-clojure :exclude [sort find])
 	(:use
-		[loccify.db]
-		[loccify.models.util]
+		[whereabts.db]
+		[whereabts.models.util]
 		[validateur.validation]
 		[monger.query]))
 

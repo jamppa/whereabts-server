@@ -1,12 +1,12 @@
-(ns loccify.server
+(ns whereabts.server
     (:use 
-        [loccify.core.auth]
-        [loccify.db]
-        [loccify.api.signup]
-        [loccify.api.messages-api]
-        [loccify.util.middleware]
-        [loccify.models.message]
-        [loccify.models.anon-message]
+        [whereabts.core.auth]
+        [whereabts.db]
+        [whereabts.api.signup]
+        [whereabts.api.messages-api]
+        [whereabts.util.middleware]
+        [whereabts.models.message]
+        [whereabts.models.anon-message]
         [compojure.core]
         [ring.middleware.format-response :only [wrap-restful-response]]
         [ring.middleware.json :only [wrap-json-body]]

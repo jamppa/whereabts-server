@@ -1,9 +1,9 @@
-(ns loccify.models.message
+(ns whereabts.models.message
 	(:refer-clojure :exclude [sort find])
 	(:use 
-		[loccify.db]
-		[loccify.util.geo]
-		[loccify.models.util]
+		[whereabts.db]
+		[whereabts.util.geo]
+		[whereabts.models.util]
 		[validateur.validation]
 		[monger.query]))
 

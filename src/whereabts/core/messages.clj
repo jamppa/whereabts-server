@@ -1,7 +1,7 @@
-(ns loccify.core.messages
+(ns whereabts.core.messages
 	(:use
-		[loccify.models.message]
-		[loccify.models.anon-message]))
+		[whereabts.models.message]
+		[whereabts.models.anon-message]))
 
 (defn- all-messages [messages anon-messages]
 	{:messages messages :anon-messages anon-messages})

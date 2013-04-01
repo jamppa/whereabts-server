@@ -1,6 +1,6 @@
 (ns whereabts.models.util-test
 	(:use 
-		[loccify.models.util]
+		[whereabts.models.util]
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 

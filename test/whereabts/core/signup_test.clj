@@ -1,8 +1,8 @@
 (ns whereabts.core.signup-test
 	(:use 
-		[loccify.core.signup]
-		[loccify.core.auth]
-		[loccify.models.user]
+		[whereabts.core.signup]
+		[whereabts.core.auth]
+		[whereabts.models.user]
 		[midje.sweet]))
 
 (defn- new-user [name email password type]

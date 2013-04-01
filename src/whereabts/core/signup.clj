@@ -1,7 +1,7 @@
-(ns loccify.core.signup
+(ns whereabts.core.signup
 	(:use
-		[loccify.core.auth]
-		[loccify.models.user]))
+		[whereabts.core.auth]
+		[whereabts.models.user]))
 
 (defn- can-signup? [user]
 	(every? true? 

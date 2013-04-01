@@ -1,7 +1,7 @@
 (ns whereabts.core.auth-test
 	(:use 
-		[loccify.core.auth]
-		[loccify.models.user]
+		[whereabts.core.auth]
+		[whereabts.models.user]
 		[midje.sweet]))
 
 (def user {})
@@ -35,5 +35,5 @@
 	(provided (find-user-by-email-and-pass "teppo@testaaja.fi" "secret") => user))
 
 (fact "should authenticate by returning anonymous system user when email and pass match"
-	(authenticate "anonymous@loccify.me" "ae129325a4db22faab7771f10b39a8af") => anon-loccify-user
-	(provided (find-user-by-email-and-pass "anonymous@loccify.me" "ae129325a4db22faab7771f10b39a8af") => nil :times 0))
+	(authenticate "anonymous@whereabts.me" "ae129325a4db22faab7771f10b39a8af") => anon-whereabts-user
+	(provided (find-user-by-email-and-pass "anonymous@whereabts.me" "ae129325a4db22faab7771f10b39a8af") => nil :times 0))

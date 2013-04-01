@@ -1,6 +1,6 @@
 (ns whereabts.db-test
 	(:use 
-		[loccify.db]
+		[whereabts.db]
 		[whereabts.db-helper]
 		[whereabts.db-test-fixtures]
 		[midje.sweet])

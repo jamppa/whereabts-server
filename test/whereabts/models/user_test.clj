@@ -1,6 +1,6 @@
 (ns whereabts.models.user-test
 	(:use 
-		[loccify.models.user]
+		[whereabts.models.user]
 		[whereabts.db-helper]
 		[whereabts.db-test-fixtures]
 		[midje.sweet])

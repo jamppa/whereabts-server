@@ -1,4 +1,4 @@
-(ns loccify.models.util
+(ns whereabts.models.util
 	(:require [monger.util :as util])
 	(:import [org.bson.types ObjectId]))
 

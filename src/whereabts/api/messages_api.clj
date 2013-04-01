@@ -1,9 +1,9 @@
-(ns loccify.api.messages-api
+(ns whereabts.api.messages-api
 	(:use
 		[compojure.core]
 		[ring.util.response]
-		[loccify.core.messages]
-		[loccify.util.geo]))
+		[whereabts.core.messages]
+		[whereabts.util.geo]))
 
 (defroutes messages-api-routes
 

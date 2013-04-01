@@ -1,6 +1,6 @@
 (ns whereabts.util.middleware-test
 	(:use 
-		[loccify.util.middleware]
+		[whereabts.util.middleware]
 		[midje.sweet]
 		[ring.mock.request]))
 

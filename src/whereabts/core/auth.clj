@@ -1,13 +1,13 @@
-(ns loccify.core.auth
-	(:use [loccify.models.user]))
+(ns whereabts.core.auth
+	(:use [whereabts.models.user]))
 
-(defn- anon-loccify-user? [email pwd]
+(defn- anon-whereabts-user? [email pwd]
 	(and 
-		(= email (anon-loccify-user :email)) (= pwd (anon-loccify-user :password))))
+		(= email (anon-whereabts-user :email)) (= pwd (anon-whereabts-user :password))))
 
 (defn authenticate [email pwd]
-	(if (anon-loccify-user? email pwd) 
-		anon-loccify-user 
+	(if (anon-whereabts-user? email pwd) 
+		anon-whereabts-user 
 		(find-user-by-email-and-pass email pwd)))
 
 (defn authenticated? [email pass]

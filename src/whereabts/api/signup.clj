@@ -1,7 +1,7 @@
-(ns loccify.api.signup
+(ns whereabts.api.signup
 	(:use 
-		[loccify.core.auth]
-		[loccify.core.signup]
+		[whereabts.core.auth]
+		[whereabts.core.signup]
 		[compojure.core]
 		[ring.util.response]
 		[monger.util]

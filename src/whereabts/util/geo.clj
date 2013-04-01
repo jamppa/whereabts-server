@@ -1,4 +1,4 @@
-(ns loccify.util.geo)
+(ns whereabts.util.geo)
 
 (def one-degree-in-km 111.12)
 (def one-km-in-meters 1000)

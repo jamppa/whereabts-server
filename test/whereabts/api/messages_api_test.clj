@@ -1,11 +1,11 @@
 (ns whereabts.api.messages-api-test
 	(:use
-		[loccify.api.messages-api]
-		[loccify.core.messages]
+		[whereabts.api.messages-api]
+		[whereabts.core.messages]
 		[midje.sweet]
 		[ring.mock.request]
 		[whereabts.api-helper]
-		[loccify.util.geo]))
+		[whereabts.util.geo]))
 
 (def bbox (bounding-box [1.23 1.23] [5.0 5.0]))
 (def messages {:messages [] :anon-messages []})

@@ -2,9 +2,9 @@
 	(:use 
 		[midje.sweet]
 		[ring.mock.request]
-		[loccify.api.signup]
-		[loccify.core.auth]
-		[loccify.core.signup]
+		[whereabts.api.signup]
+		[whereabts.core.auth]
+		[whereabts.core.signup]
 		[whereabts.api-helper]))
 
 (def expected-res-for-available-username (expected-res 200 {:name "teppo" :available true}))
@@ -33,5 +33,5 @@
 	(provided (available-email? "teppo@test.fi") => false))
 
 (fact "should give correct response when requesting to signup a user with valid payload"
-	(signup-routes (loccify-request :post "/signup" user-payload)) => expected-res-for-signup
+	(signup-routes (whereabts-request :post "/signup" user-payload)) => expected-res-for-signup
 	(provided (signup user-payload) => user-payload))

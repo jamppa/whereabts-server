@@ -1,5 +1,5 @@
 (ns whereabts.util.geo-test
-	(:use [loccify.util.geo])
+	(:use [whereabts.util.geo])
 	(:use [midje.sweet]))
 
 (fact "should create location-object"

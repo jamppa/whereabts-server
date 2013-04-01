@@ -1,10 +1,10 @@
 (ns whereabts.models.anon-message-test
 	(:use
 		[midje.sweet]
-		[loccify.models.anon-message]
+		[whereabts.models.anon-message]
 		[whereabts.db-helper]
-		[loccify.models.util]
-		[loccify.util.geo]
+		[whereabts.models.util]
+		[whereabts.util.geo]
 		[whereabts.db-test-fixtures]))
 
 (def valid-anon-message {:message "msg" :nick "Cool Guy" :loc [45.1 56.4]})

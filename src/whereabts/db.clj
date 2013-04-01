@@ -1,7 +1,7 @@
-(ns loccify.db
+(ns whereabts.db
     (:refer-clojure :exclude [sort find])
     (:use 
-        [loccify.models.util]
+        [whereabts.models.util]
         [monger.result :only [ok?]]
         [monger.query])
     (:require 

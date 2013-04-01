@@ -1,10 +1,10 @@
 (ns whereabts.core.messages-test
 	(:use
 		[midje.sweet]
-		[loccify.models.message]
-		[loccify.models.anon-message]
-		[loccify.core.messages]
-		[loccify.util.geo]))
+		[whereabts.models.message]
+		[whereabts.models.anon-message]
+		[whereabts.core.messages]
+		[whereabts.util.geo]))
 
 (def messages [{:message ""}])
 (def anon-messages [{:message ""}])

@@ -1,4 +1,4 @@
-(ns loccify.util.middleware
+(ns whereabts.util.middleware
     (:use [ring.util.response]))
 
 (defn- reason [msg] {:reason msg})

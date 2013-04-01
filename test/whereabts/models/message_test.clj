@@ -1,9 +1,9 @@
 (ns whereabts.models.message-test
 	(:use 
-		[loccify.models.message]
+		[whereabts.models.message]
 		[whereabts.db-helper]
-		[loccify.util.geo]
-		[loccify.models.util]
+		[whereabts.util.geo]
+		[whereabts.models.util]
 		[whereabts.db-test-fixtures]
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
