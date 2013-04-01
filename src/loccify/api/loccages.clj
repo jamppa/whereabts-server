@@ -10,6 +10,6 @@
 	(GET "/loccages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat]
 		(let [ll-vec [(read-string ll-lon) (read-string ll-lat)]
 			ur-vec [(read-string ur-lon) (read-string ur-lat)]]
-		(response (find-all-loccages-by-bbox (bounding-box ll-vec ur-vec)))))
+		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec)))))
 )
 

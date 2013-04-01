@@ -3,10 +3,10 @@
 		[loccify.models.message]
 		[loccify.models.anon-message]))
 
-(defn- all-loccages [loccages anon-loccages]
+(defn- all-messages [loccages anon-loccages]
 	{:loccages loccages :anon-loccages anon-loccages})
 
-(defn find-all-loccages-by-bbox [bbox]
+(defn find-all-messages-by-bbox [bbox]
 	(let [loccages (find-messages-by-bbox bbox)
 		anon-loccages (find-anon-messages-by-bbox bbox)]
-		(all-loccages loccages anon-loccages)))
+		(all-messages loccages anon-loccages)))

@@ -13,4 +13,4 @@
 
 (fact "should response correctly when requesting all loccages inside bounding box"
 	(loccage-routes (request :get "/loccages/1.23/1.23/5.0/5.0")) => expected-res-for-loccages
-	(provided (find-all-loccages-by-bbox bbox) => loccages :times 1))
+	(provided (find-all-messages-by-bbox bbox) => loccages :times 1))
