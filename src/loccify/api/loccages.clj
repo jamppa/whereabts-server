@@ -2,7 +2,7 @@
 	(:use
 		[compojure.core]
 		[ring.util.response]
-		[loccify.core.loccages]
+		[loccify.core.messages]
 		[loccify.util.geo]))
 
 (defroutes loccage-routes

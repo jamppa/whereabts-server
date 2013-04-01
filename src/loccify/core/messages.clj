@@ -1,4 +1,4 @@
-(ns loccify.core.loccages
+(ns loccify.core.messages
 	(:use
 		[loccify.models.message]
 		[loccify.models.anon-message]))

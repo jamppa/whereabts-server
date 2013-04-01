@@ -1,7 +1,7 @@
 (ns loccify.api.loccages-test
 	(:use
 		[loccify.api.loccages]
-		[loccify.core.loccages]
+		[loccify.core.messages]
 		[midje.sweet]
 		[ring.mock.request]
 		[loccify.api-helper]

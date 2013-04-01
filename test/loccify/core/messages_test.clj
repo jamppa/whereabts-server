@@ -3,7 +3,7 @@
 		[midje.sweet]
 		[loccify.models.message]
 		[loccify.models.anon-message]
-		[loccify.core.loccages]
+		[loccify.core.messages]
 		[loccify.util.geo]))
 
 (def messages [{:message ""}])
