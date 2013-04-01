@@ -5,7 +5,7 @@
 		[loccify.core.messages]
 		[loccify.util.geo]))
 
-(defroutes loccage-routes
+(defroutes messages-api-routes
 
 	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat]
 		(let [ll-vec [(read-string ll-lon) (read-string ll-lat)]

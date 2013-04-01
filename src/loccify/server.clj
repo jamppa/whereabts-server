@@ -23,7 +23,7 @@
     (init-db-connection))
 
 (defroutes api-routes
-    (context "/api" [] signup-routes loccage-routes)
+    (context "/api" [] signup-routes messages-api-routes)
     (route/not-found "Move on, nothing to see here..."))
 
 (def server

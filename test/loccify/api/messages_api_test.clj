@@ -12,5 +12,5 @@
 (def expected-res-for-messages (expected-res 200 messages))
 
 (fact "should GET all messages inside bounding box"
-	(loccage-routes (request :get "/messages/1.23/1.23/5.0/5.0")) => expected-res-for-messages
+	(messages-api-routes (request :get "/messages/1.23/1.23/5.0/5.0")) => expected-res-for-messages
 	(provided (find-all-messages-by-bbox bbox) => messages :times 1))
