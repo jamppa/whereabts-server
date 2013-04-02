@@ -8,8 +8,7 @@
         [whereabts.models.message]
         [whereabts.models.anon-message]
         [compojure.core]
-        [ring.middleware.format-response :only [wrap-restful-response]]
-        [ring.middleware.json :only [wrap-json-body]]
+        [ring.middleware.format]
         [ring.middleware.http-basic-auth])
     (:require 
         [compojure.handler :as handler]
@@ -28,9 +27,10 @@
 
 (def server
     (-> (handler/api api-routes)
-        (wrap-json-body)
+        ;(wrap-json-body)
+        (wrap-restful-format)
         (wrap-exception-handler)
-        (wrap-restful-response)
+        ;(wrap-restful-response)
         (wrap-require-auth authenticate
             "Authentication failed!"
             {:body "Authentication failed!"})))
