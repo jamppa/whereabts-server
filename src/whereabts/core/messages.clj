@@ -10,3 +10,11 @@
 	(let [messages (find-messages-by-bbox bbox)
 		anon-messages (find-anon-messages-by-bbox bbox)]
 		(all-messages messages anon-messages)))
+
+(defmulti save-new-message :msg-type)
+
+(defmethod save-new-message :anonymous [msg]
+	nil)
+
+(defmethod save-new-message :user [msg]
+	nil)
