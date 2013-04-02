@@ -1,13 +1,12 @@
 (ns whereabts.db
     (:refer-clojure :exclude [sort find])
     (:use 
-        [whereabts.models.util]
         [monger.result :only [ok?]]
-        [monger.query])
+        [monger.query]
+        [whereabts.models.util])
     (:require 
         [monger.core :as monger]
-        [monger.collection :as monger-col]
-        [monger.json]))
+        [monger.collection :as monger-col]))
 
 (def ^:dynamic *whereabts-db* "whereabtsdb")
 

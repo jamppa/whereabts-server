@@ -27,10 +27,8 @@
 
 (def server
     (-> (handler/api api-routes)
-        ;(wrap-json-body)
         (wrap-restful-format)
         (wrap-exception-handler)
-        ;(wrap-restful-response)
         (wrap-require-auth authenticate
             "Authentication failed!"
             {:body "Authentication failed!"})))
