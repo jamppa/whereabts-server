@@ -13,7 +13,7 @@
 			ur-vec [(read-string ur-lon) (read-string ur-lat)]]
 		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec)))))
 
-	(POST "/messages/anonymous" [:as req]
+	(POST "/messages" [:as req]
 		(let [payload (keywordize-keys (:body req))]
 			(status (response (save-new-message payload)) 201)))
 )

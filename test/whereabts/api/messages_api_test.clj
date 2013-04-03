@@ -21,6 +21,6 @@
 
 (fact "should POST anonymous new message"
 	(messages-api-routes 
-		(whereabts-request :post "/messages/anonymous" new-anonymous-msg-payload)) => expected-res-for-new-anon-message
+		(whereabts-request :post "/messages" new-anonymous-msg-payload)) => expected-res-for-new-anon-message
 	(provided 
 		(save-new-message new-anonymous-msg-payload) => new-anonymous-msg :times 1))
