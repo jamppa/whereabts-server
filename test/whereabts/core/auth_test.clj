@@ -35,5 +35,5 @@
 	(provided (find-user-by-email-and-pass "teppo@testaaja.fi" "secret") => user))
 
 (fact "should authenticate by returning anonymous system user when email and pass match"
-	(authenticate "anonymous@whereabts.me" "ae129325a4db22faab7771f10b39a8af") => anon-whereabts-user
+	(authenticate "anonymous@whereabts.com" "ae129325a4db22faab7771f10b39a8af") => anon-whereabts-user
 	(provided (find-user-by-email-and-pass "anonymous@whereabts.me" "ae129325a4db22faab7771f10b39a8af") => nil :times 0))
