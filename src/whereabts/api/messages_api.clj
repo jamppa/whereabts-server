@@ -14,7 +14,7 @@
 		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec)))))
 
 	(POST "/messages" [:as req]
-		(let [payload (keywordize-keys (:body req))]
-			(status (response (save-new-message payload)) 201)))
+		(let [message (keywordize-keys (:body req))]
+			(status (response (save-new-message message)) 201)))
 )
 
