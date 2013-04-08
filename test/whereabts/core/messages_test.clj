@@ -27,3 +27,6 @@
 (fact "should save new user message"
 	(save-new-message user-msg) => saved-msg
 	(provided (save-message user-msg) => saved-msg :times 1))
+
+(fact "should stamp object as anonymous message"
+	(anonymous-message {}) => {:msg-type :anonymous})
