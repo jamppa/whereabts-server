@@ -6,6 +6,9 @@
 (defn- all-messages [messages anon-messages]
 	{:messages messages :anon-messages anon-messages})
 
+(defn anonymous-message [msg]
+	(assoc msg :msg-type :anonymous))
+
 (defn find-all-messages-by-bbox [bbox]
 	(let [messages (find-messages-by-bbox bbox)
 		anon-messages (find-anon-messages-by-bbox bbox)]

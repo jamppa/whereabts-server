@@ -9,7 +9,8 @@
 
 (def bbox (bounding-box [1.23 1.23] [5.0 5.0]))
 (def messages {:messages [] :anon-messages []})
-(def new-anonymous-msg-payload {:something "and something" :type :anonymous})
+(def msg-payload {:something "and something"})
+(def anonymous-msg (merge msg-payload {:msg-type :anonymous}))
 (def new-anonymous-msg {})
 
 (def expected-res-for-messages (expected-res 200 messages))
@@ -21,6 +22,7 @@
 
 (fact "should POST anonymous new message"
 	(messages-api-routes 
-		(whereabts-request :post "/messages" new-anonymous-msg-payload)) => expected-res-for-new-anon-message
-	(provided 
-		(save-new-message new-anonymous-msg-payload) => new-anonymous-msg :times 1))
+		(whereabts-request :post "/messages" msg-payload)) => expected-res-for-new-anon-message
+	(provided
+		(anonymous-message msg-payload) => anonymous-msg :times 1
+		(save-new-message anonymous-msg) => new-anonymous-msg :times 1))
