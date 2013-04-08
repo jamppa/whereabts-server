@@ -6,7 +6,8 @@
         [whereabts.models.util])
     (:require 
         [monger.core :as monger]
-        [monger.collection :as monger-col]))
+        [monger.collection :as monger-col]
+        [monger.json]))
 
 (def ^:dynamic *whereabts-db* "whereabtsdb")
 

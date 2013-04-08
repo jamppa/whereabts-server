@@ -3,7 +3,6 @@
    :dependencies 
       [[org.clojure/clojure "1.5.1"]
       [compojure "1.1.5"]
-      [ring-middleware-format "0.3.0"]
       [ring/ring-json "0.2.0"]
       [ring-http-basic-auth "0.0.1"]
       [com.novemberain/monger "1.5.0"]]
