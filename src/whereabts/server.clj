@@ -31,6 +31,4 @@
         (wrap-json-body)
         (wrap-exception-handler)
         (wrap-restful-response)
-        (wrap-require-auth authenticate
-            "Authentication failed!"
-            {:body "Authentication failed!"})))
+        (wrap-require-auth authenticate "Authentication failed!")))
