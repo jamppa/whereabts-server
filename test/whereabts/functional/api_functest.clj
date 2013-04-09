@@ -6,7 +6,9 @@
 	{:accept :json
 	 :content-type :json
 	 :basic-auth auth
-	 :body body})
+	 :body body
+	 :coerce :always
+	 :throw-exceptions false})
 
 (defn whereabts-api-request-anon [body]
 	(whereabts-api-request 
