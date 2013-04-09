@@ -8,7 +8,7 @@
 
 (def whereabts-api-messages (str whereabts-api-testsrv "/messages"))
 
-(def message-as-json (json/write-str {:nick "teppo" :message "yey, cool things!" :loc [34.122 45.434]}))
+(def message-as-json (json/write-str {:nick "teppo" :title "cool title!" :message "yey, cool things!" :loc [34.122 45.434]}))
 (def invalid-message-as-json (json/write-str {:message "yey, cool things!" :loc [34.122 45.434]}))
 
 (fact "should response with HTTP Created when POST new message to service as an anonymous whereabts user" :functional
