@@ -21,8 +21,9 @@
 
 (defn save-anon-message [message]
 	(let [new-message (created-now message)]
-		(when (valid? anon-message-validation-set new-message)
-			(db-insert anon-message-coll new-message))))
+		(if (valid? anon-message-validation-set new-message)
+			(db-insert anon-message-coll new-message)
+			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
 (defn find-anon-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection anon-message-coll
