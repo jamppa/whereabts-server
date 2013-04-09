@@ -9,8 +9,9 @@
 (def anon-message-coll "anonymous_messages")
 (def anon-message-validation-set
 	(validation-set
-		(presence-of :message)
 		(presence-of :nick)
+		(presence-of :title)
+		(presence-of :message)
 		(presence-of :loc)
 		(presence-of :created-at)))
 

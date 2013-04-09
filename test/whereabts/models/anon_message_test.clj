@@ -7,7 +7,7 @@
 		[whereabts.util.geo]
 		[whereabts.db-test-fixtures]))
 
-(def valid-anon-message {:message "msg" :nick "Cool Guy" :loc [45.1 56.4]})
+(def valid-anon-message {:title "My Cool Message" :message "This is the content of My Cool Message" :nick "Cool Guy" :loc [45.1 56.4]})
 (def invalid-anon-message {:message "asdasd" :loc [12.2 34.4]})
 
 (background (before :facts (setup-test-db)))
