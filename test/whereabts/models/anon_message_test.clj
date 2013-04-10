@@ -7,8 +7,22 @@
 		[whereabts.util.geo]
 		[whereabts.db-test-fixtures]))
 
-(def valid-anon-message {:title "My Cool Message" :message "This is the content of My Cool Message" :nick "Cool Guy" :loc [45.1 56.4]})
-(def invalid-anon-message {:message "asdasd" :loc [12.2 34.4]})
+(def anon-message {
+	:title "My Cool Message" 
+	:message "This is the content of My Cool Message" 
+	:nick "Cool Guy" 
+	:loc [45.1 56.4]})
+
+(def anon-message-with-empty-title {
+	:title ""
+	:message "yippi yyeeee"
+	:nick "Cool Guy"
+	:loc [12.12 12.12]})
+
+(def invalid-anon-message {
+	:message "asdasd"
+	:nick "Cool Guy" 
+	:loc [12.2 34.4]})
 
 (background (before :facts (setup-test-db)))
 
@@ -19,7 +33,7 @@
 	(find-anon-message-by-id "509d513f61395f0ebbd5e666") => nil)
 
 (fact "should save valid anonymous message"
-	(let [saved-message (save-anon-message valid-anon-message)]
+	(let [saved-message (save-anon-message anon-message)]
 		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should not save invalid anonymous message but throw IllegalArgumentException"
@@ -30,3 +44,7 @@
 
 (fact "should not find anonymous messages by bounding box when there isnt any"
 	(find-anon-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
+
+(fact "should save valid anonymous message with empty title"
+	(let [saved-message (save-anon-message anon-message-with-empty-title)]
+		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))

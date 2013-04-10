@@ -7,10 +7,10 @@
 		[monger.query]))
 
 (def anon-message-coll "anonymous_messages")
-(def anon-message-validation-set
+(defn- anon-message-validation-set []
 	(validation-set
 		(presence-of :nick)
-		(presence-of :title)
+		(length-of :title :within (range 1 60) :allow-blank true)
 		(presence-of :message)
 		(presence-of :loc)
 		(presence-of :created-at)))
@@ -22,7 +22,7 @@
 
 (defn save-anon-message [message]
 	(let [new-message (created-now message)]
-		(if (valid? anon-message-validation-set new-message)
+		(if (valid? (anon-message-validation-set) new-message)
 			(db-insert anon-message-coll new-message)
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 

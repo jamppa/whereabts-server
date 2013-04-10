@@ -5,7 +5,8 @@
       [compojure "1.1.5"]
       [ring/ring-json "0.2.0"]
       [ring-http-basic-auth "0.0.1"]
-      [com.novemberain/monger "1.5.0"]]
+      [com.novemberain/monger "1.5.0"]
+      [com.novemberain/validateur "1.4.0"]]
    :plugins [[lein-ring "0.8.3"]]
    :ring {
          :handler whereabts.server/server
