@@ -50,4 +50,5 @@
 		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should compactify anonymous message"
-	(keys (compactify-anon-message (with-obj-id anon-message))) => '(:_id :loc :short-message :created-at))
+	(keys 
+		(compactify-anon-message (with-obj-id anon-message))) => '(:_id :loc :short-message :created-at))

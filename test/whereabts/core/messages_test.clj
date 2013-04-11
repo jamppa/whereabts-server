@@ -14,7 +14,7 @@
 
 (def bbox (bounding-box [1 1] [1 1]))
 
-(fact "should find all messages by bounding box"
+(fact "should find all messages by bounding box and compactify them"
 	(find-all-messages-by-bbox bbox) => expected-all-messages
 	(provided (find-anon-messages-by-bbox bbox) => anon-messages :times 1))
 
