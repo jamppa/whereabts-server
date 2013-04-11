@@ -31,3 +31,10 @@
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
 		(sort (sorted-map :created-at -1))
 		(limit 25)))
+
+(defn compactify-anon-message [msg]
+	{
+		:_id (:_id msg)
+		:loc (:loc msg)
+		:short-message (:title msg)
+		:created-at (:created-at msg)})

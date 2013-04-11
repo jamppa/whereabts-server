@@ -3,16 +3,15 @@
 		[whereabts.models.message]
 		[whereabts.models.anon-message]))
 
-(defn- all-messages [messages anon-messages]
-	{:messages messages :anon-messages anon-messages})
+(defn- all-messages [messages ]
+	{:messages messages})
 
 (defn anonymous-message [msg]
 	(assoc msg :msg-type :anonymous))
 
 (defn find-all-messages-by-bbox [bbox]
-	(let [messages (find-messages-by-bbox bbox)
-		anon-messages (find-anon-messages-by-bbox bbox)]
-		(all-messages messages anon-messages)))
+	(let [anon-messages (find-anon-messages-by-bbox bbox)]
+		(all-messages anon-messages)))
 
 (defmulti save-new-message :msg-type)
 
