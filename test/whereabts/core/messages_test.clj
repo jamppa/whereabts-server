@@ -6,8 +6,8 @@
 		[whereabts.core.messages]
 		[whereabts.util.geo]))
 
-(def anon-messages [{:message ""}])
-(def expected-all-messages {:messages anon-messages})
+(def anon-messages [{:_id "123" :loc [12.12 12.12] :title "title" :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
+(def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
 (def anon-msg {:msg-type :anonymous})
 (def user-msg {:msg-type :user})
 (def saved-msg {})
