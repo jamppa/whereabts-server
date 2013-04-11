@@ -35,6 +35,10 @@
 	(:status (http/post whereabts-api-messages
 		(whereabts-api-request ["invalid@user.com" "blaah"] message-as-json))) => 401)
 
-(fact "should response with HTTP OK when GETing all messages by bounding box" :functional
+(fact "should response with HTTP OK when GETting all messages by bbox as an anonymous user" :functional
 	(:status (http/get (whereabts-api-messages-by-bbox 24.987 60.255 24.989 60.260)
 		(whereabts-api-request-anon ""))) => 200)
+
+(fact "should response with HTTP Unauthorized when trying to GET messages by bbox with invalid credentials" :functional
+	(:status (http/get (whereabts-api-messages-by-bbox 24.987 60.255 24.989 60.260)
+		(whereabts-api-request ["invalid@blaa.com" "secret"] ""))) => 401)
