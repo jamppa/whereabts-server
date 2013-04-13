@@ -24,11 +24,18 @@
 (fact "should get short message from message object using title if available"
 	(short-message obj-with-title) => (:title obj-with-title))
 
-(fact "should get short message from message object using actual message when title is empty"
-	(short-message obj-without-title) => (:message obj-without-title))
+(fact "should get short message from message object using actual message ellipsized when title is empty"
+	(short-message obj-without-title) => "This is the message..."
+	(provided (ellipsize-str-max-len "This is the message" 30) => "This is the message..." :times 1))
 
 (fact "should ellipsize string using first four words out of the string"
-	(ellipsize-str "This is some cool string you know") => "This is some cool ...")
+	(ellipsize-str-max-words "This is some cool string you know" 4) => "This is some cool ...")
 
 (fact "should ellipsize string using first available words when it contains only couple of words"
-	(ellipsize-str "This is") => "This is ...")
+	(ellipsize-str-max-words "This is" 4) => "This is")
+	
+(fact "should ellipsize string using given maximum length"
+	(ellipsize-str-max-len "This is some very looong string" 10) => "This is so...")
+
+(fact "should not ellipsize if string fits to fiven length"
+	(ellipsize-str-max-len "This is a message" 100) => "This is a message")

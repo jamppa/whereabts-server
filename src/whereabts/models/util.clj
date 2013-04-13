@@ -3,9 +3,16 @@
 	(:require [monger.util :as util])
 	(:import [org.bson.types ObjectId]))
 
-(defn ellipsize-str [str]
+(defn ellipsize-str-max-words [str word-count]
 	(let [words (split str #"\s+")]
-		(join " " (conj (vec (take 4 words)) "..."))))
+		(if (> (count words) word-count)
+		(join " " (conj (vec (take word-count words)) "..."))
+		(join " " words))))
+		
+(defn ellipsize-str-max-len [string len]
+	(if (> (count string) len)
+		(str (subs string 0 len) "...")
+		string))
 
 (defn obj-id [hex]
 	(ObjectId. hex))
@@ -21,5 +28,5 @@
 
 (defn short-message [obj]
 	(if (empty? (:title obj))
-		(:message obj)
+		(ellipsize-str-max-len (:message obj) 30)
 		(:title obj)))
