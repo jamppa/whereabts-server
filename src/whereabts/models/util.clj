@@ -4,8 +4,8 @@
 	(:import [org.bson.types ObjectId]))
 
 (defn ellipsize-str [str]
-	(let [[w1 w2 w3 w4] (split str #"\s+")]
-		(join " " [w1 w2 w3 w4 "..."])))
+	(let [words (split str #"\s+")]
+		(join " " (conj (vec (take 4 words)) "..."))))
 
 (defn obj-id [hex]
 	(ObjectId. hex))
