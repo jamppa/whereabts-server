@@ -26,3 +26,6 @@
 
 (fact "should get short message from message object using actual message when title is empty"
 	(short-message obj-without-title) => (:message obj-without-title))
+
+(fact "should ellipsize string using first 4 words out of the string"
+	(ellipsize-str "This is some cool string you know") => "This is some cool ...")
