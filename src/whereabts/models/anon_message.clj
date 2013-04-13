@@ -10,7 +10,7 @@
 (defn- anon-message-validation-set []
 	(validation-set
 		(presence-of :nick)
-		(length-of :title :within (range 1 60) :allow-blank true)
+		(length-of :title :within (range 1 30) :allow-blank true)
 		(presence-of :message)
 		(presence-of :loc)
 		(presence-of :created-at)))
