@@ -13,6 +13,8 @@
 	:nick "Cool Guy" 
 	:loc [45.1 56.4]})
 
+(def anon-message-with-obj-id (with-obj-id anon-message))
+
 (def anon-message-with-empty-title {
 	:title ""
 	:message "yippi yyeeee"
@@ -49,6 +51,6 @@
 	(let [saved-message (save-anon-message anon-message-with-empty-title)]
 		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
-(fact "should compactify anonymous message"
-	(keys 
-		(compactify-anon-message (with-obj-id anon-message))) => '(:_id :loc :short-message :created-at))
+(fact "should compactify anonymous message extracting short-message"
+	(keys (compactify-anon-message anon-message-with-obj-id)) => '(:_id :loc :short-message :created-at)
+	(provided (short-message anon-message-with-obj-id) => "short message" :times 1))

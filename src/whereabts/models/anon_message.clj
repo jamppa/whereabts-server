@@ -36,5 +36,5 @@
 	{
 		:_id (:_id msg)
 		:loc (:loc msg)
-		:short-message (:title msg)
+		:short-message (short-message msg)
 		:created-at (:created-at msg)})
