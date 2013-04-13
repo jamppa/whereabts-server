@@ -13,3 +13,8 @@
 
 (defn obj-id-as-str [obj]
 	(.toString (:_id obj)))
+
+(defn short-message [obj]
+	(if (empty? (:title obj))
+		(:message obj)
+		(:title obj)))
