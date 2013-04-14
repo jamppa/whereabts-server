@@ -52,7 +52,7 @@
 (fact "sould not save invalid anonymous message with too long title but throw IllegalArgumentException"
 	(save-anon-message msg-title-too-long) => (throws IllegalArgumentException))
 
-(fact "should not save invalid anonymous message with too long message by throw IllegalArgumentException"
+(fact "should not save invalid anonymous message with too long message but throw IllegalArgumentException"
 	(save-anon-message msg-too-long) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
