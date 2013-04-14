@@ -38,7 +38,7 @@
 	(let [saved-message (save-anon-message anon-message)]
 		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
-(fact "should not save invalid anonymous message but throw IllegalArgumentException"
+(fact "should not save invalid anonymous message missing title but throw IllegalArgumentException"
 	(save-anon-message invalid-anon-message) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
