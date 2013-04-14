@@ -15,13 +15,17 @@
 
 (def anon-message-with-obj-id (with-obj-id anon-message))
 
-(def anon-message-with-empty-title {
+(def msg-with-empty-title {
 	:title ""
 	:message "yippi yyeeee"
 	:nick "Cool Guy"
 	:loc [12.12 12.12]})
 
-(def invalid-anon-message {
+(def msg-title-too-long 
+	(merge msg-with-empty-title 
+		{:title "this is title text that is unfortunately too looooooong"}))
+
+(def msg-missing-title {
 	:message "asdasd"
 	:nick "Cool Guy" 
 	:loc [12.2 34.4]})
@@ -39,7 +43,10 @@
 		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should not save invalid anonymous message missing title but throw IllegalArgumentException"
-	(save-anon-message invalid-anon-message) => (throws IllegalArgumentException))
+	(save-anon-message msg-missing-title) => (throws IllegalArgumentException))
+
+(fact "sould not save invalid anonymous message with too long title but throw IllegalArgumentException"
+	(save-anon-message msg-title-too-long) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-message-b test-anon-message-a])
@@ -48,7 +55,7 @@
 	(find-anon-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
 (fact "should save valid anonymous message with empty title"
-	(let [saved-message (save-anon-message anon-message-with-empty-title)]
+	(let [saved-message (save-anon-message msg-with-empty-title)]
 		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should compactify anonymous message extracting short-message"
