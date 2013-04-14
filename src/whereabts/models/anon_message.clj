@@ -12,6 +12,7 @@
 		(presence-of :nick)
 		(length-of :title :within (range 1 41) :allow-blank true)
 		(presence-of :message)
+		(length-of :message :within (range 1 251))
 		(presence-of :loc)
 		(presence-of :created-at)))
 

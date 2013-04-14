@@ -25,6 +25,10 @@
 	(merge msg-with-empty-title 
 		{:title "this is title text that is unfortunately too looooooong"}))
 
+(def msg-too-long
+	(merge anon-message 
+		{:message (clojure.string/join "" (repeat 251 "s"))}))
+
 (def msg-missing-title {
 	:message "asdasd"
 	:nick "Cool Guy" 
@@ -47,6 +51,9 @@
 
 (fact "sould not save invalid anonymous message with too long title but throw IllegalArgumentException"
 	(save-anon-message msg-title-too-long) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous message with too long message by throw IllegalArgumentException"
+	(save-anon-message msg-too-long) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-message-b test-anon-message-a])
