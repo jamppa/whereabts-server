@@ -29,6 +29,9 @@
 	(merge anon-message 
 		{:message (clojure.string/join "" (repeat 251 "s"))}))
 
+(def msg-nick-too-long
+	(merge anon-message {:nick "Termitekiller12345678"}))
+
 (def msg-missing-title {
 	:message "asdasd"
 	:nick "Cool Guy" 
@@ -54,6 +57,9 @@
 
 (fact "should not save invalid anonymous message with too long message but throw IllegalArgumentException"
 	(save-anon-message msg-too-long) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous message with too long nick but throw IllegalArgumentException"
+	(save-anon-message msg-nick-too-long) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-message-b test-anon-message-a])
