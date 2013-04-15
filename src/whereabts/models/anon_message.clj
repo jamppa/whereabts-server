@@ -11,13 +11,13 @@
 (defn- anon-message-validation-set []
 	(validation-set
 		(presence-of :nick)
-		(length-of :nick :within (range 1 21))
-		(length-of :title :within (range 1 41) :allow-blank true)
 		(presence-of :message)
-		(length-of :message :within (range 1 251))
 		(presence-of [:loc :lon])
 		(presence-of [:loc :lat])
-		(presence-of :created-at)))
+		(presence-of :created-at)
+		(length-of :message :within (range 1 251))
+		(length-of :nick :within (range 1 21))
+		(length-of :title :within (range 1 41) :allow-blank true)))
 
 (defn new-anon-message [msg-candidate]
 	{
