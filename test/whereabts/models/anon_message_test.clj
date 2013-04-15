@@ -21,10 +21,11 @@
 	(merge anon-message {:title "this is title text that is unfortunately too looooooong"}))
 (def msg-too-long
 	(merge anon-message {:message (clojure.string/join "" (repeat 251 "s"))}))
-(def msg-nick-too-long
-	(merge anon-message {:nick "Termitekiller12345678"}))
+(def msg-nick-too-long (merge anon-message {:nick "Termitekiller12345678"}))
 (def msg-missing-title (dissoc anon-message :title))
 (def msg-extra-kv (merge anon-message {:some "bullshit"}))
+(def msg-loc-erronous (merge anon-message {:loc "im invalid"}))
+(def msg-lon-lat-str (merge anon-message {:loc {:lon "123.323" :lat "blaa"}}))
 
 (background (before :facts (setup-test-db)))
 
@@ -49,6 +50,12 @@
 
 (fact "should not save invalid anonymous message with too long nick but throw IllegalArgumentException"
 	(save-anon-message msg-nick-too-long) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous message with location as a string"
+	(save-anon-message msg-loc-erronous) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous message with longitute and latitude as a string"
+	(save-anon-message msg-lon-lat-str) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-anon-message-b test-anon-message-a])
