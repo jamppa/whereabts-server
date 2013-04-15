@@ -33,9 +33,9 @@
 			:find-one anon-message-coll {:_id (obj-id id-str)})))
 
 (defn save-anon-message [message]
-	(let [new-message (created-now message)]
-		(if (valid? (anon-message-validation-set) new-message)
-			(db-insert anon-message-coll (new-anon-message new-message))
+	(let [msg-candidate (created-now message)]
+		(if (valid? (anon-message-validation-set) msg-candidate)
+			(db-insert anon-message-coll (new-anon-message msg-candidate))
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
 (defn find-anon-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]

@@ -11,13 +11,13 @@
 	(str whereabts-api-messages "/" ll-lon "/" ll-lat "/" ur-lon "/" ur-lat))
 
 (def message-as-json 
-	(json/write-str {:nick "teppo" :title "cool title!" :message "yey, cool things!" :loc [34.122 45.434]}))
+	(json/write-str {:nick "teppo" :title "cool title!" :message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323}}))
 
 (def message-with-empty-title-as-json
-	(json/write-str {:nick "teppo" :title "" :message "yey, cool things!" :loc [34.122 45.434]}))
+	(json/write-str {:nick "teppo" :title "" :message "yey, cool things!" :loc {:lon 24.5678 :lat 60.673}}))
 
 (def invalid-message-as-json 
-	(json/write-str {:message "yey, cool things!" :loc [34.122 45.434]}))
+	(json/write-str {:message "yey, cool things!" :loc {:lon 22.3123 :lat 60.1231}}))
 
 (fact "should response with HTTP Created when POST new message as an anonymous whereabts user" :functional
 	(:status (http/post whereabts-api-messages 
