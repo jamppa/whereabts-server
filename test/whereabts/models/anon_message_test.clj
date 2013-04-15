@@ -10,32 +10,21 @@
 (def anon-message {
 	:title "My Cool Message" 
 	:message "This is the content of My Cool Message" 
-	:nick "Cool Guy" 
-	:loc [45.1 56.4]})
+	:nick "Cool Guy"
+	:loc {:lon 45.1 :lat 56.4}})
 
 (def anon-message-with-obj-id (with-obj-id anon-message))
-
-(def msg-with-empty-title {
-	:title ""
-	:message "yippi yyeeee"
-	:nick "Cool Guy"
-	:loc [12.12 12.12]})
-
+(def msg-with-empty-title (merge anon-message {:title ""}))
 (def msg-title-too-long 
-	(merge msg-with-empty-title 
+	(merge anon-message 
 		{:title "this is title text that is unfortunately too looooooong"}))
-
 (def msg-too-long
 	(merge anon-message 
 		{:message (clojure.string/join "" (repeat 251 "s"))}))
-
 (def msg-nick-too-long
 	(merge anon-message {:nick "Termitekiller12345678"}))
-
-(def msg-missing-title {
-	:message "asdasd"
-	:nick "Cool Guy" 
-	:loc [12.2 34.4]})
+(def msg-missing-title (dissoc anon-message :title))
+(def msg-extra-kv (merge anon-message {:some "bullshit"}))
 
 (background (before :facts (setup-test-db)))
 
@@ -74,3 +63,9 @@
 (fact "should compactify anonymous message extracting short-message"
 	(keys (compactify-anon-message anon-message-with-obj-id)) => '(:_id :loc :short-message :created-at)
 	(provided (short-message anon-message-with-obj-id) => "short message" :times 1))
+
+(fact "should create a copy of anonymous message"
+	(new-anon-message anon-message) => anon-message)
+
+(fact "should ignore uninterested keys when copying new anonymous message"
+	(new-anon-message msg-extra-kv) => anon-message)
