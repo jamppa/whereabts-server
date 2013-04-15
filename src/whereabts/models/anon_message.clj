@@ -24,7 +24,7 @@
 		:nick (:nick msg-candidate)
 		:title (:title msg-candidate)
 		:message (:message msg-candidate)
-		:loc (:loc msg-candidate)
+		:loc [(get-in msg-candidate [:loc :lon]) (get-in msg-candidate [:loc :lat])]
 		:created-at (:created-at msg-candidate)})
 
 (defn find-anon-message-by-id [id-str]
@@ -35,7 +35,7 @@
 (defn save-anon-message [message]
 	(let [new-message (created-now message)]
 		(if (valid? (anon-message-validation-set) new-message)
-			(db-insert anon-message-coll new-message)
+			(db-insert anon-message-coll (new-anon-message new-message))
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
 (defn find-anon-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]

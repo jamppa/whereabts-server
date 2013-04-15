@@ -14,14 +14,13 @@
 	:loc {:lon 45.1 :lat 56.4}
 	:created-at (System/currentTimeMillis)})
 
+(def anon-message-after-copy (merge anon-message {:loc [45.1 56.4]}))
 (def anon-message-with-obj-id (with-obj-id anon-message))
 (def msg-with-empty-title (merge anon-message {:title ""}))
 (def msg-title-too-long 
-	(merge anon-message 
-		{:title "this is title text that is unfortunately too looooooong"}))
+	(merge anon-message {:title "this is title text that is unfortunately too looooooong"}))
 (def msg-too-long
-	(merge anon-message 
-		{:message (clojure.string/join "" (repeat 251 "s"))}))
+	(merge anon-message {:message (clojure.string/join "" (repeat 251 "s"))}))
 (def msg-nick-too-long
 	(merge anon-message {:nick "Termitekiller12345678"}))
 (def msg-missing-title (dissoc anon-message :title))
@@ -66,7 +65,7 @@
 	(provided (short-message anon-message-with-obj-id) => "short message" :times 1))
 
 (fact "should create a copy of anonymous message"
-	(new-anon-message anon-message) => anon-message)
+	(new-anon-message anon-message) => anon-message-after-copy)
 
 (fact "should ignore uninterested keys when copying new anonymous message"
-	(new-anon-message msg-extra-kv) => anon-message)
+	(new-anon-message msg-extra-kv) => anon-message-after-copy)
