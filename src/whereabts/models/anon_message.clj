@@ -24,7 +24,8 @@
 		:nick (:nick msg-candidate)
 		:title (:title msg-candidate)
 		:message (:message msg-candidate)
-		:loc (:loc msg-candidate)})
+		:loc (:loc msg-candidate)
+		:created-at (:created-at msg-candidate)})
 
 (defn find-anon-message-by-id [id-str]
 	(db-find

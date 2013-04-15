@@ -11,7 +11,8 @@
 	:title "My Cool Message" 
 	:message "This is the content of My Cool Message" 
 	:nick "Cool Guy"
-	:loc {:lon 45.1 :lat 56.4}})
+	:loc {:lon 45.1 :lat 56.4}
+	:created-at (System/currentTimeMillis)})
 
 (def anon-message-with-obj-id (with-obj-id anon-message))
 (def msg-with-empty-title (merge anon-message {:title ""}))
