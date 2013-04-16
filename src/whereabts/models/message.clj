@@ -21,7 +21,7 @@
 		(numericality-of [:loc :lon])
 		(numericality-of [:loc :lat])))
 
-(defn new-anon-message [msg-candidate]
+(defn new-message [msg-candidate]
 	{
 		:nick (:nick msg-candidate)
 		:title (:title msg-candidate)
@@ -37,7 +37,7 @@
 (defn save-anon-message [message]
 	(let [msg-candidate (created-now message)]
 		(if (valid? (message-validation-set) msg-candidate)
-			(db-insert message-coll (new-anon-message msg-candidate))
+			(db-insert message-coll (new-message msg-candidate))
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
 (defn find-anon-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]

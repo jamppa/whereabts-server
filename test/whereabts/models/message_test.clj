@@ -72,7 +72,7 @@
 	(provided (short-message anon-message-with-obj-id) => "short message" :times 1))
 
 (fact "should create a copy of anonymous message"
-	(new-anon-message anon-message) => anon-message-after-copy)
+	(new-message anon-message) => anon-message-after-copy)
 
 (fact "should ignore uninterested keys when copying new anonymous message"
-	(new-anon-message msg-extra-kv) => anon-message-after-copy)
+	(new-message msg-extra-kv) => anon-message-after-copy)
