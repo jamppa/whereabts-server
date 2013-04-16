@@ -17,7 +17,7 @@
 (defmulti save-new-message :msg-type)
 
 (defmethod save-new-message :anonymous [msg]
-	(save-anon-message msg))
+	(save-message msg))
 
 (defmethod save-new-message :user [msg]
 	(save-user-message msg))

@@ -34,7 +34,7 @@
 		(db-find-details
 			:find-one message-coll {:_id (obj-id id-str)})))
 
-(defn save-anon-message [message]
+(defn save-message [message]
 	(let [msg-candidate (created-now message)]
 		(if (valid? (message-validation-set) msg-candidate)
 			(db-insert message-coll (new-message msg-candidate))

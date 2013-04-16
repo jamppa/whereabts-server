@@ -36,26 +36,26 @@
 	(find-message-by-id "509d513f61395f0ebbd5e666") => nil)
 
 (fact "should save valid anonymous message"
-	(let [saved-message (save-anon-message anon-message)]
+	(let [saved-message (save-message anon-message)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should not save invalid anonymous message missing title but throw IllegalArgumentException"
-	(save-anon-message msg-missing-title) => (throws IllegalArgumentException))
+	(save-message msg-missing-title) => (throws IllegalArgumentException))
 
 (fact "sould not save invalid anonymous message with too long title but throw IllegalArgumentException"
-	(save-anon-message msg-title-too-long) => (throws IllegalArgumentException))
+	(save-message msg-title-too-long) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous message with too long message but throw IllegalArgumentException"
-	(save-anon-message msg-too-long) => (throws IllegalArgumentException))
+	(save-message msg-too-long) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous message with too long nick but throw IllegalArgumentException"
-	(save-anon-message msg-nick-too-long) => (throws IllegalArgumentException))
+	(save-message msg-nick-too-long) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous message with location as a string"
-	(save-anon-message msg-loc-erronous) => (throws IllegalArgumentException))
+	(save-message msg-loc-erronous) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous message with longitute and latitude as a string"
-	(save-anon-message msg-lon-lat-str) => (throws IllegalArgumentException))
+	(save-message msg-lon-lat-str) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
@@ -64,7 +64,7 @@
 	(find-anon-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
 (fact "should save valid anonymous message with empty title"
-	(let [saved-message (save-anon-message msg-with-empty-title)]
+	(let [saved-message (save-message msg-with-empty-title)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should compactify anonymous message extracting short-message"

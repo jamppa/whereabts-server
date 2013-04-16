@@ -20,7 +20,7 @@
 
 (fact "should save new anonymous message"
 	(save-new-message anon-msg) => saved-msg
-	(provided (save-anon-message anon-msg) => saved-msg :times 1))
+	(provided (save-message anon-msg) => saved-msg :times 1))
 
 (fact "should save new user message"
 	(save-new-message user-msg) => saved-msg
