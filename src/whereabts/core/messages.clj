@@ -12,3 +12,6 @@
 
 (defn save-new-message [msg]
 	(save-message msg))
+
+(defn find-message [id]
+	(find-message-by-id id))

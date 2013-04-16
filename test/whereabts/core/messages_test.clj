@@ -21,3 +21,7 @@
 	(save-new-message message) => saved-message
 	(provided (save-message message) => saved-message :times 1))
 
+(fact "should find a message by id"
+	(find-message "123abc") => message
+	(provided (find-message-by-id "123abc") => message :times 1))
+
