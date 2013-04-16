@@ -46,7 +46,7 @@
 		(sort (sorted-map :created-at -1))
 		(limit 25)))
 
-(defn compactify-anon-message [msg]
+(defn compactify-message [msg]
 	{
 		:_id (:_id msg)
 		:loc (:loc msg)

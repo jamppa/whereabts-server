@@ -11,7 +11,7 @@
 
 (defn find-all-messages-by-bbox [bbox]
 	(let [messages (find-anon-messages-by-bbox bbox)
-		  compactified (map compactify-anon-message messages)]
+		  compactified (map compactify-message messages)]
 		(all-messages compactified)))
 
 (defmulti save-new-message :msg-type)
