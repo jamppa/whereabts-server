@@ -6,7 +6,7 @@
 		[validateur.validation]
 		[monger.query]))
 
-(def anon-message-coll "anonymous_messages")
+(def anon-message-coll "messages")
 
 (defn- anon-message-validation-set []
 	(validation-set

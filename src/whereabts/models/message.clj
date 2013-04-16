@@ -7,7 +7,7 @@
 		[validateur.validation]
 		[monger.query]))
 
-(def message-coll "messages")
+(def message-coll "user_messages")
 (def message-validation-set
 	(validation-set
 		(presence-of :message)
