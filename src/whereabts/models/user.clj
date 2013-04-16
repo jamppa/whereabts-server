@@ -4,8 +4,10 @@
 		[whereabts.models.util]
 		[validateur.validation]))
 
-(def anon-whereabts-user {:name "Anonymous" :email "anonymous@whereabts.com" :password "ae129325a4db22faab7771f10b39a8af"})
-(def user-collection-name "users")
+(def anon-whereabts-user 
+	{:name "Anonymous" :email "anonymous@whereabts.com" :password "ae129325a4db22faab7771f10b39a8af"})
+
+(def user-coll "users")
 (def user-validation-set 
 	(validation-set 
 		(presence-of :name)
@@ -16,12 +18,12 @@
 (defn- create-query [type query]
 	{:find-type type 
 		:query query 
-		:collection user-collection-name})
+		:collection user-coll})
  
 (defn save-user [user]
 	(let [new-user (created-now user)]
 	(when (valid? user-validation-set new-user) 
-		(db-insert user-collection-name new-user))))
+		(db-insert user-coll new-user))))
 
 (defn find-user-by-id [id]
 	(db-find (create-query :find-one {:_id (obj-id id)})))
