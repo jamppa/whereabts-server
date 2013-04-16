@@ -16,7 +16,8 @@
 		(presence-of :created-at)))
 
 (defn find-message-by-id [id]
-	(db-find (db-find-details :find-one user-message-coll {:_id (obj-id id)})))
+	(db-find 
+		(db-find-details :find-one user-message-coll {:_id (obj-id id)})))
 
 (defn find-messages-near [location]
 	(with-collection user-message-coll
@@ -29,7 +30,7 @@
 	(when (valid? message-validation-set new-message)
 		(db-insert user-message-coll new-message))))
 
-(defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
+(defn find-user-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection user-message-coll
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
 		(sort (sorted-map :created-at -1))

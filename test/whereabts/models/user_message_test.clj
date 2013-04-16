@@ -33,7 +33,7 @@
 	(find-messages-near (location 25.0 25.0 500)) => [])
 
 (fact "should find messages inside bounding box"
-	(find-messages-by-bbox (bounding-box [0 0] [50 50])) => [test-usr-message-b test-usr-message-a])
+	(find-user-messages-by-bbox (bounding-box [0 0] [50 50])) => [test-usr-message-b test-usr-message-a])
 
 (fact "sould not find any messages inside bounding box when there is no any"
-	(find-messages-by-bbox (bounding-box [100 100] [125 125])) => [])
+	(find-user-messages-by-bbox (bounding-box [100 100] [125 125])) => [])
