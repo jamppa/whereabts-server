@@ -15,6 +15,6 @@
 
 	(POST "/messages" [:as req]
 		(let [message (keywordize-keys (:body req))]
-			(status (response (save-new-message (anonymous-message message))) 201)))
+			(status (response (save-new-message message)) 201)))
 )
 
