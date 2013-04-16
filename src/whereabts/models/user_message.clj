@@ -19,7 +19,7 @@
 	(db-find 
 		(db-find-details :find-one user-message-coll {:_id (obj-id id)})))
 
-(defn find-messages-near [location]
+(defn find-user-messages-near [location]
 	(with-collection user-message-coll
 		(find {:loc {"$near" [(:lon location) (:lat location)] "$maxDistance" (meters-to-degrees (:dist location))}})
 		(sort (sorted-map :created-at -1))

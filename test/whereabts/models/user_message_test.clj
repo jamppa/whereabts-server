@@ -27,10 +27,10 @@
 	(save-user-message invalid-msg) => nil)
 
 (fact "should find messages near by location and distance of 2500 meters"
-	(find-messages-near (location 50.0 50.0 2500)) => [test-usr-message-b test-usr-message-a])
+	(find-user-messages-near (location 50.0 50.0 2500)) => [test-usr-message-b test-usr-message-a])
 
 (fact "should not find messages when there isnt any near by"
-	(find-messages-near (location 25.0 25.0 500)) => [])
+	(find-user-messages-near (location 25.0 25.0 500)) => [])
 
 (fact "should find messages inside bounding box"
 	(find-user-messages-by-bbox (bounding-box [0 0] [50 50])) => [test-usr-message-b test-usr-message-a])
