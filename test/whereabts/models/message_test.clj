@@ -30,14 +30,14 @@
 (background (before :facts (setup-test-db)))
 
 (fact "should find anonymous message by id"
-	(find-anon-message-by-id "509d513f61395f0ebbd5e36a") => test-message-a)
+	(find-message-by-id "509d513f61395f0ebbd5e36a") => test-message-a)
 
 (fact "should not find anonymous message by id when one does not exist"
-	(find-anon-message-by-id "509d513f61395f0ebbd5e666") => nil)
+	(find-message-by-id "509d513f61395f0ebbd5e666") => nil)
 
 (fact "should save valid anonymous message"
 	(let [saved-message (save-anon-message anon-message)]
-		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
+		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should not save invalid anonymous message missing title but throw IllegalArgumentException"
 	(save-anon-message msg-missing-title) => (throws IllegalArgumentException))
@@ -65,7 +65,7 @@
 
 (fact "should save valid anonymous message with empty title"
 	(let [saved-message (save-anon-message msg-with-empty-title)]
-		(find-anon-message-by-id (obj-id-as-str saved-message)) => saved-message))
+		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should compactify anonymous message extracting short-message"
 	(keys (compactify-message anon-message-with-obj-id)) => '(:_id :loc :short-message :created-at)

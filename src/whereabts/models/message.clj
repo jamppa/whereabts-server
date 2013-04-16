@@ -29,7 +29,7 @@
 		:loc [(get-in msg-candidate [:loc :lon]) (get-in msg-candidate [:loc :lat])]
 		:created-at (:created-at msg-candidate)})
 
-(defn find-anon-message-by-id [id-str]
+(defn find-message-by-id [id-str]
 	(db-find
 		(db-find-details
 			:find-one message-coll {:_id (obj-id id-str)})))
