@@ -18,5 +18,6 @@
             [midje "1.5.1"]
             [clj-http "0.7.0"]
             [org.clojure/data.json "0.2.2"]]
-         :plugins [[lein-midje "3.0.0"]]}})
+         :plugins [[lein-midje "3.0.0"]]}}
+   :aot [whereabts.exception.WhereabtsResourceNotFoundException])
 

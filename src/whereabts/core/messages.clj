@@ -1,6 +1,6 @@
 (ns whereabts.core.messages
-	(:use
-		[whereabts.models.message]))
+	(:use [whereabts.models.message])
+	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- all-messages [messages ]
 	{:messages messages})
@@ -14,4 +14,6 @@
 	(save-message msg))
 
 (defn find-message [id]
-	(find-message-by-id id))
+	(if-let [message (find-message-by-id id)]
+		message
+		(throw (WhereabtsResourceNotFoundException.))))

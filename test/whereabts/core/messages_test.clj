@@ -4,7 +4,8 @@
 		[whereabts.models.user-message]
 		[whereabts.models.message]
 		[whereabts.core.messages]
-		[whereabts.util.geo]))
+		[whereabts.util.geo])
+	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (def messages [{:_id "123" :loc [12.12 12.12] :title "title" :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
@@ -24,4 +25,8 @@
 (fact "should find a message by id"
 	(find-message "123abc") => message
 	(provided (find-message-by-id "123abc") => message :times 1))
+
+(fact "should throw exception when message is not found by id"
+	(find-message "123abc") => (throws WhereabtsResourceNotFoundException)
+	(provided (find-message-by-id "123abc") => nil :times 1))
 
