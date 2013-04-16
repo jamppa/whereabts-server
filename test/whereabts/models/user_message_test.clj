@@ -1,6 +1,6 @@
 (ns whereabts.models.user-message-test
 	(:use 
-		[whereabts.models.message]
+		[whereabts.models.user-message]
 		[whereabts.db-helper]
 		[whereabts.util.geo]
 		[whereabts.models.util]

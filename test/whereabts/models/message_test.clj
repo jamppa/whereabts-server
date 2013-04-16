@@ -1,7 +1,7 @@
 (ns whereabts.models.message-test
 	(:use
 		[midje.sweet]
-		[whereabts.models.anon-message]
+		[whereabts.models.message]
 		[whereabts.db-helper]
 		[whereabts.models.util]
 		[whereabts.util.geo]

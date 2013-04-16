@@ -6,7 +6,7 @@
         [whereabts.api.messages-api]
         [whereabts.util.middleware]
         [whereabts.models.message]
-        [whereabts.models.anon-message]
+        [whereabts.models.user-message]
         [compojure.core]
         [ring.middleware.json :only [wrap-json-body]]
         [ring.middleware.json :only [wrap-json-response]]

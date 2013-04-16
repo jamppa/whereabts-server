@@ -1,7 +1,7 @@
 (ns whereabts.core.messages
 	(:use
 		[whereabts.models.message]
-		[whereabts.models.anon-message]))
+		[whereabts.models.user-message]))
 
 (defn- all-messages [messages ]
 	{:messages messages})

@@ -1,8 +1,8 @@
 (ns whereabts.core.messages-test
 	(:use
 		[midje.sweet]
+		[whereabts.models.user-message]
 		[whereabts.models.message]
-		[whereabts.models.anon-message]
 		[whereabts.core.messages]
 		[whereabts.util.geo]))
 

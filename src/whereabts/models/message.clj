@@ -1,36 +1,54 @@
 (ns whereabts.models.message
 	(:refer-clojure :exclude [sort find])
-	(:use 
+	(:use
 		[whereabts.db]
-		[whereabts.util.geo]
 		[whereabts.models.util]
 		[validateur.validation]
 		[monger.query]))
 
-(def message-coll "user_messages")
-(def message-validation-set
+(def anon-message-coll "messages")
+
+(defn- anon-message-validation-set []
 	(validation-set
+		(presence-of :nick)
 		(presence-of :message)
-		(presence-of :user_id)
-		(presence-of :loc)
-		(presence-of :created-at)))
+		(presence-of [:loc :lon])
+		(presence-of [:loc :lat])
+		(presence-of :created-at)
+		(length-of :message :within (range 1 251))
+		(length-of :nick :within (range 1 21))
+		(length-of :title :within (range 1 41) :allow-blank true)
+		(numericality-of [:loc :lon])
+		(numericality-of [:loc :lat])))
 
-(defn find-message-by-id [id]
-	(db-find (db-find-details :find-one message-coll {:_id (obj-id id)})))
+(defn new-anon-message [msg-candidate]
+	{
+		:nick (:nick msg-candidate)
+		:title (:title msg-candidate)
+		:message (:message msg-candidate)
+		:loc [(get-in msg-candidate [:loc :lon]) (get-in msg-candidate [:loc :lat])]
+		:created-at (:created-at msg-candidate)})
 
-(defn find-messages-near [location]
-	(with-collection message-coll
-		(find {:loc {"$near" [(:lon location) (:lat location)] "$maxDistance" (meters-to-degrees (:dist location))}})
-		(sort (sorted-map :created-at -1))
-		(limit 25)))
+(defn find-anon-message-by-id [id-str]
+	(db-find
+		(db-find-details
+			:find-one anon-message-coll {:_id (obj-id id-str)})))
 
-(defn save-message [message]
-	(let [new-message (created-now message)]
-	(when (valid? message-validation-set new-message)
-		(db-insert message-coll new-message))))
+(defn save-anon-message [message]
+	(let [msg-candidate (created-now message)]
+		(if (valid? (anon-message-validation-set) msg-candidate)
+			(db-insert anon-message-coll (new-anon-message msg-candidate))
+			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
-(defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
-	(with-collection message-coll
+(defn find-anon-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
+	(with-collection anon-message-coll
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
 		(sort (sorted-map :created-at -1))
 		(limit 25)))
+
+(defn compactify-anon-message [msg]
+	{
+		:_id (:_id msg)
+		:loc (:loc msg)
+		:short-message (short-message msg)
+		:created-at (:created-at msg)})
