@@ -20,4 +20,4 @@
 	(save-anon-message msg))
 
 (defmethod save-new-message :user [msg]
-	(save-message msg))
+	(save-user-message msg))

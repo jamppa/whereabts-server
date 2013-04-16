@@ -20,11 +20,11 @@
 	(find-message-by-id "509d513f61395f0ebbd5e34f") => nil)
 
 (fact "should save valid message"
-	(let [saved-message (save-message valid-msg)]
+	(let [saved-message (save-user-message valid-msg)]
 		(find-message-by-id (obj-id-as-str saved-message)) => truthy))
 
 (fact "should not save invalid message"
-	(save-message invalid-msg) => nil)
+	(save-user-message invalid-msg) => nil)
 
 (fact "should find messages near by location and distance of 2500 meters"
 	(find-messages-near (location 50.0 50.0 2500)) => [test-usr-message-b test-usr-message-a])

@@ -25,7 +25,7 @@
 		(sort (sorted-map :created-at -1))
 		(limit 25)))
 
-(defn save-message [message]
+(defn save-user-message [message]
 	(let [new-message (created-now message)]
 	(when (valid? message-validation-set new-message)
 		(db-insert user-message-coll new-message))))
