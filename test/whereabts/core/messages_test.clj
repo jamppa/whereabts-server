@@ -16,7 +16,7 @@
 
 (fact "should find all messages by bounding box and compactify them"
 	(find-all-messages-by-bbox bbox) => expected-all-messages
-	(provided (find-anon-messages-by-bbox bbox) => anon-messages :times 1))
+	(provided (find-messages-by-bbox bbox) => anon-messages :times 1))
 
 (fact "should save new anonymous message"
 	(save-new-message anon-msg) => saved-msg

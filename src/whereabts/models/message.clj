@@ -40,7 +40,7 @@
 			(db-insert message-coll (new-message msg-candidate))
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
-(defn find-anon-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
+(defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection message-coll
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
 		(sort (sorted-map :created-at -1))

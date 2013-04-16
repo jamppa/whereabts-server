@@ -58,10 +58,10 @@
 	(save-message msg-lon-lat-str) => (throws IllegalArgumentException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
-	(find-anon-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
+	(find-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
 
 (fact "should not find anonymous messages by bounding box when there isnt any"
-	(find-anon-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
+	(find-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
 (fact "should save valid anonymous message with empty title"
 	(let [saved-message (save-message msg-with-empty-title)]

@@ -10,7 +10,7 @@
 	(assoc msg :msg-type :anonymous))
 
 (defn find-all-messages-by-bbox [bbox]
-	(let [messages (find-anon-messages-by-bbox bbox)
+	(let [messages (find-messages-by-bbox bbox)
 		  compactified (map compactify-message messages)]
 		(all-messages compactified)))
 
