@@ -15,7 +15,7 @@
 		(presence-of :loc)
 		(presence-of :created-at)))
 
-(defn find-message-by-id [id]
+(defn find-user-message-by-id [id]
 	(db-find 
 		(db-find-details :find-one user-message-coll {:_id (obj-id id)})))
 

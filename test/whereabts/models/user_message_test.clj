@@ -14,14 +14,14 @@
 (background (before :facts (setup-test-db)))
 
 (fact "should find message by its id"
-	(find-message-by-id "509d513f61395f0ebbd5e34a") => test-usr-message-a)
+	(find-user-message-by-id "509d513f61395f0ebbd5e34a") => test-usr-message-a)
 
 (fact "should return nil when trying to find message by id which doesnt exist"
-	(find-message-by-id "509d513f61395f0ebbd5e34f") => nil)
+	(find-user-message-by-id "509d513f61395f0ebbd5e34f") => nil)
 
 (fact "should save valid message"
 	(let [saved-message (save-user-message valid-msg)]
-		(find-message-by-id (obj-id-as-str saved-message)) => truthy))
+		(find-user-message-by-id (obj-id-as-str saved-message)) => truthy))
 
 (fact "should not save invalid message"
 	(save-user-message invalid-msg) => nil)
