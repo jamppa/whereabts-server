@@ -8,7 +8,7 @@
 
 (def message-coll "messages")
 
-(defn- anon-message-validation-set []
+(defn- message-validation-set []
 	(validation-set
 		(presence-of :nick)
 		(presence-of :message)
@@ -36,7 +36,7 @@
 
 (defn save-anon-message [message]
 	(let [msg-candidate (created-now message)]
-		(if (valid? (anon-message-validation-set) msg-candidate)
+		(if (valid? (message-validation-set) msg-candidate)
 			(db-insert message-coll (new-anon-message msg-candidate))
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
