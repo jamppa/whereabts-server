@@ -5,7 +5,8 @@
 		[whereabts.db-helper]
 		[whereabts.models.util]
 		[whereabts.util.geo]
-		[whereabts.db-test-fixtures]))
+		[whereabts.db-test-fixtures])
+	(:import [com.mongodb MongoException]))
 
 (def message {
 	:title "My Cool Message" 
@@ -53,7 +54,7 @@
 	(save-message msg-loc-erronous) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous message with longitute and latitude as a string"
-	(save-message msg-lon-lat-str) => (throws IllegalArgumentException))
+	(save-message msg-lon-lat-str) => (throws MongoException))
 
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])

@@ -17,9 +17,7 @@
 		(presence-of :created-at)
 		(length-of :message :within (range 1 251))
 		(length-of :nick :within (range 1 21))
-		(length-of :title :within (range 1 41) :allow-blank true)
-		(numericality-of [:loc :lon])
-		(numericality-of [:loc :lat])))
+		(length-of :title :within (range 1 41) :allow-blank true)))
 
 (defn new-message [msg-candidate]
 	{
