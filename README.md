@@ -1,13 +1,12 @@
-# Whereabts server
 
-Server and REST API for Whereabts.
+** Server and REST API for Whereabts. **
 
 # Technology
 
-Java JDK
-Leiningen 2.x
-MongoDB
+- Java JDK
+- Leiningen 2.x
+- MongoDB
 
-## License
+** License **
 
 Copyright (C) 2012 Whereabts Ltd.
