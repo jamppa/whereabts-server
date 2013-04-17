@@ -9,4 +9,4 @@
 
 ** License **
 
-Copyright (C) 2012 Whereabts Ltd.
+Copyright (C) 2013 Whereabts Ltd.
