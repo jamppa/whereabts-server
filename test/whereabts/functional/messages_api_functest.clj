@@ -46,3 +46,7 @@
 (fact "should response with HTTP OK when GETing message by its id" :functional
 	(:status (http/get (str whereabts-api-messages "/516e7cfde4b025a0abeffbf1")
 		(whereabts-api-request-anon ""))) => 200)
+
+(fact "should response with HTTP Not Found when GETing message that does not exist" :functional
+	(:status (http/get (str whereabts-api-messages "/516e7cfde4b025a0abeff666")
+		(whereabts-api-request-anon ""))) => 404)
