@@ -42,3 +42,7 @@
 (fact "should response with HTTP Unauthorized when trying to GET messages by bbox with invalid credentials" :functional
 	(:status (http/get (whereabts-api-messages-by-bbox 24.987 60.255 24.989 60.260)
 		(whereabts-api-request ["invalid@blaa.com" "secret"] ""))) => 401)
+
+(fact "should response with HTTP OK when GETing message by its id" :functional
+	(:status (http/get (str whereabts-api-messages "/516e7cfde4b025a0abeffbf1")
+		(whereabts-api-request-anon ""))) => 200)
