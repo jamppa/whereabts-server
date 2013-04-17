@@ -2,14 +2,17 @@
 	(:use 
 		[whereabts.util.middleware]
 		[midje.sweet]
-		[ring.mock.request]))
+		[ring.mock.request])
+	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- expected-res [status body] {:status status :headers {} :body body})
 
 (def handler-throws-iae (fn [req] (throw (IllegalArgumentException. "failed!"))))
 (def handler-throws-e (fn [req] (throw (Exception. "failed!"))))
+(def handler-throws-wrnfe (fn [req] (throw (WhereabtsResourceNotFoundException. "failed!"))))
 (def expected-bad-request-res (expected-res 400 {:reason "failed!"}))
 (def expected-internal-server-err-res (expected-res 500 {:reason "failed!"}))
+(def expected-not-found-res (expected-res 404 {:reason "failed!"}))
 
 (fact "should give http bad request response when IllegalArgumentException catched"
 	(let [handler (wrap-exception-handler handler-throws-iae)
@@ -20,3 +23,8 @@
 	(let [handler (wrap-exception-handler handler-throws-e)
 		  response (handler (request :get "/some"))]
 		  (= response expected-internal-server-err-res) => truthy))
+
+(fact "should give http not found response when WhereabtsResourceNotFoundException is catched"
+	(let [handler (wrap-exception-handler handler-throws-wrnfe)
+		  response (handler (request :get "/some"))]
+		  (= response expected-not-found-res) => truthy))

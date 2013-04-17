@@ -1,5 +1,6 @@
 (ns whereabts.util.middleware
-    (:use [ring.util.response]))
+    (:use [ring.util.response])
+    (:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- reason [msg] {:reason msg})
 (defn- err-response [res-status msg]
@@ -13,5 +14,7 @@
             (handler req)
             (catch IllegalArgumentException e
                 (err-response 400 (.getMessage e)))
+            (catch WhereabtsResourceNotFoundException e
+                (err-response 404 (.getMessage e)))
             (catch Exception e
             	(err-response 500 (.getMessage e))))))
