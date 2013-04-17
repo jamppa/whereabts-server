@@ -13,6 +13,9 @@
 			  ur-vec [(read-string ur-lon) (read-string ur-lat)]]
 		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec)))))
 
+	(GET "/messages/:id" [id]
+		(response (find-message id)))
+
 	(POST "/messages" [:as req]
 		(let [message (keywordize-keys (:body req))]
 			(status (response (save-new-message message)) 201)))
