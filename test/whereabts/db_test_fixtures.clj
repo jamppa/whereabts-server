@@ -48,3 +48,9 @@
 	:message "Cool message"
 	:loc [45.0 26.0]
 	:created-at 1364642721970})
+
+(def test-feedback-a {
+	:_id (ObjectId. "509d513f61395f0ebbd5e37a")
+	:message "This is some cool app!"
+	:vote 10
+	:created-at 1364642721970})

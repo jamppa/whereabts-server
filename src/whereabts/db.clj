@@ -35,3 +35,6 @@
 
 (defmethod db-find :find-many [find-details]
     (doall (monger-col/find-maps (:collection find-details) (:query find-details))))
+
+(defn db-find-one [coll query]
+    (monger-col/find-one-as-map coll query))
