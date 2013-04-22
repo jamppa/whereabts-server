@@ -23,3 +23,6 @@
 
 (fact "should find one object by query details"
 	(db-find-one "docs" {:_id (ObjectId. "509d513f61395f0ebbd5e32a")}) => test-obj-a)
+
+(fact "should not find one object by query details if such object does not exist"
+	(db-find-one "docs" {:key "and val that doesnt exist"}) => nil)
