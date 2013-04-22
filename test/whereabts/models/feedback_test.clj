@@ -9,3 +9,6 @@
 
 (fact "should find a feedback by its id"
 	(find-feedback-by-id "509d513f61395f0ebbd5e37a") => test-feedback-a)
+
+(fact "should find nil when trying to find nonexisting feedback by id"
+	(find-feedback-by-id "509d513f61395f0ebbd5e666") => nil)
