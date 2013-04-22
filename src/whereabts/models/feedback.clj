@@ -7,3 +7,6 @@
 
 (defn find-feedback-by-id [id]
 	(db-find-one feedback-coll {:_id (obj-id id)}))
+
+(defn save-feedback [feedback]
+	(db-insert feedback-coll feedback))
