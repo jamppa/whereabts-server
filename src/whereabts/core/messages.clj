@@ -11,7 +11,7 @@
 		(all-messages compactified)))
 
 (defn save-new-message [msg]
-	(save-message msg))
+	(compactify-message (save-message msg)))
 
 (defn find-message [id]
 	(if-let [message (find-message-by-id id)]

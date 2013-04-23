@@ -11,6 +11,7 @@
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
 (def message {})
 (def saved-message {})
+(def compactified-saved-message saved-message)
 
 (def bbox (bounding-box [1 1] [1 1]))
 
@@ -18,9 +19,10 @@
 	(find-all-messages-by-bbox bbox) => expected-all-messages
 	(provided (find-messages-by-bbox bbox) => messages :times 1))
 
-(fact "should save new message"
+(fact "should save new message and return it compactified"
 	(save-new-message message) => saved-message
-	(provided (save-message message) => saved-message :times 1))
+	(provided (save-message message) => saved-message :times 1)
+	(provided (compactify-message saved-message) => compactified-saved-message :times 1))
 
 (fact "should find a message by id"
 	(find-message "123abc") => message
