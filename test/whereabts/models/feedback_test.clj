@@ -21,7 +21,7 @@
 (def feedback-vote-missing (dissoc new-feedback :vote))
 (def feedback-vote-nonzero (merge new-feedback {:vote 5}))
 (def feedback-creation-ts-missing (dissoc new-feedback :created-at))
-
+(def feedback-creation-ts-nonzero (merge new-feedback {:created-at "1.1.2013"}))
 
 (fact "should find a feedback by its id"
 	(find-feedback-by-id "509d513f61395f0ebbd5e37a") => test-feedback-a)
@@ -47,3 +47,6 @@
 
 (fact "should not save invalid feedback with missing creation timestamp"
 	(save-feedback feedback-creation-ts-missing) => (throws IllegalArgumentException))
+
+(fact "should not save invalid feedback with non-numeric creation timestamp"
+	(save-feedback feedback-creation-ts-nonzero) => (throws IllegalArgumentException))
