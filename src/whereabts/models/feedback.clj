@@ -9,6 +9,7 @@
 (def feedback-validations
 	(validation-set
 		(presence-of :vote)
+		(presence-of :created-at)
 		(numericality-of :vote :only-integer true :equal-to 0)
 		(length-of :message :within (range 1 501))))
 
