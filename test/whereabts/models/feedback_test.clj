@@ -19,6 +19,7 @@
 
 (def feedback-message-missing (dissoc new-feedback :message))
 (def feedback-vote-missing (dissoc new-feedback :vote))
+(def feedback-vote-nonzero (merge new-feedback {:vote 5}))
 
 
 (fact "should find a feedback by its id"
@@ -37,5 +38,8 @@
 (fact "should not save invalid feedback with message missing"
 	(save-feedback feedback-message-missing) => (throws IllegalArgumentException))
 
-(fact "should not save invalid feedback with vote-count missing"
+(fact "should not save invalid feedback with vote count missing"
 	(save-feedback feedback-vote-missing) => (throws IllegalArgumentException))
+
+(fact "should not save invalid feedback with non-zero vote counts"
+	(save-feedback feedback-vote-nonzero) => (throws IllegalArgumentException))

@@ -9,6 +9,7 @@
 (def feedback-validations
 	(validation-set
 		(presence-of :vote)
+		(numericality-of :vote :only-integer true :equal-to 0)
 		(length-of :message :within (range 1 501))))
 
 (defn find-feedback-by-id [id]
