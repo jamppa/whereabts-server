@@ -1,6 +1,6 @@
 (ns whereabts.api.feedback-api
 	(:use
-		[whereabts.core.feedback]
+		[whereabts.core.feedbacks]
 		[compojure.core]
 		[ring.util.response]))
 

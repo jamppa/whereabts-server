@@ -4,7 +4,7 @@
 		[ring.mock.request]
 		[whereabts.api-helper]
 		[whereabts.api.feedback-api]
-		[whereabts.core.feedback]))
+		[whereabts.core.feedbacks]))
 
 (def feedback-payload {})
 (def saved-feedback {:_id "123123"})

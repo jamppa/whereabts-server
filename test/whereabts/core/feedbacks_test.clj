@@ -1,6 +1,6 @@
-(ns whereabts.core.feedback-test
+(ns whereabts.core.feedbacks-test
 	(:use 
-		[whereabts.core.feedback]
+		[whereabts.core.feedbacks]
 		[whereabts.models.feedback]
 		[whereabts.models.util]
 		[midje.sweet])

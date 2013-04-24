@@ -1,4 +1,4 @@
-(ns whereabts.core.feedback
+(ns whereabts.core.feedbacks
     (:use
         [whereabts.models.feedback]
         [whereabts.models.util])
