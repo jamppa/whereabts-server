@@ -1,9 +1,9 @@
-(ns whereabts.api.feedback-api-test
+(ns whereabts.api.feedbacks-api-test
 	(:use
 		[midje.sweet]
 		[ring.mock.request]
 		[whereabts.api-helper]
-		[whereabts.api.feedback-api]
+		[whereabts.api.feedbacks-api]
 		[whereabts.core.feedbacks]))
 
 (def feedback-payload {})

@@ -1,4 +1,4 @@
-(ns whereabts.api.feedback-api
+(ns whereabts.api.feedbacks-api
 	(:use
 		[whereabts.core.feedbacks]
 		[compojure.core]
