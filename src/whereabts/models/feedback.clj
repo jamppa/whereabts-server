@@ -8,6 +8,7 @@
 (def feedback-length 500)
 (def feedback-validations
 	(validation-set
+		(presence-of :vote)
 		(length-of :message :within (range 1 501))))
 
 (defn find-feedback-by-id [id]

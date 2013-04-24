@@ -18,6 +18,8 @@
 		{:message (clojure.string/join "" (repeat (+ feedback-length 1) "s"))}))
 
 (def feedback-message-missing (dissoc new-feedback :message))
+(def feedback-vote-missing (dissoc new-feedback :vote))
+
 
 (fact "should find a feedback by its id"
 	(find-feedback-by-id "509d513f61395f0ebbd5e37a") => test-feedback-a)
@@ -34,3 +36,6 @@
 
 (fact "should not save invalid feedback with message missing"
 	(save-feedback feedback-message-missing) => (throws IllegalArgumentException))
+
+(fact "should not save invalid feedback with vote-count missing"
+	(save-feedback feedback-vote-missing) => (throws IllegalArgumentException))
