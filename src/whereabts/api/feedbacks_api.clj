@@ -4,7 +4,7 @@
 		[compojure.core]
 		[ring.util.response]))
 
-(defroutes feedback-api-routes
+(defroutes feedbacks-api-routes
 
 	(POST "/feedbacks" [:as req]
 		(-> (response (save-new-feedback (:body req)))

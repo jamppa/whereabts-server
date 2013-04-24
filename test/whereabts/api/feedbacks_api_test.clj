@@ -11,6 +11,6 @@
 (def successful-feedback-post-response (expected-res 201 saved-feedback))
 
 (fact "should POST new feedback message"
-	(feedback-api-routes 
+	(feedbacks-api-routes 
 		(whereabts-request :post "/feedbacks" feedback-payload)) => successful-feedback-post-response
 	(provided (save-new-feedback feedback-payload) => saved-feedback :times 1))
