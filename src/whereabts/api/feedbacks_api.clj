@@ -2,12 +2,14 @@
 	(:use
 		[whereabts.core.feedbacks]
 		[compojure.core]
-		[ring.util.response]))
+		[ring.util.response]
+		[clojure.walk :only [keywordize-keys]]))
 
 (defroutes feedbacks-api-routes
 
 	(POST "/feedbacks" [:as req]
-		(-> (response (save-new-feedback (:body req)))
-			(status 201)))
+		(let [feedback (keywordize-keys (:body req))]
+		(-> (response (save-new-feedback feedback))
+			(status 201))))
 
 	)
