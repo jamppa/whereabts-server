@@ -25,7 +25,8 @@
 		:title (:title msg-candidate)
 		:message (:message msg-candidate)
 		:loc [(get-in msg-candidate [:loc :lon]) (get-in msg-candidate [:loc :lat])]
-		:created-at (:created-at msg-candidate)})
+		:created-at (:created-at msg-candidate)
+		:views 0})
 
 (defn find-message-by-id [id-str]
 	(db-find
