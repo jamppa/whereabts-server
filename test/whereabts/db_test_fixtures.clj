@@ -33,21 +33,24 @@
 	:nick "Anonymous A"
 	:message "Cool message"
 	:loc [1.0 2.0]
-	:created-at 1364642721968})
+	:created-at 1364642721968
+	:views 10})
 
 (def test-message-b {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36b")
 	:nick "Anonymous B"
 	:message "Cool message"
 	:loc [5.0 5.0]
-	:created-at 1364642721969})
+	:created-at 1364642721969
+	:views 11})
 
 (def test-message-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
 	:nick "Anonymous C"
 	:message "Cool message"
 	:loc [45.0 26.0]
-	:created-at 1364642721970})
+	:created-at 1364642721970
+	:views 12})
 
 (def test-feedback-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e37a")
