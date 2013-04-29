@@ -52,7 +52,7 @@
 	(save-message msg-nick-too-long) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous message with location as a string"
-	(save-message msg-loc-erronous) => (throws IllegalArgumentException))
+	(save-message msg-loc-erronous) => (throws MongoException))
 
 (fact "should not save invalid anonymous message with longitute and latitude as a string"
 	(save-message msg-lon-lat-str) => (throws MongoException))

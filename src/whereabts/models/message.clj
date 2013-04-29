@@ -8,13 +8,13 @@
 
 (def message-coll "messages")
 
-(defn- message-validation-set []
+(def message-validation-set
 	(validation-set
 		(presence-of :nick)
 		(presence-of :message)
-		(presence-of [:loc :lon])
-		(presence-of [:loc :lat])
+		(presence-of :loc)
 		(presence-of :created-at)
+		(presence-of :views)
 		(length-of :message :within (range 1 251))
 		(length-of :nick :within (range 1 21))
 		(length-of :title :within (range 1 41) :allow-blank true)))
@@ -34,9 +34,9 @@
 			:find-one message-coll {:_id (obj-id id-str)})))
 
 (defn save-message [message]
-	(let [msg-candidate (created-now message)]
-		(if (valid? (message-validation-set) msg-candidate)
-			(db-insert message-coll (new-message msg-candidate))
+	(let [msg-candidate (new-message (created-now message))]
+		(if (valid? message-validation-set msg-candidate)
+			(db-insert message-coll msg-candidate)
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
 (defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]

@@ -8,7 +8,7 @@
 		[monger.query]))
 
 (def user-message-coll "user_messages")
-(def message-validation-set
+(def user-message-validation-set
 	(validation-set
 		(presence-of :message)
 		(presence-of :user_id)
@@ -27,7 +27,7 @@
 
 (defn save-user-message [message]
 	(let [new-message (created-now message)]
-	(when (valid? message-validation-set new-message)
+	(when (valid? user-message-validation-set new-message)
 		(db-insert user-message-coll new-message))))
 
 (defn find-user-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
