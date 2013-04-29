@@ -10,6 +10,7 @@
 (def messages [{:_id "123" :loc [12.12 12.12] :title "title" :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
 (def message {:views 1})
+(def viewed-message (merge message {:views 2}))
 (def saved-message {})
 (def compactified-saved-message saved-message)
 
@@ -34,3 +35,8 @@
 
 (fact "should view the message by incrementing views counter"
 	(view-message message) => (merge message {:views 2}))
+
+(fact "should view and update message"
+	(view-and-update-message message) => saved-message
+	(provided (view-message message) => viewed-message :times 1)
+	(provided (update-message viewed-message) => saved-message :times 1))
