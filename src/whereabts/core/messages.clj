@@ -17,3 +17,7 @@
 	(if-let [message (find-message-by-id id)]
 		message
 		(throw (WhereabtsResourceNotFoundException.))))
+
+(defn view-message [msg]
+	(let [views-so-far (:views msg)]
+	(merge msg {:views (inc views-so-far)})))
