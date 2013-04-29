@@ -1,2 +1,2 @@
-{ "_id" : { "$oid" : "516e7cfde4b025a0abeffbf1" }, "nick" : "teppo", "title" : "cool title!", "message" : "yey, cool things!", "loc" : [ 24.1234, 60.2323 ], "created-at" : 1366195453436 }
-{ "_id" : { "$oid" : "516e7cfde4b025a0abeffbf2" }, "nick" : "teppo", "title" : "cool title!", "message" : "yey, cool things!", "loc" : [ 24.1234, 60.2323 ], "created-at" : 1366195453675 }
+{ "_id" : { "$oid" : "516e7cfde4b025a0abeffbf1" }, "nick" : "teppo", "title" : "cool title!", "message" : "yey, cool things!", "loc" : [ 24.1234, 60.2323 ], "created-at" : 1366195453436, "views" : 23 }
+{ "_id" : { "$oid" : "516e7cfde4b025a0abeffbf2" }, "nick" : "teppo", "title" : "cool title!", "message" : "yey, cool things!", "loc" : [ 24.1234, 60.2323 ], "created-at" : 1366195453675, "views" : 378 } 
