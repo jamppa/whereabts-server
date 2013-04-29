@@ -51,3 +51,8 @@
 		:loc (:loc msg)
 		:short-message (short-message msg)
 		:created-at (:created-at msg)})
+
+(defn update-message [msg]
+	(if (valid? message-validation-set msg)
+		(db-save message-coll msg)
+		(throw (IllegalArgumentException. "Could not save invalid message!"))))

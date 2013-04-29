@@ -76,3 +76,12 @@
 
 (fact "should ignore uninterested keys when copying new anonymous message"
 	(new-message msg-extra-kv) => msg-after-copy)
+
+(fact "should update valid message"
+	(let [found-msg (find-message-by-id "509d513f61395f0ebbd5e36a")
+		  updated (update-message (merge found-msg {:views 100}))]
+		(find-message-by-id "509d513f61395f0ebbd5e36a") => (merge test-message-a {:views 100})))
+
+(fact "shoult not update invalid message"
+	(let [found-msg (find-message-by-id "509d513f61395f0ebbd5e36a")]
+		(update-message (merge found-msg {:message ""})) => (throws IllegalArgumentException)))
