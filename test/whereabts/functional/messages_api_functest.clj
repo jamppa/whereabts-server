@@ -25,7 +25,7 @@
 
 (fact "should reponse with HTTP Created when POST new message with empty title as an anonymous user" :functional
 	(:status (http/post whereabts-api-messages 
-		(whereabts-api-request-anon message-as-json))) => 201)
+		(whereabts-api-request-anon message-with-empty-title-as-json))) => 201)
 
 (fact "should response with HTTP Bad Request when trying to POST invalid message" :functional
 	(:status (http/post whereabts-api-messages
