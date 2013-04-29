@@ -3,6 +3,7 @@
     (:use 
         [monger.result :only [ok?]]
         [monger.query]
+        [monger.operators]
         [whereabts.models.util])
     (:require 
         [monger.core :as monger]
@@ -38,3 +39,6 @@
 
 (defn db-find-one [coll query]
     (monger-col/find-one-as-map coll query))
+
+(defn db-save [coll obj]
+    (monger-col/save-and-return coll obj))

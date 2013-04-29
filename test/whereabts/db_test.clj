@@ -26,3 +26,7 @@
 
 (fact "should not find one object by query details if such object does not exist"
 	(db-find-one "docs" {:key "and val that doesnt exist"}) => nil)
+
+(fact "should update document by id with given modifier"
+	(let [saved-doc (db-save "docs" (merge test-obj-a {:a "aaa"}))]
+		(db-find-one "docs" {:_id (ObjectId. "509d513f61395f0ebbd5e32a")}) => (merge test-obj-a {:a "aaa"})))
