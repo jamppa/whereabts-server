@@ -1,0 +1,1 @@
+(ns whereabts.models.anonymous-user)
