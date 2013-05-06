@@ -3,7 +3,7 @@
 
 (defn- anon-whereabts-user? [email pwd]
 	(and 
-		(= email (anon-whereabts-user :email)) (= pwd (anon-whereabts-user :password))))
+		(= email (anon-whereabts-user :email)) (= pwd (anon-whereabts-user :user-id))))
 
 (defn authenticate [email pwd]
 	(if (anon-whereabts-user? email pwd) 

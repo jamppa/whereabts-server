@@ -5,7 +5,7 @@
 		[validateur.validation]))
 
 (def anon-whereabts-user 
-	{:name "Anonymous" :email "anonymous@whereabts.com" :password "ae129325a4db22faab7771f10b39a8af"})
+	{:email "anonymous@whereabts.com" :user-id "ae129325a4db22faab7771f10b39a8af"})
 
 (def user-coll "users")
 (def user-validation-set 
