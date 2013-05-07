@@ -5,7 +5,7 @@
 		[whereabts.db-helper]
 		[whereabts.models.util]
 		[whereabts.util.geo]
-		[whereabts.db-test-fixtures])
+		[whereabts.db.test-fixtures])
 	(:import [com.mongodb MongoException]))
 
 (def message {

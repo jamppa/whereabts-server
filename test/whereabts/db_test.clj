@@ -2,7 +2,7 @@
 	(:use 
 		[whereabts.db]
 		[whereabts.db-helper]
-		[whereabts.db-test-fixtures]
+		[whereabts.db.test-fixtures]
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 

@@ -4,7 +4,7 @@
 		[whereabts.db-helper]
 		[whereabts.util.geo]
 		[whereabts.models.util]
-		[whereabts.db-test-fixtures]
+		[whereabts.db.test-fixtures]
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 

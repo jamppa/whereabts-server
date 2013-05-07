@@ -3,7 +3,7 @@
 		[monger.core :as monger] 
 		[monger.collection :as monger-col])
 	(:use 
-		[whereabts.db-test-fixtures]
+		[whereabts.db.test-fixtures]
 		[whereabts.db.user-test-fixtures])
 	(:import [org.bson.types ObjectId]))
 

@@ -4,7 +4,7 @@
 		[whereabts.models.feedback]
 		[whereabts.models.util]
 		[whereabts.db-helper]
-		[whereabts.db-test-fixtures]))
+		[whereabts.db.test-fixtures]))
 
 (background (before :facts (setup-test-db)))
 

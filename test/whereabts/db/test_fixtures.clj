@@ -1,4 +1,4 @@
-(ns whereabts.db-test-fixtures
+(ns whereabts.db.test-fixtures
 	(:import [org.bson.types ObjectId]))
 
 (def test-obj-a {:_id (ObjectId. "509d513f61395f0ebbd5e32a") :a "a" :b "b"})
