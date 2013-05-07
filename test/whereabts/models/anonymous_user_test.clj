@@ -7,13 +7,14 @@
 		[midje.sweet]))
 
 (def new-anonymous-user {
-	:user-uuid "123-abc" 
+	:user-uuid "550e8400-e29b-41d4-a716-446655440000" 
 	:email "anonymous@whereabts.com" 
 	:created-at (System/currentTimeMillis)})
 
 (def new-anonymous-user-missing-uuid (dissoc new-anonymous-user :user-uuid))
 (def new-anonymous-user-missing-email (dissoc new-anonymous-user :email))
 (def new-anonymous-user-missing-creationtime (dissoc new-anonymous-user :created-at))
+(def new-anonymous-user-too-short-uuid (merge new-anonymous-user {:user-uuid "123-abc"}))
 
 (background (before :facts (setup-test-db)))
 
@@ -26,6 +27,9 @@
 
 (fact "should not save invalid anonymous user missing uuid"
 	(save-anonymous-user new-anonymous-user-missing-uuid) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous user with too short uuid"
+	(save-anonymous-user new-anonymous-user-too-short-uuid) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous user missing email"
 	(save-anonymous-user new-anonymous-user-missing-email) => (throws IllegalArgumentException))

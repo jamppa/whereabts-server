@@ -12,7 +12,8 @@
 	(validation-set
 		(presence-of :user-uuid)
 		(presence-of :email)
-		(presence-of :created-at)))
+		(presence-of :created-at)
+		(length-of :user-uuid :is 36)))
 
 (defn find-anonymous-user-by-id [id]
 	(db-find-one-by-id anonymous-user-coll (obj-id id)))
