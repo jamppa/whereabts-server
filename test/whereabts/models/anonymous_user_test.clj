@@ -13,6 +13,7 @@
 
 (def new-anonymous-user-missing-uuid (dissoc new-anonymous-user :user-uuid))
 (def new-anonymous-user-missing-email (dissoc new-anonymous-user :email))
+(def new-anonymous-user-missing-creationtime (dissoc new-anonymous-user :created-at))
 
 (background (before :facts (setup-test-db)))
 
@@ -28,3 +29,6 @@
 
 (fact "should not save invalid anonymous user missing email"
 	(save-anonymous-user new-anonymous-user-missing-email) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous user missing creation time"
+	(save-anonymous-user new-anonymous-user-missing-creationtime) => (throws IllegalArgumentException))
