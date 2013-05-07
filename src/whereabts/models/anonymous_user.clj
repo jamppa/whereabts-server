@@ -9,3 +9,6 @@
 
 (defn find-anonymous-user-by-id [id]
 	(db-find-one-by-id anonymous-user-coll (obj-id id)))
+
+(defn save-anonymous-user [usr]
+	(db-insert anonymous-user-coll usr))
