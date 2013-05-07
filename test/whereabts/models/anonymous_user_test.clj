@@ -59,5 +59,5 @@
 (fact "should find anonymous user with uuid"
 	(find-anonymous-user by-uuid-and-email) => anonymous-user-a)
 
-(fact "should not find anonymous user with uuid if one does not exist"
+(fact "should not find anonymous user with uuid with one that does not exist"
 	(find-anonymous-user by-non-existing-uuid) => nil)
