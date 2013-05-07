@@ -7,9 +7,12 @@
 		[midje.sweet]))
 
 (def new-anonymous-user {
-	:user_uuid "123-abc" 
+	:user-uuid "123-abc" 
 	:email "anonymous@whereabts.com" 
 	:created-at (System/currentTimeMillis)})
+
+(def new-anonymous-user-missing-uuid (dissoc new-anonymous-user :user-uuid))
+(def new-anonymous-user-missing-email (dissoc new-anonymous-user :email))
 
 (background (before :facts (setup-test-db)))
 
@@ -19,3 +22,9 @@
 (fact "should save new anonymous user"
 	(let [saved-anonymous-user (save-anonymous-user new-anonymous-user)]
 		(find-anonymous-user-by-id (obj-id-as-str saved-anonymous-user)) => saved-anonymous-user))
+
+(fact "should not save invalid anonymous user missing uuid"
+	(save-anonymous-user new-anonymous-user-missing-uuid) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous user missing email"
+	(save-anonymous-user new-anonymous-user-missing-email) => (throws IllegalArgumentException))
