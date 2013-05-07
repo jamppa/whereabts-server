@@ -17,6 +17,9 @@
 		(numericality-of :created-at :only-integer true)
 		(inclusion-of :email :in #{(:email anonymous-whereabts-user)})))
 
+(defn by-uuid-and-email [uuid email]
+	{:user-uuid uuid :email email})
+
 (defn find-anonymous-user-by-id [id]
 	(db-find-one-by-id anonymous-user-coll (obj-id id)))
 
