@@ -13,7 +13,8 @@
 		(presence-of :user-uuid)
 		(presence-of :email)
 		(presence-of :created-at)
-		(length-of :user-uuid :is 36)))
+		(length-of :user-uuid :is 36)
+		(inclusion-of :email :in #{(:email anonymous-whereabts-user)})))
 
 (defn find-anonymous-user-by-id [id]
 	(db-find-one-by-id anonymous-user-coll (obj-id id)))

@@ -16,6 +16,7 @@
 (def new-anonymous-user-missing-creationtime (dissoc new-anonymous-user :created-at))
 (def new-anonymous-user-too-short-uuid (merge new-anonymous-user {:user-uuid "123-abc"}))
 (def new-anonymous-user-too-long-uuid (merge new-anonymous-user {:user-uuid (clojure.string/join "" (repeat 37 "s"))}))
+(def new-anonymous-user-wrong-email (merge new-anonymous-user {:email "iam@wrong.com"}))
 
 (background (before :facts (setup-test-db)))
 
@@ -37,6 +38,9 @@
 
 (fact "should not save invalid anonymous user missing email"
 	(save-anonymous-user new-anonymous-user-missing-email) => (throws IllegalArgumentException))
+
+(fact "should not save invalid anonymous user with wrong email"
+	(save-anonymous-user new-anonymous-user-wrong-email) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous user missing creation time"
 	(save-anonymous-user new-anonymous-user-missing-creationtime) => (throws IllegalArgumentException))
