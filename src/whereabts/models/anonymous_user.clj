@@ -14,6 +14,7 @@
 		(presence-of :email)
 		(presence-of :created-at)
 		(length-of :user-uuid :is 36)
+		(numericality-of :created-at :only-integer true)
 		(inclusion-of :email :in #{(:email anonymous-whereabts-user)})))
 
 (defn find-anonymous-user-by-id [id]
