@@ -2,7 +2,6 @@
     (:use 
         [whereabts.core.auth]
         [whereabts.db]
-        [whereabts.api.signup]
         [whereabts.api.messages-api]
         [whereabts.api.feedbacks-api]
         [whereabts.util.middleware]
@@ -24,7 +23,7 @@
     (init-db-connection))
 
 (defroutes api-routes
-    (context "/api" [] signup-routes messages-api-routes feedbacks-api-routes)
+    (context "/api" [] messages-api-routes feedbacks-api-routes)
     (route/not-found "Move on, nothing to see here..."))
 
 (def server
