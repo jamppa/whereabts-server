@@ -40,5 +40,8 @@
 (defn db-find-one [coll query]
     (monger-col/find-one-as-map coll query))
 
+(defn db-find-one-by-id [coll oid]
+    (monger-col/find-map-by-id coll oid))
+
 (defn db-save [coll obj]
     (monger-col/save-and-return coll obj))
