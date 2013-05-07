@@ -19,6 +19,10 @@
 (def new-anonymous-user-wrong-email (merge new-anonymous-user {:email "iam@wrong.com"}))
 (def new-anonymous-user-wrong-creationtime (merge new-anonymous-user {:created-at "1.5.2013"}))
 
+(def by-uuid-and-email {
+	:user-uuid "550e8400-e29b-41d4-a716-446655440000"
+	:email "anonymous@whereabts.com"})
+
 (background (before :facts (setup-test-db)))
 
 (fact "should find anonymous user by id"
@@ -48,3 +52,6 @@
 
 (fact "should not save invalid anonymous user with creation time as a string"
 	(save-anonymous-user new-anonymous-user-wrong-creationtime) => (throws IllegalArgumentException))
+
+(fact "should find anonymous user with uuid"
+	(find-anonymous-user by-uuid-and-email) => anonymous-user-a)

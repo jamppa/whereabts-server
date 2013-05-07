@@ -3,6 +3,6 @@
 
 (def anonymous-user-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e38a")
-	:user_uuid "aaa-bbb-ccc"
+	:user-uuid "550e8400-e29b-41d4-a716-446655440000"
 	:email "anonymous@whereabts.com"
 	:created-at 1364642721970})

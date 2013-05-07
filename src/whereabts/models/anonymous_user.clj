@@ -20,6 +20,9 @@
 (defn find-anonymous-user-by-id [id]
 	(db-find-one-by-id anonymous-user-coll (obj-id id)))
 
+(defn find-anonymous-user [query-map]
+	(db-find-one anonymous-user-coll query-map))
+
 (defn save-anonymous-user [usr]
 	(if (valid? anonymous-user-validations usr)
 		(db-insert anonymous-user-coll usr)
