@@ -13,3 +13,9 @@
 	(register-anonymous-user anonymous-user) => anonymous-user-created-now
 	(provided (created-now anonymous-user) => anonymous-user-created-now :times 1)
 	(provided (save-anonymous-user anonymous-user-created-now) => anonymous-user-created-now :times 1))
+
+(fact "should not re-register already existing anonymous user"
+	(register-anonymous-user anonymous-user) => anonymous-user
+	(provided (find-anonymous-user {:user-uuid "123-abc" :email "some"}) => anonymous-user)
+	(provided (created-now anonymous-user) => anonymous-user-created-now :times 0)
+	(provided (save-anonymous-user anonymous-user-created-now) => anonymous-user-created-now :times 0))
