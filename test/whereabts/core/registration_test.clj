@@ -11,6 +11,7 @@
 
 (fact "should register an anonymous new user"
 	(register-anonymous-user anonymous-user) => anonymous-user-created-now
+	(provided (find-anonymous-user anonymous-user) => nil :times 1)
 	(provided (created-now anonymous-user) => anonymous-user-created-now :times 1)
 	(provided (save-anonymous-user anonymous-user-created-now) => anonymous-user-created-now :times 1))
 
