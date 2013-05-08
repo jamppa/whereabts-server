@@ -4,6 +4,7 @@
         [whereabts.db]
         [whereabts.api.messages-api]
         [whereabts.api.feedbacks-api]
+        [whereabts.api.registration-api]
         [whereabts.util.middleware]
         [whereabts.models.message]
         [whereabts.models.user-message]
@@ -23,7 +24,8 @@
     (init-db-connection))
 
 (defroutes api-routes
-    (context "/api" [] messages-api-routes feedbacks-api-routes)
+    (context "/api" [] 
+        messages-api-routes feedbacks-api-routes registration-api-routes)
     (route/not-found "Move on, nothing to see here..."))
 
 (def server
