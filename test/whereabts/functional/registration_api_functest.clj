@@ -8,10 +8,19 @@
 	(:import [java.util UUID]))
 
 (def registration-payload 
-	(json/write-str {:user-uuid (.toString (UUID/randomUUID)) :email "anonymous@whereabts.com"}))
+	(json/write-str {
+		:user-uuid (.toString (UUID/randomUUID)) 
+		:email "anonymous@whereabts.com"}))
 
 (def invalid-registration-payload
-	(json/write-str {:invalid "value" :email "anonymous@whereabts.com"}))
+	(json/write-str {
+		:invalid "value" 
+		:email "anonymous@whereabts.com"}))
+
+(def registration-payload-wrong-uuid
+	(json/write-str {
+		:user-uuid "blaa-123-abc" 
+		:email "anonymous@whereabts.com"}))
 
 (def anonymous-registration-api 
 	(str whereabts-api-testsrv "/anonymousregistration"))
@@ -25,3 +34,6 @@
 
 (fact "should response with Bad Request When POSTing invalid formatted anonymous user registration payload" :functional
 	(:status (post-as-anon invalid-registration-payload)) => 400)
+
+(fact "should response with Bad Request when POSTing anonymous user registration payload with wrong uuid" :functional
+	(:status (post-as-anon registration-payload-wrong-uuid)) => 400)
