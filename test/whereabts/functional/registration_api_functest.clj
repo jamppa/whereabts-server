@@ -29,6 +29,10 @@
 	(http/post anonymous-registration-api
 		(whereabts-api-request-anon payload)))
 
+(defn- post-as-unauth-user [payload]
+	(http/post anonymous-registration-api
+		(whereabts-api-request ["invalid@creds.com" "blaaah"] payload)))
+
 (fact "should response with HTTP Created When POSTing valid anonymous user registration payload" :functional
 	(:status (post-as-anon registration-payload)) => 201)
 
@@ -37,3 +41,6 @@
 
 (fact "should response with Bad Request when POSTing anonymous user registration payload with wrong uuid" :functional
 	(:status (post-as-anon registration-payload-wrong-uuid)) => 400)
+
+(fact "should response with Authentication failed when POSTing anonymous user registration payload with invalid credentials" :functional
+	(:status (post-as-unauth-user registration-payload)) => 401)
