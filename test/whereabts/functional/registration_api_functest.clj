@@ -10,6 +10,9 @@
 (def registration-payload 
 	(json/write-str {:user-uuid (.toString (UUID/randomUUID)) :email "anonymous@whereabts.com"}))
 
+(def invalid-registration-payload
+	(json/write-str {:invalid "value" :email "anonymous@whereabts.com"}))
+
 (def anonymous-registration-api 
 	(str whereabts-api-testsrv "/anonymousregistration"))
 
@@ -17,5 +20,8 @@
 	(http/post anonymous-registration-api
 		(whereabts-api-request-anon payload)))
 
-(fact "should POST valid anonymous user registration payload and response with HTTP Created" :functional
+(fact "should response with HTTP Created When POSTing valid anonymous user registration payload" :functional
 	(:status (post-as-anon registration-payload)) => 201)
+
+(fact "should response with Bad Request When POSTing invalid formatted anonymous user registration payload" :functional
+	(:status (post-as-anon invalid-registration-payload)) => 400)
