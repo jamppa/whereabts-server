@@ -1,31 +1,10 @@
 (ns whereabts.core.auth-test
 	(:use 
 		[whereabts.core.auth]
-		[whereabts.models.user]
+		[whereabts.models.anonymous-user]
 		[midje.sweet]))
 
 (def user {})
 
-(fact "should be available username if user is not found by it"
-	(available-username? "teppo") => true
-	(provided (find-user-by-name "teppo") => nil))
-
-(fact "should not be available username if user is found by it"
-	(available-username? "teppo") => false
-	(provided (find-user-by-name "teppo") => user))
-
-(fact "should be available email if user is not found by it"
-	(available-email? "teppo@test.fi") => true
-	(provided (find-user-by-email "teppo@test.fi") => nil))
-
-(fact "should not be available email if user is found by it"
-	(available-email? "teppo@test.fi") => false
-	(provided (find-user-by-email "teppo@test.fi") => user))
-
-(fact "should authenticate user by finding it with email and password"
-	(authenticate "teppo@testaaja.fi" "secret") => user
-	(provided (find-user-by-email-and-pass "teppo@testaaja.fi" "secret") => user))
-
 (fact "should authenticate by returning anonymous system user when email and pass match"
-	(authenticate "anonymous@whereabts.com" "ae129325a4db22faab7771f10b39a8af") => anon-whereabts-user
-	(provided (find-user-by-email-and-pass "anonymous@whereabts.me" "ae129325a4db22faab7771f10b39a8af") => nil :times 0))
+	(authenticate "anonymous@whereabts.com" "ae129325a4db22faab7771f10b39a8af") => anonymous-whereabts-user)
