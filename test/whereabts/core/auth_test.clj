@@ -9,3 +9,6 @@
 
 (fact "should not authenticate and instead return nil when anonymous-user email is wrong"
 	(authenticate "wrong@email.com" "ae129325a4db22faab7771f10b39a8af") => nil)
+
+(fact "should not authenticate and instead return nil when anonymous-user uuid is wrong"
+	(authenticate "anonymous@whereabts.com" "666") => nil)
