@@ -7,7 +7,6 @@
         [whereabts.api.registration-api]
         [whereabts.util.middleware]
         [whereabts.models.message]
-        [whereabts.models.user-message]
         [compojure.core]
         [ring.middleware.json :only [wrap-json-body]]
         [ring.middleware.json :only [wrap-json-response]]
@@ -18,7 +17,7 @@
 
 (defn init-db-connection []
 	(db-connect)
-	(db-geospatialize [message-coll user-message-coll]))
+	(db-geospatialize [message-coll]))
 
 (defn init-app []
     (init-db-connection))
