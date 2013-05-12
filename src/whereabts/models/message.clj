@@ -6,6 +6,7 @@
 		[validateur.validation]
 		[monger.query]))
 
+(def messages-in-bbox-limit 20)
 (def message-coll "messages")
 
 (def message-validation-set
@@ -43,7 +44,7 @@
 	(with-collection message-coll
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
 		(sort (sorted-map :created-at -1))
-		(limit 25)))
+		(limit messages-in-bbox-limit)))
 
 (defn compactify-message [msg]
 	{
