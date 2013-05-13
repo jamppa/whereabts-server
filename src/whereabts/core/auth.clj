@@ -9,3 +9,6 @@
 	(if (anon-whereabts-user? email pwd) 
 		anonymous-whereabts-user 
 		nil))
+
+(defn authenticate [email uuid]
+	(find-anonymous-user (by-uuid-and-email uuid email)))

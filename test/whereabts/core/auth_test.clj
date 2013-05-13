@@ -15,6 +15,6 @@
 (fact "should not authenticate as whereabts user when user-uuid is wrong"
 	(authenticate-whereabts-anon-user "anonymous@whereabts.com" "666") => nil)
 
-; (fact "should authenticate as anonymous user when one is found by email and uuid"
-; 	(authenticate "anonymous@whereabts.com" "123abc") => anonymous-user
-; 	(provided (find-anonymous-user anonymous-user) => anonymous-user :times 1))
+(fact "should authenticate as anonymous user when one is found by email and uuid"
+	(authenticate "anonymous@whereabts.com" "123abc") => anonymous-user
+	(provided (find-anonymous-user anonymous-user) => anonymous-user :times 1))
