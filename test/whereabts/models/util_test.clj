@@ -41,4 +41,4 @@
 	(ellipsize-str-max-len "This is a message" 100) => "This is a message")
 
 (fact "should stamp object with last-seen-at with current timestamp"
-	(contains? (last-seen-at obj) :last-seen-at) => truthy)
+	(contains? (last-seen-now obj) :last-seen-at) => truthy)

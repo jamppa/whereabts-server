@@ -23,7 +23,7 @@
 (defn created-now [obj]
 	(assoc obj :created-at (System/currentTimeMillis)))
 
-(defn last-seen-at [obj]
+(defn last-seen-now [obj]
 	(merge obj {:last-seen-at (System/currentTimeMillis)}))
 
 (defn obj-id-as-str [obj]
