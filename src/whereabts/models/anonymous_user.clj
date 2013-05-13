@@ -6,7 +6,7 @@
 
 (def anonymous-user-coll "anonymous_users")
 (def anonymous-whereabts-user 
-	{:email "anonymous@whereabts.com" :user-uuid "ae129325a4db22faab7771f10b39a8af"})
+	{:email "anonymous@whereabts.com" :user-id "ae129325a4db22faab7771f10b39a8af"})
 
 (def anonymous-user-validations
 	(validation-set

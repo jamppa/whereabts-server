@@ -32,4 +32,4 @@
         (wrap-json-body)
         (wrap-exception-handler)
         (wrap-json-response)
-        (wrap-require-auth authenticate "Authentication failed!")))
+        (wrap-require-auth authenticate-whereabts-anon-user "Authentication failed!")))
