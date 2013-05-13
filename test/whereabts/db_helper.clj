@@ -26,11 +26,9 @@
 		(monger-col/remove coll)))
 
 (defn populate-test-db []
-	(clear-collections ["docs" "users" "anonymous_users" "messages" "user_messages" "feedbacks"])
+	(clear-collections ["docs" "anonymous_users" "messages" "feedbacks"])
 	(insert-test-objects "docs" [test-obj-a test-obj-b])
-	(insert-test-objects "users" [test-user-a test-user-b])
 	(insert-test-objects "anonymous_users" [anonymous-user-a anonymous-user-b])
-	(insert-test-objects "user_messages" [test-usr-message-a test-usr-message-b test-usr-message-c])
 	(insert-test-objects "messages" [test-message-a test-message-b test-message-c])
 	(insert-test-objects "feedbacks" [test-feedback-a]))
 

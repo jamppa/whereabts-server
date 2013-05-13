@@ -4,30 +4,6 @@
 (def test-obj-a {:_id (ObjectId. "509d513f61395f0ebbd5e32a") :a "a" :b "b"})
 (def test-obj-b {:_id (ObjectId. "509d513f61395f0ebbd5e32b") :a "aa" :b "b"})
 
-(def test-user-a {:_id (ObjectId. "509d513f61395f0ebbd5e33a") :name "dsad" :email "fdsfs@dsad.fi" :password "secret" :type "email"})
-(def test-user-b {:_id (ObjectId. "509d513f61395f0ebbd5e33b") :name "teppo" :email "teppo@test.fi" :password "secret" :type "email"})
-
-(def test-usr-message-a {
-		:_id (ObjectId. "509d513f61395f0ebbd5e34a")
-		:user_id (:_id test-user-a)
-		:message "I am test message A"
-		:loc [50.0 50.0]
-		:created-at 1364642721965})
-
-(def test-usr-message-b {
-	:_id (ObjectId. "509d513f61395f0ebbd5e35a")
-	:user_id (:_id test-user-a)
-	:message "I am test message B"
-	:loc [50.0 50.0]
-	:created-at 1364642721966})
-
-(def test-usr-message-c {
-	:_id (ObjectId. "509d513f61395f0ebbd5e36a")
-	:user_id (:_id test-user-a)
-	:message "I am test message C"
-	:loc [51.12 51.12]
-	:created-at 1364642721967})
-
 (def test-message-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36a")
 	:nick "Anonymous A"

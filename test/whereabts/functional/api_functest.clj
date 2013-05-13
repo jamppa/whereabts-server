@@ -1,6 +1,6 @@
 (ns whereabts.functional.api-functest)
 
-(def whereabts-api-testsrv "http://testsrv.whereabts.com:8080/api")
+(def whereabts-api-testsrv "http://localhost:3000/api")
 
 (defn whereabts-api-request [auth body]
 	{:accept :json
