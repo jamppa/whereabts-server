@@ -1,7 +1,8 @@
 (ns whereabts.functional.messages-api-functest
 	(:use 
 		[midje.sweet]
-		[whereabts.functional.api-functest])
+		[whereabts.functional.api-functest]
+		[whereabts.db-helper])
 	(:require 
 		[clj-http.client :as http]
 		[clojure.data.json :as json]))
@@ -18,6 +19,8 @@
 
 (def invalid-message-as-json 
 	(json/write-str {:message "yey, cool things!" :loc {:lon 22.3123 :lat 60.1231}}))
+
+(background (before :facts (setup-test-db)))
 
 (fact "should response with HTTP Created when POST new message as an anonymous whereabts user" :functional
 	(:status (http/post whereabts-api-messages 
@@ -44,7 +47,7 @@
 		(whereabts-api-request ["invalid@blaa.com" "secret"] ""))) => 401)
 
 (fact "should response with HTTP OK when GETing message by its id" :functional
-	(:status (http/get (str whereabts-api-messages "/516e7cfde4b025a0abeffbf1")
+	(:status (http/get (str whereabts-api-messages "/509d513f61395f0ebbd5e36a")
 		(whereabts-api-request-anon ""))) => 200)
 
 (fact "should response with HTTP Not Found when GETing message that does not exist" :functional
