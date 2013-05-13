@@ -7,4 +7,4 @@
 	(let [already-registered (find-anonymous-user usr)]
 		(if (not (nil? already-registered))
 			already-registered
-			(save-anonymous-user (created-now usr)))))
+			(save-anonymous-user (last-seen-now (created-now usr))))))
