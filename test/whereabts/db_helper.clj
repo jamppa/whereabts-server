@@ -2,16 +2,13 @@
 	(:require 
 		[monger.core :as monger] 
 		[monger.collection :as monger-col])
-	(:use 
+	(:use
+		[whereabts.db]
 		[whereabts.db.test-fixtures]
 		[whereabts.db.user-test-fixtures])
 	(:import [org.bson.types ObjectId]))
 
 (def test-db-name "whereabtsdb_test")
-
-(defn connect-to-test-db []
-	(monger/connect!)
-	(monger/set-db! (monger/get-db test-db-name)))
 
 (defn create-geospatial-idxs [collections]
 	(doseq [coll collections]
@@ -33,6 +30,12 @@
 	(insert-test-objects "feedbacks" [test-feedback-a]))
 
 (defn setup-test-db []
-	(connect-to-test-db)
+	(binding [*whereabts-db* test-db-name]
+		(db-connect)
+		(populate-test-db)
+		(create-geospatial-idxs ["messages" "user_messages"])))
+
+(defn setup-db []
+	(db-connect)
 	(populate-test-db)
 	(create-geospatial-idxs ["messages" "user_messages"]))

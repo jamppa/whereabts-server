@@ -17,4 +17,5 @@
             (catch WhereabtsResourceNotFoundException e
                 (err-response 404 (.getMessage e)))
             (catch Exception e
+                (.printStackTrace e)
             	(err-response 500 (.getMessage e))))))

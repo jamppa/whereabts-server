@@ -1,7 +1,8 @@
 (ns whereabts.functional.feedbacks-api-functest
 	(:use 
 		[midje.sweet]
-		[whereabts.functional.api-functest])
+		[whereabts.functional.api-functest]
+		[whereabts.db-helper])
 	(:require 
 		[clj-http.client :as http]
 		[clojure.data.json :as json]))
@@ -15,6 +16,8 @@
 (defn- post-feedback-as-anon [payload]
 	(http/post whereabts-feedbacks-api
 		(whereabts-api-request-anon payload)))
+
+(background (before :facts (setup-db)))
 
 (fact "should POST feedback-payload and response with HTTP Created" :functional
 	(:status (post-feedback-as-anon feedback-payload)) => 201)

@@ -20,7 +20,7 @@
 (def invalid-message-as-json 
 	(json/write-str {:message "yey, cool things!" :loc {:lon 22.3123 :lat 60.1231}}))
 
-(background (before :facts (setup-test-db)))
+(background (before :facts (setup-db)))
 
 (fact "should response with HTTP Created when POST new message as an anonymous whereabts user" :functional
 	(:status (http/post whereabts-api-messages 

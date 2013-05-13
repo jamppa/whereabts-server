@@ -1,7 +1,8 @@
 (ns whereabts.functional.registration-api-functest
 	(:use 
 		[midje.sweet]
-		[whereabts.functional.api-functest])
+		[whereabts.functional.api-functest]
+		[whereabts.db-helper])
 	(:require 
 		[clj-http.client :as http]
 		[clojure.data.json :as json])
@@ -32,6 +33,8 @@
 (defn- post-as-unauth-user [payload]
 	(http/post anonymous-registration-api
 		(whereabts-api-request ["invalid@creds.com" "blaaah"] payload)))
+
+(background (before :facts (setup-db)))
 
 (fact "should response with HTTP Created When POSTing valid anonymous user registration payload" :functional
 	(:status (post-as-anon registration-payload)) => 201)
