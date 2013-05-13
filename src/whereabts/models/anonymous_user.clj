@@ -32,3 +32,8 @@
 	(if (valid? anonymous-user-validations usr)
 		(db-insert anonymous-user-coll usr)
 		(throw (IllegalArgumentException. "Invalid anonymous user!"))))
+
+(defn update-anonymous-user [usr]
+	(if (valid? anonymous-user-validations usr)
+		(db-save anonymous-user-coll usr)
+		(throw (IllegalArgumentException. "Invalid anonymous user!"))))

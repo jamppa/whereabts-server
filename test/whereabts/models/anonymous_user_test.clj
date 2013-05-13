@@ -57,3 +57,8 @@
 (fact "should not find anonymous user with uuid with one that does not exist"
 	(find-anonymous-user 
 		(by-uuid-and-email "550e8400-e29b-41d4-a716-446655441234" "anonymous@whereabts.com")) => nil)
+
+(fact "should find and update anonymous user"
+	(let [found-user (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a")
+		  updated-user (update-anonymous-user (merge found-user {:last-seen-at 1364642721971}))]
+		  (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a") => (merge anonymous-user-a {:last-seen-at 1364642721971})))
