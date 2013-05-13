@@ -5,7 +5,8 @@
 
 (defn- anon-whereabts-user? [email pwd]
 	(and 
-		(= email (anonymous-whereabts-user :email)) (= pwd (anonymous-whereabts-user :user-id))))
+		(= email (anonymous-whereabts-user :email))
+		(= pwd (anonymous-whereabts-user :user-id))))
 
 (defn authenticated-now [user]
 	(when user

@@ -10,7 +10,7 @@
         [compojure.core]
         [ring.middleware.json :only [wrap-json-body]]
         [ring.middleware.json :only [wrap-json-response]]
-        [ring.middleware.http-basic-auth])
+        [ring.middleware.basic-authentication])
     (:require 
         [compojure.handler :as handler]
         [compojure.route :as route]))
@@ -32,4 +32,4 @@
         (wrap-json-body)
         (wrap-exception-handler)
         (wrap-json-response)
-        (wrap-require-auth authenticate-whereabts-anon-user "Authentication failed!")))
+        (wrap-basic-authentication authenticate-whereabts-anon-user)))
