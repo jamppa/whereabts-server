@@ -9,7 +9,7 @@
 
 (defn authenticated-now [user]
 	(when user
-		(last-seen-now user)))
+		(update-anonymous-user (last-seen-now user))))
 
 (defn authenticate-whereabts-anon-user [email pwd]
 	(if (anon-whereabts-user? email pwd) 

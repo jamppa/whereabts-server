@@ -29,8 +29,10 @@
 
 (fact "should update last seen timestamp and save user when authenticating now"
 	(authenticated-now anonymous-user) => anonymous-user-authenticated-now
-	(provided (last-seen-now anonymous-user) => anonymous-user-authenticated-now :times 1))
+	(provided (last-seen-now anonymous-user) => anonymous-user-authenticated-now :times 1)
+	(provided (update-anonymous-user anonymous-user-authenticated-now) => anonymous-user-authenticated-now :times 1))
 
 (fact "should not update last seen timestamp when now authenticating nil user"
 	(authenticated-now nil) => nil
-	(provided (last-seen-now nil) => nil :times 0))
+	(provided (last-seen-now nil) => nil :times 0)
+	(provided (update-anonymous-user nil) => nil :times 0))
