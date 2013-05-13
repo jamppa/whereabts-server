@@ -9,7 +9,8 @@
 (def new-anonymous-user {
 	:user-uuid "550e8400-e29b-41d4-a716-446655440000" 
 	:email "anonymous@whereabts.com" 
-	:created-at (System/currentTimeMillis)})
+	:created-at (System/currentTimeMillis)
+	:last-seen-at (System/currentTimeMillis)})
 
 (def new-anonymous-user-missing-uuid (dissoc new-anonymous-user :user-uuid))
 (def new-anonymous-user-missing-email (dissoc new-anonymous-user :email))

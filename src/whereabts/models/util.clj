@@ -23,10 +23,13 @@
 (defn created-now [obj]
 	(assoc obj :created-at (System/currentTimeMillis)))
 
+(defn last-seen-at [obj]
+	(merge obj {:last-seen-at (System/currentTimeMillis)}))
+
 (defn obj-id-as-str [obj]
 	(.toString (:_id obj)))
 
 (defn short-message [obj]
 	(if (empty? (:title obj))
-		(ellipsize-str-max-len (:message obj) 30)
+		(ellipsize-str-max-len (:message obj) 40)
 		(:title obj)))

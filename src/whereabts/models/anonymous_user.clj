@@ -13,8 +13,10 @@
 		(presence-of :user-uuid)
 		(presence-of :email)
 		(presence-of :created-at)
+		(presence-of :last-seen-at)
 		(length-of :user-uuid :is 36)
 		(numericality-of :created-at :only-integer true)
+		(numericality-of :last-seen-at :only-integer true)
 		(inclusion-of :email :in #{(:email anonymous-whereabts-user)})))
 
 (defn by-uuid-and-email [uuid email]

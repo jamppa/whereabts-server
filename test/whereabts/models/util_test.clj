@@ -26,7 +26,7 @@
 
 (fact "should get short message from message object using actual message ellipsized when title is empty"
 	(short-message obj-without-title) => "This is the message..."
-	(provided (ellipsize-str-max-len "This is the message" 30) => "This is the message..." :times 1))
+	(provided (ellipsize-str-max-len "This is the message" 40) => "This is the message..." :times 1))
 
 (fact "should ellipsize string using first four words out of the string"
 	(ellipsize-str-max-words "This is some cool string you know" 4) => "This is some cool ...")
@@ -39,3 +39,6 @@
 
 (fact "should not ellipsize if string fits to fiven length"
 	(ellipsize-str-max-len "This is a message" 100) => "This is a message")
+
+(fact "should stamp object with last-seen-at with current timestamp"
+	(contains? (last-seen-at obj) :last-seen-at) => truthy)

@@ -19,6 +19,6 @@
 	(authenticate "anonymous@whereabts.com" "123abc") => anonymous-user
 	(provided (find-anonymous-user anonymous-user) => anonymous-user :times 1))
 
-(fact "should not authenticate as anonymous user when one is not found"
+(fact "should not authenticate as anonymous user when one is not found by email and uuid"
 	(authenticate "anonymous@whereabts.com" "123abc") => nil
 	(provided (find-anonymous-user anonymous-user) => nil :times 1))
