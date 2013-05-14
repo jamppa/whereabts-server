@@ -21,6 +21,10 @@
 	(http/post whereabts-feedbacks-api
 		(whereabts-api-request-public-user payload)))
 
+(defn- post-feedback-as-invalid-user [payload]
+	(http/post whereabts-feedbacks-api
+		(whereabts-api-request ["invalid@creds.com" "blaaah"] payload)))
+
 (background (before :facts (setup-db)))
 
 (fact "should POST feedback-payload and response with HTTP Created" :functional
@@ -31,3 +35,6 @@
 
 (fact "should response with HTTP Forbidden when POSTing as public user" :functional
 	(:status (post-feedback-as-public-user feedback-payload)) => 403)
+
+(fact "should response with HTTP Unauthorized when POSTing with wrong credentials" :functional
+	(:status (post-feedback-as-invalid-user feedback-payload)) => 401)

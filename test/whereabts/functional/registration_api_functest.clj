@@ -26,7 +26,7 @@
 (def anonymous-registration-api 
 	(str whereabts-api-testsrv "/anonymousregistration"))
 
-(defn- post-as-anon [payload]
+(defn- post-as-public-user [payload]
 	(http/post anonymous-registration-api
 		(whereabts-api-request-public-user payload)))
 
@@ -37,13 +37,13 @@
 (background (before :facts (setup-db)))
 
 (fact "should response with HTTP Created When POSTing valid anonymous user registration payload" :functional
-	(:status (post-as-anon registration-payload)) => 201)
+	(:status (post-as-public-user registration-payload)) => 201)
 
 (fact "should response with Bad Request When POSTing invalid formatted anonymous user registration payload" :functional
-	(:status (post-as-anon invalid-registration-payload)) => 400)
+	(:status (post-as-public-user invalid-registration-payload)) => 400)
 
 (fact "should response with Bad Request when POSTing anonymous user registration payload with wrong uuid" :functional
-	(:status (post-as-anon registration-payload-wrong-uuid)) => 400)
+	(:status (post-as-public-user registration-payload-wrong-uuid)) => 400)
 
 (fact "should response with Authentication failed when POSTing anonymous user registration payload with invalid credentials" :functional
 	(:status (post-as-unauth-user registration-payload)) => 401)
