@@ -8,6 +8,7 @@
 (def feedback-length 500)
 (def feedback-validations
 	(validation-set
+		(presence-of :user_id)
 		(presence-of :vote)
 		(presence-of :created-at)
 		(numericality-of :vote :only-integer true :equal-to 0)

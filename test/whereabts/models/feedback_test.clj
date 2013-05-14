@@ -4,11 +4,13 @@
 		[whereabts.models.feedback]
 		[whereabts.models.util]
 		[whereabts.db-helper]
-		[whereabts.db.test-fixtures]))
+		[whereabts.db.test-fixtures]
+		[whereabts.db.user-test-fixtures]))
 
 (background (before :facts (setup-test-db)))
 
 (def new-feedback {
+	:user_id (:_id anonymous-user-a)
 	:message "message of new feedback"
 	:vote 0
 	:created-at (System/currentTimeMillis)})
