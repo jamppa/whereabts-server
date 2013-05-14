@@ -44,10 +44,8 @@
 	(provided (view-message message) => viewed-message :times 1)
 	(provided (update-message viewed-message) => saved-message :times 1))
 
-(fact "should find message as a user and add ownership as true when user owns the message"
-	(find-message-as-user "123abc" user) => (merge message-with-user {:owns true})
-	(provided (find-message-by-id "123abc") => message-with-user :times 1))
+(fact "should add ownership to message when user owns it"
+	(with-ownership message-with-user user) => (merge message-with-user {:owns true}))
 
-(fact "should find message as a user abd add ownership as false when user does not own the message"
-	(find-message-as-user "123abc" other-user) => (merge message-with-user {:owns false})
-	(provided (find-message-by-id "123abc") => message-with-user :times 1))
+(fact "should not add ownershipt to message when user does not own it"
+	(with-ownership message-with-user other-user) => (merge message-with-user {:owns false}))

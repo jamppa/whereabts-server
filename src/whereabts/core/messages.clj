@@ -35,7 +35,3 @@
 	(if-let [message (find-message-by-id id)]
 		message
 		(throw (WhereabtsResourceNotFoundException.))))
-
-(defn find-message-as-user [id user]
-	(let [message (find-message id)]
-		(with-ownership message user)))
