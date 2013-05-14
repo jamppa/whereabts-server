@@ -13,6 +13,10 @@
 (def invalid-feedback-payload
 	(json/write-str {:vote 0}))
 
+(defn- post-feedback-as-user [payload]
+	(http/post whereabts-feedbacks-api
+		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
+
 (defn- post-feedback-as-anon [payload]
 	(http/post whereabts-feedbacks-api
 		(whereabts-api-request-anon payload)))
@@ -20,7 +24,7 @@
 (background (before :facts (setup-db)))
 
 (fact "should POST feedback-payload and response with HTTP Created" :functional
-	(:status (post-feedback-as-anon feedback-payload)) => 201)
+	(:status (post-feedback-as-user feedback-payload)) => 201)
 
 (fact "should POST invalid feedback-payload and response with HTTP Bad Request" :functional
-	(:status (post-feedback-as-anon invalid-feedback-payload)) => 400)
+	(:status (post-feedback-as-user invalid-feedback-payload)) => 400)

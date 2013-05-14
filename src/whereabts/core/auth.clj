@@ -15,12 +15,18 @@
 (defn authenticated-now-async [usr-agent]
 	(send-off usr-agent authenticated-now))
 
-(defn authenticate-whereabts-anon-user [email pwd]
-	(if (anon-whereabts-user? email pwd) 
+(defn authenticate-whereabts-anon-user [email uuid]
+	(if (anon-whereabts-user? email uuid) 
 		anonymous-whereabts-user 
 		nil))
 
-(defn authenticate [email uuid]
+(defn authenticate-anon-user [email uuid]
 	(let [found-user (find-anonymous-user (by-uuid-and-email uuid email))]
 		  (authenticated-now-async (agent found-user))
 		  found-user))
+
+(defn authenticate [email uuid]
+	(let [usr (authenticate-whereabts-anon-user email uuid)]
+		(if (nil? usr)
+			(authenticate-anon-user email uuid)
+			usr)))

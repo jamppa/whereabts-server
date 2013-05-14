@@ -8,7 +8,8 @@
 
 (def new-anonymous-user {
 	:user-uuid "550e8400-e29b-41d4-a716-446655440000" 
-	:email "anonymous@whereabts.com" 
+	:email "anonymous@whereabts.com"
+	:role "anonymous"
 	:created-at (System/currentTimeMillis)
 	:last-seen-at (System/currentTimeMillis)})
 

@@ -22,9 +22,17 @@
 (defn init-app []
     (init-db-connection))
 
-(defroutes api-routes
+(defroutes public-routes
     (context "/api" [] 
-        messages-api-routes feedbacks-api-routes registration-api-routes)
+        registration-api-routes))
+
+(defroutes user-routes
+    (context "/api" []
+        messages-api-routes feedbacks-api-routes))
+
+(defroutes api-routes
+    public-routes 
+    user-routes
     (route/not-found "Move on, nothing to see here..."))
 
 (def server
@@ -32,4 +40,4 @@
         (wrap-json-body)
         (wrap-exception-handler)
         (wrap-json-response)
-        (wrap-basic-authentication authenticate-whereabts-anon-user)))
+        (wrap-basic-authentication authenticate)))

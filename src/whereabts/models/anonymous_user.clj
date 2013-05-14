@@ -6,7 +6,7 @@
 
 (def anonymous-user-coll "anonymous_users")
 (def anonymous-whereabts-user 
-	{:email "anonymous@whereabts.com" :user-id "ae129325a4db22faab7771f10b39a8af"})
+	{:email "anonymous@whereabts.com" :user-id "ae129325a4db22faab7771f10b39a8af" :role "public"})
 
 (def anonymous-user-validations
 	(validation-set
@@ -14,10 +14,12 @@
 		(presence-of :email)
 		(presence-of :created-at)
 		(presence-of :last-seen-at)
+		(presence-of :role)
 		(length-of :user-uuid :is 36)
 		(numericality-of :created-at :only-integer true)
 		(numericality-of :last-seen-at :only-integer true)
 		(inclusion-of :email :in #{(:email anonymous-whereabts-user)})))
+		(inclusion-of :role :in #{"anonymous"})
 
 (defn by-uuid-and-email [uuid email]
 	{:user-uuid uuid :email email})

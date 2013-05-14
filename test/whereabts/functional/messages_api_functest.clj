@@ -20,11 +20,14 @@
 (def invalid-message-as-json 
 	(json/write-str {:message "yey, cool things!" :loc {:lon 22.3123 :lat 60.1231}}))
 
+(defn- post-message-as-user [payload]
+	(http/post whereabts-api-messages
+		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
+
 (background (before :facts (setup-db)))
 
 (fact "should response with HTTP Created when POST new message as an anonymous whereabts user" :functional
-	(:status (http/post whereabts-api-messages 
-		(whereabts-api-request-anon message-as-json))) => 201)
+	(:status (post-message-as-user message-as-json)) => 201)
 
 (fact "should reponse with HTTP Created when POST new message with empty title as an anonymous user" :functional
 	(:status (http/post whereabts-api-messages 
