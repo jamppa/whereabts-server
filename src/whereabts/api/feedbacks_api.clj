@@ -10,8 +10,9 @@
 
 	(POST "/feedbacks" [:as req]
 		(with-role req "anonymous"
-			(let [feedback (keywordize-keys (:body req))]
-			(-> (response (save-new-feedback feedback))
+			(let [feedback (keywordize-keys (:body req))
+				  user (:basic-authentication req)]
+			(-> (response (save-new-feedback feedback user))
 				(status 201)))))
 
 	)
