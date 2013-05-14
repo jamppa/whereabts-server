@@ -7,6 +7,7 @@
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (def user {:_id "some"})
+(def other-user {:_id "other"})
 
 (def messages [{:_id "123" :loc [12.12 12.12] :title "title" :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
@@ -42,3 +43,11 @@
 	(view-and-update-message message) => saved-message
 	(provided (view-message message) => viewed-message :times 1)
 	(provided (update-message viewed-message) => saved-message :times 1))
+
+(fact "should find message as a user and add ownership as true when user owns the message"
+	(find-message-as-user "123abc" user) => (merge message-with-user {:owns true})
+	(provided (find-message-by-id "123abc") => message-with-user :times 1))
+
+(fact "should find message as a user abd add ownership as false when user does not own the message"
+	(find-message-as-user "123abc" other-user) => (merge message-with-user {:owns false})
+	(provided (find-message-by-id "123abc") => message-with-user :times 1))

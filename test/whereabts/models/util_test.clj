@@ -5,7 +5,7 @@
 	(:import [org.bson.types ObjectId]))
 
 (def obj {})
-(def obj-with-id {:_id (ObjectId. "507f191e810c19729de860ea")})
+(def obj-with-id {:_id (ObjectId. "507f191e810c19729de860ea") :other_id (ObjectId. "507f191e810c19729de860eb")})
 (def obj-with-title {:title "This is message title" :message "This is the message"})
 (def obj-without-title {:title "" :message "This is the message"})
 
@@ -42,3 +42,6 @@
 
 (fact "should stamp object with last-seen-at with current timestamp"
 	(contains? (last-seen-now obj) :last-seen-at) => truthy)
+
+(fact "should give specified object-id-field as string"
+	(id-as-str obj-with-id :other_id) => "507f191e810c19729de860eb")

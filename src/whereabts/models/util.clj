@@ -29,6 +29,9 @@
 (defn obj-id-as-str [obj]
 	(.toString (:_id obj)))
 
+(defn id-as-str [obj field]
+	(.toString (field obj)))
+
 (defn short-message [obj]
 	(if (empty? (:title obj))
 		(ellipsize-str-max-len (:message obj) 40)
