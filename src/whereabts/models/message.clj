@@ -11,6 +11,7 @@
 
 (def message-validation-set
 	(validation-set
+		(presence-of :user_id)
 		(presence-of :nick)
 		(presence-of :message)
 		(presence-of :loc)
@@ -22,6 +23,7 @@
 
 (defn new-message [msg-candidate]
 	{
+		:user_id (:user_id msg-candidate)
 		:nick (:nick msg-candidate)
 		:title (:title msg-candidate)
 		:message (:message msg-candidate)

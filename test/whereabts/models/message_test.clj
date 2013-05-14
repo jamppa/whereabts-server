@@ -5,10 +5,12 @@
 		[whereabts.db-helper]
 		[whereabts.models.util]
 		[whereabts.util.geo]
-		[whereabts.db.test-fixtures])
+		[whereabts.db.test-fixtures]
+		[whereabts.db.user-test-fixtures])
 	(:import [com.mongodb MongoException]))
 
 (def message {
+	:user_id (:_id anonymous-user-a)
 	:title "My Cool Message" 
 	:message "This is the content of My Cool Message" 
 	:nick "Cool Guy"
@@ -26,6 +28,7 @@
 (def msg-extra-kv (merge message {:some "bullshit"}))
 (def msg-loc-erronous (merge message {:loc "im invalid"}))
 (def msg-lon-lat-str (merge message {:loc {:lon "123.323" :lat "blaa"}}))
+(def msg-missing-user (dissoc message :user_id))
 
 (background (before :facts (setup-test-db)))
 
@@ -57,6 +60,9 @@
 (fact "should not save invalid anonymous message with longitute and latitude as a string"
 	(save-message msg-lon-lat-str) => (throws MongoException))
 
+(fact "should not save invalid anonymous message without user-id"
+	(save-message msg-missing-user) => (throws IllegalArgumentException))
+
 (fact "should find anonymous messages by bounding box sorted by creation time"
 	(find-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
 
@@ -82,6 +88,6 @@
 		  updated (update-message (merge found-msg {:views 100}))]
 		(find-message-by-id "509d513f61395f0ebbd5e36a") => (merge test-message-a {:views 100})))
 
-(fact "shoult not update invalid message"
+(fact "should not update invalid message"
 	(let [found-msg (find-message-by-id "509d513f61395f0ebbd5e36a")]
 		(update-message (merge found-msg {:message ""})) => (throws IllegalArgumentException)))
