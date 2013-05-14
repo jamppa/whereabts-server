@@ -39,6 +39,10 @@
 	(:status (http/post whereabts-api-messages
 		(whereabts-api-request ["invalid@user.com" "blaah"] message-as-json))) => 401)
 
+(fact "should response with HTTP Forbidden when POSTing message with public user" :functional
+	(:status (http/post whereabts-api-messages
+		(whereabts-api-request-public-user message-as-json))) => 403)
+
 (fact "should response with HTTP OK when GETting all messages by bbox as an anonymous user" :functional
 	(:status (http/get (whereabts-api-messages-by-bbox 24.987 60.255 24.989 60.260)
 		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
