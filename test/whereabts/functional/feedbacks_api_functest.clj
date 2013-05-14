@@ -28,3 +28,6 @@
 
 (fact "should POST invalid feedback-payload and response with HTTP Bad Request" :functional
 	(:status (post-feedback-as-user invalid-feedback-payload)) => 400)
+
+(fact "should response with HTTP Forbidden when POSTing as public user" :functional
+	(:status (post-feedback-as-public-user feedback-payload)) => 403)
