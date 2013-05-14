@@ -4,4 +4,5 @@
 (defn check-role [req role]
 	(let [user (:basic-authentication req)
 		  user-role (:role user)]
-		(when-not (= user-role role) (throw (WhereabtsForbiddenException.)))))
+		(when-not (= user-role role)
+			(throw (WhereabtsForbiddenException.)))))
