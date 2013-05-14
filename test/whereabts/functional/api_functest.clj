@@ -13,8 +13,11 @@
 	 :coerce :always
 	 :throw-exceptions false})
 
-(defn whereabts-api-request-anon [body]
+(defn whereabts-api-request-public-user [body]
 	(whereabts-api-request 
 		["anonymous@whereabts.com" "ae129325a4db22faab7771f10b39a8af"] body))
+
+(defn whereabts-api-request-anon-user [creds payload]
+	(whereabts-api-request creds payload))
 
 (defonce jetty-server (run-jetty server {:port 3000 :join? false}))

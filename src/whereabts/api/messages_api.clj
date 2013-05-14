@@ -1,5 +1,6 @@
 (ns whereabts.api.messages-api
 	(:use
+		[whereabts.api.api-utils]
 		[compojure.core]
 		[ring.util.response]
 		[whereabts.core.messages]
@@ -11,18 +12,21 @@
 
 (defroutes messages-api-routes
 
-	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat]
+	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat :as req]
+		(with-role req "anonymous"
 		(let [ll-vec [(read-string ll-lon) (read-string ll-lat)]
 			  ur-vec [(read-string ur-lon) (read-string ur-lat)]]
-		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec)))))
+		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec))))))
 
-	(GET "/messages/:id" [id]
+	(GET "/messages/:id" [id :as req]
+		(with-role req "anonymous"
 		(let [message (find-message id)]
 			  (view-message-async (agent message))
-			  (response message)))
+			  (response message))))
 
 	(POST "/messages" [:as req]
+		(with-role req "anonymous"
 		(let [message (keywordize-keys (:body req))]
-			(status (response (save-new-message message)) 201)))
+			(status (response (save-new-message message)) 201))))
 )
 

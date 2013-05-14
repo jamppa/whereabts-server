@@ -17,9 +17,9 @@
 	(http/post whereabts-feedbacks-api
 		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
 
-(defn- post-feedback-as-anon [payload]
+(defn- post-feedback-as-public-user [payload]
 	(http/post whereabts-feedbacks-api
-		(whereabts-api-request-anon payload)))
+		(whereabts-api-request-public-user payload)))
 
 (background (before :facts (setup-db)))
 

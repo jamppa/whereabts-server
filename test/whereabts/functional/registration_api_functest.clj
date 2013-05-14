@@ -28,7 +28,7 @@
 
 (defn- post-as-anon [payload]
 	(http/post anonymous-registration-api
-		(whereabts-api-request-anon payload)))
+		(whereabts-api-request-public-user payload)))
 
 (defn- post-as-unauth-user [payload]
 	(http/post anonymous-registration-api
