@@ -20,5 +20,7 @@
             [ring/ring-jetty-adapter "1.1.8"]
             [org.clojure/data.json "0.2.2"]]
          :plugins [[lein-midje "3.0.0"]]}}
-   :aot [whereabts.exception.WhereabtsResourceNotFoundException])
+   :aot [
+      whereabts.exception.WhereabtsResourceNotFoundException 
+      whereabts.exception.WhereabtsForbiddenException])
 
