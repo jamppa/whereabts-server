@@ -4,9 +4,12 @@
         [whereabts.models.util])
     (:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
-(defn save-new-feedback [new-feedback]
-    (let [the-feedback (created-now new-feedback)]
-        (save-feedback the-feedback)))
+(defn- with-user [feedback user]
+    (merge feedback {:user_id (:_id user)}))
+
+(defn save-new-feedback [new-feedback user]
+    (let [feedback (created-now new-feedback)]
+        (save-feedback (with-user feedback user))))
 
 (defn find-feedback [id]
     (let [found-feedback (find-feedback-by-id id)]

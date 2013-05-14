@@ -6,13 +6,15 @@
 		[midje.sweet])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
+(def user {:_id "some"})
 (def new-feedback {})
 (def feedback-created-now {:created-at 123123})
+(def feedback-with-user (merge feedback-created-now {:user_id "some"}))
 
-(fact "should save new feedback with current timestamp"
-	(save-new-feedback new-feedback) => feedback-created-now
+(fact "should save new feedback with current timestamp and user id"
+	(save-new-feedback new-feedback user) => feedback-with-user
 	(provided (created-now new-feedback) => feedback-created-now :times 1)
-	(provided (save-feedback feedback-created-now) => feedback-created-now :times 1))
+	(provided (save-feedback feedback-with-user) => feedback-with-user :times 1))
 
 (fact "should find feedback with id"
 	(find-feedback "123abc") => new-feedback
