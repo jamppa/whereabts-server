@@ -20,7 +20,7 @@
 
 	(GET "/messages/:id" [id :as req]
 		(with-role req "anonymous"
-		(let [message (find-message id)]
+		(let [message (find-message-as-user id (:basic-authentication req))]
 			  (view-message-async (agent message))
 			  (response message))))
 
