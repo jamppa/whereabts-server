@@ -6,3 +6,6 @@
 		  user-role (:role user)]
 		(when-not (= user-role role)
 			(throw (WhereabtsForbiddenException.)))))
+
+(defmacro with-role [req role & form]
+    `(let [] (check-role ~req ~role) ~@form))
