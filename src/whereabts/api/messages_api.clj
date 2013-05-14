@@ -26,7 +26,8 @@
 
 	(POST "/messages" [:as req]
 		(with-role req "anonymous"
-		(let [message (keywordize-keys (:body req))]
-			(status (response (save-new-message message)) 201))))
+		(let [message (keywordize-keys (:body req))
+			  user (:basic-authentication req)]
+			(status (response (save-new-message message user)) 201))))
 )
 

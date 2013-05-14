@@ -6,9 +6,12 @@
 		[whereabts.util.geo])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
+(def user {:_id "some"})
+
 (def messages [{:_id "123" :loc [12.12 12.12] :title "title" :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
 (def message {:views 1})
+(def message-with-user (merge message {:user_id (:_id user)}))
 (def viewed-message (merge message {:views 2}))
 (def saved-message {})
 (def compactified-saved-message saved-message)
@@ -20,8 +23,8 @@
 	(provided (find-messages-by-bbox bbox) => messages :times 1))
 
 (fact "should save new message and return it compactified"
-	(save-new-message message) => saved-message
-	(provided (save-message message) => saved-message :times 1)
+	(save-new-message message user) => saved-message
+	(provided (save-message message-with-user) => saved-message :times 1)
 	(provided (compactify-message saved-message) => compactified-saved-message :times 1))
 
 (fact "should find a message by id"

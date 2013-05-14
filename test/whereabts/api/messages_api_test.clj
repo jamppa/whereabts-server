@@ -23,8 +23,7 @@
 (fact "should POST anonymous new message"
 	(messages-api-routes 
 		(whereabts-request-as-anonymous-user :post "/messages" new-msg-payload)) => expected-res-for-new-message
-	(provided
-		(save-new-message new-msg-payload) => message :times 1))
+	(provided (save-new-message new-msg-payload anonymous-roled-user) => message :times 1))
 
 (fact "should GET message by its id"
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/123abc")) => expected-res-for-message
