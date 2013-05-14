@@ -12,5 +12,5 @@
 
 (fact "should POST new feedback message"
 	(feedbacks-api-routes 
-		(whereabts-request :post "/feedbacks" feedback-payload)) => successful-feedback-post-response
+		(whereabts-request-as-anonymous-user :post "/feedbacks" feedback-payload)) => successful-feedback-post-response
 	(provided (save-new-feedback feedback-payload) => saved-feedback :times 1))
