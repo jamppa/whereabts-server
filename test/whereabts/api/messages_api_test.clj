@@ -29,4 +29,4 @@
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/123abc")) => expected-res-for-message
 	(provided (find-message "123abc" ) => message :times 1)
 	(provided (view-message-async (agent message)) => message :times 1)
-	(provided (with-ownership message anonymous-roled-user) => message :times 1))
+	(provided (message-with-ownership message anonymous-roled-user) => message :times 1))

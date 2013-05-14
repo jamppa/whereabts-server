@@ -23,7 +23,7 @@
 		(let [message (find-message id)
 			  user (:basic-authentication req)]
 			  (view-message-async (agent message))
-			  (response (with-ownership message user)))))
+			  (response (message-with-ownership message user)))))
 
 	(POST "/messages" [:as req]
 		(with-role req "anonymous"

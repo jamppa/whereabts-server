@@ -10,7 +10,7 @@
 (defn- with-user [msg usr]
 	(merge msg {:user_id (:_id usr)}))
 
-(defn with-ownership [msg usr]
+(defn message-with-ownership [msg usr]
 	(if (= (id-as-str :user_id msg) (obj-id-as-str usr))
 		(merge msg {:owns true})
 		(merge msg {:owns false})))

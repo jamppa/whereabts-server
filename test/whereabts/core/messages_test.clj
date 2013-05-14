@@ -45,7 +45,7 @@
 	(provided (update-message viewed-message) => saved-message :times 1))
 
 (fact "should add ownership to message when user owns it"
-	(with-ownership message-with-user user) => (merge message-with-user {:owns true}))
+	(message-with-ownership message-with-user user) => (merge message-with-user {:owns true}))
 
 (fact "should not add ownershipt to message when user does not own it"
-	(with-ownership message-with-user other-user) => (merge message-with-user {:owns false}))
+	(message-with-ownership message-with-user other-user) => (merge message-with-user {:owns false}))
