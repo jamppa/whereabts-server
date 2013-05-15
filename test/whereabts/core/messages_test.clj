@@ -61,3 +61,9 @@
 	(provided (find-message-by-id "123abc") => message-with-user :times 1)
 	(provided (user-owns-message? message-with-user other-user) => false :times 1)
 	(provided (delete-and-update-message message-with-user) => message-with-user :times 0))
+
+(fact "should own message when messages user id and users id match"
+	(user-owns-message? message-with-user user) => true)
+
+(fact "should not own message when messages user-id and users id does not match"
+	(user-owns-message? message-with-user other-user) => false)
