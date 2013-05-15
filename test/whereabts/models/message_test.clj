@@ -92,3 +92,11 @@
 (fact "should not update invalid message"
 	(let [found-msg (find-message-by-id "509d513f61395f0ebbd5e36a")]
 		(update-message (merge found-msg {:message ""})) => (throws IllegalArgumentException)))
+
+(fact "should delete and update message"
+	(let [message (find-message-by-id "509d513f61395f0ebbd5e36a")
+		  deleted (delete-and-update-message message)]
+		  (find-message-by-id "509d513f61395f0ebbd5e36a") => (merge test-message-a {:deleted true})))
+
+(fact "should throw exception when deleting and updating nil message"
+	(delete-and-update-message nil) => (throws IllegalArgumentException))

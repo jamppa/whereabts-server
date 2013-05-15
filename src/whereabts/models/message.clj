@@ -63,4 +63,4 @@
 		(throw (IllegalArgumentException. "Could not save invalid message!"))))
 
 (defn delete-and-update-message [msg]
-	nil)
+	(update-message (merge msg {:deleted true})))
