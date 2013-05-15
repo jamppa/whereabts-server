@@ -58,3 +58,7 @@
 (fact "should response with HTTP Not Found when GETing message that does not exist" :functional
 	(:status (http/get (str whereabts-api-messages "/516e7cfde4b025a0abeff666")
 		(whereabts-api-request valid-anonymous-credentials ""))) => 404)
+
+(fact "should response with HTTP OK when DELETING message of a user" :functional
+	(:status (http/delete (str whereabts-api-messages "/509d513f61395f0ebbd5e36a") 
+		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
