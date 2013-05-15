@@ -16,11 +16,7 @@
         [compojure.route :as route]))
 
 (defn init-db-connection []
-	(db-connect)
-	(db-geospatialize [message-coll]))
-
-(defn init-app []
-    (init-db-connection))
+	(db-connect))
 
 (defroutes public-routes
     (context "/api" [] 

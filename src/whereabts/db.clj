@@ -20,10 +20,6 @@
 (defn db-connect []
     (monger/connect!)
     (monger/set-db! (monger/get-db *whereabts-db*)))
-
-(defn db-geospatialize [collections]
-    (doseq [coll collections]
-        (monger-col/ensure-index coll {:loc "2d"})))
     
 (defn db-insert [collection obj]
     (let [obj-with-id (with-obj-id obj)]
