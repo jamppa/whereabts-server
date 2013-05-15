@@ -46,7 +46,7 @@
 
 (defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection message-coll
-		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}})
+		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}} :deleted false})
 		(sort (sorted-map :created-at -1))
 		(limit messages-in-bbox-limit)))
 

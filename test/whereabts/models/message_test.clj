@@ -64,7 +64,7 @@
 (fact "should not save invalid anonymous message without user-id"
 	(save-message msg-missing-user) => (throws IllegalArgumentException))
 
-(fact "should find anonymous messages by bounding box sorted by creation time"
+(fact "should find anonymous messages by bounding box sorted by creation time and filter deleted messages out"
 	(find-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
 
 (fact "should not find anonymous messages by bounding box when there isnt any"

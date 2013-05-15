@@ -26,7 +26,7 @@
 	(clear-collections ["docs" "anonymous_users" "messages" "feedbacks"])
 	(insert-test-objects "docs" [test-obj-a test-obj-b])
 	(insert-test-objects "anonymous_users" [anonymous-user-a anonymous-user-b])
-	(insert-test-objects "messages" [test-message-a test-message-b test-message-c])
+	(insert-test-objects "messages" [test-message-a test-message-b test-message-c test-message-d])
 	(insert-test-objects "feedbacks" [test-feedback-a]))
 
 (defn setup-test-db []
