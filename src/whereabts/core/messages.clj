@@ -35,3 +35,6 @@
 	(if-let [message (find-message-by-id id)]
 		message
 		(throw (WhereabtsResourceNotFoundException.))))
+
+(defn delete-message [id user]
+	nil)

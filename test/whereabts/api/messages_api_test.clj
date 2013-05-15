@@ -11,10 +11,12 @@
 (def messages {:messages []})
 (def new-msg-payload {:something "cool"})
 (def message {})
+(def deleted-message {})
 
 (def expected-res-for-messages (expected-res 200 messages))
 (def expected-res-for-new-message (expected-res 201 message))
 (def expected-res-for-message (expected-res 200 message))
+(def expected-res-for-delete-message (expected-res 200 {}))
 
 (fact "should GET all messages inside bounding box"
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/1.23/1.23/5.0/5.0")) => expected-res-for-messages
@@ -30,3 +32,8 @@
 	(provided (find-message "123abc" ) => message :times 1)
 	(provided (view-message-async (agent message)) => message :times 1)
 	(provided (message-with-ownership message anonymous-roled-user) => message :times 1))
+
+(fact "should DELETE message by its id"
+	(messages-api-routes
+		(whereabts-request-as-anonymous-user :delete "/messages/123abc")) => expected-res-for-delete-message
+	(provided (delete-message "123abc" anonymous-roled-user) => deleted-message :times 1))

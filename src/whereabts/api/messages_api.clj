@@ -30,5 +30,9 @@
 		(let [message (keywordize-keys (:body req))
 			  user (:basic-authentication req)]
 			(status (response (save-new-message message user)) 201))))
+
+	(DELETE "/messages/:id" [id :as req]
+		(with-role req "anonymous"
+			(response (delete-message id (:basic-authentication req)))))
 )
 
