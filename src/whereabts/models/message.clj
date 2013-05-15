@@ -59,3 +59,6 @@
 	(if (valid? message-validation-set msg)
 		(db-save message-coll msg)
 		(throw (IllegalArgumentException. "Could not save invalid message!"))))
+
+(defn delete-and-update-message [msg]
+	nil)

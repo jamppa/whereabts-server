@@ -15,6 +15,9 @@
 		(merge msg {:owns true})
 		(merge msg {:owns false})))
 
+(defn user-owns-message? [message user]
+	(= (obj-id-as-str user) (id-as-str :user_id message)))
+
 (defn view-message [msg]
 	(let [views-so-far (:views msg)]
 	(merge msg {:views (inc views-so-far)})))
@@ -37,4 +40,8 @@
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn delete-message [id user]
-	nil)
+	(let [message (find-message-by-id id)
+		  owner (user-owns-message? message user)]
+		  (if owner 
+		  	(delete-and-update-message message) 
+		  	message)))

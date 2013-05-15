@@ -49,3 +49,9 @@
 
 (fact "should not add ownershipt to message when user does not own it"
 	(message-with-ownership message-with-user other-user) => (merge message-with-user {:owns false}))
+
+(fact "should delete and update message when user owns it"
+	(delete-message "123abc" user) => message-with-user
+	(provided (find-message-by-id "123abc") => message-with-user :times 1)
+	(provided (user-owns-message? message-with-user user) => true :times 1)
+	(provided (delete-and-update-message message-with-user) => message-with-user :times 1))
