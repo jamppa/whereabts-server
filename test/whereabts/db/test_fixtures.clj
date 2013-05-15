@@ -12,7 +12,8 @@
 	:title "Cool title"
 	:loc [1.0 2.0]
 	:created-at 1364642721968
-	:views 10})
+	:views 10
+	:deleted false})
 
 (def test-message-b {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36b")
@@ -22,7 +23,8 @@
 	:title "Cool title"
 	:loc [5.0 5.0]
 	:created-at 1364642721969
-	:views 11})
+	:views 11
+	:deleted false})
 
 (def test-message-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
@@ -32,7 +34,8 @@
 	:title "Cool title"
 	:loc [45.0 26.0]
 	:created-at 1364642721970
-	:views 12})
+	:views 12
+	:deleted false})
 
 (def test-feedback-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e37a")

@@ -16,7 +16,8 @@
 	:nick "Cool Guy"
 	:loc {:lon 45.1 :lat 56.4}
 	:created-at (System/currentTimeMillis)
-	:views 0})
+	:views 0
+	:deleted false})
 
 (def msg-after-copy (merge message {:loc [45.1 56.4]}))
 (def msg-with-obj-id (with-obj-id message))

@@ -17,6 +17,7 @@
 		(presence-of :loc)
 		(presence-of :created-at)
 		(presence-of :views)
+		(presence-of :deleted)
 		(length-of :message :within (range 1 251))
 		(length-of :nick :within (range 1 21))
 		(length-of :title :within (range 1 41) :allow-blank true)))
@@ -29,7 +30,8 @@
 		:message (:message msg-candidate)
 		:loc [(get-in msg-candidate [:loc :lon]) (get-in msg-candidate [:loc :lat])]
 		:created-at (:created-at msg-candidate)
-		:views 0})
+		:views 0
+		:deleted false})
 
 (defn find-message-by-id [id-str]
 	(db-find
