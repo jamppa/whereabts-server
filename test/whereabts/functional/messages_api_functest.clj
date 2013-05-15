@@ -62,3 +62,7 @@
 (fact "should response with HTTP OK when DELETING message of a user" :functional
 	(:status (http/delete (str whereabts-api-messages "/509d513f61395f0ebbd5e36a") 
 		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
+
+(fact "should response with HTTP Forbidden when DELETING message as a public user" :functional
+	(:status (http/delete (str whereabts-api-messages "/509d513f61395f0ebbd5e36a")
+		(whereabts-api-request-public-user ""))) => 403)
