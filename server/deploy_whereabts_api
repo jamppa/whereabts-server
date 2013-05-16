@@ -1,0 +1,5 @@
+/etc/init.d/jetty8 stop
+rm -rf /var/lib/jetty8/webapps/root.war
+chown jetty:adm whereabts-server-0.1.0-SNAPSHOT-standalone.war
+cp -v -p whereabts-server-0.1.0-SNAPSHOT-standalone.war /var/lib/jetty8/webapps/root.war
+/etc/init.d/jetty8 start

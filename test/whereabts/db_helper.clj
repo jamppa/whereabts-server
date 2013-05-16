@@ -33,9 +33,9 @@
 	(binding [*whereabts-db* test-db-name]
 		(db-connect)
 		(populate-test-db)
-		(create-geospatial-idxs ["messages" "user_messages"])))
+		(create-geospatial-idxs ["messages"])))
 
 (defn setup-db []
 	(db-connect)
 	(populate-test-db)
-	(create-geospatial-idxs ["messages" "user_messages"]))
+	(create-geospatial-idxs ["messages"]))
