@@ -12,9 +12,6 @@
 
 (def ^:dynamic *whereabts-db* "whereabtsdb")
 
-(defn db-find-details [type col query]
-    {:find-type type :collection col :query query})
-
 (defn db-connect []
     (monger/connect!)
     (monger/set-db! (monger/get-db *whereabts-db*)))
