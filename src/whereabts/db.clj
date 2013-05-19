@@ -12,8 +12,6 @@
 
 (def ^:dynamic *whereabts-db* "whereabtsdb")
 
-(defmulti db-find :find-type)
-
 (defn db-find-details [type col query]
     {:find-type type :collection col :query query})
 
@@ -26,9 +24,6 @@
         (if (ok? (monger-col/insert collection obj-with-id))
         obj-with-id
         (throw (Exception. "db write failed!")))))
-
-(defmethod db-find :find-many [find-details]
-    (doall (monger-col/find-maps (:collection find-details) (:query find-details))))
 
 (defn db-find-one [coll query]
     (monger-col/find-one-as-map coll query))
