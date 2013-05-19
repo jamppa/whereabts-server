@@ -16,7 +16,7 @@
 		(length-of :message :within (range 1 501))))
 
 (defn find-feedback-by-id [id]
-	(db-find-one feedback-coll {:_id (obj-id id)}))
+	(db-find-one-by-id feedback-coll (obj-id id)))
 
 (defn save-feedback [feedback]
 	(if (valid? feedback-validations feedback)
