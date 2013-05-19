@@ -6,9 +6,6 @@
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 
-(defn- query-details [type coll query]
-	{:find-type type :collection coll :query query})
-
 (background (before :facts (setup-test-db)))
 
 (fact "should insert object to database with object-id"
