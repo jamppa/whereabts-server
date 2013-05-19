@@ -34,9 +34,7 @@
 		:deleted false})
 
 (defn find-message-by-id [id-str]
-	(db-find
-		(db-find-details
-			:find-one message-coll {:_id (obj-id id-str)})))
+	(db-find-one-by-id message-coll (obj-id id-str)))
 
 (defn save-message [message]
 	(let [msg-candidate (new-message (created-now message))]
