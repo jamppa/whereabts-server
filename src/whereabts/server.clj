@@ -34,6 +34,7 @@
 (def server
     (-> (handler/api api-routes)
         (wrap-json-body)
+        (wrap-exception-logger)
         (wrap-exception-handler)
         (wrap-json-response)
         (wrap-basic-authentication authenticate)))

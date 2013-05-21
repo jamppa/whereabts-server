@@ -1,5 +1,7 @@
 (ns whereabts.util.middleware
-    (:use [ring.util.response])
+    (:use 
+        [ring.util.response])
+    (:require [clojure.tools.logging :as logger])
     (:import 
         [whereabts.exception WhereabtsResourceNotFoundException]
         [whereabts.exception WhereabtsForbiddenException]))
@@ -23,3 +25,11 @@
             (catch Exception e
                 (.printStackTrace e)
             	(err-response 500 (.getMessage e))))))
+
+(defn wrap-exception-logger [handler]
+    (fn [req]
+        (try
+            (handler req)
+            (catch Exception e
+                (logger/error e "Error occured while handling request") 
+                (throw e)))))
