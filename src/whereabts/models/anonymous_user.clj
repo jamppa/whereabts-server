@@ -16,8 +16,6 @@
 		(presence-of :last-seen-at)
 		(presence-of :role)
 		(length-of :user-uuid :is 36)
-		(numericality-of :created-at :only-integer true)
-		(numericality-of :last-seen-at :only-integer true)
 		(inclusion-of :email :in #{(:email anonymous-whereabts-user)})))
 		(inclusion-of :role :in #{"anonymous"})
 

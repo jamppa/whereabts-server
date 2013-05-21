@@ -11,8 +11,6 @@
 		(presence-of :user_id)
 		(presence-of :vote)
 		(presence-of :created-at)
-		(numericality-of :vote :only-integer true :equal-to 0)
-		(numericality-of :created-at :only-integer true)
 		(length-of :message :within (range 1 501))))
 
 (defn find-feedback-by-id [id]

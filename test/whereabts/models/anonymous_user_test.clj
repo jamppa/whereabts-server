@@ -48,8 +48,8 @@
 (fact "should not save invalid anonymous user missing creation time"
 	(save-anonymous-user new-anonymous-user-missing-creationtime) => (throws IllegalArgumentException))
 
-(fact "should not save invalid anonymous user with creation time as a string"
-	(save-anonymous-user new-anonymous-user-wrong-creationtime) => (throws IllegalArgumentException))
+; (fact "should not save invalid anonymous user with creation time as a string"
+; 	(save-anonymous-user new-anonymous-user-wrong-creationtime) => (throws IllegalArgumentException))
 
 (fact "should find anonymous user by uuid and email"
 	(find-anonymous-user 
