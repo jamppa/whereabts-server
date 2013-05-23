@@ -8,7 +8,8 @@
 (def reply-validation
 	(validation-set
 		(presence-of :message_id)
-		(presence-of :user_id)))
+		(presence-of :user_id)
+		(presence-of :nick)))
 
 (defn find-reply-by-id [id]
 	(db-find-one-by-id replies-coll (obj-id id)))
