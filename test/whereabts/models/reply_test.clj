@@ -10,6 +10,7 @@
 	(merge (dissoc test-reply-a :_id) {:replymessage "Yyyeaaahhh!"}))
 
 (def reply-missing-msg-id (dissoc new-reply :message_id))
+(def reply-missing-user (dissoc new-reply :user_id))
 
 (background (before :facts (setup-test-db)))
 
@@ -25,3 +26,6 @@
 
 (fact "should not save invalid reply message missing message id"
 	(save-new-reply reply-missing-msg-id) => (throws IllegalArgumentException))
+
+(fact "should not save invalid reply message missing user id"
+	(save-new-reply reply-missing-user) => (throws IllegalArgumentException))
