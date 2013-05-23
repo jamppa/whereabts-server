@@ -12,6 +12,7 @@
 (def reply-missing-msg-id (dissoc new-reply :message_id))
 (def reply-missing-user (dissoc new-reply :user_id))
 (def reply-missing-nick (dissoc new-reply :nick))
+(def reply-missing-msg (dissoc new-reply :replymessage))
 
 (background (before :facts (setup-test-db)))
 
@@ -33,3 +34,6 @@
 
 (fact "should not save invalid reply message missing nick"
 	(save-new-reply reply-missing-nick) => (throws IllegalArgumentException))
+
+(fact "should not save invalid reply message missing replymessage"
+	(save-new-reply reply-missing-msg) => (throws IllegalArgumentException))
