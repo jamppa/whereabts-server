@@ -5,7 +5,8 @@
 	(:use
 		[whereabts.db]
 		[whereabts.db.test-fixtures]
-		[whereabts.db.user-test-fixtures])
+		[whereabts.db.user-test-fixtures]
+		[whereabts.db.reply-test-fixtures])
 	(:import [org.bson.types ObjectId]))
 
 (def test-db-name "whereabtsdb_test")
@@ -23,11 +24,12 @@
 		(monger-col/remove coll)))
 
 (defn populate-test-db []
-	(clear-collections ["docs" "anonymous_users" "messages" "feedbacks"])
+	(clear-collections ["docs" "anonymous_users" "messages" "feedbacks" "replies"])
 	(insert-test-objects "docs" [test-obj-a test-obj-b])
 	(insert-test-objects "anonymous_users" [anonymous-user-a anonymous-user-b])
 	(insert-test-objects "messages" [test-message-a test-message-b test-message-c test-message-d])
-	(insert-test-objects "feedbacks" [test-feedback-a]))
+	(insert-test-objects "feedbacks" [test-feedback-a])
+	(insert-test-objects "replies" [test-reply-a]))
 
 (defn setup-test-db []
 	(binding [*whereabts-db* test-db-name]
