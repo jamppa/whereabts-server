@@ -16,6 +16,7 @@
 (def reply-missing-msg (dissoc new-reply :replymessage))
 (def reply-missing-timestamp (dissoc new-reply :created-at))
 (def reply-too-long (merge new-reply {:replymessage long-reply}))
+(def reply-nick-too-long (merge new-reply {:nick "nicktoolonggoddammits"}))
 
 (background (before :facts (setup-test-db)))
 
@@ -46,3 +47,6 @@
 
 (fact "should not save invalid reply message with too long message"
 	(save-new-reply reply-too-long) => (throws IllegalArgumentException))
+
+(fact "should not save invalid reply message with too long nick"
+	(save-new-reply reply-nick-too-long) => (throws IllegalArgumentException))
