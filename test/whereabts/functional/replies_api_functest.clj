@@ -35,8 +35,14 @@
 
 (background (before :facts (setup-db)))
 
-(fact "should response HTTP Created when POSTing valid reply for message" :functional
+(fact "should response HTTP Created when POSTing reply for message" :functional
 	(:status (post-reply-as-user reply-payload)) => 201)
 
-(fact "should response HTTP Not Found when POSTing valid relpy for nonexisting message" :functional
+(fact "should response HTTP Not Found when POSTing relpy for nonexisting message" :functional
 	(:status (post-reply-to-nonexisting-message reply-payload)) => 404)
+
+(fact "should response HTTP Forbidden when POSTing reply as public user" :functional
+	(:status (post-reply-as-public-user reply-payload)) => 403)
+
+(fact "should reponse HTTP Unauthorized when POSTing reply as invalid user" :functional
+	(:status (post-reply-as-invalid-user reply-payload)) => 401)
