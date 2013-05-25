@@ -1,19 +1,12 @@
 (ns whereabts.core.messages
 	(:use 
 		[whereabts.models.message]
-		[whereabts.models.util])
+		[whereabts.models.util]
+		[whereabts.core.with-util])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- all-messages [messages ]
 	{:messages messages})
-
-(defn- with-user [msg usr]
-	(merge msg {:user_id (:_id usr)}))
-
-(defn message-with-ownership [msg usr]
-	(if (= (id-as-str :user_id msg) (obj-id-as-str usr))
-		(merge msg {:owns true})
-		(merge msg {:owns false})))
 
 (defn user-owns-message? [message user]
 	(= (obj-id-as-str user) (id-as-str :user_id message)))
@@ -34,9 +27,9 @@
 (defn view-and-update-message [msg]
 	(update-message (view-message msg)))
 
-(defn find-message [id]
+(defn find-message [id user]
 	(if-let [message (find-message-by-id id)]
-		message
+		(with-ownership message user)
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn delete-message [id user]

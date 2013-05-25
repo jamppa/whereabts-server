@@ -28,12 +28,12 @@
 	(provided (save-message message-with-user) => saved-message :times 1)
 	(provided (compactify-message saved-message) => compactified-saved-message :times 1))
 
-(fact "should find a message by id"
-	(find-message "123abc") => message
-	(provided (find-message-by-id "123abc") => message :times 1))
+(fact "should find a message by id with user"
+	(find-message "123abc" user) => (merge message-with-user {:owns true})
+	(provided (find-message-by-id "123abc") => message-with-user :times 1))
 
 (fact "should throw exception when message is not found by id"
-	(find-message "123abc") => (throws WhereabtsResourceNotFoundException)
+	(find-message "123abc" user) => (throws WhereabtsResourceNotFoundException)
 	(provided (find-message-by-id "123abc") => nil :times 1))
 
 (fact "should view the message by incrementing views counter"
@@ -43,12 +43,6 @@
 	(view-and-update-message message) => saved-message
 	(provided (view-message message) => viewed-message :times 1)
 	(provided (update-message viewed-message) => saved-message :times 1))
-
-(fact "should add ownership to message when user owns it"
-	(message-with-ownership message-with-user user) => (merge message-with-user {:owns true}))
-
-(fact "should not add ownershipt to message when user does not own it"
-	(message-with-ownership message-with-user other-user) => (merge message-with-user {:owns false}))
 
 (fact "should delete and update message when user owns it"
 	(delete-message "123abc" user) => message-with-user

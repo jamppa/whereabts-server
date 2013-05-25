@@ -4,6 +4,7 @@
 		[compojure.core]
 		[ring.util.response]
 		[whereabts.core.messages]
+		[whereabts.core.with-util]
 		[whereabts.util.geo]
 		[clojure.walk :only [keywordize-keys]]))
 
@@ -20,10 +21,10 @@
 
 	(GET "/messages/:id" [id :as req]
 		(with-role req "anonymous"
-		(let [message (find-message id)
-			  user (:basic-authentication req)]
+		(let [user (:basic-authentication req)
+			  message (find-message id user)]
 			  (view-message-async (agent message))
-			  (response (message-with-ownership message user)))))
+			  (response message))))
 
 	(POST "/messages" [:as req]
 		(with-role req "anonymous"

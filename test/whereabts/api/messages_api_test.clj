@@ -2,6 +2,7 @@
 	(:use
 		[whereabts.api.messages-api]
 		[whereabts.core.messages]
+		[whereabts.core.with-util]
 		[midje.sweet]
 		[ring.mock.request]
 		[whereabts.api-helper]
@@ -29,9 +30,8 @@
 
 (fact "should GET message by its id"
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/123abc")) => expected-res-for-message
-	(provided (find-message "123abc" ) => message :times 1)
-	(provided (view-message-async (agent message)) => message :times 1)
-	(provided (message-with-ownership message anonymous-roled-user) => message :times 1))
+	(provided (find-message "123abc" anonymous-roled-user) => message :times 1)
+	(provided (view-message-async (agent message)) => message :times 1))
 
 (fact "should DELETE message by its id"
 	(messages-api-routes
