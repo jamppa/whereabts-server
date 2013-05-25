@@ -5,6 +5,7 @@
         [whereabts.api.messages-api]
         [whereabts.api.feedbacks-api]
         [whereabts.api.registration-api]
+        [whereabts.api.replies-api]
         [whereabts.util.middleware]
         [whereabts.models.message]
         [compojure.core]
@@ -24,7 +25,7 @@
 
 (defroutes user-routes
     (context "/api" []
-        messages-api-routes feedbacks-api-routes))
+        messages-api-routes feedbacks-api-routes replies-api-routes))
 
 (defroutes api-routes
     public-routes 
