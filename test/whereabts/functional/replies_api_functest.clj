@@ -32,6 +32,9 @@
 
 (def reply-payload
 	(json/write-str {:nick "jamppa" :replymessage "yeah!"}))
+(def invalid-reply-payload
+	(json/write-str {:replymessage "yeah!"}))
+
 
 (background (before :facts (setup-db)))
 
@@ -46,3 +49,6 @@
 
 (fact "should reponse HTTP Unauthorized when POSTing reply as invalid user" :functional
 	(:status (post-reply-as-invalid-user reply-payload)) => 401)
+
+(fact "should response HTTP Bad Request when POSTing bad formatted reply" :functional
+	(:status (post-reply-as-user invalid-reply-payload)) => 400)
