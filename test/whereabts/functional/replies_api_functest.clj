@@ -35,7 +35,6 @@
 (def invalid-reply-payload
 	(json/write-str {:replymessage "yeah!"}))
 
-
 (background (before :facts (setup-db)))
 
 (fact "should response HTTP Created when POSTing reply for message" :functional
