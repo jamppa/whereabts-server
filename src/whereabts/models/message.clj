@@ -46,11 +46,9 @@
 		(limit messages-in-bbox-limit)))
 
 (defn compactify-message [msg]
-	{
-		:_id (:_id msg)
-		:loc (:loc msg)
-		:short-message (short-message msg)
-		:created-at (:created-at msg)})
+	(merge 
+		(select-keys msg [:_id :loc :created-at]) 
+		{:short-message (short-message msg)}))
 
 (defn update-message [msg]
 	(if (valid? message-validation-set msg)

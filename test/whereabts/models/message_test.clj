@@ -75,7 +75,7 @@
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should compactify anonymous message extracting short-message"
-	(keys (compactify-message msg-with-obj-id)) => '(:_id :loc :short-message :created-at)
+	(keys (compactify-message msg-with-obj-id)) => '(:short-message :created-at :loc :_id)
 	(provided (short-message msg-with-obj-id) => "short message" :times 1))
 
 (fact "should create a copy of anonymous message"
