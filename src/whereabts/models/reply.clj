@@ -24,3 +24,6 @@
 	(if (valid? reply-validation reply)
 	(db-insert replies-coll reply)
 	(throw (IllegalArgumentException. "Invalid reply!"))))
+
+(defn find-replies-by-message [message]
+	(db-find-maps replies-coll {:message_id (:_id message)}))

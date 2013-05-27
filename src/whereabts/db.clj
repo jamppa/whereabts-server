@@ -30,3 +30,6 @@
 
 (defn db-save [coll obj]
     (monger-col/save-and-return coll obj))
+
+(defn db-find-maps [coll query]
+    (doall (monger-col/find-maps coll query)))

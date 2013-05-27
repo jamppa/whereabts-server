@@ -29,7 +29,7 @@
 	(insert-test-objects "anonymous_users" [anonymous-user-a anonymous-user-b])
 	(insert-test-objects "messages" [test-message-a test-message-b test-message-c test-message-d])
 	(insert-test-objects "feedbacks" [test-feedback-a])
-	(insert-test-objects "replies" [test-reply-a]))
+	(insert-test-objects "replies" [test-reply-a test-reply-b]))
 
 (defn setup-test-db []
 	(binding [*whereabts-db* test-db-name]

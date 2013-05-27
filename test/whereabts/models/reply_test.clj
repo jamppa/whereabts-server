@@ -4,7 +4,8 @@
 		[whereabts.models.reply]
 		[whereabts.models.util]
 		[whereabts.db-helper]
-		[whereabts.db.reply-test-fixtures]))
+		[whereabts.db.reply-test-fixtures]
+		[whereabts.db.test-fixtures]))
 
 (def long-reply (clojure.string/join "" (repeat (+ reply-length 1) "s")))
 (def new-reply 
@@ -50,3 +51,6 @@
 
 (fact "should not save invalid reply message with too long nick"
 	(save-new-reply reply-nick-too-long) => (throws IllegalArgumentException))
+
+(fact "should find replies of a message"
+	(find-replies-by-message test-message-a) => [test-reply-a test-reply-b])
