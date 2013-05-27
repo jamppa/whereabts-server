@@ -15,3 +15,7 @@
 		(with-message message)
 		(new-reply)
 		(save-new-reply)))
+
+(defn with-replies [message]
+	(merge message 
+		{:replies (find-replies-by-message message)}))

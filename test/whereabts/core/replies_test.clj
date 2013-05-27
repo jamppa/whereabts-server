@@ -21,3 +21,7 @@
 	(provided (with-user reply-created-now user) => reply-with-user :times 1)
 	(provided (with-message reply-with-user message) => reply-with-message :times 1)
 	(provided (save-new-reply reply-with-message) => saved-reply :times 1))
+
+(fact "should return message with replies"
+	(with-replies message) => (merge message {:replies [reply-with-message]})
+	(provided (find-replies-by-message message) => [reply-with-message] :times 1))
