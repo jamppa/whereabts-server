@@ -23,15 +23,12 @@
 		(length-of :title :within (range 1 41) :allow-blank true)))
 
 (defn new-message [msg-candidate]
-	{
-		:user_id (:user_id msg-candidate)
-		:nick (:nick msg-candidate)
-		:title (:title msg-candidate)
-		:message (:message msg-candidate)
-		:loc [(get-in msg-candidate [:loc :lon]) (get-in msg-candidate [:loc :lat])]
-		:created-at (:created-at msg-candidate)
-		:views 0
-		:deleted false})
+	(merge 
+		(select-keys msg-candidate [:user_id :nick :title :message :created-at])
+		{:views 0 :deleted false 
+		 :loc [
+		 	(get-in msg-candidate [:loc :lon]) 
+		 	(get-in msg-candidate [:loc :lat])]}))
 
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))
