@@ -54,3 +54,6 @@
 
 (fact "should find replies of a message"
 	(find-replies-by-message test-message-a) => [test-reply-a test-reply-b])
+
+(fact "should not find any replies when message doesnt have any"
+	(find-replies-by-message test-message-b) => [])
