@@ -3,6 +3,7 @@
 		[midje.sweet]
 		[whereabts.models.message]
 		[whereabts.core.messages]
+		[whereabts.core.replies]
 		[whereabts.util.geo])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
@@ -13,6 +14,8 @@
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
 (def message {:views 1})
 (def message-with-user (merge message {:user_id (:_id user)}))
+(def message-with-user-and-ownership (merge message-with-user {:owns true}))
+(def message-with-user-and-replies (merge message-with-user-and-ownership {:replies []}))
 (def viewed-message (merge message {:views 2}))
 (def saved-message {})
 (def compactified-saved-message saved-message)
@@ -28,9 +31,10 @@
 	(provided (save-message message-with-user) => saved-message :times 1)
 	(provided (compactify-message saved-message) => compactified-saved-message :times 1))
 
-(fact "should find a message by id with user"
-	(find-message "123abc" user) => (merge message-with-user {:owns true})
-	(provided (find-message-by-id "123abc") => message-with-user :times 1))
+(fact "should find a message with replies and user by id"
+	(find-message "123abc" user) => message-with-user-and-replies
+	(provided (find-message-by-id "123abc") => message-with-user :times 1)
+	(provided (with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1))
 
 (fact "should throw exception when message is not found by id"
 	(find-message "123abc" user) => (throws WhereabtsResourceNotFoundException)

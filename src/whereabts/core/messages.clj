@@ -2,7 +2,8 @@
 	(:use 
 		[whereabts.models.message]
 		[whereabts.models.util]
-		[whereabts.core.with-util])
+		[whereabts.core.with-util]
+		[whereabts.core.replies])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- all-messages [messages ]
@@ -29,7 +30,9 @@
 
 (defn find-message [id user]
 	(if-let [message (find-message-by-id id)]
-		(with-ownership message user)
+		(-> message 
+			(with-ownership user)
+			(with-replies))
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn delete-message [id user]
