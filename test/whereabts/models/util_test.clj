@@ -45,3 +45,6 @@
 
 (fact "should give specified object-id-field as string"
 	(id-as-str obj-with-id :other_id) => "507f191e810c19729de860eb")
+
+(fact "should update object by merging updated-at timestamp with current time"
+	(keys (updated-now {})) => [:updated-at])
