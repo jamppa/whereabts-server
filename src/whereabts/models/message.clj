@@ -31,6 +31,10 @@
 		 	(get-in msg-candidate [:loc :lon]) 
 		 	(get-in msg-candidate [:loc :lat])]}))
 
+(defn message-to-update [message]
+	(select-keys message 
+		[:_id :user_id :nick :message :title :loc :created-at :updated-at :views :deleted]))
+
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))
 
@@ -52,9 +56,10 @@
 		{:short-message (short-message msg)}))
 
 (defn update-message [msg]
-	(if (valid? message-validation-set msg)
-		(db-save message-coll msg)
-		(throw (IllegalArgumentException. "Could not save invalid message!"))))
+	(let [msg-to-update (message-to-update msg)]
+		(if (valid? message-validation-set msg-to-update)
+			(db-save message-coll msg-to-update)
+			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
 (defn delete-and-update-message [msg]
 	(update-message (merge msg {:deleted true})))
