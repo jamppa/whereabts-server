@@ -14,7 +14,7 @@
 
 (defn view-message [msg]
 	(let [views-so-far (:views msg)]
-	(merge msg {:views (inc views-so-far)})))
+		(merge msg {:views (inc views-so-far)})))
 
 (defn find-all-messages-by-bbox [bbox]
 	(let [messages (find-messages-by-bbox bbox)
