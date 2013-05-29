@@ -15,10 +15,10 @@
 	:message "This is the content of My Cool Message" 
 	:nick "Cool Guy"
 	:loc {:lon 45.1 :lat 56.4}
-	:created-at (System/currentTimeMillis)
-	:updated-at (System/currentTimeMillis)
 	:views 0
 	:deleted false})
+
+(def existing-message (with-obj-id (updated-now (created-now message))))
 
 (def msg-after-copy (merge message {:loc [45.1 56.4]}))
 (def msg-with-obj-id (with-obj-id message))
@@ -76,8 +76,8 @@
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should compactify anonymous message extracting short-message"
-	(keys (compactify-message msg-with-obj-id)) => '(:short-message :created-at :loc :_id)
-	(provided (short-message msg-with-obj-id) => "short message" :times 1))
+	(keys (compactify-message existing-message)) => '(:short-message :created-at :updated-at :loc :_id)
+	(provided (short-message existing-message) => "short message" :times 1))
 
 (fact "should create a copy of anonymous message"
 	(new-message message) => msg-after-copy)

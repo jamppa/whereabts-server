@@ -35,7 +35,7 @@
 	(db-find-one-by-id message-coll (obj-id id-str)))
 
 (defn save-message [message]
-	(let [msg-candidate (new-message (created-now message))]
+	(let [msg-candidate (new-message (updated-now (created-now message)))]
 		(if (valid? message-validation-set msg-candidate)
 			(db-insert message-coll msg-candidate)
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
@@ -43,12 +43,12 @@
 (defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection message-coll
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}} :deleted false})
-		(sort (sorted-map :created-at -1))
+		(sort (sorted-map :updated-at -1))
 		(limit messages-in-bbox-limit)))
 
 (defn compactify-message [msg]
 	(merge 
-		(select-keys msg [:_id :loc :created-at]) 
+		(select-keys msg [:_id :loc :updated-at :created-at]) 
 		{:short-message (short-message msg)}))
 
 (defn update-message [msg]

@@ -1,4 +1,5 @@
 mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "created-at" : -1})'
+mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1})'
 mongo whereabtsdb --eval 'db.anonymous_users.ensureIndex({"user-uuid" : 1, "email" : 1})'
 
 # one time shot
