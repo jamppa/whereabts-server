@@ -52,7 +52,7 @@
 (fact "should not save invalid reply message with too long nick"
 	(save-new-reply reply-nick-too-long) => (throws IllegalArgumentException))
 
-(fact "should find replies of a message"
+(fact "should find replies of a message and sort by creation time"
 	(find-replies-by-message test-message-a) => [test-reply-a test-reply-b])
 
 (fact "should not find any replies when message doesnt have any"

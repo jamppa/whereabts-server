@@ -15,4 +15,6 @@
 
 (def test-reply-b 
 	(merge test-reply-a 
-		{:_id (ObjectId. "509d513f61395f0ebbd5e40b") :replymessage "Super Cool!"}))
+		{:_id (ObjectId. "509d513f61395f0ebbd5e40b") 
+		 :replymessage "Super Cool!"
+		 :created-at 1364642721990}))

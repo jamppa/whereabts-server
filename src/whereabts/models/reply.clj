@@ -1,8 +1,10 @@
 (ns whereabts.models.reply
+	(:refer-clojure :exclude [sort find])
 	(:use
 		[whereabts.db]
 		[whereabts.models.util]
-		[validateur.validation]))
+		[validateur.validation]
+		[monger.query]))
 
 (def replies-coll "replies")
 (def reply-length 250)
@@ -26,4 +28,6 @@
 	(throw (IllegalArgumentException. "Invalid reply!"))))
 
 (defn find-replies-by-message [message]
-	(db-find-maps replies-coll {:message_id (:_id message)}))
+	(with-collection replies-coll
+		(find {:message_id (:_id message)})
+		(sort (sorted-map :created-at 1))))
