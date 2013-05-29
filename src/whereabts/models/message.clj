@@ -16,6 +16,7 @@
 		(presence-of :message)
 		(presence-of :loc)
 		(presence-of :created-at)
+		(presence-of :updated-at)
 		(presence-of :views)
 		(presence-of :deleted)
 		(length-of :message :within (range 1 251))
@@ -24,7 +25,7 @@
 
 (defn new-message [msg-candidate]
 	(merge 
-		(select-keys msg-candidate [:user_id :nick :title :message :created-at])
+		(select-keys msg-candidate [:user_id :nick :title :message :created-at :updated-at])
 		{:views 0 :deleted false 
 		 :loc [
 		 	(get-in msg-candidate [:loc :lon]) 

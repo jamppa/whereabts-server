@@ -16,6 +16,7 @@
 	:nick "Cool Guy"
 	:loc {:lon 45.1 :lat 56.4}
 	:created-at (System/currentTimeMillis)
+	:updated-at (System/currentTimeMillis)
 	:views 0
 	:deleted false})
 
