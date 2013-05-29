@@ -14,7 +14,7 @@
 			(let [user (:basic-authentication req)
 				  reply-payload (keywordize-keys (:body req))
 				  message-to-reply (find-message id user)]
-				(-> (save-reply reply-payload user message-to-reply)
+				(-> (save-reply-to-message reply-payload user message-to-reply)
 					(response)
 					(status 201)))))
 

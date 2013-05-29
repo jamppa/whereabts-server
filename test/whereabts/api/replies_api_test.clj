@@ -21,4 +21,4 @@
 	(replies-api-routes
 		(whereabts-request-as-anonymous-user :post "/messages/123abc/replies" new-reply-payload)) => expected-res-for-new-reply
 	(provided (find-message "123abc" anonymous-roled-user) => message-to-reply :times 1)
-	(provided (save-reply new-reply-payload anonymous-roled-user message-to-reply) => saved-reply :times 1))
+	(provided (save-reply-to-message new-reply-payload anonymous-roled-user message-to-reply) => saved-reply :times 1))
