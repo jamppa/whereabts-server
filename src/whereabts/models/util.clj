@@ -30,7 +30,9 @@
 	(merge obj {:last-seen-at (System/currentTimeMillis)}))
 
 (defn obj-id-as-str [obj]
-	(.toString (:_id obj)))
+	(if (nil? (:_id obj))
+		""
+		(.toString (:_id obj))))
 
 (defn id-as-str [obj field]
 	(.toString (field obj)))
