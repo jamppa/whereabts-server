@@ -14,26 +14,26 @@
 (defroutes messages-api-routes
 
 	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat :as req]
-		(with-role req "anonymous"
+		(with-role req ["anonymous"]
 		(let [ll-vec [(read-string ll-lon) (read-string ll-lat)]
 			  ur-vec [(read-string ur-lon) (read-string ur-lat)]]
 		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec))))))
 
 	(GET "/messages/:id" [id :as req]
-		(with-role req "anonymous"
+		(with-role req ["anonymous" "public"]
 		(let [user (:basic-authentication req)
 			  message (find-message id user)]
 			  (view-message-async (agent message))
 			  (response message))))
 
 	(POST "/messages" [:as req]
-		(with-role req "anonymous"
+		(with-role req ["anonymous"]
 		(let [message (keywordize-keys (:body req))
 			  user (:basic-authentication req)]
 			(status (response (save-new-message message user)) 201))))
 
 	(DELETE "/messages/:id" [id :as req]
-		(with-role req "anonymous"
+		(with-role req ["anonymous"]
 			(response (delete-message id (:basic-authentication req)))))
 )
 

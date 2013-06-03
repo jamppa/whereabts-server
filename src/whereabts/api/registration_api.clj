@@ -13,7 +13,7 @@
 (defroutes registration-api-routes
 	
 	(POST "/anonymousregistration" [:as req]
-		(with-role req "public"
+		(with-role req ["public"]
 		(let [user (extract-user req)]
 			(-> (response (register-anonymous-user user))
 				(status 201)))))

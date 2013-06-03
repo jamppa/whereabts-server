@@ -9,7 +9,7 @@
 (defroutes feedbacks-api-routes
 
 	(POST "/feedbacks" [:as req]
-		(with-role req "anonymous"
+		(with-role req ["anonymous"]
 			(let [feedback (keywordize-keys (:body req))
 				  user (:basic-authentication req)]
 			(-> (response (save-new-feedback feedback user))

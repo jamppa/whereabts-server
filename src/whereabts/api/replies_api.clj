@@ -10,7 +10,7 @@
 (defroutes replies-api-routes
 
 	(POST "/messages/:id/replies" [id :as req]
-		(with-role req "anonymous"
+		(with-role req ["anonymous"]
 			(let [user (:basic-authentication req)
 				  reply-payload (keywordize-keys (:body req))
 				  message-to-reply (find-message id user)]
