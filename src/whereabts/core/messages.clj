@@ -6,11 +6,18 @@
 		[whereabts.core.replies])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
-(defn- all-messages [messages ]
+(defn- all-messages [messages]
 	{:messages messages})
 
+(defn message-expires-at [message]
+	(if (not (nil? (:expire-time message)))
+	(merge message 
+		{:expires-at (+ (:expire-time message) (System/currentTimeMillis))})
+	message))
+
 (defn user-owns-message? [message user]
-	(= (obj-id-as-str user) (id-as-str :user_id message)))
+	(= (obj-id-as-str user) 
+		(id-as-str :user_id message)))
 
 (defn view-message [msg]
 	(let [views-so-far (:views msg)]
@@ -23,7 +30,8 @@
 
 (defn save-new-message [msg usr]
 	(compactify-message 
-		(save-message (with-user msg usr))))
+		(save-message 
+			(message-expires-at (with-user msg usr)))))
 
 (defn view-and-update-message [msg]
 	(update-message (view-message msg)))
