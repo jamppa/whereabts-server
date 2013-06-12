@@ -17,6 +17,7 @@
 		(presence-of :loc)
 		(presence-of :created-at)
 		(presence-of :updated-at)
+		(presence-of :expires-at)
 		(presence-of :views)
 		(presence-of :deleted)
 		(length-of :message :within (range 1 251))
@@ -25,7 +26,7 @@
 
 (defn new-message [msg-candidate]
 	(merge 
-		(select-keys msg-candidate [:user_id :nick :title :message :created-at :updated-at])
+		(select-keys msg-candidate [:user_id :nick :title :message :created-at :updated-at :expires-at])
 		{:views 0 :deleted false 
 		 :loc [
 		 	(get-in msg-candidate [:loc :lon]) 
@@ -33,7 +34,7 @@
 
 (defn message-to-update [message]
 	(select-keys message 
-		[:_id :user_id :nick :message :title :loc :created-at :updated-at :views :deleted]))
+		[:_id :user_id :nick :message :title :loc :created-at :updated-at :views :deleted :expires-at]))
 
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))

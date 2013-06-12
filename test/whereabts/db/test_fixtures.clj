@@ -13,6 +13,7 @@
 	:loc [1.0 2.0]
 	:created-at 1364642721968
 	:updated-at 1364642721968
+	:expires-at (+ (System/currentTimeMillis) 5000)
 	:views 10
 	:deleted false})
 
@@ -25,6 +26,7 @@
 	:loc [5.0 5.0]
 	:created-at 1364642721969
 	:updated-at 1364642721968
+	:expires-at (+ (System/currentTimeMillis) 5000)
 	:views 11
 	:deleted false})
 
@@ -37,6 +39,7 @@
 	:loc [45.0 26.0]
 	:created-at 1364642721970
 	:updated-at 1364642721968
+	:expires-at (+ (System/currentTimeMillis) 5000)
 	:views 12
 	:deleted false})
 

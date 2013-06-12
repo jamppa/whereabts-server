@@ -16,7 +16,8 @@
 	:nick "Cool Guy"
 	:loc {:lon 45.1 :lat 56.4}
 	:views 0
-	:deleted false})
+	:deleted false
+	:expires-at (+ (System/currentTimeMillis) 5000)})
 
 (def existing-message (with-obj-id (updated-now (created-now message))))
 
