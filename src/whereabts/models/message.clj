@@ -49,7 +49,9 @@
 
 (defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection message-coll
-		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}} :deleted false})
+		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}} 
+			:deleted false 
+			:expires-at {"$gt" (System/currentTimeMillis)}})
 		(sort (sorted-map :updated-at -1))
 		(limit messages-in-bbox-limit)))
 

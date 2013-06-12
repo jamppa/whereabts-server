@@ -52,6 +52,12 @@
 		:loc [4.123 3.123]
 		:deleted true}))
 
+(def test-message-e 
+	(merge test-message-a {
+		:_id (ObjectId. "509d513f61395f0ebbd5e36e")
+		:loc [4.123 3.123]
+		:expires-at (- (System/currentTimeMillis) 5000)}))
+
 (def test-feedback-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e37a")
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38b")

@@ -27,7 +27,7 @@
 	(clear-collections ["docs" "anonymous_users" "messages" "feedbacks" "replies"])
 	(insert-test-objects "docs" [test-obj-a test-obj-b])
 	(insert-test-objects "anonymous_users" [anonymous-user-a anonymous-user-b])
-	(insert-test-objects "messages" [test-message-a test-message-b test-message-c test-message-d])
+	(insert-test-objects "messages" [test-message-a test-message-b test-message-c test-message-d test-message-e])
 	(insert-test-objects "feedbacks" [test-feedback-a])
 	(insert-test-objects "replies" [test-reply-a test-reply-b]))
 
