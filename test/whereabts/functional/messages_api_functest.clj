@@ -22,6 +22,9 @@
 (def invalid-message-as-json 
 	(json/write-str 
 		{:message "yey, cool things!" :loc {:lon 22.3123 :lat 60.1231}}))
+(def message-without-expire-time-as-json
+	(json/write-str
+		{:nick "teppo" :title "" :message "yey, cool things!" :loc {:lon 24.5678 :lat 60.673}}))
 
 (defn- post-message-as-user [payload]
 	(http/post whereabts-api-messages
@@ -34,6 +37,9 @@
 
 (fact "should reponse with HTTP Created when POST new message with empty title as an anonymous user" :functional
 	(:status (post-message-as-user message-with-empty-title-as-json)) => 201)
+
+(fact "should response HTTP Created when POSTing new message without expire-time for it" :functional
+	(:status (post-message-as-user message-without-expire-time-as-json)) => 201)
 
 (fact "should response with HTTP Bad Request when trying to POST invalid message" :functional
 	(:status (post-message-as-user invalid-message-as-json)) => 400)
