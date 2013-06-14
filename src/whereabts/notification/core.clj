@@ -1,4 +1,5 @@
 (ns whereabts.notification.core
+	(:use [whereabts.models.util])
 	(:require [taoensso.carmine :as carmine]))
 
 (def conn-pool (carmine/make-conn-pool))
@@ -10,4 +11,4 @@
 	`(carmine/with-conn conn-pool conn-spec ~@body))
 
 (defn notify-on-reply [message]
-	(with-carmine (carmine/publish reply-channel message)))
+	(with-carmine (carmine/publish reply-channel (obj-id-as-str message))))

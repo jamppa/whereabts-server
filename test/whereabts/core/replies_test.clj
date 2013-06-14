@@ -5,7 +5,8 @@
 		[whereabts.core.with-util]
 		[whereabts.models.reply]
 		[whereabts.models.message]
-		[whereabts.models.util]))
+		[whereabts.models.util]
+		[whereabts.notification.core]))
 
 (def user {:_id 1})
 (def message {:message_id 1})
@@ -23,7 +24,8 @@
 	(provided (with-message reply-with-user message) => reply-with-message :times 1)
 	(provided (save-new-reply reply-with-message) => saved-reply :times 1)
 	(provided (updated-now message) => message :times 1)
-	(provided (update-message message) => message :times 1))
+	(provided (update-message message) => message :times 1)
+	(provided (notify-on-reply message) => message :times 1))
 
 (fact "should return message with replies"
 	(with-replies message) => (merge message {:replies [reply-with-message]})

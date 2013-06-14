@@ -3,7 +3,8 @@
 		[whereabts.models.reply]
 		[whereabts.models.message]
 		[whereabts.models.util]
-		[whereabts.core.with-util]))
+		[whereabts.core.with-util]
+		[whereabts.notification.core]))
 
 (defn- new-reply [candidate]
 	(select-keys candidate
@@ -20,6 +21,7 @@
 (defn save-reply-to-message [reply user message]
 	(let [saved-reply (save-reply reply user message)]
 		(update-message (updated-now message))
+		(notify-on-reply message)
 			saved-reply))
 
 (defn with-replies [message]
