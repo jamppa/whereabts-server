@@ -8,7 +8,8 @@
       [com.novemberain/monger "1.5.0"]
       [com.novemberain/validateur "1.4.0"]
       [org.clojure/tools.logging "0.2.6"]
-      [log4j/log4j "1.2.17"]]
+      [log4j/log4j "1.2.17"]
+      [com.taoensso/carmine "1.12.0"]]
    :plugins [[lein-ring "0.8.3"]]
    :ring {
          :handler whereabts.server/server
