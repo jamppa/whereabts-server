@@ -10,5 +10,10 @@
 (defmacro with-carmine [& body] 
 	`(carmine/with-conn conn-pool conn-spec ~@body))
 
+(defn prepare-message-for-channel [message]
+	{:message_id (obj-id-as-str message) 
+		:user_id (id-as-str message :user_id)})
+
 (defn notify-on-reply [message]
-	(with-carmine (carmine/publish reply-channel (obj-id-as-str message))))
+	(with-carmine (carmine/publish reply-channel 
+		(prepare-message-for-channel message))))
