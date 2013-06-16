@@ -21,7 +21,7 @@
 (defn save-reply-to-message [reply user message]
 	(let [saved-reply (save-reply reply user message)]
 		(update-message (updated-now message))
-		(notify-on-reply message)
+		(notify-on-reply saved-reply user message)
 			saved-reply))
 
 (defn with-replies [message]

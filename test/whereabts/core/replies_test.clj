@@ -25,7 +25,7 @@
 	(provided (save-new-reply reply-with-message) => saved-reply :times 1)
 	(provided (updated-now message) => message :times 1)
 	(provided (update-message message) => message :times 1)
-	(provided (notify-on-reply message) => message :times 1))
+	(provided (notify-on-reply saved-reply user message) => message :times 1))
 
 (fact "should return message with replies"
 	(with-replies message) => (merge message {:replies [reply-with-message]})
