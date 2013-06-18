@@ -23,8 +23,11 @@
 		:user-uuid "blaa-123-abc" 
 		:email "anonymous@whereabts.com"}))
 
-(def anonymous-registration-api 
-	(str whereabts-api-testsrv "/anonymousregistration"))
+(def gcm-registration-payload (json/write-str {:gcm-id "123abc"}))
+(def invalid-gcm-registration-payload (json/write-str {:some-other "asdasd"}))
+
+(def anonymous-registration-api (str whereabts-api-testsrv "/anonymousregistration"))
+(def gcm-id-registration-api (str whereabts-api-testsrv "/register_gcm"))
 
 (defn- post-as-public-user [payload]
 	(http/post anonymous-registration-api
@@ -33,6 +36,10 @@
 (defn- post-as-unauth-user [payload]
 	(http/post anonymous-registration-api
 		(whereabts-api-request ["invalid@creds.com" "blaaah"] payload)))
+
+(defn- post-as-anon-user [payload]
+	(http/post gcm-id-registration-api
+		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
 
 (background (before :facts (setup-db)))
 
@@ -47,3 +54,9 @@
 
 (fact "should response with Authentication failed when POSTing anonymous user registration payload with invalid credentials" :functional
 	(:status (post-as-unauth-user registration-payload)) => 401)
+
+(fact "should response with Http Created when POSTing for registration of GCM Id for user" :functional
+	(:status (post-as-anon-user gcm-registration-payload)) => 201)
+
+(fact "should reponse with Http Bad Request when POSTing invalid payload for registration of GCM Id" :functional
+	(:status (post-as-anon-user invalid-gcm-registration-payload)) => 400)
