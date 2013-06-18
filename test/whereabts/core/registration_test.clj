@@ -12,6 +12,7 @@
 	(merge anonymous-user-created-now {:last-seen-at (System/currentTimeMillis)}))
 (def anonymified (merge anonymous-user-created-and-last-seen-now {:role "anonymous"}))
 
+(def user-with-gcm (merge anonymified {:gcm-id "123"}))
 
 (fact "should register new anonymous user"
 	(register-anonymous-user anonymous-user) => anonymified
@@ -26,3 +27,7 @@
 	(provided (find-anonymous-user {:user-uuid "123-abc" :email "some"}) => anonymous-user)
 	(provided (created-now anonymous-user) => anonymous-user-created-now :times 0)
 	(provided (save-anonymous-user anonymous-user-created-now) => anonymous-user-created-now :times 0))
+
+(fact "should register gcm-id for already existing user"
+	(register-gcm-for-user anonymified "123") => user-with-gcm
+	(provided (update-anonymous-user user-with-gcm) => user-with-gcm :times 1))

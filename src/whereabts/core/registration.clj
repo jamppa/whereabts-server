@@ -12,3 +12,6 @@
 			already-registered
 			(save-anonymous-user 
 				(anonymify (last-seen-now (created-now usr)))))))
+
+(defn register-gcm-for-user [usr gcm-id]
+	(update-anonymous-user (merge usr {:gcm-id gcm-id})))
