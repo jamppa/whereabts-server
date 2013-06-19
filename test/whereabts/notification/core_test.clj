@@ -7,6 +7,6 @@
 
 (fact "should prepare message for redis channel"
 	(prepare-message-for-channel test-reply-a test-message-a) => 
-		{:replied_message "509d513f61395f0ebbd5e36a" 
-		 :user_to_notify "509d513f61395f0ebbd5e38a"
+		{:replied-message "509d513f61395f0ebbd5e36a" 
+		 :user-to-notify "509d513f61395f0ebbd5e38a"
 		 :reply "509d513f61395f0ebbd5e40a"})

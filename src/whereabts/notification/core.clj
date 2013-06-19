@@ -12,8 +12,8 @@
 
 (defn prepare-message-for-channel [reply message]
 	{
-		:replied_message (obj-id-as-str message) 
-		:user_to_notify (id-as-str message :user_id)
+		:replied-message (obj-id-as-str message) 
+		:user-to-notify (id-as-str message :user_id)
 		:reply (obj-id-as-str reply)})
 
 (defn notify-on-reply [reply user message]
