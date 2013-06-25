@@ -19,14 +19,29 @@
 
 (fact "should save reply for message with user and update message with current timestamp"
 	(save-reply-to-message reply user message) => saved-reply
-	(provided (created-now reply) => reply-created-now :times 1)
-	(provided (with-user reply-created-now user) => reply-with-user :times 1)
-	(provided (with-message reply-with-user message) => reply-with-message :times 1)
-	(provided (save-new-reply reply-with-message) => saved-reply :times 1)
+	(provided (save-reply reply user message) => saved-reply :times 1)
 	(provided (updated-now message) => message :times 1)
 	(provided (update-message message) => message :times 1)
-	(provided (notify-on-reply saved-reply user message) => message :times 1))
+	(provided (notify-on-reply-if-not-owner saved-reply user message) => message :times 1))
 
 (fact "should return message with replies"
 	(with-replies message) => (merge message {:replies [reply-with-message]})
 	(provided (find-replies-by-message message) => [reply-with-message] :times 1))
+
+(fact "should notify on reply when not owner of the replied message"
+	(notify-on-reply-if-not-owner reply user message) => reply
+	(provided (replying-to-own-message? message user) => false :times 1)
+	(provided (notify-on-reply reply user message) => reply :times 1))
+
+(fact "should not notify on reply when owner of the replied message"
+	(notify-on-reply-if-not-owner reply user message) => nil
+	(provided (replying-to-own-message? message user) => true :times 1)
+	(provided (notify-on-reply reply user message) => anything :times 0))
+
+(fact "should be replying to own message when user is the owner of the message"
+	(replying-to-own-message? message user) => true
+	(provided (with-ownership message user) => (merge message {:owns true})))
+
+(fact "should not be replying to own messag when user is not the owner of the message"
+	(replying-to-own-message? message user) => false
+	(provided (with-ownership message user) => (merge message {:owns false})))
