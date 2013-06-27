@@ -7,3 +7,6 @@
 
 (defn find-category-by-id [id]
 	(db-find-one-by-id categories-coll (obj-id id)))
+
+(defn find-category-by-key [k]
+	nil)
