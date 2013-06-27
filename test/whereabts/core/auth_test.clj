@@ -9,15 +9,6 @@
 (def anonymous-user-authenticated-now
 	(merge anonymous-user {:last-seen-at (System/currentTimeMillis)}))
 
-(fact "should authenticate as whereabts user when email and pass match"
-	(authenticate-whereabts-anon-user "anonymous@whereabts.com" "ae129325a4db22faab7771f10b39a8af") => public-whereabts-user)
-
-(fact "should not authenticate as whereabts user when email is wrong"
-	(authenticate-whereabts-anon-user "wrong@email.com" "ae129325a4db22faab7771f10b39a8af") => nil)
-
-(fact "should not authenticate as whereabts user when user-uuid is wrong"
-	(authenticate-whereabts-anon-user "anonymous@whereabts.com" "666") => nil)
-
 (fact "should authenticate as anonymous user when one is found by email and uuid"
 	(authenticate "anonymous@whereabts.com" "123abc") => anonymous-user
 	(provided (find-anonymous-user anonymous-user) => anonymous-user :times 1)
