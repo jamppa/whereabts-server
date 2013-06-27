@@ -9,4 +9,4 @@
 	(db-find-one-by-id categories-coll (obj-id id)))
 
 (defn find-category-by-key [k]
-	nil)
+	(db-find-one categories-coll {:key k}))
