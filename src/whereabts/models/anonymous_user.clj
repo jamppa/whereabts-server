@@ -5,7 +5,7 @@
 		[validateur.validation]))
 
 (def anonymous-user-coll "anonymous_users")
-(def anonymous-whereabts-user 
+(def public-whereabts-user 
 	{:email "anonymous@whereabts.com" :user-id "ae129325a4db22faab7771f10b39a8af" :role "public"})
 
 (def anonymous-user-validations
@@ -16,7 +16,7 @@
 		(presence-of :last-seen-at)
 		(presence-of :role)
 		(length-of :user-uuid :is 36)
-		(inclusion-of :email :in #{(:email anonymous-whereabts-user)})))
+		(inclusion-of :email :in #{(:email public-whereabts-user)})))
 		(inclusion-of :role :in #{"anonymous"})
 
 (defn by-uuid-and-email [uuid email]

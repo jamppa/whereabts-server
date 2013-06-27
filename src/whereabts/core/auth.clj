@@ -3,10 +3,10 @@
 		[whereabts.models.anonymous-user]
 		[whereabts.models.util]))
 
-(defn- anon-whereabts-user? [email pwd]
+(defn- public-whereabts-user? [email pwd]
 	(and 
-		(= email (anonymous-whereabts-user :email))
-		(= pwd (anonymous-whereabts-user :user-id))))
+		(= email (public-whereabts-user :email))
+		(= pwd (public-whereabts-user :user-id))))
 
 (defn authenticated-now [user]
 	(when user
@@ -16,8 +16,8 @@
 	(send-off usr-agent authenticated-now))
 
 (defn authenticate-whereabts-anon-user [email uuid]
-	(if (anon-whereabts-user? email uuid) 
-		anonymous-whereabts-user 
+	(if (public-whereabts-user? email uuid) 
+		public-whereabts-user 
 		nil))
 
 (defn authenticate-anon-user [email uuid]
