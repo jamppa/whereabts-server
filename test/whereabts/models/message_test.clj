@@ -18,7 +18,8 @@
 	:views 0
 	:deleted false
 	:expire-time 5000
-	:expires-at (+ (System/currentTimeMillis) 5000)})
+	:expires-at (+ (System/currentTimeMillis) 5000)
+	:category_id 1})
 
 (def existing-message (with-obj-id (updated-now (created-now message))))
 

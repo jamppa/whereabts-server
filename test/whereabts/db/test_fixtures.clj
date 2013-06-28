@@ -16,7 +16,8 @@
 	:expire-time 5000
 	:expires-at (+ (System/currentTimeMillis) 5000)
 	:views 10
-	:deleted false})
+	:deleted false
+	:category_id 1})
 
 (def test-message-b {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36b")
@@ -30,7 +31,8 @@
 	:expire-time 5000
 	:expires-at (+ (System/currentTimeMillis) 5000)
 	:views 11
-	:deleted false})
+	:deleted false
+	:category_id 1})
 
 (def test-message-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
@@ -44,7 +46,8 @@
 	:expire-time 5000
 	:expires-at (+ (System/currentTimeMillis) 5000)
 	:views 12
-	:deleted false})
+	:deleted false
+	:category_id 2})
 
 (def test-message-d 
 	(merge test-message-a {
