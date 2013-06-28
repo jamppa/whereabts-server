@@ -9,6 +9,7 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:nick "Anonymous A"
 	:message "Cool message"
+	:title "Cool title"
 	:loc [1.0 2.0]
 	:created-at 1364642721968
 	:updated-at 1364642721968
@@ -22,6 +23,7 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:nick "Anonymous B"
 	:message "Cool message"
+	:title "Cool title"
 	:loc [5.0 5.0]
 	:created-at 1364642721969
 	:updated-at 1364642721968
@@ -35,6 +37,7 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38b")
 	:nick "Anonymous C"
 	:message "Cool message"
+	:title "Cool title"
 	:loc [45.0 26.0]
 	:created-at 1364642721970
 	:updated-at 1364642721968

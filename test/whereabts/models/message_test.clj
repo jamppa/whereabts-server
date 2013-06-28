@@ -10,7 +10,8 @@
 	(:import [com.mongodb MongoException]))
 
 (def message {
-	:user_id (:_id anonymous-user-a) 
+	:user_id (:_id anonymous-user-a)
+	:title "My Cool Message" 
 	:message "This is the content of My Cool Message" 
 	:nick "Cool Guy"
 	:loc {:lon 45.1 :lat 56.4}
@@ -44,6 +45,12 @@
 (fact "should save valid anonymous message"
 	(let [saved-message (save-message message)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
+
+(fact "should not save invalid anonymous message missing title but throw IllegalArgumentException"
+	(save-message msg-missing-title) => (throws IllegalArgumentException))
+
+(fact "sould not save invalid anonymous message with too long title but throw IllegalArgumentException"
+	(save-message msg-title-too-long) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous message with too long message but throw IllegalArgumentException"
 	(save-message msg-too-long) => (throws IllegalArgumentException))
