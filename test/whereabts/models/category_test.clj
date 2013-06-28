@@ -14,7 +14,7 @@
 	(find-category-by-id 100) => nil)
 
 (fact "should find category by its key"
-	(find-category-by-key :sports_and_activities) => test-category-a)
+	(find-category-by-key :traffic) => test-category-a)
 
 (fact "should not find category by its key, when one does not exist"
 	(find-category-by-key :something_non_existing) => nil)

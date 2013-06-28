@@ -13,18 +13,21 @@
 (defn- whereabts-api-messages-by-bbox [ll-lon ll-lat ur-lon ur-lat]
 	(str whereabts-api-messages "/" ll-lon "/" ll-lat "/" ur-lon "/" ur-lat))
 
+(def message 
+	{:nick "teppo" :title "cool title!" :message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323} :expire-time 5000 :category-key "traffic"})
+
 (def message-as-json 
-	(json/write-str 
-		{:nick "teppo" :title "cool title!" :message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323} :expire-time 5000}))
+	(json/write-str message))
+
 (def message-with-empty-title-as-json
-	(json/write-str 
-		{:nick "teppo" :title "" :message "yey, cool things!" :loc {:lon 24.5678 :lat 60.673} :expire-time 5000}))
+	(json/write-str (merge message {:title ""})))
+
 (def invalid-message-as-json 
 	(json/write-str 
 		{:message "yey, cool things!" :loc {:lon 22.3123 :lat 60.1231}}))
+
 (def message-without-expire-time-as-json
-	(json/write-str
-		{:nick "teppo" :title "" :message "yey, cool things!" :loc {:lon 24.5678 :lat 60.673}}))
+	(json/write-str (dissoc message :expire-time)))
 
 (defn- post-message-as-user [payload]
 	(http/post whereabts-api-messages
