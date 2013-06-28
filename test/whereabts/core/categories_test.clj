@@ -12,6 +12,6 @@
 	(with-category obj-with-category-key) => obj-with-category-id
 	(provided (find-category-by-key "traffic") => category :times 1))
 
-(fact "should not add any category when category-key is not available"
-	(with-category {}) => {}
+(fact "should add default category when category-key is missing"
+	(with-category {}) => {:category_id 10}
 	(provided (find-category-by-key nil) => nil :times 1))

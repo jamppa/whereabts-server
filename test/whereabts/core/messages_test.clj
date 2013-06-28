@@ -5,6 +5,7 @@
 		[whereabts.core.messages]
 		[whereabts.core.expirations]
 		[whereabts.core.replies]
+		[whereabts.core.categories]
 		[whereabts.util.geo])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
@@ -29,6 +30,7 @@
 
 (fact "should save new message and return it compactified"
 	(save-new-message message user) => saved-message
+	(provided (with-category message-with-user) => message-with-user :times 1)
 	(provided (expires-at message-with-user) => message-with-user :times 1)
 	(provided (save-message message-with-user) => saved-message :times 1)
 	(provided (compactify-message saved-message) => compactified-saved-message :times 1))
