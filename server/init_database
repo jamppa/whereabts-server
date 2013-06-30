@@ -1,9 +1,8 @@
 mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "created-at" : -1})'
 mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1})'
+mongo whereabtsdb --eval 'db.messages.ensureIndex({"category_id" : 1})'
 mongo whereabtsdb --eval 'db.anonymous_users.ensureIndex({"user-uuid" : 1, "email" : 1})'
 mongo whereabtsdb --eval 'db.replies.ensureIndex({"message_id" : 1, "created-at" : 1})'
 
-# one time shot
-#mongo localhost:27017/whereabtsdb add_update_field_to_messages.js
-# one time shot
-#mongo localhost:27017/whereabtsdb add_expire_field_to_messages.js
+mongo localhost:27017/whereabtsdb add_categories.js
+
