@@ -37,52 +37,52 @@
 
 (background (before :facts (setup-test-db)))
 
-(fact "should find anonymous message by id"
+(fact "should find  message by id"
 	(find-message-by-id "509d513f61395f0ebbd5e36a") => test-message-a)
 
-(fact "should not find anonymous message by id when one does not exist"
+(fact "should not find message by id when one does not exist"
 	(find-message-by-id "509d513f61395f0ebbd5e666") => nil)
 
-(fact "should save valid anonymous message"
+(fact "should save valid  message"
 	(let [saved-message (save-message message)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
-(fact "should not save invalid anonymous message missing title but throw IllegalArgumentException"
+(fact "should not save  anonymous message missing title but throw IllegalArgumentException"
 	(save-message msg-missing-title) => (throws IllegalArgumentException))
 
-(fact "sould not save invalid anonymous message with too long title but throw IllegalArgumentException"
+(fact "sould not save  anonymous message with too long title but throw IllegalArgumentException"
 	(save-message msg-title-too-long) => (throws IllegalArgumentException))
 
-(fact "should not save invalid anonymous message with too long message but throw IllegalArgumentException"
+(fact "should not save anonymous message with too long message but throw IllegalArgumentException"
 	(save-message msg-too-long) => (throws IllegalArgumentException))
 
-(fact "should not save invalid anonymous message with too long nick but throw IllegalArgumentException"
+(fact "should not save anonymous message with too long nick but throw IllegalArgumentException"
 	(save-message msg-nick-too-long) => (throws IllegalArgumentException))
 
-(fact "should not save invalid anonymous message with location as a string"
+(fact "should not save anonymous message with location as a string"
 	(save-message msg-loc-erronous) => (throws MongoException))
 
-(fact "should not save invalid anonymous message with longitute and latitude as a string"
+(fact "should not save anonymous message with longitute and latitude as a string"
 	(save-message msg-lon-lat-str) => (throws MongoException))
 
-(fact "should not save invalid anonymous message without user-id"
+(fact "should not save anonymous message without user-id"
 	(save-message msg-missing-user) => (throws IllegalArgumentException))
 
-(fact "should find anonymous messages by bounding box sorted by creation time and filter deleted and expired messages out"
+(fact "should find messages by bounding box sorted by creation time and filter deleted and expired messages out"
 	(find-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
 
-(fact "should not find anonymous messages by bounding box when there isnt any"
+(fact "should not find messages by bounding box when there isnt any"
 	(find-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
 (fact "should save valid anonymous message with empty title"
 	(let [saved-message (save-message msg-with-empty-title)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
-(fact "should compactify anonymous message extracting short-message"
+(fact "should compactify message extracting short-message"
 	(keys (compactify-message existing-message)) => '(:short-message :created-at :updated-at :loc :_id)
 	(provided (short-message existing-message) => "short message" :times 1))
 
-(fact "should create a copy of anonymous message"
+(fact "should create a copy of message"
 	(new-message message) => msg-after-copy)
 
 (fact "should ignore uninterested keys when copying new anonymous message"
