@@ -56,8 +56,14 @@
 		(sort (sorted-map :updated-at -1))
 		(limit messages-in-bbox-limit)))
 
-(defn find-messages-by-bbox-and-category [{ll-vec :lower-left ur-vec :upper-right} category_id]
-	nil)
+(defn find-messages-by-bbox-and-category [{ll-vec :lower-left ur-vec :upper-right} category]
+	(with-collection message-coll
+		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}} 
+			:deleted false 
+			:expires-at {"$gt" (System/currentTimeMillis)}
+			:category_id category})
+		(sort (sorted-map :updated-at -1))
+		(limit messages-in-bbox-limit)))
 
 (defn compactify-message [msg]
 	(merge 

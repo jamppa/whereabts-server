@@ -32,7 +32,7 @@
 	:expires-at (+ (System/currentTimeMillis) 5000)
 	:views 11
 	:deleted false
-	:category_id 1})
+	:category_id 2})
 
 (def test-message-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
