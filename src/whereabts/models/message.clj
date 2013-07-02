@@ -56,6 +56,9 @@
 		(sort (sorted-map :updated-at -1))
 		(limit messages-in-bbox-limit)))
 
+(defn find-messages-by-bbox-and-category [{ll-vec :lower-left ur-vec :upper-right} category_id]
+	nil)
+
 (defn compactify-message [msg]
 	(merge 
 		(select-keys msg [:_id :loc :updated-at :created-at]) 

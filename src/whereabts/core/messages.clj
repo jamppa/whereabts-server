@@ -25,7 +25,10 @@
 		(all-messages compactified)))
 
 (defn find-all-messages-by-bbox-and-category [bbox category]
-	nil)
+	(let [messages (->> 
+		    (resolve-category-id category)
+			(find-messages-by-bbox-and-category bbox))]
+		(all-messages (map compactify-message messages))))
 
 (defn save-new-message [msg usr]
 	(compactify-message 

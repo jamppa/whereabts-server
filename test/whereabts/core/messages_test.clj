@@ -12,8 +12,8 @@
 (def user {:_id "some"})
 (def other-user {:_id "other"})
 
-(def messages [{:_id "123" :loc [12.12 12.12] :title "title" :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
-(def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "title" :created-at "1.1.2013"}]})
+(def messages [{:_id "123" :loc [12.12 12.12] :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
+(def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :short-message "looong message" :created-at "1.1.2013"}]})
 (def message {:views 1})
 (def message-with-user (merge message {:user_id (:_id user)}))
 (def message-with-user-and-ownership (merge message-with-user {:owns true}))
@@ -27,6 +27,11 @@
 (fact "should find all messages by bounding box and compactify them"
 	(find-all-messages-by-bbox bbox) => expected-all-messages
 	(provided (find-messages-by-bbox bbox) => messages :times 1))
+
+(fact "should find all messages by bounding box and category, and return them compactified"
+	(find-all-messages-by-bbox-and-category bbox "traffic") => expected-all-messages
+	(provided (resolve-category-id "traffic") => 1 :times 1)
+	(provided (find-messages-by-bbox-and-category bbox 1) => messages :times 1))
 
 (fact "should save new message and return it compactified"
 	(save-new-message message user) => saved-message

@@ -15,3 +15,11 @@
 (fact "should add default category when category-key is missing"
 	(with-category {}) => {:category_id 10}
 	(provided (find-category-by-key nil) => nil :times 1))
+
+(fact "should resolve category id from key"
+	(resolve-category-id "traffic") => 1
+	(provided (find-category-by-key "traffic") => category :times 1))
+
+(fact "should resolve category id to nil when category with key doesnt exist"
+	(resolve-category-id "nonexisting") => nil
+	(provided (find-category-by-key "nonexisting") => nil :times 1))
