@@ -24,6 +24,9 @@
 		  compactified (map compactify-message messages)]
 		(all-messages compactified)))
 
+(defn find-all-messages-by-bbox-and-category [bbox category]
+	nil)
+
 (defn save-new-message [msg usr]
 	(compactify-message 
 		(save-message 
