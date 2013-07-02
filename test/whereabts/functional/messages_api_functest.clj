@@ -13,6 +13,9 @@
 (defn- whereabts-api-messages-by-bbox [ll-lon ll-lat ur-lon ur-lat]
 	(str whereabts-api-messages "/" ll-lon "/" ll-lat "/" ur-lon "/" ur-lat))
 
+(defn- whereabts-api-messages-by-bbox-and-category [ll-lon ll-lat ur-lon ur-lat category] 
+	(str (whereabts-api-messages-by-bbox ll-lon ll-lat ur-lon ur-lat) "/" category))
+
 (def message 
 	{:nick "teppo" :title "cool title!" :message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323} :expire-time 5000 :category-key "traffic"})
 
@@ -55,8 +58,12 @@
 	(:status (http/post whereabts-api-messages
 		(whereabts-api-request-public-user message-as-json))) => 403)
 
-(fact "should response with HTTP OK when GETting all messages by bbox as an anonymous user" :functional
+(fact "should response with HTTP OK when GETting all messages by bbox" :functional
 	(:status (http/get (whereabts-api-messages-by-bbox 24.987 60.255 24.989 60.260)
+		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
+
+(fact "should response with HTTP OK when GETing messages by bounding box and cateogory" :functional
+	(:status (http/get (whereabts-api-messages-by-bbox-and-category 24.987 60.255 24.989 60.260 "traffic")
 		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
 
 (fact "should response with HTTP Unauthorized when trying to GET messages by bbox with invalid credentials" :functional
