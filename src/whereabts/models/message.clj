@@ -66,8 +66,7 @@
 		(limit messages-in-bbox-limit)))
 
 (defn compactify-message [msg]
-	(merge 
-		(select-keys msg [:_id :loc :updated-at :created-at]) 
+	(merge (select-keys msg [:_id :loc :updated-at :created-at :category_id]) 
 		{:short-message (short-message msg)}))
 
 (defn update-message [msg]
