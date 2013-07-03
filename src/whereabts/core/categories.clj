@@ -1,7 +1,7 @@
 (ns whereabts.core.categories
 	(:use [whereabts.models.category]))
 
-(def default-category-id 10)
+(def default-category-id 9)
 
 (defn with-category [obj]
 	(if-let [category (find-category-by-key (:category-key obj))]

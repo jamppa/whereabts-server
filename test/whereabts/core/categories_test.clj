@@ -13,7 +13,7 @@
 	(provided (find-category-by-key "traffic") => category :times 1))
 
 (fact "should add default category when category-key is missing"
-	(with-category {}) => {:category_id 10}
+	(with-category {}) => {:category_id 9}
 	(provided (find-category-by-key nil) => nil :times 1))
 
 (fact "should resolve category id from key"
