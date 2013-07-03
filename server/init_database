@@ -4,5 +4,5 @@ mongo whereabtsdb --eval 'db.messages.ensureIndex({"category_id" : 1})'
 mongo whereabtsdb --eval 'db.anonymous_users.ensureIndex({"user-uuid" : 1, "email" : 1})'
 mongo whereabtsdb --eval 'db.replies.ensureIndex({"message_id" : 1, "created-at" : 1})'
 
-mongo localhost:27017/whereabtsdb add_categories.js
+mongo localhost:27017/whereabtsdb add_default_category.js
 
