@@ -1,8 +1,10 @@
-mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "created-at" : -1})'
-mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1})'
-mongo whereabtsdb --eval 'db.messages.ensureIndex({"category_id" : 1})'
-mongo whereabtsdb --eval 'db.anonymous_users.ensureIndex({"user-uuid" : 1, "email" : 1})'
-mongo whereabtsdb --eval 'db.replies.ensureIndex({"message_id" : 1, "created-at" : 1})'
+# indexes for messages collection
+mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1, "expires-at": 1})'
+mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1, "expires-at": 1, "category_id": 1})'
 
-mongo localhost:27017/whereabtsdb add_default_category.js
+# indexes for users collection
+mongo whereabtsdb --eval 'db.anonymous_users.ensureIndex({"user-uuid" : 1, "email" : 1})'
+
+# indexes for replies collection
+mongo whereabtsdb --eval 'db.replies.ensureIndex({"message_id" : 1, "created-at" : 1})'
 
