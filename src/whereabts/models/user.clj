@@ -21,6 +21,9 @@
 (defn by-uuid-and-email [uuid email]
 	{:user-uuid uuid :email email})
 
+(defn by-email [email]
+	{:email email})
+
 (defn find-user-by-id [id]
 	(db-find-one-by-id user-coll (obj-id id)))
 

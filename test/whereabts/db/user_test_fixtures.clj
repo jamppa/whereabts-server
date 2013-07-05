@@ -12,4 +12,5 @@
 (def test-user-b 
 	(merge test-user-a {
 		:_id (ObjectId. "509d513f61395f0ebbd5e38b")
-		:user-uuid "550e8400-e29b-41d4-a716-446655440001"}))
+		:user-uuid "550e8400-e29b-41d4-a716-446655440001"
+		:email "user@test.com"}))
