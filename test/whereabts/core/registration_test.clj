@@ -1,7 +1,7 @@
 (ns whereabts.core.registration-test
 	(:use 
 		[whereabts.core.registration]
-		[whereabts.models.anonymous-user]
+		[whereabts.models.user]
 		[whereabts.models.util]
 		[midje.sweet]))
 

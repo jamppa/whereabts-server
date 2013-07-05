@@ -1,4 +1,4 @@
-(ns whereabts.models.anonymous-user
+(ns whereabts.models.user
 	(:use
 		[whereabts.db]
 		[whereabts.models.util]

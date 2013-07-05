@@ -1,6 +1,6 @@
 (ns whereabts.core.registration
 	(:use
-		[whereabts.models.anonymous-user]
+		[whereabts.models.user]
 		[whereabts.models.util]))
 
 (defn anonymify [user]

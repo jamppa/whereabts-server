@@ -1,6 +1,6 @@
-(ns whereabts.models.anonymous-user-test
+(ns whereabts.models.user-test
 	(:use
-		[whereabts.models.anonymous-user]
+		[whereabts.models.user]
 		[whereabts.models.util]
 		[whereabts.db.user-test-fixtures]
 		[whereabts.db-helper]

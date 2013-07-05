@@ -1,6 +1,6 @@
 (ns whereabts.core.auth
 	(:use 
-		[whereabts.models.anonymous-user]
+		[whereabts.models.user]
 		[whereabts.models.util]))
 
 (defn- public-whereabts-user? [email pwd]

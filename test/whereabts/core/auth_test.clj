@@ -1,7 +1,7 @@
 (ns whereabts.core.auth-test
 	(:use 
 		[whereabts.core.auth]
-		[whereabts.models.anonymous-user]
+		[whereabts.models.user]
 		[whereabts.models.util]
 		[midje.sweet]))
 
