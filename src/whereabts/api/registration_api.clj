@@ -19,7 +19,7 @@
 	(POST "/anonymousregistration" [:as req]
 		(with-role req ["public"]
 		(let [user (extract-user req)]
-			(-> (response (register-anonymous-user user))
+			(-> (response (register-user user))
 				(status 201)))))
 
 	(POST "/register_gcm" [:as req]

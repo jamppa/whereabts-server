@@ -16,7 +16,7 @@
 (def user-with-nil-gcm (merge anonymified {:gcm-id nil}))
 
 (fact "should register new anonymous user"
-	(register-anonymous-user user) => anonymified
+	(register-user user) => anonymified
 	(provided (find-user user) => nil :times 1)
 	(provided (created-now user) => user-created-now :times 1)
 	(provided (last-seen-now user-created-now) => user-created-and-last-seen-now :times 1)
@@ -24,7 +24,7 @@
 	(provided (save-new-user anonymified) => anonymified :times 1))
 
 (fact "should not re-register already existing anonymous user"
-	(register-anonymous-user user) => user
+	(register-user user) => user
 	(provided (find-user {:user-uuid "123-abc" :email "some"}) => user)
 	(provided (created-now user) => user-created-now :times 0)
 	(provided (save-new-user user-created-now) => user-created-now :times 0))
