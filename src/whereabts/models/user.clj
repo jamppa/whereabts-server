@@ -32,7 +32,7 @@
 		(db-insert user-coll usr)
 		(throw (IllegalArgumentException. "Invalid anonymous user!"))))
 
-(defn update-anonymous-user [usr]
+(defn update-user [usr]
 	(if (valid? user-validation usr)
 		(db-save user-coll usr)
 		(throw (IllegalArgumentException. "Invalid anonymous user!"))))

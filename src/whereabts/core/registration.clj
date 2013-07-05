@@ -15,4 +15,4 @@
 
 (defn register-gcm-for-user [usr gcm-id]
 	(when (nil? gcm-id) (throw (IllegalArgumentException. "invalid GCM id!")))
-	(update-anonymous-user (merge usr {:gcm-id gcm-id})))
+	(update-user (merge usr {:gcm-id gcm-id})))

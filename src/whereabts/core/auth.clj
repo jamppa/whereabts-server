@@ -10,7 +10,7 @@
 
 (defn authenticated-now [user]
 	(when user
-		(update-anonymous-user (last-seen-now user))))
+		(update-user (last-seen-now user))))
 
 (defn authenticated-now-async [usr-agent]
 	(send-off usr-agent authenticated-now))

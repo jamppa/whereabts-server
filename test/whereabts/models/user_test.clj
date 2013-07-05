@@ -54,9 +54,9 @@
 
 (fact "should find and update user"
 	(let [found-user (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a")
-		  updated-user (update-anonymous-user (merge found-user {:last-seen-at 1364642721971}))]
+		  updated-user (update-user (merge found-user {:last-seen-at 1364642721971}))]
 		  (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a") => (merge anonymous-user-a {:last-seen-at 1364642721971})))
 
 (fact "should throw exception when trying to update invalid anonymous user"
 	(let [found-user (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a")]
-		  (update-anonymous-user (merge found-user {:user-uuid "123-abc"})) => (throws IllegalArgumentException)))
+		  (update-user (merge found-user {:user-uuid "123-abc"})) => (throws IllegalArgumentException)))

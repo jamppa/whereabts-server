@@ -31,8 +31,8 @@
 
 (fact "should register gcm-id for already existing user"
 	(register-gcm-for-user anonymified "123") => user-with-gcm
-	(provided (update-anonymous-user user-with-gcm) => user-with-gcm :times 1))
+	(provided (update-user user-with-gcm) => user-with-gcm :times 1))
 
 (fact "should throw exception when trying to register nil gcm-id"
 	(register-gcm-for-user anonymified nil) => (throws IllegalArgumentException)
-	(provided (update-anonymous-user user-with-nil-gcm) => user-with-nil-gcm :times 0))
+	(provided (update-user user-with-nil-gcm) => user-with-nil-gcm :times 0))
