@@ -1,6 +1,6 @@
 (ns whereabts.api-helper)
 
-(def anonymous-roled-user {:role "anonymous" :_id "some"})
+(def anonymous-roled-user {:role "email" :_id "some"})
 (def public-roled-user {:role "public"})
 
 (defn whereabts-request [method uri & body]
