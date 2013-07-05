@@ -7,7 +7,7 @@
 	(merge user {:role "email"}))
 
 (defn register-user [usr]
-	(let [already-registered (find-user usr)]
+	(let [already-registered (find-user (by-email (:email usr)))]
 		(if (not (nil? already-registered))
 			already-registered
 			(save-new-user 

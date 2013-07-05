@@ -23,7 +23,7 @@
 				(status 201)))))
 
 	(POST "/register_gcm" [:as req]
-		(with-role req ["anonymous"]
+		(with-role req ["email"]
 			(let [user (:basic-authentication req)]
 				(-> (response (register-gcm-for-user user (extract-gcm-id req)))
 					(status 201)))))
