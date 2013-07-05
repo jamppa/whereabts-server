@@ -20,7 +20,7 @@
 	(provided (find-user user) => nil :times 1)
 	(provided (created-now user) => user-created-now :times 1)
 	(provided (last-seen-now user-created-now) => user-created-and-last-seen-now :times 1)
-	(provided (anonymify user-created-and-last-seen-now) => anonymified :times 1)
+	(provided (with-email-role user-created-and-last-seen-now) => anonymified :times 1)
 	(provided (save-new-user anonymified) => anonymified :times 1))
 
 (fact "should not re-register already existing anonymous user"
