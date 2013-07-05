@@ -21,7 +21,7 @@
 (defn by-uuid-and-email [uuid email]
 	{:user-uuid uuid :email email})
 
-(defn find-anonymous-user-by-id [id]
+(defn find-user-by-id [id]
 	(db-find-one-by-id user-coll (obj-id id)))
 
 (defn find-anonymous-user [query-map]

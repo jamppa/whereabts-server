@@ -23,11 +23,11 @@
 (background (before :facts (setup-test-db)))
 
 (fact "should find user by id"
-	(find-anonymous-user-by-id "509d513f61395f0ebbd5e38a") => anonymous-user-a)
+	(find-user-by-id "509d513f61395f0ebbd5e38a") => anonymous-user-a)
 
 (fact "should save new  user"
 	(let [saved-anonymous-user (save-new-user new-user)]
-		(find-anonymous-user-by-id (obj-id-as-str saved-anonymous-user)) => saved-anonymous-user))
+		(find-user-by-id (obj-id-as-str saved-anonymous-user)) => saved-anonymous-user))
 
 (fact "should not save invalid user missing uuid"
 	(save-new-user new-user-missing-uuid) => (throws IllegalArgumentException))
@@ -53,10 +53,10 @@
 		(by-uuid-and-email "550e8400-e29b-41d4-a716-446655441234" "anonymous@whereabts.com")) => nil)
 
 (fact "should find and update user"
-	(let [found-user (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a")
+	(let [found-user (find-user-by-id "509d513f61395f0ebbd5e38a")
 		  updated-user (update-user (merge found-user {:last-seen-at 1364642721971}))]
-		  (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a") => (merge anonymous-user-a {:last-seen-at 1364642721971})))
+		  (find-user-by-id "509d513f61395f0ebbd5e38a") => (merge anonymous-user-a {:last-seen-at 1364642721971})))
 
 (fact "should throw exception when trying to update invalid anonymous user"
-	(let [found-user (find-anonymous-user-by-id "509d513f61395f0ebbd5e38a")]
+	(let [found-user (find-user-by-id "509d513f61395f0ebbd5e38a")]
 		  (update-user (merge found-user {:user-uuid "123-abc"})) => (throws IllegalArgumentException)))
