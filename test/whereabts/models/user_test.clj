@@ -6,19 +6,19 @@
 		[whereabts.db-helper]
 		[midje.sweet]))
 
-(def new-anonymous-user {
+(def new-user {
 	:user-uuid "550e8400-e29b-41d4-a716-446655440000" 
 	:email "anonymous@whereabts.com"
 	:role "anonymous"
 	:created-at (System/currentTimeMillis)
 	:last-seen-at (System/currentTimeMillis)})
 
-(def new-anonymous-user-missing-uuid (dissoc new-anonymous-user :user-uuid))
-(def new-anonymous-user-missing-email (dissoc new-anonymous-user :email))
-(def new-anonymous-user-missing-creationtime (dissoc new-anonymous-user :created-at))
-(def new-anonymous-user-too-short-uuid (merge new-anonymous-user {:user-uuid "123-abc"}))
-(def new-anonymous-user-too-long-uuid (merge new-anonymous-user {:user-uuid (clojure.string/join "" (repeat 37 "s"))}))
-(def new-anonymous-user-wrong-creationtime (merge new-anonymous-user {:created-at "1.5.2013"}))
+(def new-user-missing-uuid (dissoc new-user :user-uuid))
+(def new-user-missing-email (dissoc new-user :email))
+(def new-user-missing-creationtime (dissoc new-user :created-at))
+(def new-user-too-short-uuid (merge new-user {:user-uuid "123-abc"}))
+(def new-user-too-long-uuid (merge new-user {:user-uuid (clojure.string/join "" (repeat 37 "s"))}))
+(def new-user-wrong-creationtime (merge new-user {:created-at "1.5.2013"}))
 
 (background (before :facts (setup-test-db)))
 
@@ -26,23 +26,23 @@
 	(find-anonymous-user-by-id "509d513f61395f0ebbd5e38a") => anonymous-user-a)
 
 (fact "should save new anonymous user"
-	(let [saved-anonymous-user (save-anonymous-user new-anonymous-user)]
+	(let [saved-anonymous-user (save-anonymous-user new-user)]
 		(find-anonymous-user-by-id (obj-id-as-str saved-anonymous-user)) => saved-anonymous-user))
 
 (fact "should not save invalid anonymous user missing uuid"
-	(save-anonymous-user new-anonymous-user-missing-uuid) => (throws IllegalArgumentException))
+	(save-anonymous-user new-user-missing-uuid) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous user with too short uuid"
-	(save-anonymous-user new-anonymous-user-too-short-uuid) => (throws IllegalArgumentException))
+	(save-anonymous-user new-user-too-short-uuid) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous user with too long uuid"
-	(save-anonymous-user new-anonymous-user-too-long-uuid) => (throws IllegalArgumentException))
+	(save-anonymous-user new-user-too-long-uuid) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous user missing email"
-	(save-anonymous-user new-anonymous-user-missing-email) => (throws IllegalArgumentException))
+	(save-anonymous-user new-user-missing-email) => (throws IllegalArgumentException))
 
 (fact "should not save invalid anonymous user missing creation time"
-	(save-anonymous-user new-anonymous-user-missing-creationtime) => (throws IllegalArgumentException))
+	(save-anonymous-user new-user-missing-creationtime) => (throws IllegalArgumentException))
 
 (fact "should find anonymous user by uuid and email"
 	(find-anonymous-user 
