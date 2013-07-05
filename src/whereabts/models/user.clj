@@ -16,7 +16,7 @@
 		(presence-of :last-seen-at)
 		(presence-of :role)
 		(length-of :user-uuid :is 36)
-		(inclusion-of :role :in #{"anonymous"})))
+		(inclusion-of :role :in #{"email"})))
 
 (defn by-uuid-and-email [uuid email]
 	{:user-uuid uuid :email email})

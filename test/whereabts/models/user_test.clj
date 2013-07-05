@@ -9,7 +9,7 @@
 (def new-user {
 	:user-uuid "550e8400-e29b-41d4-a716-446655440000" 
 	:email "anonymous@whereabts.com"
-	:role "anonymous"
+	:role "email"
 	:created-at (System/currentTimeMillis)
 	:last-seen-at (System/currentTimeMillis)})
 
@@ -25,7 +25,7 @@
 (fact "should find user by id"
 	(find-user-by-id "509d513f61395f0ebbd5e38a") => anonymous-user-a)
 
-(fact "should save new  user"
+(fact "should save new user"
 	(let [saved-anonymous-user (save-new-user new-user)]
 		(find-user-by-id (obj-id-as-str saved-anonymous-user)) => saved-anonymous-user))
 

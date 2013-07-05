@@ -5,29 +5,29 @@
 		[whereabts.models.util]
 		[midje.sweet]))
 
-(def anonymous-user {:email "some" :user-uuid "123-abc"})
-(def anonymous-user-created-now 
-	(merge anonymous-user {:created-at (System/currentTimeMillis)}))
-(def anonymous-user-created-and-last-seen-now
-	(merge anonymous-user-created-now {:last-seen-at (System/currentTimeMillis)}))
-(def anonymified (merge anonymous-user-created-and-last-seen-now {:role "anonymous"}))
+(def user {:email "some" :user-uuid "123-abc"})
+(def user-created-now 
+	(merge user {:created-at (System/currentTimeMillis)}))
+(def user-created-and-last-seen-now
+	(merge user-created-now {:last-seen-at (System/currentTimeMillis)}))
+(def anonymified (merge user-created-and-last-seen-now {:role "anonymous"}))
 
 (def user-with-gcm (merge anonymified {:gcm-id "123"}))
 (def user-with-nil-gcm (merge anonymified {:gcm-id nil}))
 
 (fact "should register new anonymous user"
-	(register-anonymous-user anonymous-user) => anonymified
-	(provided (find-user anonymous-user) => nil :times 1)
-	(provided (created-now anonymous-user) => anonymous-user-created-now :times 1)
-	(provided (last-seen-now anonymous-user-created-now) => anonymous-user-created-and-last-seen-now :times 1)
-	(provided (anonymify anonymous-user-created-and-last-seen-now) => anonymified :times 1)
+	(register-anonymous-user user) => anonymified
+	(provided (find-user user) => nil :times 1)
+	(provided (created-now user) => user-created-now :times 1)
+	(provided (last-seen-now user-created-now) => user-created-and-last-seen-now :times 1)
+	(provided (anonymify user-created-and-last-seen-now) => anonymified :times 1)
 	(provided (save-new-user anonymified) => anonymified :times 1))
 
 (fact "should not re-register already existing anonymous user"
-	(register-anonymous-user anonymous-user) => anonymous-user
-	(provided (find-user {:user-uuid "123-abc" :email "some"}) => anonymous-user)
-	(provided (created-now anonymous-user) => anonymous-user-created-now :times 0)
-	(provided (save-new-user anonymous-user-created-now) => anonymous-user-created-now :times 0))
+	(register-anonymous-user user) => user
+	(provided (find-user {:user-uuid "123-abc" :email "some"}) => user)
+	(provided (created-now user) => user-created-now :times 0)
+	(provided (save-new-user user-created-now) => user-created-now :times 0))
 
 (fact "should register gcm-id for already existing user"
 	(register-gcm-for-user anonymified "123") => user-with-gcm
