@@ -23,7 +23,7 @@
 (background (before :facts (setup-test-db)))
 
 (fact "should find user by id"
-	(find-user-by-id "509d513f61395f0ebbd5e38a") => anonymous-user-a)
+	(find-user-by-id "509d513f61395f0ebbd5e38a") => test-user-a)
 
 (fact "should save new user"
 	(let [saved-anonymous-user (save-new-user new-user)]
@@ -46,7 +46,7 @@
 
 (fact "should find user by uuid and email"
 	(find-user 
-		(by-uuid-and-email "550e8400-e29b-41d4-a716-446655440000" "anonymous@whereabts.com")) => anonymous-user-a)
+		(by-uuid-and-email "550e8400-e29b-41d4-a716-446655440000" "anonymous@whereabts.com")) => test-user-a)
 
 (fact "should not find user with uuid with one that does not exist"
 	(find-user 
@@ -55,7 +55,7 @@
 (fact "should find and update user"
 	(let [found-user (find-user-by-id "509d513f61395f0ebbd5e38a")
 		  updated-user (update-user (merge found-user {:last-seen-at 1364642721971}))]
-		  (find-user-by-id "509d513f61395f0ebbd5e38a") => (merge anonymous-user-a {:last-seen-at 1364642721971})))
+		  (find-user-by-id "509d513f61395f0ebbd5e38a") => (merge test-user-a {:last-seen-at 1364642721971})))
 
 (fact "should throw exception when trying to update invalid anonymous user"
 	(let [found-user (find-user-by-id "509d513f61395f0ebbd5e38a")]

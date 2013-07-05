@@ -8,7 +8,7 @@
 	{
 		:_id (ObjectId. "509d513f61395f0ebbd5e40a")
 		:message_id (:_id test-message-a)
-		:user_id (:_id anonymous-user-a)
+		:user_id (:_id test-user-a)
 		:nick "jamppa"
 		:replymessage "Cool!"
 		:created-at 1364642721970})

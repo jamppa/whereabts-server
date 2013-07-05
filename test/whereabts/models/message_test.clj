@@ -10,7 +10,7 @@
 	(:import [com.mongodb MongoException]))
 
 (def message {
-	:user_id (:_id anonymous-user-a)
+	:user_id (:_id test-user-a)
 	:title "My Cool Message" 
 	:message "This is the content of My Cool Message" 
 	:nick "Cool Guy"

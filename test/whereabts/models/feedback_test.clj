@@ -10,7 +10,7 @@
 (background (before :facts (setup-test-db)))
 
 (def new-feedback {
-	:user_id (:_id anonymous-user-a)
+	:user_id (:_id test-user-a)
 	:message "message of new feedback"
 	:vote 0
 	:created-at (System/currentTimeMillis)})
