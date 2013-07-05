@@ -29,14 +29,14 @@
 (fact "should POST anonymous new message"
 	(messages-api-routes 
 		(whereabts-request-as-anonymous-user :post "/messages" new-msg-payload)) => expected-res-for-new-message
-	(provided (save-new-message new-msg-payload anonymous-roled-user) => message :times 1))
+	(provided (save-new-message new-msg-payload email-roled-user) => message :times 1))
 
 (fact "should GET message by its id"
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/123abc")) => expected-res-for-message
-	(provided (find-message "123abc" anonymous-roled-user) => message :times 1)
+	(provided (find-message "123abc" email-roled-user) => message :times 1)
 	(provided (view-message-async (agent message)) => message :times 1))
 
 (fact "should DELETE message by its id"
 	(messages-api-routes
 		(whereabts-request-as-anonymous-user :delete "/messages/123abc")) => expected-res-for-delete-message
-	(provided (delete-message "123abc" anonymous-roled-user) => message :times 1))
+	(provided (delete-message "123abc" email-roled-user) => message :times 1))
