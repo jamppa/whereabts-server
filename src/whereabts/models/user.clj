@@ -8,7 +8,7 @@
 (def public-whereabts-user 
 	{:email "anonymous@whereabts.com" :user-id "ae129325a4db22faab7771f10b39a8af" :role "public"})
 
-(def anonymous-user-validations
+(def user-validation
 	(validation-set
 		(presence-of :user-uuid)
 		(presence-of :email)
@@ -27,12 +27,12 @@
 (defn find-anonymous-user [query-map]
 	(db-find-one user-coll query-map))
 
-(defn save-anonymous-user [usr]
-	(if (valid? anonymous-user-validations usr)
+(defn save-new-user [usr]
+	(if (valid? user-validation usr)
 		(db-insert user-coll usr)
 		(throw (IllegalArgumentException. "Invalid anonymous user!"))))
 
 (defn update-anonymous-user [usr]
-	(if (valid? anonymous-user-validations usr)
+	(if (valid? user-validation usr)
 		(db-save user-coll usr)
 		(throw (IllegalArgumentException. "Invalid anonymous user!"))))

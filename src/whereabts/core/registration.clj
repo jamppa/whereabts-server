@@ -10,7 +10,7 @@
 	(let [already-registered (find-anonymous-user usr)]
 		(if (not (nil? already-registered))
 			already-registered
-			(save-anonymous-user 
+			(save-new-user 
 				(anonymify (last-seen-now (created-now usr)))))))
 
 (defn register-gcm-for-user [usr gcm-id]
