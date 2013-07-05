@@ -45,11 +45,11 @@
 	(save-new-user new-user-missing-creationtime) => (throws IllegalArgumentException))
 
 (fact "should find user by uuid and email"
-	(find-anonymous-user 
+	(find-user 
 		(by-uuid-and-email "550e8400-e29b-41d4-a716-446655440000" "anonymous@whereabts.com")) => anonymous-user-a)
 
 (fact "should not find user with uuid with one that does not exist"
-	(find-anonymous-user 
+	(find-user 
 		(by-uuid-and-email "550e8400-e29b-41d4-a716-446655441234" "anonymous@whereabts.com")) => nil)
 
 (fact "should find and update user"

@@ -16,7 +16,7 @@
 	(send-off usr-agent authenticated-now))
 
 (defn authenticate-anon-user [email uuid]
-	(let [found-user (find-anonymous-user (by-uuid-and-email uuid email))]
+	(let [found-user (find-user (by-uuid-and-email uuid email))]
 		  (authenticated-now-async (agent found-user))
 		  found-user))
 

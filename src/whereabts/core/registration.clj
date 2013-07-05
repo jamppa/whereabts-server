@@ -7,7 +7,7 @@
 	(merge user {:role "anonymous"}))
 
 (defn register-anonymous-user [usr]
-	(let [already-registered (find-anonymous-user usr)]
+	(let [already-registered (find-user usr)]
 		(if (not (nil? already-registered))
 			already-registered
 			(save-new-user 

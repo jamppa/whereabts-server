@@ -24,7 +24,7 @@
 (defn find-user-by-id [id]
 	(db-find-one-by-id user-coll (obj-id id)))
 
-(defn find-anonymous-user [query-map]
+(defn find-user [query-map]
 	(db-find-one user-coll query-map))
 
 (defn save-new-user [usr]

@@ -11,12 +11,12 @@
 
 (fact "should authenticate as anonymous user when one is found by email and uuid"
 	(authenticate "anonymous@whereabts.com" "123abc") => anonymous-user
-	(provided (find-anonymous-user anonymous-user) => anonymous-user :times 1)
+	(provided (find-user anonymous-user) => anonymous-user :times 1)
 	(provided (authenticated-now-async (agent anonymous-user)) => anonymous-user :times 1))
 
 (fact "should not authenticate as anonymous user when one is not found by email and uuid"
 	(authenticate "anonymous@whereabts.com" "123abc") => nil
-	(provided (find-anonymous-user anonymous-user) => nil :times 1))
+	(provided (find-user anonymous-user) => nil :times 1))
 
 (fact "should update last seen timestamp and save user when authenticating now"
 	(authenticated-now anonymous-user) => anonymous-user-authenticated-now
