@@ -5,6 +5,9 @@
 		[validateur.validation]))
 
 (def profiles-coll "profiles")
+(def profile-validation
+	(validation-set
+		(presence-of :nick)))
 
 (defn find-profile-by-id [id]
 	(db-find-one-by-id profiles-coll (obj-id id)))
@@ -13,4 +16,6 @@
 	(db-find-one profiles-coll {:user_id (:_id user)}))
 
 (defn save-profile [profile]
-	(db-save profiles-coll profile))
+	(if (valid? profile-validation profile)
+		(db-save profiles-coll profile)
+		(throw (IllegalArgumentException. "invalid profile"))))
