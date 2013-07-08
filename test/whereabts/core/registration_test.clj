@@ -14,18 +14,14 @@
 
 (fact "should register new user"
 	(register-user user) => registered-user
-	(provided (find-user {:email (:email user)}) => nil :times 1)
+	(provided (find-user-by-email "some") => nil :times 1)
 	(provided (save-user user) => registered-user :times 1))
 
 (fact "should not re-register already existing anonymous user"
 	(register-user user) => registered-user
-	(provided (find-user {:email (:email user)}) => registered-user)
+	(provided (find-user-by-email "some") => registered-user :times 1)
 	(provided (save-user registered-user) => registered-user :times 0))
 
-(fact "should register gcm-id for already existing user"
+(fact "should register gcm-id for registered user"
 	(register-gcm-for-user registered-user "123") => user-with-gcm
-	(provided (update-user user-with-gcm) => user-with-gcm :times 1))
-
-(fact "should throw exception when trying to register nil gcm-id"
-	(register-gcm-for-user registered-user nil) => (throws IllegalArgumentException)
-	(provided (update-user user-with-nil-gcm) => user-with-nil-gcm :times 0))
+	(provided (update-gcm-for-user registered-user "123") => user-with-gcm :times 1))
