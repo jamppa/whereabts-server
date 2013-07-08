@@ -25,4 +25,4 @@
 (fact "should POST gcm id and register it for the user"
 	(registration-api-routes
 		(whereabts-request-as-anonymous-user :post "/register_gcm" gcm-registration-payload)) => successful-response
-	(provided (register-gcm-for-user email-roled-user "123abc") => payload :times 1))
+	(provided (register-gcm email-roled-user "123abc") => payload :times 1))

@@ -8,5 +8,5 @@
 			already-registered
 			(save-user usr))))
 
-(defn register-gcm-for-user [usr gcm]
+(defn register-gcm [usr gcm]
 	(update-gcm-for-user usr gcm))

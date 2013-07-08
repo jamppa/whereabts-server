@@ -25,7 +25,7 @@
 	(POST "/register_gcm" [:as req]
 		(with-role req ["email"]
 			(let [user (:basic-authentication req)]
-				(-> (response (register-gcm-for-user user (extract-gcm-id req)))
+				(-> (response (register-gcm user (extract-gcm-id req)))
 					(status 201)))))
 
 	)
