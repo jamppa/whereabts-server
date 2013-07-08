@@ -11,3 +11,6 @@
 
 (defn find-profile-by-user [user]
 	(db-find-one profiles-coll {:user_id (:_id user)}))
+
+(defn save-profile [profile]
+	(db-save profiles-coll profile))
