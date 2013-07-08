@@ -8,7 +8,7 @@
 	(merge user {:role "email"}))
 
 (defn with-no-profile [user]
-	(merge user {:profile_id 0}))
+	(merge user {:profile_id ""}))
 
 (defn save-user [user]
 	(-> user

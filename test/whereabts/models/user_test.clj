@@ -11,7 +11,8 @@
 	:email "anonymous@whereabts.com"
 	:role "email"
 	:created-at (System/currentTimeMillis)
-	:last-seen-at (System/currentTimeMillis)})
+	:last-seen-at (System/currentTimeMillis)
+	:profile_id 0})
 
 (def new-user-missing-uuid (dissoc new-user :user-uuid))
 (def new-user-missing-email (dissoc new-user :email))

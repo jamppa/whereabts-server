@@ -17,7 +17,7 @@
 (def user-with-gcm (merge user {:gcm-id "aBCd"}))
 (def user-with-nil-gcm (merge user {:gcm-id nil}))
 
-(def user-with-profile (merge saved-user {:profile_id 0}))
+(def user-with-no-profile (merge saved-user {:profile_id ""}))
 
 (fact "should save new user"
 	(save-user user) => saved-user
@@ -39,4 +39,4 @@
 	(provided (update-user user-with-nil-gcm) => user-with-gcm :times 0))
 
 (fact "should return user with no profile"
-	(with-no-profile saved-user) => user-with-profile)
+	(with-no-profile saved-user) => user-with-no-profile)

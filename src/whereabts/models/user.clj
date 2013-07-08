@@ -15,6 +15,7 @@
 		(presence-of :created-at)
 		(presence-of :last-seen-at)
 		(presence-of :role)
+		(presence-of :profile_id)
 		(length-of :user-uuid :is 36)
 		(inclusion-of :role :in #{"email"})))
 
