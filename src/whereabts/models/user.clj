@@ -33,9 +33,9 @@
 (defn save-new-user [usr]
 	(if (valid? user-validation usr)
 		(db-insert user-coll usr)
-		(throw (IllegalArgumentException. "Invalid anonymous user!"))))
+		(throw (IllegalArgumentException. "Invalid user"))))
 
 (defn update-user [usr]
 	(if (valid? user-validation usr)
 		(db-save user-coll usr)
-		(throw (IllegalArgumentException. "Invalid anonymous user!"))))
+		(throw (IllegalArgumentException. "Invalid user"))))
