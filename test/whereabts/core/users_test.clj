@@ -17,14 +17,15 @@
 (def user-with-gcm (merge user {:gcm-id "aBCd"}))
 (def user-with-nil-gcm (merge user {:gcm-id nil}))
 
-(def user-with-no-profile (merge saved-user {:profile_id ""}))
+(def user-with-no-profile (merge saved-user {:profile_id "0"}))
 
 (fact "should save new user"
 	(save-user user) => saved-user
 		(provided (created-now user) => user-created-now :times 1)
 		(provided (last-seen-now user-created-now) => user-created-and-last-seen-now :times 1)
 		(provided (with-email-role user-created-and-last-seen-now) => user-with-email :times 1)
-		(provided (save-new-user user-with-email) => saved-user :times 1))
+		(provided (with-no-profile user-with-email) => user-with-no-profile :times 1)
+		(provided (save-new-user user-with-no-profile) => saved-user :times 1))
 
 (fact "should find user by email with profile"
 	(find-user-by-email "testman@testland.fi") => user-with-email

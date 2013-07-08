@@ -8,13 +8,14 @@
 	(merge user {:role "email"}))
 
 (defn with-no-profile [user]
-	(merge user {:profile_id ""}))
+	(merge user {:profile_id "0"}))
 
 (defn save-user [user]
 	(-> user
 		(created-now)
 		(last-seen-now)
 		(with-email-role)
+		(with-no-profile)
 		(save-new-user)))
 
 (defn find-user-by-email [email]
