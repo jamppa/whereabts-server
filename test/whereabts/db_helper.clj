@@ -25,13 +25,14 @@
 		(monger-col/remove coll)))
 
 (defn populate-test-db []
-	(clear-collections ["docs" "users" "messages" "feedbacks" "replies" "categories"])
+	(clear-collections ["docs" "users" "messages" "feedbacks" "replies" "categories" "profiles"])
 	(insert-test-objects "docs" [test-obj-a test-obj-b])
 	(insert-test-objects "users" [test-user-a test-user-b])
 	(insert-test-objects "messages" [test-message-a test-message-b test-message-c test-message-d test-message-e])
 	(insert-test-objects "feedbacks" [test-feedback-a])
 	(insert-test-objects "replies" [test-reply-a test-reply-b])
-	(insert-test-objects "categories" [test-category-a]))
+	(insert-test-objects "categories" [test-category-a])
+	(insert-test-objects "profiles" [test-profile-a]))
 
 (defn setup-test-db []
 	(binding [*whereabts-db* test-db-name]
