@@ -18,4 +18,4 @@
 
 (defn update-gcm-for-user [user gcm]
 	(when (nil? gcm) (throw (IllegalArgumentException. "invalid gcm")))
-	(update-user (merge {:gcm-id gcm})))
+	(update-user (merge user {:gcm-id gcm})))
