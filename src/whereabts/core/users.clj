@@ -7,10 +7,8 @@
 (defn with-email-role [user]
 	(merge user {:role "email"}))
 
-(defn with-profile [user]
-	(if-let [profile (find-profile-by-user user)]
-		(merge user {:profile_id (:_id profile)})
-		(merge user {:profile_id 0})))
+(defn with-no-profile [user]
+	(merge user {:profile_id 0}))
 
 (defn save-user [user]
 	(-> user
