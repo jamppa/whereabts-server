@@ -8,7 +8,8 @@
 (def profile-validation
 	(validation-set
 		(presence-of :nick)
-		(presence-of :country)))
+		(presence-of :country)
+		(presence-of :description)))
 
 (defn find-profile-by-id [id]
 	(db-find-one-by-id profiles-coll (obj-id id)))
