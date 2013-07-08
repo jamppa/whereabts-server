@@ -2,10 +2,11 @@
 	(:use
 		[whereabts.core.users]
 		[whereabts.models.user]
+		[whereabts.models.profile]
 		[whereabts.models.util]
 		[midje.sweet]))
 
-(def user {})
+(def user {:_id "123"})
 (def user-created-now 
 	(merge user {:created-at (System/currentTimeMillis)}))
 (def user-created-and-last-seen-now
@@ -15,6 +16,10 @@
 
 (def user-with-gcm (merge user {:gcm-id "aBCd"}))
 (def user-with-nil-gcm (merge user {:gcm-id nil}))
+
+(def user-profile {:_id "01abc"})
+(def user-with-profile (merge saved-user {:profile_id (:_id user-profile)}))
+(def user-without-profile (merge saved-user {:profile_id 0}))
 
 (fact "should save new user"
 	(save-user user) => saved-user
@@ -34,3 +39,11 @@
 (fact "should not update gcm for user when gcm is nil"
 	(update-gcm-for-user user nil) => (throws IllegalArgumentException)
 	(provided (update-user user-with-nil-gcm) => user-with-gcm :times 0))
+
+(fact "should return user with profile"
+	(with-profile saved-user) => user-with-profile
+	(provided (find-profile-by-user saved-user) => user-profile :times 1))
+
+(fact "should return user without profile when user does not have one"
+	(with-profile saved-user) => user-without-profile
+	(provided (find-profile-by-user saved-user) => nil :times 1))
