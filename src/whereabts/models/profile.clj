@@ -8,3 +8,6 @@
 
 (defn find-profile-by-id [id]
 	(db-find-one-by-id profiles-coll (obj-id id)))
+
+(defn find-profile-by-user [user]
+	(db-find-one profiles-coll {:user_id (:_id user)}))
