@@ -24,3 +24,6 @@
 (defn update-gcm-for-user [user gcm]
 	(when (nil? gcm) (throw (IllegalArgumentException. "invalid gcm")))
 	(update-user (merge user {:gcm-id gcm})))
+
+(defn update-profile-for-user [user profile]
+	nil)
