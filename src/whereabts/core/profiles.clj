@@ -13,7 +13,7 @@
 
 (defn create-profile [user profile]
 	(let [saved-profile (save-profile profile)]
-		(update-profile-for-user user saved-profile)
+		(set-profile-for-user user saved-profile)
 	saved-profile))
 
 (defn save-user-profile [user profile]

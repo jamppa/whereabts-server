@@ -27,4 +27,4 @@
 (fact "should save profile and update it to user when creating profile"
 	(create-profile user-without-profile profile) => profile
 	(provided (save-profile profile) => profile :times 1)
-	(provided (update-profile-for-user user-without-profile profile) => user :times 1))
+	(provided (set-profile-for-user user-without-profile profile) => user :times 1))

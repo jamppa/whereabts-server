@@ -4,7 +4,8 @@
 		[whereabts.models.user]
 		[whereabts.models.profile]
 		[whereabts.models.util]
-		[midje.sweet]))
+		[midje.sweet])
+	(:import [org.bson.types ObjectId]))
 
 (def user {:_id "123"})
 (def user-created-now 
@@ -17,7 +18,9 @@
 (def user-with-gcm (merge user {:gcm-id "aBCd"}))
 (def user-with-nil-gcm (merge user {:gcm-id nil}))
 
+(def profile {:_id (ObjectId.)})
 (def user-with-no-profile (merge saved-user {:profile_id "0"}))
+(def user-with-profile (merge saved-user {:profile_id (:_id profile)}))
 
 (fact "should save new user"
 	(save-user user) => saved-user
@@ -41,3 +44,7 @@
 
 (fact "should return user with no profile"
 	(with-no-profile saved-user) => user-with-no-profile)
+
+(fact "should set profile for user"
+	(set-profile-for-user saved-user profile) => user-with-profile
+	(provided (update-user user-with-profile) => user-with-profile :times 1))
