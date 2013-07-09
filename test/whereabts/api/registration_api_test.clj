@@ -12,12 +12,12 @@
 
 (def successful-response (expected-res 201 payload))
 
-(fact "should POST anonymous user details"
+(fact "should POST user details"
 	(registration-api-routes
 		(whereabts-request-as-public-user :post "/anonymousregistration" payload)) => successful-response
 	(provided (register-user payload) => payload :times 1))
 
-(fact "should throw exception when POSTing invalid anonymous user details"
+(fact "should throw exception when POSTing invalid user details"
 	(registration-api-routes
 		(whereabts-request-as-public-user :post "/anonymousregistration" invalid-payload)) => (throws IllegalArgumentException)
 	(provided (register-user {:user-uuid nil :email nil}) =throws=> (IllegalArgumentException. "invalid!")))
