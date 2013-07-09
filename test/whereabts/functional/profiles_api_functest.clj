@@ -15,6 +15,10 @@
 	(http/post whereabts-profiles-api
 		(whereabts-api-request ["user@test.com" "550e8400-e29b-41d4-a716-446655440001"] payload)))
 
+(defn- post-as-public-user [payload]
+	(http/post whereabts-profiles-api
+		(whereabts-api-request-public-user payload)))
+
 (defn- post-as-user-profile-already [payload]
 	(http/post whereabts-profiles-api
 		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
@@ -26,3 +30,6 @@
 
 (fact "should response http created when posting profile for user with profile already" :functional
 	(:status (post-as-user-profile-already profile-payload)) => 201)
+
+(fact "should response http forbidden when posting profile as public user"
+	(:status (post-as-public-user profile-payload)) => 403)
