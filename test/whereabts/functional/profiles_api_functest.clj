@@ -10,6 +10,7 @@
 
 (def whereabts-profiles-api (str whereabts-api-testsrv "/userprofile"))
 (def profile-payload (json/write-str {:profile {:nick "jamppa" :country "fi" :description "testman from testland"}}))
+(def broken-profile-payload (json/write-str {:profile {:country "fi" :description "testman from testland"}}))
 
 (defn- post-as-user [payload]
 	(http/post whereabts-profiles-api
@@ -40,3 +41,6 @@
 
 (fact "should response http unauthorized when posting profile as invalid user" :functional
 	(:status (post-as-invalid-user profile-payload)) => 401)
+
+(fact "should reponse http bad request when posting broken profile" :functional
+	(:status (post-as-user broken-profile-payload)) => 400)
