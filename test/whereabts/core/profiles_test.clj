@@ -4,7 +4,9 @@
 		[whereabts.core.users]
 		[whereabts.models.profile]
 		[midje.sweet])
-	(:import [org.bson.types ObjectId]))
+	(:import 
+		[org.bson.types ObjectId]
+		[whereabts.exception WhereabtsResourceNotFoundException]))
 
 (def profile-id (ObjectId.))
 (def profile-id-as-str (.toString profile-id))
@@ -34,3 +36,7 @@
 (fact "should find profile of a user"
 	(find-user-profile user) => profile
 	(provided (find-profile-by-id profile-id-as-str) => profile :times 1))
+
+(fact "should throw exception when user doesnt have any profile"
+	(find-user-profile user-without-profile) => (throws WhereabtsResourceNotFoundException)
+	(provided (find-profile-by-id "0") => anything :times 0))
