@@ -6,7 +6,9 @@
 		[midje.sweet])
 	(:import [org.bson.types ObjectId]))
 
-(def user {:_id "123" :profile_id (ObjectId.)})
+(def profile-id (ObjectId.))
+(def profile-id-as-str (.toString profile-id))
+(def user {:_id "123" :profile_id profile-id})
 (def user-without-profile (merge user {:profile_id "0"}))
 (def profile {:_id "abc" :nick "testman"})
 
@@ -28,3 +30,7 @@
 	(create-profile user-without-profile profile) => profile
 	(provided (save-profile profile) => profile :times 1)
 	(provided (set-profile-for-user user-without-profile profile) => user :times 1))
+
+(fact "should find profile of a user"
+	(find-user-profile user) => profile
+	(provided (find-profile-by-id profile-id-as-str) => profile :times 1))

@@ -20,3 +20,7 @@
 	(if (has-profile? user)
 		(update-profile user profile)
 		(create-profile user profile)))
+
+(defn find-user-profile [user]
+	(let [profile-id (:profile_id user)]
+		(find-profile-by-id (.toString profile-id))))

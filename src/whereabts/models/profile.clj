@@ -12,7 +12,8 @@
 		(presence-of :description)))
 
 (defn find-profile-by-id [id]
-	(db-find-one-by-id profiles-coll (obj-id id)))
+	(if (nil? id) nil
+	(db-find-one-by-id profiles-coll (obj-id id))))
 
 (defn save-profile [profile]
 	(if (valid? profile-validation profile)
