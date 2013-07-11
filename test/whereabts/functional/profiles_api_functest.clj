@@ -28,6 +28,9 @@
 	(http/post whereabts-profiles-api
 		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
 
+(defn- get-as-user [email uuid]
+	(http/get whereabts-profiles-api (whereabts-api-request [email uuid] "")))
+
 (background (before :facts (setup-db)))
 
 (fact "should response http created when posting profile for user without profile" :functional
@@ -44,3 +47,9 @@
 
 (fact "should reponse http bad request when posting broken profile" :functional
 	(:status (post-as-user broken-profile-payload)) => 400)
+
+(fact "should response http ok when geting profile of a user" :functional
+	(:status (get-as-user "anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000")) => 200)
+
+(fact "should response http not found when geting profile of user that doesnt have profile yet" :functional
+	(:status (get-as-user "user@test.com" "550e8400-e29b-41d4-a716-446655440001")) => 404)
