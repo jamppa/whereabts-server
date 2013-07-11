@@ -13,6 +13,7 @@
 (def profile-missing-nick (dissoc profile :nick))
 (def profile-missing-country (dissoc profile :country))
 (def profile-missing-description (dissoc profile :description))
+(def profile-with-empty-desc (merge profile {:description ""}))
 
 (fact "should find profile by id"
 	(find-profile-by-id "509d513f61395f0ebbd5e58a") => test-profile-a)
@@ -35,3 +36,7 @@
 
 (fact "should not save profile when description is missing"
 	(save-profile profile-missing-description) => (throws IllegalArgumentException))
+
+(fact "should save profile with empty description"
+	(let [saved-profile (save-profile profile-with-empty-desc)]
+		(find-profile-by-id (obj-id-as-str saved-profile)) => saved-profile))
