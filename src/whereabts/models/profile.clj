@@ -9,6 +9,7 @@
 	(validation-set
 		(presence-of :nick)
 		(presence-of :country)
+		(presence-of :user_id)
 		(length-of :description :within (range 1 100) :allow-blank true)))
 
 (defn find-profile-by-id [id]

@@ -9,10 +9,11 @@
 (background (before :facts (setup-test-db)))
 
 
-(def profile {:nick "testman" :country "fi" :description "testman from testland"})
+(def profile {:user_id (:_id test-user-a) :nick "testman" :country "fi" :description "testman from testland"})
 (def profile-missing-nick (dissoc profile :nick))
 (def profile-missing-country (dissoc profile :country))
 (def profile-missing-description (dissoc profile :description))
+(def profile-missing-user (dissoc profile :user_id))
 (def profile-with-empty-desc (merge profile {:description ""}))
 
 (fact "should find profile by id"
@@ -40,3 +41,6 @@
 (fact "should save profile with empty description"
 	(let [saved-profile (save-profile profile-with-empty-desc)]
 		(find-profile-by-id (obj-id-as-str saved-profile)) => saved-profile))
+
+(fact "should not save profile with missing user_id"
+	(save-profile profile-missing-user) => (throws IllegalArgumentException))

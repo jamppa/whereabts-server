@@ -9,6 +9,9 @@
 (defn- has-profile? [user]
 	(= (type (:profile_id user)) org.bson.types.ObjectId))
 
+(defn- with-user [profile user]
+	(merge profile {:user_id (:_id user)}))
+
 (defn update-profile [user profile]
 	(save-profile 
 		(merge profile {:_id (:profile_id user)})))
