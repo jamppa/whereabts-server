@@ -19,4 +19,10 @@
 				  (-> (response (save-user-profile user profile))
 				  	(status 201)))))
 
+	(GET "/userprofile" [:as req]
+		(with-role req ["email"]
+			(-> (:basic-authentication req)
+				(find-user-profile)
+				(response))))
+
 )
