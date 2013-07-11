@@ -17,7 +17,7 @@
 	(str (whereabts-api-messages-by-bbox ll-lon ll-lat ur-lon ur-lat) "/" category))
 
 (def message 
-	{:nick "teppo" :title "cool title!" :message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323} :expire-time 5000 :category-key "traffic"})
+	{:title "cool title!" :message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323} :expire-time 5000 :category-key "traffic"})
 
 (def message-as-json 
 	(json/write-str message))
