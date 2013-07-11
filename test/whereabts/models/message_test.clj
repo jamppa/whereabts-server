@@ -13,7 +13,6 @@
 	:user_id (:_id test-user-a)
 	:title "My Cool Message" 
 	:message "This is the content of My Cool Message" 
-	:nick "Cool Guy"
 	:loc {:lon 45.1 :lat 56.4}
 	:views 0
 	:deleted false
@@ -28,7 +27,6 @@
 (def msg-with-empty-title (merge message {:title ""}))
 (def msg-title-too-long (merge message {:title "this is title text that is unfortunately too looooooong"}))
 (def msg-too-long (merge message {:message (clojure.string/join "" (repeat 251 "s"))}))
-(def msg-nick-too-long (merge message {:nick "Termitekiller12345678"}))
 (def msg-missing-title (dissoc message :title))
 (def msg-extra-kv (merge message {:some "bullshit"}))
 (def msg-loc-erronous (merge message {:loc "im invalid"}))
@@ -55,9 +53,6 @@
 
 (fact "should not save anonymous message with too long message but throw IllegalArgumentException"
 	(save-message msg-too-long) => (throws IllegalArgumentException))
-
-(fact "should not save anonymous message with too long nick but throw IllegalArgumentException"
-	(save-message msg-nick-too-long) => (throws IllegalArgumentException))
 
 (fact "should not save anonymous message with location as a string"
 	(save-message msg-loc-erronous) => (throws MongoException))

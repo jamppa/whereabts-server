@@ -7,7 +7,6 @@
 (def test-message-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36a")
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
-	:nick "Anonymous A"
 	:message "Cool message"
 	:title "Cool title"
 	:loc [1.0 2.0]
@@ -22,7 +21,6 @@
 (def test-message-b {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36b")
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
-	:nick "Anonymous B"
 	:message "Cool message"
 	:title "Cool title"
 	:loc [5.0 5.0]
@@ -37,7 +35,6 @@
 (def test-message-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38b")
-	:nick "Anonymous C"
 	:message "Cool message"
 	:title "Cool title"
 	:loc [45.0 26.0]

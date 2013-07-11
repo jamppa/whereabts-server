@@ -12,7 +12,6 @@
 (def message-validation-set
 	(validation-set
 		(presence-of :user_id)
-		(presence-of :nick)
 		(presence-of :message)
 		(presence-of :loc)
 		(presence-of :created-at)
@@ -23,13 +22,12 @@
 		(presence-of :deleted)
 		(presence-of :category_id)
 		(length-of :message :within (range 1 251))
-		(length-of :nick :within (range 1 21))
 		(length-of :title :within (range 1 41) :allow-blank true)))
 
 (defn new-message [msg-candidate]
 	(merge 
 		(select-keys msg-candidate 
-			[:user_id :nick :title :message :created-at :updated-at :expires-at :expire-time :category_id])
+			[:user_id :title :message :created-at :updated-at :expires-at :expire-time :category_id])
 		{:views 0 :deleted false 
 		 :loc [
 		 	(get-in msg-candidate [:loc :lon]) 
@@ -37,7 +35,7 @@
 
 (defn message-to-update [message]
 	(select-keys message 
-		[:_id :user_id :nick :message :title :loc :created-at :updated-at :views :deleted :expires-at :expire-time :category_id]))
+		[:_id :user_id :message :title :loc :created-at :updated-at :views :deleted :expires-at :expire-time :category_id]))
 
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))
