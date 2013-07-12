@@ -12,7 +12,7 @@
 (def profile-id-as-str (.toString profile-id))
 (def user {:_id "123" :profile_id profile-id})
 (def user-without-profile (merge user {:profile_id "0"}))
-(def profile {:_id "abc" :nick "testman"})
+(def profile {:_id "abc" :user_id (:_id user) :nick "testman"})
 
 (fact "should just update profile when user already has one"
 	(save-user-profile user profile) => anything
