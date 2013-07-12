@@ -13,11 +13,9 @@
 
 (def reply-missing-msg-id (dissoc new-reply :message_id))
 (def reply-missing-user (dissoc new-reply :user_id))
-(def reply-missing-nick (dissoc new-reply :nick))
 (def reply-missing-msg (dissoc new-reply :replymessage))
 (def reply-missing-timestamp (dissoc new-reply :created-at))
 (def reply-too-long (merge new-reply {:replymessage long-reply}))
-(def reply-nick-too-long (merge new-reply {:nick "nicktoolonggoddammits"}))
 
 (background (before :facts (setup-test-db)))
 
@@ -37,9 +35,6 @@
 (fact "should not save invalid reply message missing user id"
 	(save-new-reply reply-missing-user) => (throws IllegalArgumentException))
 
-(fact "should not save invalid reply message missing nick"
-	(save-new-reply reply-missing-nick) => (throws IllegalArgumentException))
-
 (fact "should not save invalid reply message missing replymessage"
 	(save-new-reply reply-missing-msg) => (throws IllegalArgumentException))
 
@@ -48,9 +43,6 @@
 
 (fact "should not save invalid reply message with too long message"
 	(save-new-reply reply-too-long) => (throws IllegalArgumentException))
-
-(fact "should not save invalid reply message with too long nick"
-	(save-new-reply reply-nick-too-long) => (throws IllegalArgumentException))
 
 (fact "should find replies of a message and sort by creation time"
 	(find-replies-by-message test-message-a) => [test-reply-a test-reply-b])
