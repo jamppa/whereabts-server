@@ -11,10 +11,10 @@
 	(= (type (:profile_id user)) org.bson.types.ObjectId))
 
 (defn update-profile [user profile]
+	(let [profile-id (:profile_id user)
+		  user-id (:_id user)]
 	(save-profile 
-		(merge profile {
-			:_id (:profile_id user) 
-			:user_id (:_id user)})))
+		(merge profile {:_id profile-id :user_id user-id}))))
 
 (defn create-profile [user profile]
 	(let [saved-profile (save-profile (with-user profile user))]
