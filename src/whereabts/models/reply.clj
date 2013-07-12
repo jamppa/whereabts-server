@@ -8,7 +8,6 @@
 
 (def replies-coll "replies")
 (def reply-length 250)
-(def reply-nick-length 20)
 (def reply-validation
 	(validation-set
 		(presence-of :message_id)
