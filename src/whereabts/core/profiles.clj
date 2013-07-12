@@ -12,7 +12,9 @@
 
 (defn update-profile [user profile]
 	(save-profile 
-		(merge profile {:_id (:profile_id user)})))
+		(merge profile {
+			:_id (:profile_id user) 
+			:user_id (:_id user)})))
 
 (defn create-profile [user profile]
 	(let [saved-profile (save-profile (with-user profile user))]
