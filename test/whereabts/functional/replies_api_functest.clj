@@ -32,8 +32,9 @@
 
 (def reply-payload
 	(json/write-str {:nick "jamppa" :replymessage "yeah!"}))
+
 (def invalid-reply-payload
-	(json/write-str {:replymessage "yeah!"}))
+	(json/write-str {:some "value"}))
 
 (background (before :facts (setup-db)))
 
