@@ -24,7 +24,8 @@
 		(with-no-profile)))
 
 (defn find-user-by-email [email]
-	(with-profile (find-user (by-email email))))
+	(if-let [user (find-user (by-email email))]
+		(with-profile user)))
 
 (defn update-gcm-for-user [user gcm]
 	(when (nil? gcm) (throw (IllegalArgumentException. "invalid gcm")))
