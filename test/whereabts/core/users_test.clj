@@ -19,20 +19,21 @@
 (def user-with-nil-gcm (merge user {:gcm-id nil}))
 
 (def profile {:_id (ObjectId.)})
-(def user-with-no-profile (merge saved-user {:profile_id "0"}))
 (def user-with-profile (merge saved-user {:profile_id (:_id profile)}))
+(def user-without-profile (merge saved-user {:profile_id ""}))
 
 (fact "should save new user"
-	(save-user user) => saved-user
+	(save-user user) => user-without-profile
 		(provided (created-now user) => user-created-now :times 1)
 		(provided (last-seen-now user-created-now) => user-created-and-last-seen-now :times 1)
 		(provided (with-email-role user-created-and-last-seen-now) => user-with-email :times 1)
-		(provided (with-no-profile user-with-email) => user-with-no-profile :times 1)
-		(provided (save-new-user user-with-no-profile) => saved-user :times 1))
+		(provided (save-new-user user-with-email) => saved-user :times 1)
+		(provided (with-no-profile saved-user) => user-without-profile :times 1))
 
 (fact "should find user by email with profile"
-	(find-user-by-email "testman@testland.fi") => user-with-email
-	(provided (find-user {:email "testman@testland.fi"}) => user-with-email :times 1))
+	(find-user-by-email "testman@testland.fi") => user-with-profile
+	(provided (find-user {:email "testman@testland.fi"}) => user-with-email :times 1)
+	(provided (with-profile user-with-email) => user-with-profile :times 1))
 
 (fact "should update gcm for user"
 	(update-gcm-for-user user "aBCd") => user-with-gcm
@@ -41,9 +42,6 @@
 (fact "should not update gcm for user when gcm is nil"
 	(update-gcm-for-user user nil) => (throws IllegalArgumentException)
 	(provided (update-user user-with-nil-gcm) => user-with-gcm :times 0))
-
-(fact "should return user with no profile"
-	(with-no-profile saved-user) => user-with-no-profile)
 
 (fact "should set profile for user"
 	(set-profile-for-user saved-user profile) => user-with-profile

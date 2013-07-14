@@ -8,18 +8,23 @@
 	(merge user {:role "email"}))
 
 (defn with-no-profile [user]
-	(merge user {:profile_id "0"}))
+	(merge user {:profile_id ""}))
+
+(defn with-profile [user]
+	(if (contains? user :profile_id)
+		user
+		(with-no-profile user)))
 
 (defn save-user [user]
 	(-> user
 		(created-now)
 		(last-seen-now)
 		(with-email-role)
-		(with-no-profile)
-		(save-new-user)))
+		(save-new-user)
+		(with-no-profile)))
 
 (defn find-user-by-email [email]
-	(find-user (by-email email)))
+	(with-profile (find-user (by-email email))))
 
 (defn update-gcm-for-user [user gcm]
 	(when (nil? gcm) (throw (IllegalArgumentException. "invalid gcm")))

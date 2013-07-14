@@ -8,7 +8,7 @@
 		[whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- has-profile? [user]
-	(= (type (:profile_id user)) org.bson.types.ObjectId))
+	(contains? user :profile_id))
 
 (defn update-profile [user profile]
 	(let [profile-id (:profile_id user)
