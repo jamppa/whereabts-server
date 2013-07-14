@@ -8,7 +8,6 @@
 
 (background (before :facts (setup-test-db)))
 
-
 (def profile {:user_id (:_id test-user-a) :nick "testman" :country "fi" :description "testman from testland"})
 (def profile-missing-nick (dissoc profile :nick))
 (def profile-missing-country (dissoc profile :country))
@@ -44,3 +43,7 @@
 
 (fact "should not save profile with missing user_id"
 	(save-profile profile-missing-user) => (throws IllegalArgumentException))
+
+(fact "should find profile by user_id"
+	(let [user-id (:_id test-user-a)]
+		(find-profile-by-user-id user-id) => test-profile-a))

@@ -16,6 +16,9 @@
 	(if (nil? id) nil
 	(db-find-one-by-id profiles-coll (obj-id id))))
 
+(defn find-profile-by-user-id [user-id]
+	(db-find-one profiles-coll {:user_id user-id}))
+
 (defn save-profile [profile]
 	(if (valid? profile-validation profile)
 		(db-save profiles-coll profile)
