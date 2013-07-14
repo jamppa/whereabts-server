@@ -47,3 +47,10 @@
 (fact "should find profile by user_id"
 	(let [user-id (:_id test-user-a)]
 		(find-profile-by-user-id user-id) => test-profile-a))
+
+(fact "should not find profile by user_id when one doesnt exist"
+	(let [false-user-id (:_id test-user-b)]
+		(find-profile-by-user-id false-user-id) => nil))
+
+(fact "should not find profile by nil user_id"
+	(find-profile-by-user-id nil) => nil)
