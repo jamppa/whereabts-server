@@ -37,7 +37,8 @@
 
 (fact "should update gcm for user"
 	(update-gcm-for-user user "aBCd") => user-with-gcm
-	(provided (update-user user-with-gcm) => user-with-gcm :times 1))
+	(provided (update-user user-with-gcm) => user-with-gcm :times 1)
+	(provided (with-profile user-with-gcm) => user-with-gcm :times 1))
 
 (fact "should not update gcm for user when gcm is nil"
 	(update-gcm-for-user user nil) => (throws IllegalArgumentException)
