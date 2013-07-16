@@ -45,6 +45,11 @@
 
 (def obj {:user_id user-id})
 (def obj-with-user (merge obj {:user-profile profile}))
-(fact "should return object with user-profile when user_id exists"
+(fact "should return object with user-profile when object has user_id"
 	(with-user-profile obj) => obj-with-user
 	(provided (find-profile-by-user-id user-id) => profile))
+
+(def obj-without-user {:some "thing"})
+(fact "should return object without user-profile when object doesnt have user_id "
+	(with-user-profile obj-without-user) => obj-without-user
+	(provided (find-profile-by-user-id nil) => anything :times 0))
