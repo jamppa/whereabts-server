@@ -41,4 +41,10 @@
 
 (fact "should throw exception when user doesnt have any profile"
 	(find-user-profile user-without-profile) => (throws WhereabtsResourceNotFoundException)
-	(provided (find-profile-by-id "0") => anything :times 0))
+	(provided (find-profile-by-id anything) => anything :times 0))
+
+(def obj {:user_id user-id})
+(def obj-with-user (merge obj {:user-profile profile}))
+(fact "should return object with user-profile when user_id exists"
+	(with-user-profile obj) => obj-with-user
+	(provided (find-profile-by-user-id user-id) => profile))

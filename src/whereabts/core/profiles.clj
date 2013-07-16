@@ -30,3 +30,8 @@
 	(when (not (has-profile? user)) (throw (WhereabtsResourceNotFoundException.)))
 	(let [profile-id (:profile_id user)]
 		(find-profile-by-id (.toString profile-id))))
+
+(defn with-user-profile [obj]
+	(if (contains? obj :user_id)
+		(merge obj {:user-profile (find-profile-by-user-id (:user_id obj))})
+		obj))

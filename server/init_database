@@ -8,3 +8,7 @@ mongo whereabtsdb --eval 'db.anonymous_users.ensureIndex({"user-uuid" : 1, "emai
 # indexes for replies collection
 mongo whereabtsdb --eval 'db.replies.ensureIndex({"message_id" : 1, "created-at" : 1})'
 
+#indexes for profiles collection
+mongo whereabtsdb --eval 'db.profiles.ensureIndex({"user_id" : 1})'
+
+
