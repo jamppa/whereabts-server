@@ -8,7 +8,7 @@
 		[clj-http.client :as http]
 		[clojure.data.json :as json]))
 
-(def whereabts-profiles-api (str whereabts-api-testsrv "/userprofile"))
+(def whereabts-profiles-api (str whereabts-api-testsrv "/user"))
 (def profile-payload (json/write-str {:profile {:nick "jamppa" :country "fi" :description "testman from testland"}}))
 (def broken-profile-payload (json/write-str {:profile {:country "fi" :description "testman from testland"}}))
 
@@ -30,6 +30,9 @@
 
 (defn- get-as-user [email uuid]
 	(http/get whereabts-profiles-api (whereabts-api-request [email uuid] "")))
+
+(defn- get-profile-as-user [userid email uuid]
+	(http/get (str whereabts-profiles-api "/" userid) (whereabts-api-request [email uuid] "")))
 
 (background (before :facts (setup-db)))
 
@@ -53,3 +56,9 @@
 
 (fact "should response http not found when geting profile of user that doesnt have profile yet" :functional
 	(:status (get-as-user "user@test.com" "550e8400-e29b-41d4-a716-446655440001")) => 404)
+
+(fact "should response http ok when geting a users profile" :functional
+	(:status (get-profile-as-user "509d513f61395f0ebbd5e38a" "user@test.com" "550e8400-e29b-41d4-a716-446655440001")) => 200)
+
+(fact "should response http not found when geting a profile of non-existing user" :functional
+	(:status (get-profile-as-user "509d513f61395f0ebbd5e666" "user@test.com" "550e8400-e29b-41d4-a716-446655440001")) => 404)

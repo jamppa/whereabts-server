@@ -12,17 +12,23 @@
 
 (defroutes profiles-api-routes
 
-	(POST "/userprofile" [:as req]
+	(POST "/user" [:as req]
 		(with-role req ["email"]
 			(let [user (:basic-authentication req)
 				  profile (extract-profile req)]
 				  (-> (response (save-user-profile user profile))
 				  	(status 201)))))
 
-	(GET "/userprofile" [:as req]
+	(GET "/user" [:as req]
 		(with-role req ["email"]
 			(-> (:basic-authentication req)
 				(find-user-profile)
+				(response))))
+
+	(GET "/user/:id" [id :as req]
+		(with-role req ["email"]
+			(-> id
+				(find-profile-of-user)
 				(response))))
 
 )

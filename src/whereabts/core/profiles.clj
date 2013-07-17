@@ -2,7 +2,8 @@
 	(:use
 		[whereabts.core.users]
 		[whereabts.core.with-util]
-		[whereabts.models.profile])
+		[whereabts.models.profile]
+		[whereabts.models.util])
 	(:import 
 		[org.bson.types ObjectId]
 		[whereabts.exception WhereabtsResourceNotFoundException]))
@@ -30,6 +31,11 @@
 	(when (not (has-profile? user)) (throw (WhereabtsResourceNotFoundException.)))
 	(let [profile-id (:profile_id user)]
 		(find-profile-by-id (.toString profile-id))))
+
+(defn find-profile-of-user [user-id]
+	(if-let [user-profile (find-profile-by-user-id (obj-id user-id))]
+		user-profile
+		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn with-user-profile [obj]
 	(if (contains? obj :user_id)
