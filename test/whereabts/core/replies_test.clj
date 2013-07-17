@@ -23,7 +23,8 @@
 	(provided (save-reply reply user message) => saved-reply :times 1)
 	(provided (updated-now message) => message :times 1)
 	(provided (update-message message) => message :times 1)
-	(provided (notify-on-reply-if-not-owner saved-reply user message) => message :times 1))
+	(provided (notify-on-reply-if-not-owner saved-reply user message) => message :times 1)
+	(provided (with-user-profile saved-reply) => saved-reply :times 1))
 
 (fact "should return message with replies that are mapped with user profile"
 	(with-replies message) => (merge message {:replies [reply-with-message]})

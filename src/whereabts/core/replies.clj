@@ -31,7 +31,7 @@
 	(let [saved-reply (save-reply reply user message)]
 		(update-message (updated-now message))
 		(notify-on-reply-if-not-owner saved-reply user message)
-			saved-reply))
+			(with-user-profile saved-reply)))
 
 (defn with-replies [message]
 	(merge message {
