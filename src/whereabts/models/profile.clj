@@ -13,8 +13,7 @@
 		(length-of :description :within (range 1 100) :allow-blank true)))
 
 (defn find-profile-by-id [id]
-	(if (nil? id) nil
-	(db-find-one-by-id profiles-coll (obj-id id))))
+	(db-find-one-by-id profiles-coll (obj-id id)))
 
 (defn find-profile-by-user-id [user-id]
 	(db-find-one profiles-coll {:user_id user-id}))
