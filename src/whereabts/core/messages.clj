@@ -5,7 +5,8 @@
 		[whereabts.core.with-util]
 		[whereabts.core.replies]
 		[whereabts.core.expirations]
-		[whereabts.core.categories])
+		[whereabts.core.categories]
+		[whereabts.core.profiles])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- all-messages [messages]
@@ -42,6 +43,7 @@
 	(if-let [message (find-message-by-id id)]
 		(-> message 
 			(with-ownership user)
+			(with-user-profile)
 			(with-replies))
 		(throw (WhereabtsResourceNotFoundException.))))
 

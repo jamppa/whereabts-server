@@ -6,6 +6,7 @@
 		[whereabts.core.expirations]
 		[whereabts.core.replies]
 		[whereabts.core.categories]
+		[whereabts.core.profiles]
 		[whereabts.util.geo])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
@@ -40,9 +41,10 @@
 	(provided (save-message message-with-user) => saved-message :times 1)
 	(provided (compactify-message saved-message) => compactified-saved-message :times 1))
 
-(fact "should find a message with replies and user by id"
+(fact "should find a message with user profile and replies by id"
 	(find-message "123abc" user) => message-with-user-and-replies
 	(provided (find-message-by-id "123abc") => message-with-user :times 1)
+	(provided (with-user-profile message-with-user-and-ownership) => message-with-user-and-ownership :times 1)
 	(provided (with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1))
 
 (fact "should throw exception when message is not found by id"
