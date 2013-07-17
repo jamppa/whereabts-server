@@ -4,6 +4,7 @@
 		[whereabts.models.message]
 		[whereabts.models.util]
 		[whereabts.core.with-util]
+		[whereabts.core.profiles]
 		[whereabts.notification.core]))
 
 (defn- new-reply [candidate]
@@ -33,5 +34,5 @@
 			saved-reply))
 
 (defn with-replies [message]
-	(merge message 
-		{:replies (find-replies-by-message message)}))
+	(merge message {
+		:replies (map with-user-profile (find-replies-by-message message))}))

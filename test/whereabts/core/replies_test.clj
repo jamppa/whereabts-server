@@ -2,6 +2,7 @@
 	(:use
 		[midje.sweet]
 		[whereabts.core.replies]
+		[whereabts.core.profiles]
 		[whereabts.core.with-util]
 		[whereabts.models.reply]
 		[whereabts.models.message]
@@ -24,9 +25,10 @@
 	(provided (update-message message) => message :times 1)
 	(provided (notify-on-reply-if-not-owner saved-reply user message) => message :times 1))
 
-(fact "should return message with replies"
+(fact "should return message with replies that are mapped with user profile"
 	(with-replies message) => (merge message {:replies [reply-with-message]})
-	(provided (find-replies-by-message message) => [reply-with-message] :times 1))
+	(provided (find-replies-by-message message) => [reply-with-message] :times 1)
+	(provided (with-user-profile anything) => reply-with-message :times 1))
 
 (fact "should notify on reply when not owner of the replied message"
 	(notify-on-reply-if-not-owner reply user message) => reply
