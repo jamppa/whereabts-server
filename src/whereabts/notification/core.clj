@@ -12,9 +12,9 @@
 
 (defn prepare-message-for-channel [reply message]
 	{
-		:replied-message (obj-id-as-str message) 
-		:user-to-notify (id-as-str message :user_id)
-		:reply (obj-id-as-str reply)})
+		:message-id (obj-id-as-str message) 
+		:user-id (id-as-str message :user_id)
+		:reply-id (obj-id-as-str reply)})
 
 (defn notify-on-reply [reply user message]
 	(with-carmine (carmine/publish reply-channel 
