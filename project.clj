@@ -5,11 +5,11 @@
       [compojure "1.1.5"]
       [ring/ring-json "0.2.0"]
       [ring-basic-authentication "1.0.2"]
-      [com.novemberain/monger "1.5.0"]
-      [com.novemberain/validateur "1.4.0"]
+      [com.novemberain/monger "1.6.0"]
+      [com.novemberain/validateur "1.5.0"]
       [org.clojure/tools.logging "0.2.6"]
       [log4j/log4j "1.2.17"]
-      [com.taoensso/carmine "2.0.0"]]
+      [com.taoensso/carmine "2.1.2"]]
    :plugins [[lein-ring "0.8.3"]]
    :ring {
          :handler whereabts.server/server
