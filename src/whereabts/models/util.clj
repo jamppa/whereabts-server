@@ -3,11 +3,6 @@
 	(:require [monger.util :as util])
 	(:import [org.bson.types ObjectId]))
 		
-(defn ellipsize-str-max-len [string len]
-	(if (> (count string) len)
-		(str (subs string 0 len) "...")
-		string))
-
 (defn obj-id [hex]
 	(ObjectId. hex))
 
@@ -30,8 +25,3 @@
 
 (defn id-as-str [obj field]
 	(.toString (field obj)))
-
-(defn short-message [obj]
-	(if (empty? (:title obj))
-		(ellipsize-str-max-len (:message obj) 40)
-		(:title obj)))

@@ -77,8 +77,7 @@
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
 (fact "should compactify message extracting short-message"
-	(keys (compactify-message existing-message)) => '(:short-message :category_id :created-at :updated-at :loc :_id)
-	(provided (short-message existing-message) => "short message" :times 1))
+	(keys (compactify-message existing-message)) => '(:message :category_id :created-at :updated-at :loc :_id))
 
 (fact "should create a copy of message"
 	(new-message message) => msg-after-copy)
