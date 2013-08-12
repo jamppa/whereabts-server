@@ -8,7 +8,7 @@
 
 (background (before :facts (setup-test-db)))
 
-(def profile {:user_id (:_id test-user-a) :nick "testman" :country "fi" :description "testman from testland"})
+(def profile {:user_id (:_id test-user-a) :nick "testman" :country "fi" :description "testman from testland" :photo ""})
 (def profile-missing-nick (dissoc profile :nick))
 (def profile-missing-country (dissoc profile :country))
 (def profile-missing-description (dissoc profile :description))
