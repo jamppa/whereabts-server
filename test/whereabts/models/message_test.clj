@@ -11,7 +11,6 @@
 
 (def message {
 	:user_id (:_id test-user-a)
-	:title "My Cool Message" 
 	:message "This is the content of My Cool Message" 
 	:loc {:lon 45.1 :lat 56.4}
 	:views 0
@@ -45,22 +44,16 @@
 	(let [saved-message (save-message message)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
-(fact "should not save  anonymous message missing title but throw IllegalArgumentException"
-	(save-message msg-missing-title) => (throws IllegalArgumentException))
-
-(fact "sould not save  anonymous message with too long title but throw IllegalArgumentException"
-	(save-message msg-title-too-long) => (throws IllegalArgumentException))
-
-(fact "should not save anonymous message with too long message but throw IllegalArgumentException"
+(fact "should not save message with too long message but throw IllegalArgumentException"
 	(save-message msg-too-long) => (throws IllegalArgumentException))
 
-(fact "should not save anonymous message with location as a string"
+(fact "should not save message with location as a string"
 	(save-message msg-loc-erronous) => (throws MongoException))
 
-(fact "should not save anonymous message with longitute and latitude as a string"
+(fact "should not save message with longitute and latitude as a string"
 	(save-message msg-lon-lat-str) => (throws MongoException))
 
-(fact "should not save anonymous message without user-id"
+(fact "should not save message without user-id"
 	(save-message msg-missing-user) => (throws IllegalArgumentException))
 
 (fact "should find messages by bounding box"
@@ -76,7 +69,7 @@
 	(let [saved-message (save-message msg-with-empty-title)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
-(fact "should compactify message extracting short-message"
+(fact "should compactify message"
 	(keys (compactify-message existing-message)) => '(:message :category_id :created-at :updated-at :loc :_id))
 
 (fact "should create a copy of message"

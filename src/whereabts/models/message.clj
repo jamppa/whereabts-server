@@ -21,8 +21,7 @@
 		(presence-of :views)
 		(presence-of :deleted)
 		(presence-of :category_id)
-		(length-of :message :within (range 1 251))
-		(length-of :title :within (range 1 41) :allow-blank true)))
+		(length-of :message :within (range 1 251))))
 
 (defn new-message [msg-candidate]
 	(merge 
