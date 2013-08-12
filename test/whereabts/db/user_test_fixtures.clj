@@ -24,4 +24,5 @@
 		:user_id (:_id test-user-a)
 		:nick "testman"
 		:country "fi"
-		:description "testman from testland"})
+		:description "testman from testland"
+		:photo ""})

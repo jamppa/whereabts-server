@@ -9,8 +9,10 @@
 		[clojure.data.json :as json]))
 
 (def whereabts-profiles-api (str whereabts-api-testsrv "/user"))
-(def profile-payload (json/write-str {:profile {:nick "jamppa" :country "fi" :description "testman from testland"}}))
-(def broken-profile-payload (json/write-str {:profile {:country "fi" :description "testman from testland"}}))
+(def profile-payload (json/write-str 
+	{:profile {:nick "jamppa" :country "fi" :description "testman from testland" :photo "me.jpg"}}))
+(def broken-profile-payload (json/write-str 
+	{:profile {:country "fi" :description "testman from testland"}}))
 
 (defn- post-as-user [payload]
 	(http/post whereabts-profiles-api

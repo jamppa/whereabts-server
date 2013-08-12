@@ -8,12 +8,13 @@
 
 (background (before :facts (setup-test-db)))
 
-(def profile {:user_id (:_id test-user-a) :nick "testman" :country "fi" :description "testman from testland" :photo ""})
+(def profile {:user_id (:_id test-user-a) :nick "testman" :country "fi" :description "testman from testland" :photo "me.jpg"})
 (def profile-missing-nick (dissoc profile :nick))
 (def profile-missing-country (dissoc profile :country))
 (def profile-missing-description (dissoc profile :description))
 (def profile-missing-user (dissoc profile :user_id))
 (def profile-with-empty-desc (merge profile {:description ""}))
+(def profile-with-empty-photo (merge profile {:photo ""}))
 
 (fact "should find profile by id"
 	(find-profile-by-id "509d513f61395f0ebbd5e58a") => test-profile-a)
@@ -36,6 +37,10 @@
 
 (fact "should save profile with empty description"
 	(let [saved-profile (save-profile profile-with-empty-desc)]
+		(find-profile-by-id (obj-id-as-str saved-profile)) => saved-profile))
+
+(fact "should save profile with empty photo"
+	(let [saved-profile (save-profile profile-with-empty-photo)]
 		(find-profile-by-id (obj-id-as-str saved-profile)) => saved-profile))
 
 (fact "should not save profile with missing user_id"
