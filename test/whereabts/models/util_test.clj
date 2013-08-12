@@ -6,8 +6,6 @@
 
 (def obj {})
 (def obj-with-id {:_id (ObjectId. "507f191e810c19729de860ea") :other_id (ObjectId. "507f191e810c19729de860eb")})
-(def obj-with-title {:title "This is message title" :message "This is the message"})
-(def obj-without-title {:title "" :message "This is the message"})
 
 (fact "should merge object with current timestamp"
 	(contains? (created-now obj) :created-at) => truthy)

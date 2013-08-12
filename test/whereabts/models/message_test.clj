@@ -23,10 +23,7 @@
 
 (def msg-after-copy (merge message {:loc [45.1 56.4]}))
 (def msg-with-obj-id (with-obj-id message))
-(def msg-with-empty-title (merge message {:title ""}))
-(def msg-title-too-long (merge message {:title "this is title text that is unfortunately too looooooong"}))
 (def msg-too-long (merge message {:message (clojure.string/join "" (repeat 251 "s"))}))
-(def msg-missing-title (dissoc message :title))
 (def msg-extra-kv (merge message {:some "bullshit"}))
 (def msg-loc-erronous (merge message {:loc "im invalid"}))
 (def msg-lon-lat-str (merge message {:loc {:lon "123.323" :lat "blaa"}}))
@@ -65,11 +62,7 @@
 (fact "should not find messages by bounding box when there isnt any"
 	(find-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
-(fact "should save valid anonymous message with empty title"
-	(let [saved-message (save-message msg-with-empty-title)]
-		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
-
-(fact "should compactify message"
+(fact "should compactify message extracting short-message"
 	(keys (compactify-message existing-message)) => '(:message :category_id :created-at :updated-at :loc :_id))
 
 (fact "should create a copy of message"

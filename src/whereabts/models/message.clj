@@ -26,7 +26,7 @@
 (defn new-message [msg-candidate]
 	(merge 
 		(select-keys msg-candidate 
-			[:user_id :title :message :created-at :updated-at :expires-at :expire-time :category_id])
+			[:user_id :message :created-at :updated-at :expires-at :expire-time :category_id])
 		{:views 0 :deleted false 
 		 :loc [
 		 	(get-in msg-candidate [:loc :lon]) 
@@ -34,7 +34,7 @@
 
 (defn message-to-update [message]
 	(select-keys message 
-		[:_id :user_id :message :title :loc :created-at :updated-at :views :deleted :expires-at :expire-time :category_id]))
+		[:_id :user_id :message :loc :created-at :updated-at :views :deleted :expires-at :expire-time :category_id]))
 
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))

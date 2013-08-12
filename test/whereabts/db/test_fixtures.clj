@@ -8,7 +8,6 @@
 	:_id (ObjectId. "509d513f61395f0ebbd5e36a")
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:message "Cool message"
-	:title "Cool title"
 	:loc [1.0 2.0]
 	:created-at 1364642721968
 	:updated-at 1364642721968
@@ -22,7 +21,6 @@
 	:_id (ObjectId. "509d513f61395f0ebbd5e36b")
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:message "Cool message"
-	:title "Cool title"
 	:loc [5.0 5.0]
 	:created-at 1364642721969
 	:updated-at 1364642721968
@@ -36,7 +34,6 @@
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38b")
 	:message "Cool message"
-	:title "Cool title"
 	:loc [45.0 26.0]
 	:created-at 1364642721970
 	:updated-at 1364642721968
