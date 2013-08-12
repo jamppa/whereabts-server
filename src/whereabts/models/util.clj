@@ -2,12 +2,6 @@
 	(:use [clojure.string :only [split join]])
 	(:require [monger.util :as util])
 	(:import [org.bson.types ObjectId]))
-
-(defn ellipsize-str-max-words [str word-count]
-	(let [words (split str #"\s+")]
-		(if (> (count words) word-count)
-		(join " " (conj (vec (take word-count words)) "..."))
-		(join " " words))))
 		
 (defn ellipsize-str-max-len [string len]
 	(if (> (count string) len)

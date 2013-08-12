@@ -21,3 +21,6 @@
 (fact "should update document by id with given modifier"
 	(let [saved-doc (db-save "docs" (merge test-obj-a {:a "aaa"}))]
 		(db-find-one "docs" {:_id (ObjectId. "509d513f61395f0ebbd5e32a")}) => (merge test-obj-a {:a "aaa"})))
+
+(fact "should update document with oid as string"
+	(db-save "docs" {:_id (ObjectId. "509d513f61395f0ebbd5e32a") :a "a" :b "b" :c "c"}) => (merge test-obj-a {:c "c"}))
