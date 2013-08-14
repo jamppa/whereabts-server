@@ -6,6 +6,7 @@
 		[validateur.validation]
 		[monger.query]))
 
+(def message-expiration-time-ms (* 3 86400000)) ; 3 days
 (def messages-in-bbox-limit 20)
 (def message-coll "messages")
 
@@ -16,31 +17,28 @@
 		(presence-of :loc)
 		(presence-of :created-at)
 		(presence-of :updated-at)
-		(presence-of :expires-at)
-		(presence-of :expire-time)
 		(presence-of :views)
-		(presence-of :deleted)
 		(presence-of :category_id)
 		(length-of :message :within (range 1 251))))
 
 (defn new-message [msg-candidate]
 	(merge 
 		(select-keys msg-candidate 
-			[:user_id :message :created-at :updated-at :expires-at :expire-time :category_id])
-		{:views 0 :deleted false 
+			[:user_id :message :created-at :updated-at :category_id])
+		{:views 0 
 		 :loc [
 		 	(get-in msg-candidate [:loc :lon]) 
 		 	(get-in msg-candidate [:loc :lat])]}))
 
-(defn message-to-update [message]
-	(select-keys message 
-		[:_id :user_id :message :loc :created-at :updated-at :views :deleted :expires-at :expire-time :category_id]))
+(defn message-to-update [msg]
+	(select-keys msg 
+		[:_id :user_id :message :loc :created-at :updated-at :views :category_id]))
 
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))
 
-(defn save-message [message]
-	(let [msg-candidate (new-message (updated-now (created-now message)))]
+(defn save-message [msg-details]
+	(let [msg-candidate (new-message (updated-now (created-now msg-details)))]
 		(if (valid? message-validation-set msg-candidate)
 			(db-insert message-coll msg-candidate)
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
@@ -48,16 +46,14 @@
 (defn find-messages-by-bbox [{ll-vec :lower-left ur-vec :upper-right}]
 	(with-collection message-coll
 		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}} 
-			:deleted false 
-			:expires-at {"$gt" (System/currentTimeMillis)}})
+			:created-at {"$gte" (- (System/currentTimeMillis) message-expiration-time-ms)}})
 		(sort (sorted-map :updated-at -1))
 		(limit messages-in-bbox-limit)))
 
 (defn find-messages-by-bbox-and-category [{ll-vec :lower-left ur-vec :upper-right} category]
 	(with-collection message-coll
-		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}} 
-			:deleted false 
-			:expires-at {"$gt" (System/currentTimeMillis)}
+		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}  
+			:created-at {"$gte" (- (System/currentTimeMillis) message-expiration-time-ms)}
 			:category_id category})
 		(sort (sorted-map :updated-at -1))
 		(limit messages-in-bbox-limit)))
@@ -72,5 +68,5 @@
 			(db-save message-coll msg-to-update)
 			(throw (IllegalArgumentException. "Could not save invalid message!")))))
 
-(defn delete-and-update-message [msg]
-	(update-message (merge msg {:deleted true})))
+(defn delete-message-by-id [msg-oid]
+	(db-delete message-coll msg-oid))

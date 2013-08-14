@@ -15,7 +15,7 @@
 
 (def messages [{:_id "123" :loc [12.12 12.12] :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :message "looong message" :created-at "1.1.2013"}]})
-(def message {:views 1})
+(def message {:_id "123abc" :views 1})
 (def message-with-user (merge message {:user_id (:_id user)}))
 (def message-with-user-and-ownership (merge message-with-user {:owns true}))
 (def message-with-user-and-replies (merge message-with-user-and-ownership {:replies []}))
@@ -59,17 +59,17 @@
 	(provided (view-message message) => viewed-message :times 1)
 	(provided (update-message viewed-message) => saved-message :times 1))
 
-(fact "should delete and update message when user owns it"
+(fact "should delete message when user owns it"
 	(delete-message "123abc" user) => message-with-user
 	(provided (find-message-by-id "123abc") => message-with-user :times 1)
 	(provided (user-owns-message? message-with-user user) => true :times 1)
-	(provided (delete-and-update-message message-with-user) => message-with-user :times 1))
+	(provided (delete-message-by-id "123abc") => anything :times 1))
 
 (fact "should not delete and update message when user does not own it"
 	(delete-message "123abc" other-user) => message-with-user
 	(provided (find-message-by-id "123abc") => message-with-user :times 1)
 	(provided (user-owns-message? message-with-user other-user) => false :times 1)
-	(provided (delete-and-update-message message-with-user) => message-with-user :times 0))
+	(provided (delete-message-by-id "123abc") => anything :times 0))
 
 (fact "should own message when messages user id and users id match"
 	(user-owns-message? message-with-user user) => true)

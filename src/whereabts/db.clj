@@ -30,3 +30,6 @@
 
 (defn db-save [coll obj]
     (monger-col/save-and-return coll obj))
+
+(defn db-delete [coll id]
+    (monger-col/remove-by-id coll id))

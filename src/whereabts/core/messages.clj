@@ -48,8 +48,7 @@
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn delete-message [id user]
-	(let [message (find-message-by-id id)
-		  owner (user-owns-message? message user)]
-		  (if owner 
-		  	(delete-and-update-message message) 
-		  	message)))
+	(let [message (find-message-by-id id)]
+		  (when (user-owns-message? message user)
+		  	(delete-message-by-id (:_id message))) 
+		message))

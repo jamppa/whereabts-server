@@ -14,9 +14,6 @@
 	:message "This is the content of My Cool Message" 
 	:loc {:lon 45.1 :lat 56.4}
 	:views 0
-	:deleted false
-	:expire-time 5000
-	:expires-at (+ (System/currentTimeMillis) 5000)
 	:category_id 1})
 
 (def existing-message (with-obj-id (updated-now (created-now message))))
@@ -53,10 +50,10 @@
 (fact "should not save message without user-id"
 	(save-message msg-missing-user) => (throws IllegalArgumentException))
 
-(fact "should find messages by bounding box"
+(fact "should find fresh messages by bounding box"
 	(find-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
 
-(fact "should find messages by bounding box and category"
+(fact "should find fresh messages by bounding box and category"
 	(find-messages-by-bbox-and-category (bounding-box [0 0] [10 10]) 1) => [test-message-a])
 
 (fact "should not find messages by bounding box when there isnt any"
@@ -80,10 +77,7 @@
 	(let [found-msg (find-message-by-id "509d513f61395f0ebbd5e36a")]
 		(update-message (merge found-msg {:message ""})) => (throws IllegalArgumentException)))
 
-(fact "should delete and update message"
-	(let [message (find-message-by-id "509d513f61395f0ebbd5e36a")
-		  deleted (delete-and-update-message message)]
-		  (find-message-by-id "509d513f61395f0ebbd5e36a") => (merge test-message-a {:deleted true})))
-
-(fact "should throw exception when deleting and updating nil message"
-	(delete-and-update-message nil) => (throws IllegalArgumentException))
+(fact "should delete message"
+	(let [message (find-message-by-id "509d513f61395f0ebbd5e36a")]
+		(delete-message-by-id (:_id message))
+		(find-message-by-id "509d513f61395f0ebbd5e36a") => nil))

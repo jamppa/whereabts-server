@@ -9,12 +9,9 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:message "Cool message"
 	:loc [1.0 2.0]
-	:created-at 1364642721968
-	:updated-at 1364642721968
-	:expire-time 5000
-	:expires-at (+ (System/currentTimeMillis) 5000)
+	:created-at (- (System/currentTimeMillis) 86400000)
+	:updated-at (System/currentTimeMillis)
 	:views 10
-	:deleted false
 	:category_id 1})
 
 (def test-message-b {
@@ -22,12 +19,9 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:message "Cool message"
 	:loc [5.0 5.0]
-	:created-at 1364642721969
-	:updated-at 1364642721968
-	:expire-time 5000
-	:expires-at (+ (System/currentTimeMillis) 5000)
+	:created-at (- (System/currentTimeMillis) 86400000)
+	:updated-at (System/currentTimeMillis)
 	:views 11
-	:deleted false
 	:category_id 2})
 
 (def test-message-c {
@@ -35,25 +29,20 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38b")
 	:message "Cool message"
 	:loc [45.0 26.0]
-	:created-at 1364642721970
-	:updated-at 1364642721968
-	:expire-time 5000
-	:expires-at (+ (System/currentTimeMillis) 5000)
+	:created-at (- (System/currentTimeMillis) (* 86400000 4))
+	:updated-at (System/currentTimeMillis)
 	:views 12
-	:deleted false
 	:category_id 2})
 
 (def test-message-d 
-	(merge test-message-a {
+	(merge test-message-c {
 		:_id (ObjectId. "509d513f61395f0ebbd5e36d")
-		:loc [4.123 3.123]
-		:deleted true}))
+		:loc [4.123 3.123]}))
 
 (def test-message-e 
-	(merge test-message-a {
+	(merge test-message-c {
 		:_id (ObjectId. "509d513f61395f0ebbd5e36e")
-		:loc [4.123 3.123]
-		:expires-at (- (System/currentTimeMillis) 5000)}))
+		:loc [4.123 3.123]}))
 
 (def test-feedback-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e37a")
