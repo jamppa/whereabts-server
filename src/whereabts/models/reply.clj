@@ -4,7 +4,8 @@
 		[whereabts.db]
 		[whereabts.models.util]
 		[validateur.validation]
-		[monger.query]))
+		[monger.query])
+	(:require [monger.collection :as monger-col]))
 
 (def replies-coll "replies")
 (def reply-length 250)
@@ -28,3 +29,7 @@
 	(with-collection replies-coll
 		(find {:message_id (:_id message)})
 		(sort (sorted-map :created-at 1))))
+
+(defn delete-replies-by-message [message]
+	(monger-col/remove replies-coll 
+		{:message_id (:_id message)}))

@@ -1,6 +1,7 @@
 (ns whereabts.core.messages
 	(:use 
 		[whereabts.models.message]
+		[whereabts.models.reply]
 		[whereabts.models.util]
 		[whereabts.core.with-util]
 		[whereabts.core.replies]
@@ -49,5 +50,6 @@
 (defn delete-message [id user]
 	(let [message (find-message-by-id id)]
 		  (when (user-owns-message? message user)
-		  	(delete-message-by-id (:_id message))) 
+		  	(delete-message-by-id (:_id message))
+		  	(delete-replies-by-message message)) 
 		message))

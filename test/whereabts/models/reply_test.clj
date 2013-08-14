@@ -49,3 +49,7 @@
 
 (fact "should not find any replies when message doesnt have any"
 	(find-replies-by-message test-message-b) => [])
+
+(fact "should delete replies of message"
+	(delete-replies-by-message test-message-a)
+	(find-replies-by-message test-message-a) => [])

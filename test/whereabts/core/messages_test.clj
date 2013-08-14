@@ -2,6 +2,7 @@
 	(:use
 		[midje.sweet]
 		[whereabts.models.message]
+		[whereabts.models.reply]
 		[whereabts.core.messages]
 		[whereabts.core.replies]
 		[whereabts.core.categories]
@@ -61,13 +62,15 @@
 	(delete-message "123abc" user) => message-with-user
 	(provided (find-message-by-id "123abc") => message-with-user :times 1)
 	(provided (user-owns-message? message-with-user user) => true :times 1)
-	(provided (delete-message-by-id "123abc") => anything :times 1))
+	(provided (delete-message-by-id "123abc") => anything :times 1)
+	(provided (delete-replies-by-message message-with-user) => anything :times 1))
 
 (fact "should not delete and update message when user does not own it"
 	(delete-message "123abc" other-user) => message-with-user
 	(provided (find-message-by-id "123abc") => message-with-user :times 1)
 	(provided (user-owns-message? message-with-user other-user) => false :times 1)
-	(provided (delete-message-by-id "123abc") => anything :times 0))
+	(provided (delete-message-by-id "123abc") => anything :times 0)
+	(provided (delete-replies-by-message message-with-user) => anything :times 0))
 
 (fact "should own message when messages user id and users id match"
 	(user-owns-message? message-with-user user) => true)
