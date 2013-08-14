@@ -4,7 +4,6 @@
 		[whereabts.models.util]
 		[whereabts.core.with-util]
 		[whereabts.core.replies]
-		[whereabts.core.expirations]
 		[whereabts.core.categories]
 		[whereabts.core.profiles])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
@@ -34,7 +33,7 @@
 (defn save-new-message [msg usr]
 	(compactify-message 
 		(save-message 
-			(expires-at (with-category (with-user msg usr))))))
+			(with-category (with-user msg usr)))))
 
 (defn view-and-update-message [msg]
 	(update-message (view-message msg)))
