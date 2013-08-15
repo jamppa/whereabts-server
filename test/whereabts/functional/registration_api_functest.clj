@@ -33,6 +33,7 @@
 
 (def anonymous-registration-api (str whereabts-api-testsrv "/register_user"))
 (def gcm-id-registration-api (str whereabts-api-testsrv "/register_gcm"))
+(def required-client-version-api (str whereabts-api-testsrv "/required_client_version"))
 
 (defn- post-as-public-user [payload]
 	(http/post anonymous-registration-api
@@ -45,6 +46,10 @@
 (defn- post-as-anon-user [payload]
 	(http/post gcm-id-registration-api
 		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
+
+(defn- get-client-version-as-user []
+	(http/get required-client-version-api
+		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] "")))
 
 (background (before :facts (setup-db)))
 
@@ -68,3 +73,6 @@
 
 (fact "should response with HTTP created when POSTing registration payload with existin email" :functional
 	(:status (post-as-public-user registration-payload-existing-email)) => 201)
+
+(fact "should response with HTTP ok when GETing minimum required client version" :functional
+	(:status (get-client-version-as-user)) => 200)
