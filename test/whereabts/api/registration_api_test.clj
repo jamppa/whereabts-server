@@ -14,12 +14,12 @@
 
 (fact "should POST user details"
 	(registration-api-routes
-		(whereabts-request-as-public-user :post "/anonymousregistration" payload)) => successful-response
+		(whereabts-request-as-public-user :post "/register_user" payload)) => successful-response
 	(provided (register-user payload) => payload :times 1))
 
 (fact "should throw exception when POSTing invalid user details"
 	(registration-api-routes
-		(whereabts-request-as-public-user :post "/anonymousregistration" invalid-payload)) => (throws IllegalArgumentException)
+		(whereabts-request-as-public-user :post "/register_user" invalid-payload)) => (throws IllegalArgumentException)
 	(provided (register-user {:user-uuid nil :email nil}) =throws=> (IllegalArgumentException. "invalid!")))
 
 (fact "should POST gcm id and register it for the user"

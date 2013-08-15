@@ -16,7 +16,7 @@
 
 (defroutes registration-api-routes
 	
-	(POST "/anonymousregistration" [:as req]
+	(POST "/register_user" [:as req]
 		(with-role req ["public"]
 		(let [user (extract-user req)]
 			(-> (response (register-user user))

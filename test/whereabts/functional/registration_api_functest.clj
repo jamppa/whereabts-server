@@ -31,7 +31,7 @@
 (def gcm-registration-payload (json/write-str {:gcm-id "123abc"}))
 (def invalid-gcm-registration-payload (json/write-str {:some-other "asdasd"}))
 
-(def anonymous-registration-api (str whereabts-api-testsrv "/anonymousregistration"))
+(def anonymous-registration-api (str whereabts-api-testsrv "/register_user"))
 (def gcm-id-registration-api (str whereabts-api-testsrv "/register_gcm"))
 
 (defn- post-as-public-user [payload]
