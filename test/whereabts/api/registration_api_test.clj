@@ -26,3 +26,7 @@
 	(registration-api-routes
 		(whereabts-request-as-anonymous-user :post "/register_gcm" gcm-registration-payload)) => successful-response
 	(provided (register-gcm email-roled-user "123abc") => payload :times 1))
+
+(fact "should GET minimum required client version"
+	(registration-api-routes
+		(whereabts-request-as-public-user :get "/required_client_version")) => (expected-res 200 {:version-code 7}))

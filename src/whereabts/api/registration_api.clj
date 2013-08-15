@@ -6,6 +6,8 @@
 		[ring.util.response]
 		[clojure.walk :only [keywordize-keys]]))
 
+(def required-client-version {:version-code 7})
+
 (defn- extract-user [req]
 	(let [body (keywordize-keys (:body req))]
 		{:user-uuid (:user-uuid body) :email (:email body)}))
@@ -27,5 +29,9 @@
 			(let [user (:basic-authentication req)]
 				(-> (response (register-gcm user (extract-gcm-id req)))
 					(status 201)))))
+
+	(GET "/required_client_version" [:as req]
+		(with-role req ["public" "email"]
+			(response required-client-version)))
 
 	)
