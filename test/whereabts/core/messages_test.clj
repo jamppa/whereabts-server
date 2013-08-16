@@ -15,7 +15,7 @@
 
 (def messages [{:_id "123" :loc [12.12 12.12] :created-at "1.1.2013" :nick "jamppa" :message "looong message"}])
 (def expected-all-messages {:messages [{:_id "123" :loc [12.12 12.12] :message "looong message" :created-at "1.1.2013"}]})
-(def message {:_id "123abc" :views 1})
+(def message {:_id "123abc" :views 1 :created-at 1})
 (def message-with-user (merge message {:user_id (:_id user)}))
 (def message-with-user-and-ownership (merge message-with-user {:owns true}))
 (def message-with-user-and-replies (merge message-with-user-and-ownership {:replies []}))
@@ -44,7 +44,8 @@
 	(find-message "123abc" user) => message-with-user-and-replies
 	(provided (find-message-by-id "123abc") => message-with-user :times 1)
 	(provided (with-user-profile message-with-user-and-ownership) => message-with-user-and-ownership :times 1)
-	(provided (with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1))
+	(provided (with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1)
+	(provided (with-expiration message-with-user-and-replies) => message-with-user-and-replies :times 1))
 
 (fact "should throw exception when message is not found by id"
 	(find-message "123abc" user) => (throws WhereabtsResourceNotFoundException)
@@ -77,3 +78,7 @@
 
 (fact "should not own message when messages user-id and users id does not match"
 	(user-owns-message? message-with-user other-user) => false)
+
+(fact "should return message with expiration time"
+	(with-expiration message) => 
+		(merge message {:expires-at (+ (:created-at message) message-expiration-time-ms)}))
