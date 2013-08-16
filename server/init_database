@@ -1,9 +1,9 @@
 # indexes for messages collection
-mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1, "expires-at": 1})'
-mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1, "expires-at": 1, "category_id": 1})'
+mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1, "created-at": 1})'
+mongo whereabtsdb --eval 'db.messages.ensureIndex({"loc" : "2d", "updated-at" : -1, "created-at": 1, "category_id": 1})'
 
 # indexes for users collection
-mongo whereabtsdb --eval 'db.anonymous_users.ensureIndex({"user-uuid" : 1, "email" : 1})'
+mongo whereabtsdb --eval 'db.users.ensureIndex({"user-uuid" : 1, "email" : 1})'
 
 # indexes for replies collection
 mongo whereabtsdb --eval 'db.replies.ensureIndex({"message_id" : 1, "created-at" : 1})'
