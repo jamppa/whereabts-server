@@ -40,42 +40,47 @@
 
 (fact "should save new message and return it compactified"
 	(save-new-message message user) => saved-message
-	(provided (with-category message-with-user) => message-with-user :times 1)
-	(provided (save-message message-with-user) => saved-message :times 1)
-	(provided (compactify-message saved-message) => compactified-saved-message :times 1))
+	(provided 
+		(with-category message-with-user) => message-with-user :times 1
+		(save-message message-with-user) => saved-message :times 1
+		(compactify-message saved-message) => compactified-saved-message :times 1))
 
 (fact "should find a message with user profile and replies by id"
 	(find-message "123abc" user) => message-with-user-and-replies
-	(provided (find-message-by-id "123abc") => message-with-user :times 1)
-	(provided (with-user-profile message-with-user-and-ownership) => message-with-user-and-ownership :times 1)
-	(provided (with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1)
-	(provided (with-expiration message-with-user-and-replies) => message-with-user-and-replies :times 1))
+	(provided (find-message-by-id "123abc") => message-with-user :times 1
+		(with-user-profile message-with-user-and-ownership) => message-with-user-and-ownership :times 1
+		(with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1
+		(with-expiration message-with-user-and-replies) => message-with-user-and-replies :times 1))
 
 (fact "should throw exception when message is not found by id"
 	(find-message "123abc" user) => (throws WhereabtsResourceNotFoundException)
-	(provided (find-message-by-id "123abc") => nil :times 1))
+	(provided 
+		(find-message-by-id "123abc") => nil :times 1))
 
 (fact "should view the message by incrementing views counter"
 	(view-message message) => (merge message {:views 2}))
 
 (fact "should view and update message"
 	(view-and-update-message message) => saved-message
-	(provided (view-message message) => viewed-message :times 1)
-	(provided (update-message viewed-message) => saved-message :times 1))
+	(provided 
+		(view-message message) => viewed-message :times 1
+		(update-message viewed-message) => saved-message :times 1))
 
 (fact "should delete message when user owns it"
 	(delete-message "123abc" user) => message-with-user
-	(provided (find-message-by-id "123abc") => message-with-user :times 1)
-	(provided (user-owns-message? message-with-user user) => true :times 1)
-	(provided (delete-message-by-id "123abc") => anything :times 1)
-	(provided (delete-replies-by-message message-with-user) => anything :times 1))
+	(provided 
+		(find-message-by-id "123abc") => message-with-user :times 1
+		(user-owns-message? message-with-user user) => true :times 1
+		(delete-message-by-id "123abc") => anything :times 1
+		(delete-replies-by-message message-with-user) => anything :times 1))
 
 (fact "should not delete and update message when user does not own it"
 	(delete-message "123abc" other-user) => message-with-user
-	(provided (find-message-by-id "123abc") => message-with-user :times 1)
-	(provided (user-owns-message? message-with-user other-user) => false :times 1)
-	(provided (delete-message-by-id "123abc") => anything :times 0)
-	(provided (delete-replies-by-message message-with-user) => anything :times 0))
+	(provided 
+		(find-message-by-id "123abc") => message-with-user :times 1
+		(user-owns-message? message-with-user other-user) => false :times 1
+		(delete-message-by-id "123abc") => anything :times 0
+		(delete-replies-by-message message-with-user) => anything :times 0))
 
 (fact "should own message when messages user id and users id match"
 	(user-owns-message? message-with-user user) => true)
