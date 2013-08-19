@@ -7,7 +7,7 @@
 		[whereabts.models.reply]
 		[whereabts.models.message]
 		[whereabts.models.util]
-		[whereabts.notification.core]))
+		[whereabts.notification.reply-notification]))
 
 (def user {:_id 1})
 (def message {:message_id 1})
@@ -20,26 +20,18 @@
 
 (fact "should save reply for message with user and update message with current timestamp"
 	(save-reply-to-message reply user message) => saved-reply
-	(provided (save-reply reply user message) => saved-reply :times 1)
-	(provided (updated-now message) => message :times 1)
-	(provided (update-message message) => message :times 1)
-	(provided (notify-on-reply-if-not-owner saved-reply user message) => message :times 1)
-	(provided (with-user-profile saved-reply) => saved-reply :times 1))
+	(provided 
+		(save-reply reply user message) => saved-reply :times 1
+		(updated-now message) => message :times 1
+		(update-message message) => message :times 1
+		(publish-reply-notification saved-reply message) => message :times 1
+		(with-user-profile saved-reply) => saved-reply :times 1))
 
 (fact "should return message with replies that are mapped with user profile"
 	(with-replies message) => (merge message {:replies [reply-with-message]})
-	(provided (find-replies-by-message message) => [reply-with-message] :times 1)
-	(provided (with-user-profile anything) => reply-with-message :times 1))
-
-(fact "should notify on reply when not owner of the replied message"
-	(notify-on-reply-if-not-owner reply user message) => reply
-	(provided (replying-to-own-message? message user) => false :times 1)
-	(provided (notify-on-reply reply user message) => reply :times 1))
-
-(fact "should not notify on reply when owner of the replied message"
-	(notify-on-reply-if-not-owner reply user message) => nil
-	(provided (replying-to-own-message? message user) => true :times 1)
-	(provided (notify-on-reply reply user message) => anything :times 0))
+	(provided 
+		(find-replies-by-message message) => [reply-with-message] :times 1
+		(with-user-profile anything) => reply-with-message :times 1))
 
 (fact "should be replying to own message when user is the owner of the message"
 	(replying-to-own-message? message user) => true

@@ -5,7 +5,7 @@
 		[whereabts.models.util]
 		[whereabts.core.with-util]
 		[whereabts.core.profiles]
-		[whereabts.notification.core]))
+		[whereabts.notification.reply-notification]))
 
 (defn- new-reply [candidate]
 	(select-keys candidate
@@ -25,12 +25,12 @@
 
 (defn notify-on-reply-if-not-owner [reply user message]
 	(when (not (replying-to-own-message? message user))
-		(notify-on-reply reply user message)))
+		(publish-reply-notification reply user message)))
 
 (defn save-reply-to-message [reply user message]
 	(let [saved-reply (save-reply reply user message)]
 		(update-message (updated-now message))
-		(notify-on-reply-if-not-owner saved-reply user message)
+		(publish-reply-notification saved-reply message)
 			(with-user-profile saved-reply)))
 
 (defn with-replies [message]
