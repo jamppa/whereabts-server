@@ -47,6 +47,7 @@
 	(if-let [message (find-message-by-id id)]
 		(-> message 
 			(with-ownership user)
+			(with-liked user)
 			(with-user-profile)
 			(with-replies)
 			(with-expiration))
