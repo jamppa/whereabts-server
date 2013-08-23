@@ -8,9 +8,6 @@
 		[whereabts.util.geo]
 		[clojure.walk :only [keywordize-keys]]))
 
-(defn view-message-async [msg-agent]
-	(send-off msg-agent view-and-update-message))
-
 (defroutes messages-api-routes
 
 	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat :as req]
@@ -30,7 +27,6 @@
 		(with-role req ["email" "public"]
 		(let [user (:basic-authentication req)
 			  message (find-message id user)]
-			  (view-message-async (agent message))
 			  (response message))))
 
 	(POST "/messages" [:as req]

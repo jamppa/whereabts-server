@@ -48,7 +48,9 @@
 
 (fact "should find a message with user profile and replies by id"
 	(find-message "123abc" user) => message-with-user-and-replies
-	(provided (find-message-by-id "123abc") => message-with-user :times 1
+	(provided 
+		(find-message-by-id "123abc") => message-with-user :times 1
+		(update-message anything) => message-with-user :times 1
 		(with-liked anything user) => message-with-user-and-ownership :times 1
 		(with-likes-as-number anything) => message-with-user-and-ownership :times 1
 		(with-user-profile message-with-user-and-ownership) => message-with-user-and-ownership :times 1
@@ -60,13 +62,9 @@
 	(provided 
 		(find-message-by-id "123abc") => nil :times 1))
 
-(fact "should view the message by incrementing views counter"
-	(view-message message) => (merge message {:views 2}))
-
 (fact "should view and update message"
 	(view-and-update-message message) => saved-message
 	(provided 
-		(view-message message) => viewed-message :times 1
 		(update-message viewed-message) => saved-message :times 1))
 
 (fact "should delete message when user owns it"

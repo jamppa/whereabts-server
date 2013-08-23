@@ -16,10 +16,6 @@
 	(= (obj-id-as-str user) 
 		(id-as-str :user_id message)))
 
-(defn view-message [msg]
-	(let [views-so-far (:views msg)]
-		(merge msg {:views (inc views-so-far)})))
-
 (defn find-all-messages-by-bbox [bbox]
 	(let [messages (find-messages-by-bbox bbox)
 		  compactified (map compactify-message messages)]
@@ -37,11 +33,12 @@
 			(with-category (with-user msg usr)))))
 
 (defn view-and-update-message [msg]
-	(update-message (view-message msg)))
+	(update-message 
+		(update-in msg [:views] inc)))
 
 (defn find-message [id user]
 	(if-let [message (find-message-by-id id)]
-		(-> message 
+		(-> (view-and-update-message message) 
 			(with-ownership user)
 			(with-liked user)
 			(with-likes-as-number)

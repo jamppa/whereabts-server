@@ -33,8 +33,8 @@
 
 (fact "should GET message by its id"
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/123abc")) => expected-res-for-message
-	(provided (find-message "123abc" email-roled-user) => message :times 1)
-	(provided (view-message-async (agent message)) => message :times 1))
+	(provided 
+		(find-message "123abc" email-roled-user) => message :times 1))
 
 (fact "should DELETE message by its id"
 	(messages-api-routes
