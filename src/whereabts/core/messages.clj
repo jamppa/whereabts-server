@@ -12,10 +12,6 @@
 (defn- all-messages [messages]
 	{:messages messages})
 
-(defn with-expiration [message]
-	(let [expires-at (+ (:created-at message) message-expiration-time-ms)]
-		(merge message {:expires-at expires-at})))
-
 (defn user-owns-message? [message user]
 	(= (obj-id-as-str user) 
 		(id-as-str :user_id message)))
@@ -50,7 +46,7 @@
 			(with-liked user)
 			(with-user-profile)
 			(with-replies)
-			(with-expiration))
+			(with-expiration message-expiration-time-ms))
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn delete-message [id user]

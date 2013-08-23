@@ -52,7 +52,7 @@
 		(with-liked anything user) => message-with-user-and-ownership :times 1
 		(with-user-profile message-with-user-and-ownership) => message-with-user-and-ownership :times 1
 		(with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1
-		(with-expiration message-with-user-and-replies) => message-with-user-and-replies :times 1))
+		(with-expiration message-with-user-and-replies message-expiration-time-ms) => message-with-user-and-replies :times 1))
 
 (fact "should throw exception when message is not found by id"
 	(find-message "123abc" user) => (throws WhereabtsResourceNotFoundException)
@@ -90,12 +90,7 @@
 (fact "should not own message when messages user-id and users id does not match"
 	(user-owns-message? message-with-user other-user) => false)
 
-(fact "should return message with expiration time"
-	(with-expiration message) => 
-		(merge message {:expires-at (+ (:created-at message) message-expiration-time-ms)}))
-
 (def liked-message (merge message {:likes ["some"]}))
-
 (fact "should like message and update it"
 	(like-message "123abc" user) => liked-message
 	(provided

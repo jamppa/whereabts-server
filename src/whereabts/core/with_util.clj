@@ -12,6 +12,10 @@
 		(merge obj {:owns true})
 		(merge obj {:owns false})))
 
+(defn with-expiration [message expiration]
+	(let [expires-at (+ (:created-at message) expiration)]
+		(merge message {:expires-at expires-at})))
+
 (defn with-liked [message user]
 	(if (some #{(obj-id-as-str user)} (:likes message))
 		(merge message {:liked true})

@@ -1,7 +1,8 @@
 (ns whereabts.core.with-util-test
 	(:use
 		[midje.sweet]
-		[whereabts.core.with-util]))
+		[whereabts.core.with-util]
+		[whereabts.models.message]))
 
 (def obj {})
 (def user {:_id "123"})
@@ -31,3 +32,8 @@
 
 (fact "should return message with liked-status false when likes list is nil"
 	(with-liked {} user) => {:liked false})
+
+(def message (merge message {:created-at 1}))
+(fact "should return message with expiration time"
+	(with-expiration message message-expiration-time-ms) => 
+		(merge message {:expires-at (+ (:created-at message) message-expiration-time-ms)}))
