@@ -2,8 +2,8 @@
 	(:use
 		[whereabts.api.replies-api]
 		[whereabts.core.replies]
-		[whereabts.core.messages]
 		[whereabts.core.with-util]
+		[whereabts.models.message]
 		[midje.sweet]
 		[ring.mock.request]
 		[whereabts.api-helper]))
@@ -20,5 +20,6 @@
 (fact "should POST new reply to message from user"
 	(replies-api-routes
 		(whereabts-request-as-anonymous-user :post "/messages/123abc/replies" new-reply-payload)) => expected-res-for-new-reply
-	(provided (find-message "123abc" email-roled-user) => message-to-reply :times 1)
-	(provided (save-reply-to-message new-reply-payload email-roled-user message-to-reply) => saved-reply :times 1))
+	(provided 
+		(find-message-by-id "123abc") => message-to-reply :times 1
+		(save-reply-to-message new-reply-payload email-roled-user message-to-reply) => saved-reply :times 1))

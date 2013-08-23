@@ -32,11 +32,3 @@
 	(provided 
 		(find-replies-by-message message) => [reply-with-message] :times 1
 		(with-user-profile anything) => reply-with-message :times 1))
-
-(fact "should be replying to own message when user is the owner of the message"
-	(replying-to-own-message? message user) => true
-	(provided (with-ownership message user) => (merge message {:owns true})))
-
-(fact "should not be replying to own messag when user is not the owner of the message"
-	(replying-to-own-message? message user) => false
-	(provided (with-ownership message user) => (merge message {:owns false})))

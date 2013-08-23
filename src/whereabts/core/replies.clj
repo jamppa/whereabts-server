@@ -19,19 +19,11 @@
 		(new-reply)
 		(save-new-reply)))
 
-(defn replying-to-own-message? [message user]
-	(let [msg (with-ownership message user)]
-		(:owns msg)))
-
-(defn notify-on-reply-if-not-owner [reply user message]
-	(when (not (replying-to-own-message? message user))
-		(publish-reply-notification reply user message)))
-
 (defn save-reply-to-message [reply user message]
 	(let [saved-reply (save-reply reply user message)]
 		(update-message (updated-now message))
 		(publish-reply-notification saved-reply message)
-			(with-user-profile saved-reply)))
+		(with-user-profile saved-reply)))
 
 (defn with-replies [message]
 	(merge message {
