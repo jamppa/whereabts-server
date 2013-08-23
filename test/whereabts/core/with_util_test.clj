@@ -37,3 +37,7 @@
 (fact "should return message with expiration time"
 	(with-expiration message message-expiration-time-ms) => 
 		(merge message {:expires-at (+ (:created-at message) message-expiration-time-ms)}))
+
+(def message (merge message {:likes ["asdasdasd"]}))
+(fact "should return message with likes as number"
+	(with-likes-as-number message) => (merge message {:likes 1}))

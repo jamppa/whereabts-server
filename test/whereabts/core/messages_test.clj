@@ -50,6 +50,7 @@
 	(find-message "123abc" user) => message-with-user-and-replies
 	(provided (find-message-by-id "123abc") => message-with-user :times 1
 		(with-liked anything user) => message-with-user-and-ownership :times 1
+		(with-likes-as-number anything) => message-with-user-and-ownership :times 1
 		(with-user-profile message-with-user-and-ownership) => message-with-user-and-ownership :times 1
 		(with-replies message-with-user-and-ownership) => message-with-user-and-replies :times 1
 		(with-expiration message-with-user-and-replies message-expiration-time-ms) => message-with-user-and-replies :times 1))

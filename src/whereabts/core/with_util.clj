@@ -20,3 +20,6 @@
 	(if (some #{(obj-id-as-str user)} (:likes message))
 		(merge message {:liked true})
 		(merge message {:liked false})))
+
+(defn with-likes-as-number [message]
+	(merge message {:likes (count (:likes message))}))

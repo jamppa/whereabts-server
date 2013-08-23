@@ -44,6 +44,7 @@
 		(-> message 
 			(with-ownership user)
 			(with-liked user)
+			(with-likes-as-number)
 			(with-user-profile)
 			(with-replies)
 			(with-expiration message-expiration-time-ms))
