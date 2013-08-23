@@ -26,7 +26,7 @@
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/1.23/1.23/5.0/5.0/traffic")) => expected-res-for-messages
 	(provided (find-all-messages-by-bbox-and-category bbox "traffic") => messages :times 1))
 
-(fact "should POST anonymous new message"
+(fact "should POST new message"
 	(messages-api-routes 
 		(whereabts-request-as-anonymous-user :post "/messages" new-msg-payload)) => expected-res-for-new-message
 	(provided (save-new-message new-msg-payload email-roled-user) => message :times 1))
@@ -40,3 +40,9 @@
 	(messages-api-routes
 		(whereabts-request-as-anonymous-user :delete "/messages/123abc")) => expected-res-for-delete-message
 	(provided (delete-message "123abc" email-roled-user) => message :times 1))
+
+(fact "should POST like to existing message"
+	(messages-api-routes
+		(whereabts-request-as-anonymous-user :post "/messages/123abc/likes" {})) => (expected-res 201 message)
+	(provided
+		(like-message "123abc" email-roled-user) => message :times 1))

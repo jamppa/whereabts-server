@@ -58,3 +58,6 @@
 		  	(delete-message-by-id (:_id message))
 		  	(delete-replies-by-message message)) 
 		message))
+
+(defn like-message [id user]
+	(find-message-by-id id))

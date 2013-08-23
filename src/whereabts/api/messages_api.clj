@@ -42,5 +42,12 @@
 	(DELETE "/messages/:id" [id :as req]
 		(with-role req ["email"]
 			(response (delete-message id (:basic-authentication req)))))
+
+	(POST "/messages/:id/likes" [id :as req]
+		(with-role req ["email"]
+			(-> id
+				(like-message (:basic-authentication req))
+				(response)
+				(status 201))))
 )
 
