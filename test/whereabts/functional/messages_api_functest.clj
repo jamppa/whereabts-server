@@ -9,6 +9,7 @@
 
 (def valid-anonymous-credentials ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"])
 (def whereabts-api-messages (str whereabts-api-testsrv "/messages"))
+(def whereabts-api-like-message (str whereabts-api-messages "/509d513f61395f0ebbd5e36a/likes"))
 
 (defn- whereabts-api-messages-by-bbox [ll-lon ll-lat ur-lon ur-lat]
 	(str whereabts-api-messages "/" ll-lon "/" ll-lat "/" ur-lon "/" ur-lat))
@@ -32,6 +33,10 @@
 (defn- post-message-as-user [payload]
 	(http/post whereabts-api-messages
 		(whereabts-api-request valid-anonymous-credentials payload)))
+
+(defn- like-message-as-user []
+	(http/post whereabts-api-like-message
+		(whereabts-api-request valid-anonymous-credentials "")))
 
 (background (before :facts (setup-db)))
 
@@ -83,3 +88,6 @@
 (fact "should response with HTTP Forbidden when DELETING message as a public user" :functional
 	(:status (http/delete (str whereabts-api-messages "/509d513f61395f0ebbd5e36a")
 		(whereabts-api-request-public-user ""))) => 403)
+
+(fact "should response with HTTP Created when POSTing new like for message" :functional
+	(:status (like-message-as-user)) => 201)
