@@ -14,7 +14,8 @@
 	:message "This is the content of My Cool Message" 
 	:loc {:lon 45.1 :lat 56.4}
 	:views 0
-	:category_id 1})
+	:category_id 1
+	:likes []})
 
 (def existing-message (with-obj-id (updated-now (created-now message))))
 

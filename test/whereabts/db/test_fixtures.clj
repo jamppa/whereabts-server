@@ -12,6 +12,7 @@
 	:created-at (- (System/currentTimeMillis) 86400000)
 	:updated-at (System/currentTimeMillis)
 	:views 10
+	:likes []
 	:category_id 1})
 
 (def test-message-b {
@@ -22,6 +23,7 @@
 	:created-at (- (System/currentTimeMillis) 86400000)
 	:updated-at (System/currentTimeMillis)
 	:views 11
+	:likes ["509d513f61395f0ebbd5e38a"]
 	:category_id 2})
 
 (def test-message-c {
@@ -32,6 +34,7 @@
 	:created-at (- (System/currentTimeMillis) (* 86400000 4))
 	:updated-at (System/currentTimeMillis)
 	:views 12
+	:likes ["509d513f61395f0ebbd5e38a"]
 	:category_id 2})
 
 (def test-message-d 

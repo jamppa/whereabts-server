@@ -59,8 +59,14 @@
 		  	(delete-replies-by-message message)) 
 		message))
 
+(defn add-user-to-likes [message user]
+	(if (nil? (some #{(obj-id-as-str user)} (:likes message)))
+		(assoc-in message [:likes] 
+			(vec (conj (:likes message) (obj-id-as-str user))))
+		message))
+
 (defn like-message [id user]
 	(let [message (find-message-by-id id)] 
 		(-> message
-			(assoc-in [:likes] (vec (conj (:likes message) (obj-id-as-str user))))
+			(add-user-to-likes user)
 			(update-message))))

@@ -93,8 +93,16 @@
 		(merge message {:expires-at (+ (:created-at message) message-expiration-time-ms)}))
 
 (def liked-message (merge message {:likes ["some"]}))
-(fact "should like message by adding user id to message likes"
+
+(fact "should like message and update it"
 	(like-message "123abc" user) => liked-message
 	(provided
 		(find-message-by-id "123abc") => message :times 1
+		(add-user-to-likes message user) => liked-message :times 1
 		(update-message liked-message) => liked-message :times 1))
+
+(fact "should add user id to messages likes"
+	(add-user-to-likes message user) => liked-message)
+
+(fact "should not double add user id to messages likes"
+	(add-user-to-likes liked-message user) => liked-message)
