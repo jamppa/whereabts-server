@@ -91,3 +91,10 @@
 (fact "should return message with expiration time"
 	(with-expiration message) => 
 		(merge message {:expires-at (+ (:created-at message) message-expiration-time-ms)}))
+
+(def liked-message (merge message {:likes ["some"]}))
+(fact "should like message by adding user id to message likes"
+	(like-message "123abc" user) => liked-message
+	(provided
+		(find-message-by-id "123abc") => message :times 1
+		(update-message liked-message) => liked-message :times 1))

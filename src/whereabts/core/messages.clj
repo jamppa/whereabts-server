@@ -60,4 +60,7 @@
 		message))
 
 (defn like-message [id user]
-	(find-message-by-id id))
+	(let [message (find-message-by-id id)] 
+		(-> message
+			(assoc-in [:likes] (vec (conj (:likes message) (obj-id-as-str user))))
+			(update-message))))
