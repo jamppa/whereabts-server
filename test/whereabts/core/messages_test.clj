@@ -8,6 +8,7 @@
 		[whereabts.core.categories]
 		[whereabts.core.profiles]
 		[whereabts.core.with-util]
+		[whereabts.notification.like-notification]
 		[whereabts.util.geo])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
@@ -95,7 +96,8 @@
 	(provided
 		(find-message-by-id "123abc") => message :times 1
 		(add-user-to-likes message user) => liked-message :times 1
-		(update-message liked-message) => liked-message :times 1))
+		(update-message liked-message) => liked-message :times 1
+		(publish-like-message liked-message user) => liked-message :times 1))
 
 (fact "should add user id to messages likes"
 	(add-user-to-likes message user) => liked-message)

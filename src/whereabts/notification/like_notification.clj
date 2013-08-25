@@ -12,4 +12,5 @@
 
 (defn publish-like-message [message user]
 	(publish-message like-channel 
-		(prepare-like-message-for-channel message user)))
+		(prepare-like-message-for-channel message user))
+	message)

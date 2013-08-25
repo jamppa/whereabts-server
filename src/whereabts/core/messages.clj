@@ -6,7 +6,8 @@
 		[whereabts.core.with-util]
 		[whereabts.core.replies]
 		[whereabts.core.categories]
-		[whereabts.core.profiles])
+		[whereabts.core.profiles]
+		[whereabts.notification.like-notification])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn- all-messages [messages]
@@ -64,4 +65,5 @@
 	(let [message (find-message-by-id id)] 
 		(-> message
 			(add-user-to-likes user)
-			(update-message))))
+			(update-message)
+			(publish-like-message user))))

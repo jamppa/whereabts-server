@@ -20,7 +20,7 @@
 	(prepare-like-message-for-channel liked-message user-who-liked) => like-channel-message)
 
 (fact "should publish like message to channel"
-	(publish-like-message liked-message user-who-liked) => anything
+	(publish-like-message liked-message user-who-liked) => liked-message
 	(provided
 		(prepare-like-message-for-channel liked-message user-who-liked) => anything :times 1
 		(publish-message like-channel anything) => anything :times 1))
