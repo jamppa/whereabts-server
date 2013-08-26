@@ -8,6 +8,7 @@
 (defn prepare-like-message-for-channel [message user]
 	{
 		:user-id (obj-id-as-str user)
+		:message-owner-id (id-as-str message :user_id)
 		:message-id (obj-id-as-str message)})
 
 (defn publish-like-message [message user]

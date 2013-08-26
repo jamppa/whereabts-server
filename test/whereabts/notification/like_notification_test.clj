@@ -13,6 +13,7 @@
 (def user-who-liked test-user-a)
 (def like-channel-message {
 	:user-id (.toString (:_id user-who-liked))
+	:message-owner-id (.toString (:user_id liked-message))
 	:message-id (.toString (:_id liked-message))
 	})
 
