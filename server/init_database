@@ -11,4 +11,6 @@ mongo whereabtsdb --eval 'db.replies.ensureIndex({"message_id" : 1, "created-at"
 #indexes for profiles collection
 mongo whereabtsdb --eval 'db.profiles.ensureIndex({"user_id" : 1})'
 
+#add likes field to messages
+mongo localhost:27017/whereabtsdb add_likes_field_to_messages.js
 
