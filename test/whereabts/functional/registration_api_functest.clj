@@ -11,7 +11,11 @@
 (def registration-payload 
 	(json/write-str {
 		:user-uuid (.toString (UUID/randomUUID)) 
-		:email "anonymous@whereabts.com"}))
+		:email "test.man@testland.fi"
+		:nick "test.man"
+		:description ""
+		:country "fi"
+		:photo ""}))
 
 (def registration-payload-existing-email
 	(json/write-str {

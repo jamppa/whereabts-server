@@ -10,11 +10,11 @@
 
 (defn- extract-user [req]
 	(let [body (keywordize-keys (:body req))]
-		{:user-uuid (:user-uuid body) :email (:email body)}))
+		(select-keys body [:email :user-uuid])))
 
 (defn- extract-profile [req]
 	(let [body (keywordize-keys (:body req))]
-		{:country (:country body) :nick (:nick body)}))
+		(select-keys body [:country :nick :description :photo])))
 
 (defn- extract-gcm-id [req]
 	(let [body (keywordize-keys (:body req))]

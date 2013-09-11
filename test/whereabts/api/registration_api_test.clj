@@ -6,9 +6,9 @@
 		[ring.mock.request]
 		[midje.sweet]))
 
-(def payload {:user-uuid "123-abc" :email "anonymous@whereabts.com" :country "fi" :nick "anonymous"})
+(def payload {:user-uuid "123-abc" :email "anonymous@whereabts.com" :country "fi" :nick "anonymous" :photo "" :description ""})
 (def user-from-payload (select-keys payload [:user-uuid :email]))
-(def profile-from-payload (select-keys payload [:country :nick]))
+(def profile-from-payload (select-keys payload [:country :nick :description :photo]))
 
 (def invalid-payload {:invalid "payload"})
 (def gcm-registration-payload {:gcm-id "123abc"})
@@ -25,7 +25,7 @@
 	(registration-api-routes
 		(whereabts-request-as-public-user :post "/register_user" invalid-payload)) => (throws IllegalArgumentException)
 	(provided 
-		(register-user {:user-uuid nil :email nil} {:country nil :nick nil}) =throws=> (IllegalArgumentException. "invalid!")))
+		(register-user {} {}) =throws=> (IllegalArgumentException. "invalid!")))
 
 (fact "should POST gcm id and register it for the user"
 	(registration-api-routes
