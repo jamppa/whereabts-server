@@ -29,6 +29,9 @@
 (fact "should not save profile when nick is missing"
 	(save-profile profile-missing-nick) => (throws IllegalArgumentException))
 
+(fact "should not save profile when nil nick"
+	(save-profile (assoc-in profile [:nick] nil)) => (throws IllegalArgumentException))
+
 (fact "should not save profile when country is missing"
 	(save-profile profile-missing-country) => (throws IllegalArgumentException))
 
