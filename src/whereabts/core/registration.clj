@@ -2,7 +2,7 @@
 	(:use
 		[whereabts.core.users]))
 
-(defn register-user [usr]
+(defn register-user [usr profile]
 	(let [already-registered (find-user-by-email (:email usr))]
 		(if (not (nil? already-registered))
 			already-registered

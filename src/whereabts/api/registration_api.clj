@@ -12,6 +12,10 @@
 	(let [body (keywordize-keys (:body req))]
 		{:user-uuid (:user-uuid body) :email (:email body)}))
 
+(defn- extract-profile [req]
+	(let [body (keywordize-keys (:body req))]
+		{:country (:country body) :nick (:nick body)}))
+
 (defn- extract-gcm-id [req]
 	(let [body (keywordize-keys (:body req))]
 		(:gcm-id body)))
@@ -20,8 +24,9 @@
 	
 	(POST "/register_user" [:as req]
 		(with-role req ["public"]
-		(let [user (extract-user req)]
-			(-> (response (register-user user))
+		(let [user (extract-user req)
+			  profile (extract-profile req)]
+			(-> (response (register-user user profile))
 				(status 201)))))
 
 	(POST "/register_gcm" [:as req]

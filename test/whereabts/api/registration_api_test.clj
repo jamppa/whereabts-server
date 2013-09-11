@@ -6,26 +6,31 @@
 		[ring.mock.request]
 		[midje.sweet]))
 
-(def payload {:user-uuid "123-abc" :email "anonymous@whereabts.com"})
+(def payload {:user-uuid "123-abc" :email "anonymous@whereabts.com" :country "fi" :nick "anonymous"})
+(def user-from-payload (select-keys payload [:user-uuid :email]))
+(def profile-from-payload (select-keys payload [:country :nick]))
+
 (def invalid-payload {:invalid "payload"})
 (def gcm-registration-payload {:gcm-id "123abc"})
 
-(def successful-response (expected-res 201 payload))
+(def successful-response (expected-res 201 user-from-payload))
 
 (fact "should POST user details"
 	(registration-api-routes
 		(whereabts-request-as-public-user :post "/register_user" payload)) => successful-response
-	(provided (register-user payload) => payload :times 1))
+	(provided 
+		(register-user user-from-payload profile-from-payload) => user-from-payload :times 1))
 
 (fact "should throw exception when POSTing invalid user details"
 	(registration-api-routes
 		(whereabts-request-as-public-user :post "/register_user" invalid-payload)) => (throws IllegalArgumentException)
-	(provided (register-user {:user-uuid nil :email nil}) =throws=> (IllegalArgumentException. "invalid!")))
+	(provided 
+		(register-user {:user-uuid nil :email nil} {:country nil :nick nil}) =throws=> (IllegalArgumentException. "invalid!")))
 
 (fact "should POST gcm id and register it for the user"
 	(registration-api-routes
 		(whereabts-request-as-anonymous-user :post "/register_gcm" gcm-registration-payload)) => successful-response
-	(provided (register-gcm email-roled-user "123abc") => payload :times 1))
+	(provided (register-gcm email-roled-user "123abc") => user-from-payload :times 1))
 
 (fact "should GET minimum required client version"
 	(registration-api-routes
