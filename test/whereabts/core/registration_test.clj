@@ -13,13 +13,15 @@
 
 (fact "should register new user with default profile"
 	(register-user user profile) => registered-user
-	(provided (find-user-by-email "some") => nil :times 1)
-	(provided (save-user user) => registered-user :times 1))
+	(provided 
+		(find-user-by-email "some") => nil :times 1
+		(register-new-user user profile) => registered-user :times 1))
 
 (fact "should not re-register already existing anonymous user"
 	(register-user user profile) => registered-user
-	(provided (find-user-by-email "some") => registered-user :times 1)
-	(provided (save-user registered-user) => registered-user :times 0))
+	(provided 
+		(find-user-by-email "some") => registered-user :times 1
+		(register-new-user registered-user profile) => anything :times 0))
 
 (fact "should register gcm-id for registered user"
 	(register-gcm registered-user "123") => user-with-gcm
