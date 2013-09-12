@@ -33,3 +33,10 @@
 	(provided
 		(save-user user) => user :times 1
 		(save-user-profile user profile) => anything :times 1))
+
+(fact "should delete user and throw exception if saving of profile fails when registering new user"
+	(register-new-user user profile) => (throws Exception)
+	(provided
+		(save-user user) => user :times 1
+		(save-user-profile user profile) =throws=> (Exception.)
+		(delete-user user) => anything :times 1))
