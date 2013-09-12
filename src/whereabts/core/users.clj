@@ -15,7 +15,7 @@
 		(save-new-user)))
 
 (defn delete-user [user]
-	nil)
+	(delete-user-by-id (:_id user)))
 
 (defn find-user-by-email [email]
 	(find-user (by-email email)))

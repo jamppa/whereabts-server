@@ -39,3 +39,8 @@
 (fact "should set profile for user"
 	(set-profile-for-user user profile) => user-with-profile
 	(provided (update-user user-with-profile) => user-with-profile :times 1))
+
+(fact "should delete user"
+	(delete-user user) => anything
+	(provided
+		(delete-user-by-id "123") => anything :times 1))
