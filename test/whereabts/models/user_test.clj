@@ -66,3 +66,7 @@
 (fact "should throw exception when trying to update invalid anonymous user"
 	(let [found-user (find-user-by-id "509d513f61395f0ebbd5e38a")]
 		  (update-user (merge found-user {:user-uuid "123-abc"})) => (throws IllegalArgumentException)))
+
+(fact "should delete user by user oid"
+	(delete-user-by-id (:_id test-user-a))
+	(find-user-by-id (.toString (:_id test-user-a))) => nil)

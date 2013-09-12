@@ -39,3 +39,6 @@
 	(if (valid? user-validation usr)
 		(db-save user-coll usr)
 		(throw (IllegalArgumentException. "Invalid user"))))
+
+(defn delete-user-by-id [user-oid]
+	(db-delete user-coll user-oid))
