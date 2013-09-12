@@ -8,7 +8,13 @@
 (defroutes follow-api-routes
 
 	(POST "/user/:id/followers" [:as req]
-		(-> (response {})
-			(status 201)))
+		(with-role req ["email"]
+			(-> (response {})
+				(status 201))))
+
+	(DELETE "/user/:id/followers" [:as req]
+		(with-role req ["email"]
+			(-> (response {})
+				(status 200))))
 
 	)
