@@ -8,7 +8,7 @@
 (defroutes follow-api-routes
 
 	(POST "/user/:id/followers" [:as req]
-		(-> (response)
+		(-> (response {})
 			(status 201)))
 
 	)
