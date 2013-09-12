@@ -14,6 +14,9 @@
 		(with-email-role)
 		(save-new-user)))
 
+(defn delete-user [user]
+	nil)
+
 (defn find-user-by-email [email]
 	(find-user (by-email email)))
 

@@ -2,6 +2,7 @@
 	(:use 
 		[whereabts.core.registration]
 		[whereabts.core.users]
+		[whereabts.core.profiles]
 		[midje.sweet]))
 
 (def user {:email "some" :user-uuid "123-abc"})
@@ -26,3 +27,9 @@
 (fact "should register gcm-id for registered user"
 	(register-gcm registered-user "123") => user-with-gcm
 	(provided (update-gcm-for-user registered-user "123") => user-with-gcm :times 1))
+
+(fact "should save user and profile when registering new user"
+	(register-new-user user profile) => user
+	(provided
+		(save-user user) => user :times 1
+		(save-user-profile user profile) => anything :times 1))

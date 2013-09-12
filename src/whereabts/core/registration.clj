@@ -5,7 +5,11 @@
 
 (defn register-new-user [user profile]
 	(let [saved-user (save-user user)]
-		(save-user-profile saved-user profile)
+		(try
+			(save-user-profile saved-user profile)
+		(catch Exception e
+			(delete-user saved-user)
+			(throw e)))
 		saved-user))
 
 (defn register-user [usr profile]
