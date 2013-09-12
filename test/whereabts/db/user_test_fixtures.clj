@@ -10,7 +10,9 @@
 	:role "email"
 	:created-at 1364642721970
 	:last-seen-at 1364642721970
-	:profile_id profile-id-a})
+	:profile_id profile-id-a
+	:following []
+	:followers []})
 
 (def test-user-b 
 	(dissoc (merge test-user-a {

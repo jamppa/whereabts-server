@@ -15,6 +15,8 @@
 		(presence-of :created-at)
 		(presence-of :last-seen-at)
 		(presence-of :role)
+		(presence-of :followers)
+		(presence-of :following)
 		(length-of :user-uuid :is 36)
 		(inclusion-of :role :in #{"email"})))
 
