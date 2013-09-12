@@ -7,11 +7,19 @@
 (defn with-email-role [user]
 	(merge user {:role "email"}))
 
+(defn with-empty-followers [user]
+	(merge user {:followers []}))
+
+(defn with-empty-followings [user]
+	(merge user {:following []}))
+
 (defn save-user [user]
 	(-> user
 		(created-now)
 		(last-seen-now)
 		(with-email-role)
+		(with-empty-followers)
+		(with-empty-followings)
 		(save-new-user)))
 
 (defn delete-user [user]

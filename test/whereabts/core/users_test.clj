@@ -20,6 +20,8 @@
 			(created-now user) => user :times 1
 			(last-seen-now user) => user :times 1
 			(with-email-role user) => user :times 1
+			(with-empty-followers user) => user :times 1
+			(with-empty-followings user) => user :times 1
 			(save-new-user user) => user :times 1))
 
 (fact "should find user by email"
