@@ -45,3 +45,7 @@
 (def user (assoc user :followers [(:_id other-user)]))
 (fact "should return user with following as true when another users id is found from followers"
 	(with-followed? user other-user) => (merge user {:followed true}))
+
+(def user (assoc user :followers []))
+(fact "should return following user with :followed false when followers id is not found from :followers"
+	(with-followed? user other-user) => (merge user {:followed false}))
