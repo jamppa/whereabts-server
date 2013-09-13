@@ -15,9 +15,11 @@
 				(response)
 				(status 201))))
 
-	(DELETE "/user/:id/followers" [:as req]
+	(DELETE "/user/:id/followers" [id :as req]
 		(with-role req ["email"]
-			(-> (response {})
+			(-> 
+				(unfollow-user id (:basic-authentication req))
+				(response)
 				(status 200))))
 
 	)
