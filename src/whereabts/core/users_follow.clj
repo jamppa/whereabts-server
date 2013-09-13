@@ -14,9 +14,22 @@
 		(vec (set (conj (:following user) (obj-id-as-str following)))))
 		(update-user)))
 
-(defn follow-user [user-id user-follower]
-	(if-let [user (find-user-by-id user-id)]
+(defn follow-user [user-following-id user-follower]
+	(if-let [user (find-user-by-id user-following-id)]
 		(do 
 			(add-follower user user-follower)
 			(add-following user-follower user))
+		(throw (WhereabtsResourceNotFoundException.))))
+
+(defn remove-follower [user follower]
+	nil)
+
+(defn remove-following [user following]
+	nil)
+
+(defn unfollow-user [user-following-id user-follower]
+	(if-let [user-following (find-user-by-id user-following-id)]
+		(do
+			(remove-follower user-following user-follower)
+			(remove-following user-follower user-following))
 		(throw (WhereabtsResourceNotFoundException.))))

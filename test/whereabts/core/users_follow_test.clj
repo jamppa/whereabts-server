@@ -46,3 +46,10 @@
 	(add-following follower-after-following user) => follower-after-following
 	(provided
 		(update-user follower-after-following) => follower-after-following :times 1))
+
+(fact "should unfollow user by removing follower and following"
+	(unfollow-user user-id user-follower) => anything
+	(provided
+		(find-user-by-id user-id) => user :times 1
+		(remove-follower user user-follower) => anything :times 1
+		(remove-following user-follower user) => anything :times 1))
