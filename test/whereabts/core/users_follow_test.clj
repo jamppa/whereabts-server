@@ -53,3 +53,10 @@
 		(find-user-by-id user-id) => user :times 1
 		(remove-follower user user-follower) => anything :times 1
 		(remove-following user-follower user) => anything :times 1))
+
+(fact "should throw exception when trying to unfollow user that does not exist"
+	(unfollow-user user-id user-follower) => (throws WhereabtsResourceNotFoundException)
+	(provided
+		(find-user-by-id user-id) => nil :times 1
+		(remove-follower user user-follower) => anything :times 0
+		(remove-following user-follower user) => anything :times 0))
