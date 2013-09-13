@@ -33,7 +33,7 @@
 	(let [profile-id (:profile_id user)]
 		(find-profile-by-id (.toString profile-id))))
 
-(defn find-profile-of-user [user-id]
+(defn find-profile-of-user [user-id finder-usr]
 	(if-let [user (find-user-by-id user-id)]
 		(do 
 			(-> (merge user {:user-profile (find-user-profile user)})))

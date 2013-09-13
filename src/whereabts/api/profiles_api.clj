@@ -28,7 +28,7 @@
 	(GET "/user/:id" [id :as req]
 		(with-role req ["email"]
 			(-> id
-				(find-profile-of-user)
+				(find-profile-of-user (:basic-authentication req))
 				(response))))
 
 )

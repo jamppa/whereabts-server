@@ -21,4 +21,5 @@
 
 (fact "should get profile detais of specific user"
 	(profiles-api-routes (whereabts-request-as-anonymous-user :get "/user/123abc")) => successfull-get-response
-	(provided (find-profile-of-user "123abc") => profile :times 1))
+	(provided 
+		(find-profile-of-user "123abc" email-roled-user) => profile :times 1))

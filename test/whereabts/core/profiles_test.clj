@@ -18,13 +18,15 @@
 
 (fact "should just update profile when user already has one"
 	(save-user-profile user profile) => anything
-	(provided (update-profile user profile) => profile :times 1)
-	(provided (create-profile user profile) => anything :times 0))
+	(provided 
+		(update-profile user profile) => profile :times 1
+		(create-profile user profile) => anything :times 0))
 
 (fact "should create profile for user when she doesn't have one"
 	(save-user-profile user-without-profile profile) => anything
-	(provided (create-profile user-without-profile profile) => profile :times 1)
-	(provided (update-profile user-without-profile profile) => anything :times 0))
+	(provided 
+		(create-profile user-without-profile profile) => profile :times 1
+		(update-profile user-without-profile profile) => anything :times 0))
 
 (fact "should merge profile with user and save it when updating profile"
 	(update-profile user profile) => profile
@@ -32,10 +34,11 @@
 
 (fact "should save profile and update it to user when creating profile"
 	(create-profile user-without-profile profile) => profile
-	(provided (save-profile profile) => profile :times 1)
-	(provided (set-profile-for-user user-without-profile profile) => user :times 1))
+	(provided 
+		(save-profile profile) => profile :times 1
+		(set-profile-for-user user-without-profile profile) => user :times 1))
 
-(fact "should find profile of a user"
+(fact "should find users profile"
 	(find-user-profile user) => profile
 	(provided (find-profile-by-id profile-id-as-str) => profile :times 1))
 
