@@ -41,3 +41,8 @@
 	(add-following user-follower user) => follower-after-following
 	(provided
 		(update-user follower-after-following) => follower-after-following :times 1))
+
+(fact "should not add doulbe following for user"
+	(add-following follower-after-following user) => follower-after-following
+	(provided
+		(update-user follower-after-following) => follower-after-following :times 1))
