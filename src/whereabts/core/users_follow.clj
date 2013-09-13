@@ -9,8 +9,10 @@
 		(vec (set (conj (:followers user) (obj-id-as-str follower)))))
 		(update-user)))
 
-(defn add-following [follower user]
-	nil)
+(defn add-following [user following]
+	(-> (assoc-in user [:following]
+		(vec (set (conj (:following user) (obj-id-as-str following)))))
+		(update-user)))
 
 (defn follow-user [user-id user-follower]
 	(if-let [user (find-user-by-id user-id)]
