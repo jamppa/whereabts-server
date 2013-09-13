@@ -29,3 +29,9 @@
 	(add-follower user user-follower) => user-after-followed
 	(provided
 		(update-user user-after-followed) => user-after-followed :times 1))
+
+(def user-already-followed user-after-followed)
+(fact "should not add double follower for user"
+	(add-follower user-already-followed user-follower) => user-already-followed
+	(provided
+		(update-user user-already-followed) => user-already-followed :times 1))
