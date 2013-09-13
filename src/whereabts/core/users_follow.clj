@@ -1,10 +1,13 @@
 (ns whereabts.core.users-follow
 	(:use
-		whereabts.models.user)
+		whereabts.models.user
+		whereabts.models.util)
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn add-follower [user follower]
-	nil)
+	(-> (assoc-in user [:followers] 
+		(vec (set (conj (:followers user) (obj-id-as-str follower)))))
+		(update-user)))
 
 (defn add-following [follower user]
 	nil)

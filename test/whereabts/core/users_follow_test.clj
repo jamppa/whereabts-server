@@ -6,8 +6,10 @@
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (def user-id "some")
-(def user {})
-(def user-follower {})
+(def user-follower {:_id "123abc"})
+
+(def user {:followers []})
+(def user-after-followed (merge user {:followers [(:_id user-follower)]}))
 
 (fact "should follow user by adding follower and following"
 	(follow-user user-id user-follower) => anything
@@ -22,3 +24,8 @@
 		(find-user-by-id user-id) => nil :times 1
 		(add-follower user user-follower) => anything :times 0
 		(add-following user-follower user) => anything :times 0))
+
+(fact "should add follower for user"
+	(add-follower user user-follower) => user-after-followed
+	(provided
+		(update-user user-after-followed) => user-after-followed :times 1))
