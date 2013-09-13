@@ -6,7 +6,8 @@
 		whereabts.db.user-test-fixtures)
 	(:require
 		[clj-http.client :as http]
-		[clojure.data.json :as json]))
+		[clojure.data.json :as json])
+	(:import [org.bson.types ObjectId]))
 
 (defn- whereabts-follow-user-api [user-id] 
 	(str whereabts-api-testsrv "/user/" user-id "/followers"))
@@ -19,3 +20,6 @@
 
 (fact "should POST follow request for user" :functional
 	(:status (post-follow-as test-user-b test-user-a)) => 201)
+
+(fact "should POST follow request for nonexisting user and return http not found"
+	(:status (post-follow-as test-user-b {:_id (ObjectId.)})) => 404)
