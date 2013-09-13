@@ -23,3 +23,8 @@
 
 (defn with-likes-as-number [message]
 	(merge message {:likes (count (:likes message))}))
+
+(defn with-followed? [following follower]
+	(if (some #{(obj-id-as-str follower)} (:followers following))
+		(assoc following :followed true)
+		(assoc following :followed false)))

@@ -35,7 +35,8 @@
 
 (defn find-profile-of-user [user-id]
 	(if-let [user (find-user-by-id user-id)]
-		(merge user {:user-profile (find-user-profile user)})
+		(do 
+			(-> (merge user {:user-profile (find-user-profile user)})))
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn with-user-profile [obj]

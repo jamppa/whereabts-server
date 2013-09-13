@@ -41,3 +41,7 @@
 (def message (merge message {:likes ["asdasdasd"]}))
 (fact "should return message with likes as number"
 	(with-likes-as-number message) => (merge message {:likes 1}))
+
+(def user (assoc user :followers [(:_id other-user)]))
+(fact "should return user with following as true when another users id is found from followers"
+	(with-followed? user other-user) => (merge user {:followed true}))
