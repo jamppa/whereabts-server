@@ -2,7 +2,9 @@
 	(:use
 		[whereabts.core.profiles]
 		[whereabts.core.users]
+		[whereabts.core.with-util]
 		[whereabts.models.profile]
+		[whereabts.models.user]
 		[midje.sweet])
 	(:import 
 		[org.bson.types ObjectId]
@@ -56,3 +58,13 @@
 (fact "should return object without user-profile when object doesnt have user_id "
 	(with-user-profile obj-without-user) => obj-without-user
 	(provided (find-profile-by-user-id nil) => anything :times 0))
+
+(def user-id "123abc")
+(def auth-user {})
+(def user-with-profile (merge user {:user-profile profile}))
+(fact "should find profile of a user"
+	(find-profile-of-user user-id auth-user) => user-with-profile
+	(provided
+		(find-user-by-id user-id) => user :times 1
+		(find-user-profile user) => profile :times 1
+		(with-followed? user-with-profile auth-user) => user-with-profile :times 1))

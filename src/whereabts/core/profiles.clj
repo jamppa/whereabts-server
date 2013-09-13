@@ -33,10 +33,11 @@
 	(let [profile-id (:profile_id user)]
 		(find-profile-by-id (.toString profile-id))))
 
-(defn find-profile-of-user [user-id finder-usr]
+(defn find-profile-of-user [user-id auth-user]
 	(if-let [user (find-user-by-id user-id)]
 		(do 
-			(-> (merge user {:user-profile (find-user-profile user)})))
+			(-> (merge user {:user-profile (find-user-profile user)})
+				(with-followed? auth-user)))
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn with-user-profile [obj]
