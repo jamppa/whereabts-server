@@ -27,7 +27,9 @@
 		(update-user)))
 
 (defn remove-following [user-follower user-following]
-	nil)
+	(-> (assoc-in user-follower [:following]
+		(vec (disj (set (:following user-follower)) (obj-id-as-str user-following))))
+		(update-user)))
 
 (defn unfollow-user [user-following-id user-follower]
 	(if-let [user-following (find-user-by-id user-following-id)]

@@ -65,3 +65,8 @@
 	(remove-follower user-after-followed user-follower) => user
 	(provided
 		(update-user user) => user :times 1))
+
+(fact "should remove user following from user follower"
+	(remove-following follower-after-following user-after-followed) => user-follower
+	(provided
+		(update-user user-follower) => user-follower :times 1))
