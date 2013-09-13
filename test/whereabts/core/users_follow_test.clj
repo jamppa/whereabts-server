@@ -60,3 +60,8 @@
 		(find-user-by-id user-id) => nil :times 1
 		(remove-follower user user-follower) => anything :times 0
 		(remove-following user-follower user) => anything :times 0))
+
+(fact "should remove user follower from user following"
+	(remove-follower user-after-followed user-follower) => user
+	(provided
+		(update-user user) => user :times 1))

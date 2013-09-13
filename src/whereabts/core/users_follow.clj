@@ -21,10 +21,12 @@
 			(add-following user-follower user))
 		(throw (WhereabtsResourceNotFoundException.))))
 
-(defn remove-follower [user follower]
-	nil)
+(defn remove-follower [user-following user-follower]
+	(-> (assoc-in user-following [:followers]
+		(vec (disj (set (:followers user-following)) (obj-id-as-str user-follower))))
+		(update-user)))
 
-(defn remove-following [user following]
+(defn remove-following [user-follower user-following]
 	nil)
 
 (defn unfollow-user [user-following-id user-follower]
