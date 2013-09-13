@@ -42,7 +42,7 @@
 	(provided
 		(update-user follower-after-following) => follower-after-following :times 1))
 
-(fact "should not add doulbe following for user"
+(fact "should not add double following for user"
 	(add-following follower-after-following user) => follower-after-following
 	(provided
 		(update-user follower-after-following) => follower-after-following :times 1))
