@@ -2,6 +2,7 @@
 	(:import [org.bson.types ObjectId]))
 
 (def profile-id-a (ObjectId. "509d513f61395f0ebbd5e58a"))
+(def profile-id-b (ObjectId. "509d513f61395f0ebbd5e58b"))
 
 (def test-user-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e38a")
@@ -15,10 +16,11 @@
 	:followers []})
 
 (def test-user-b 
-	(dissoc (merge test-user-a {
+	(merge test-user-a {
 		:_id (ObjectId. "509d513f61395f0ebbd5e38b")
 		:user-uuid "550e8400-e29b-41d4-a716-446655440001"
-		:email "user@test.com"}) :profile_id))
+		:email "user@test.com"
+		:profile_id profile-id-b}))
 
 (def test-profile-a
 	{
@@ -28,3 +30,7 @@
 		:country "fi"
 		:description "testman from testland"
 		:photo ""})
+
+(def test-profile-b
+	(merge test-profile-a {
+		:_id profile-id-b}))

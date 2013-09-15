@@ -59,3 +59,6 @@
 
 (fact "should not find profile by nil user_id"
 	(find-profile-by-user-id nil) => nil)
+
+(fact "should find profiles by user ids"
+	(find-profiles-by-user-ids ["509d513f61395f0ebbd5e38a" "509d513f61395f0ebbd5e38b"]) => [test-profile-a test-profile-b])

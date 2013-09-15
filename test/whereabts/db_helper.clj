@@ -32,7 +32,7 @@
 	(insert-test-objects "feedbacks" [test-feedback-a])
 	(insert-test-objects "replies" [test-reply-a test-reply-b])
 	(insert-test-objects "categories" [test-category-a])
-	(insert-test-objects "profiles" [test-profile-a]))
+	(insert-test-objects "profiles" [test-profile-a test-profile-b]))
 
 (defn setup-test-db []
 	(binding [*whereabts-db* test-db-name]
