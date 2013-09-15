@@ -67,4 +67,6 @@
 	(provided
 		(find-user-by-id user-id) => user :times 1
 		(find-user-profile user) => profile :times 1
-		(with-followed? user-with-profile auth-user) => user-with-profile :times 1))
+		(with-followed? user-with-profile auth-user) => user-with-profile :times 1
+		(with-following-as-number user-with-profile) => user-with-profile :times 1
+		(with-followers-as-number user-with-profile) => user-with-profile :times 1))

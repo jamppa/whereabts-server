@@ -37,7 +37,9 @@
 	(if-let [user (find-user-by-id user-id)]
 		(do 
 			(-> (merge user {:user-profile (find-user-profile user)})
-				(with-followed? auth-user)))
+				(with-followed? auth-user)
+				(with-following-as-number)
+				(with-followers-as-number)))
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn with-user-profile [obj]
