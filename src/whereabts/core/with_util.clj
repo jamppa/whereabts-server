@@ -31,3 +31,6 @@
 
 (defn with-following-as-number [user]
 	(assoc user :following (count (:following user))))
+
+(defn with-followers-as-number [user]
+	(assoc user :followers (count (:followers user))))

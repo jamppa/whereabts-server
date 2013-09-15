@@ -54,3 +54,6 @@
 (fact "should return user with followings as number"
 	(with-following-as-number user) => (merge user {:following 2}))
 
+(def user {:followers ["asd" "123"]})
+(fact "should return user with followers as number"
+	(with-followers-as-number user) => (merge user {:followers 2}))
