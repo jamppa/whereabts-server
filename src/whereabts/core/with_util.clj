@@ -28,3 +28,6 @@
 	(if (some #{(obj-id-as-str follower)} (:followers following))
 		(assoc following :followed true)
 		(assoc following :followed false)))
+
+(defn with-following-as-number [user]
+	(assoc user :following (count (:following user))))
