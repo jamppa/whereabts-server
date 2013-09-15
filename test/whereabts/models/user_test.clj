@@ -72,3 +72,6 @@
 (fact "should delete user by user oid"
 	(delete-user-by-id (:_id test-user-a))
 	(find-user-by-id (.toString (:_id test-user-a))) => nil)
+
+(fact "should find users by ids"
+	(find-users-by-ids ["509d513f61395f0ebbd5e38a" "509d513f61395f0ebbd5e38b"]) => [test-user-a test-user-b])

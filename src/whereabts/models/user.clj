@@ -1,8 +1,11 @@
 (ns whereabts.models.user
+	(:refer-clojure :exclude [sort find])
 	(:use
-		[whereabts.db]
-		[whereabts.models.util]
-		[validateur.validation]))
+		whereabts.db
+		whereabts.models.util
+		validateur.validation
+		monger.query
+		monger.operators))
 
 (def user-coll "users")
 (def public-whereabts-user 
@@ -28,6 +31,10 @@
 
 (defn find-user-by-id [id]
 	(db-find-one-by-id user-coll (obj-id id)))
+
+(defn find-users-by-ids [ids]
+	(with-collection user-coll
+		(find {:_id {$in (map obj-id ids)}})))
 
 (defn find-user [query-map]
 	(db-find-one user-coll query-map))
