@@ -6,6 +6,9 @@
 		ring.util.response
 		[clojure.walk :only [keywordize-keys]]))
 
+(defn- get-followers-response-body [followers]
+	{:followers followers})
+
 (defroutes follow-api-routes
 
 	(POST "/user/:id/followers" [id :as req]
@@ -24,6 +27,9 @@
 
 	(GET "/user/:id/followers" [id :as req]
 		(with-role req ["email"]
-			(response {})))
+			(-> (find-followers-of-user id)
+				(get-followers-response-body)
+				(response)
+				(status 200))))
 
 	)
