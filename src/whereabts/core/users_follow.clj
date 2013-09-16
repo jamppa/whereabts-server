@@ -1,6 +1,7 @@
 (ns whereabts.core.users-follow
 	(:use
 		whereabts.models.user
+		whereabts.models.profile
 		whereabts.models.util)
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
@@ -37,3 +38,7 @@
 			(remove-follower user-following user-follower)
 			(remove-following user-follower user-following))
 		(throw (WhereabtsResourceNotFoundException.))))
+
+(defn find-followers-of-user [user-id]
+	(if-let [user (find-user-by-id user-id)]
+		(find-profiles-by-user-ids (:followers user))))

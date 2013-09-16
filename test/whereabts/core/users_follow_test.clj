@@ -2,7 +2,8 @@
 	(:use
 		midje.sweet
 		whereabts.core.users-follow
-		whereabts.models.user)
+		whereabts.models.user
+		whereabts.models.profile)
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (def user-id "some")
@@ -70,3 +71,11 @@
 	(remove-following follower-after-following user-after-followed) => user-follower
 	(provided
 		(update-user user-follower) => user-follower :times 1))
+
+(def follower-profile {:nick "testman"})
+(def followers (:followers user-after-followed))
+(fact "should find followers of a user"
+	(find-followers-of-user user-id) => [follower-profile]
+	(provided
+		(find-user-by-id user-id) => user-after-followed :times 1
+		(find-profiles-by-user-ids followers) => [follower-profile] :times 1))

@@ -22,4 +22,8 @@
 				(response)
 				(status 200))))
 
+	(GET "/user/:id/followers" [id :as req]
+		(with-role req ["email"]
+			(response {})))
+
 	)
