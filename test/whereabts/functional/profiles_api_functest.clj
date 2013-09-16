@@ -56,9 +56,6 @@
 (fact "should response http ok when geting profile of a user" :functional
 	(:status (get-as-user "anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000")) => 200)
 
-(fact "should response http not found when geting profile of user that doesnt have profile yet" :functional
-	(:status (get-as-user "user@test.com" "550e8400-e29b-41d4-a716-446655440001")) => 404)
-
 (fact "should response http ok when geting a users profile" :functional
 	(:status (get-profile-as-user "509d513f61395f0ebbd5e38a" "user@test.com" "550e8400-e29b-41d4-a716-446655440001")) => 200)
 
