@@ -31,4 +31,6 @@
 
 (fact "should GET followings of a user"
 	(follow-api-routes
-		(whereabts-request-as-anonymous-user :get "/user/123AbC/following" {})) => response-get-followings)
+		(whereabts-request-as-anonymous-user :get "/user/123AbC/following" {})) => response-get-followings
+	(provided
+		(find-followings-of-user "123AbC") => [] :times 1))

@@ -35,7 +35,8 @@
 
 	(GET "/user/:id/following" [id :as req]
 		(with-role req ["email"]
-			(-> (get-followings-response-body [])
+			(-> (find-followings-of-user id)
+				(get-followings-response-body)
 				(response)
 				(status 200))))
 
