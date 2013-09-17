@@ -79,3 +79,17 @@
 	(provided
 		(find-user-by-id user-id) => user-after-followed :times 1
 		(find-profiles-by-user-ids followers) => [follower-profile] :times 1))
+
+(def following-profile follower-profile)
+(def user-after-following (merge user-after-followed {:following [(:_id user-follower)]}))
+(def followings (:following user-after-following))
+(fact "should find followings of a user"
+	(find-followings-of-user user-id) => [following-profile]
+	(provided
+		(find-user-by-id user-id) => user-after-following :times 1
+		(find-profiles-by-user-ids followings) => [following-profile] :times 1))
+
+(fact "should throw exception when finding followings of a user that doesnt exist"
+	(find-followings-of-user user-id) => (throws WhereabtsResourceNotFoundException)
+	(provided
+		(find-user-by-id user-id) => nil :times 1))

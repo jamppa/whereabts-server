@@ -41,4 +41,10 @@
 
 (defn find-followers-of-user [user-id]
 	(if-let [user (find-user-by-id user-id)]
-		(find-profiles-by-user-ids (:followers user))))
+		(find-profiles-by-user-ids (:followers user))
+		(throw (WhereabtsResourceNotFoundException.))))
+
+(defn find-followings-of-user [user-id]
+	(if-let [user (find-user-by-id user-id)]
+		(find-profiles-by-user-ids (:following user))
+		(throw (WhereabtsResourceNotFoundException.))))
