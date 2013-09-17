@@ -9,19 +9,20 @@
 (defn- get-followers-response-body [followers]
 	{:followers followers})
 
+(defn- get-followings-response-body [followings]
+	{:following followings})
+
 (defroutes follow-api-routes
 
 	(POST "/user/:id/followers" [id :as req]
 		(with-role req ["email"]
-			(-> 
-				(follow-user id (:basic-authentication req))
+			(-> (follow-user id (:basic-authentication req))
 				(response)
 				(status 201))))
 
 	(DELETE "/user/:id/followers" [id :as req]
 		(with-role req ["email"]
-			(-> 
-				(unfollow-user id (:basic-authentication req))
+			(-> (unfollow-user id (:basic-authentication req))
 				(response)
 				(status 200))))
 
@@ -29,6 +30,12 @@
 		(with-role req ["email"]
 			(-> (find-followers-of-user id)
 				(get-followers-response-body)
+				(response)
+				(status 200))))
+
+	(GET "/user/:id/following" [id :as req]
+		(with-role req ["email"]
+			(-> (get-followings-response-body [])
 				(response)
 				(status 200))))
 

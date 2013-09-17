@@ -9,6 +9,7 @@
 (def response-followed (expected-res 201 {}))
 (def response-unfollowed (expected-res 200 {}))
 (def response-get-followers (expected-res 200 {:followers []}))
+(def response-get-followings (expected-res 200 {:following []}))
 
 (fact "should POST to user followers"
 	(follow-api-routes 
@@ -27,3 +28,7 @@
 		(whereabts-request-as-anonymous-user :get "/user/123AbC/followers" {})) => response-get-followers
 	(provided
 		(find-followers-of-user "123AbC") => [] :times 1))
+
+(fact "should GET followings of a user"
+	(follow-api-routes
+		(whereabts-request-as-anonymous-user :get "/user/123AbC/following" {})) => response-get-followings)
