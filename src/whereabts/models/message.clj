@@ -6,7 +6,7 @@
 		[validateur.validation]
 		[monger.query]))
 
-(def message-expiration-time-ms (* 3 86400000)) ; 3 days
+(def message-expiration-time-ms (* 1 86400000)) ; 1 day / 24h
 (def messages-in-bbox-limit 20)
 (def message-coll "messages")
 

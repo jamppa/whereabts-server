@@ -9,7 +9,7 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:message "Cool message"
 	:loc [1.0 2.0]
-	:created-at (- (System/currentTimeMillis) 86400000)
+	:created-at (- (System/currentTimeMillis) (* 1000 60 60 23))
 	:updated-at (System/currentTimeMillis)
 	:views 10
 	:likes []
@@ -20,7 +20,7 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38a")
 	:message "Cool message"
 	:loc [5.0 5.0]
-	:created-at (- (System/currentTimeMillis) 86400000)
+	:created-at (- (System/currentTimeMillis) (* 1000 60 60 22))
 	:updated-at (System/currentTimeMillis)
 	:views 11
 	:likes ["509d513f61395f0ebbd5e38a"]
@@ -31,7 +31,7 @@
 	:user_id (ObjectId. "509d513f61395f0ebbd5e38b")
 	:message "Cool message"
 	:loc [45.0 26.0]
-	:created-at (- (System/currentTimeMillis) (* 86400000 4))
+	:created-at (- (System/currentTimeMillis) 86400000)
 	:updated-at (System/currentTimeMillis)
 	:views 12
 	:likes ["509d513f61395f0ebbd5e38a"]
