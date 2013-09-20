@@ -9,3 +9,8 @@
 	{
 		:follower-id (obj-id-as-str follower)
 		:following-id (obj-id-as-str following)})
+
+(defn publish-follow-message [follower following]
+	(->> 
+		(prepare-follow-message-for-channel follower following)
+		(publish-message follow-channel)))

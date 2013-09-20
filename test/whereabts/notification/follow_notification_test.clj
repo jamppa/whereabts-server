@@ -18,3 +18,9 @@
 
 (fact "should define correct channel name for follow"
 	follow-channel => "users.follow")
+
+(fact "should publish follow message to channel"
+	(publish-follow-message follower following) => anything
+	(provided
+		(prepare-follow-message-for-channel follower following) => anything :times 1
+		(publish-message follow-channel anything) => anything :times 1))
