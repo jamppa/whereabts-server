@@ -15,3 +15,6 @@
 
 (fact "should prepare message for channel"
 	(prepare-follow-message-for-channel follower following) => follow-channel-message)
+
+(fact "should define correct channel name for follow"
+	follow-channel => "users.follow")

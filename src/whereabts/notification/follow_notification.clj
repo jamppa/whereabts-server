@@ -3,6 +3,8 @@
 		whereabts.notification.core
 		whereabts.models.util))
 
+(def follow-channel "users.follow")
+
 (defn prepare-follow-message-for-channel [follower following]
 	{
 		:follower-id (obj-id-as-str follower)
