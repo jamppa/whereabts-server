@@ -3,7 +3,8 @@
 		midje.sweet
 		whereabts.core.users-follow
 		whereabts.models.user
-		whereabts.models.profile)
+		whereabts.models.profile
+		whereabts.notification.follow-notification)
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (def user-id "some")
@@ -17,7 +18,8 @@
 	(provided
 		(find-user-by-id user-id) => user :times 1
 		(add-follower user user-follower) => anything :times 1
-		(add-following user-follower user) => anything :times 1))
+		(add-following user-follower user) => anything :times 1
+		(publish-follow-message user-follower user) => anything :times 1))
 
 (fact "should throw exception when trying to follow user that does not exist"
 	(follow-user user-id user-follower) => (throws WhereabtsResourceNotFoundException)

@@ -2,7 +2,8 @@
 	(:use
 		whereabts.models.user
 		whereabts.models.profile
-		whereabts.models.util)
+		whereabts.models.util
+		whereabts.notification.follow-notification)
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
 (defn add-follower [user follower]
@@ -19,7 +20,8 @@
 	(if-let [user (find-user-by-id user-following-id)]
 		(do 
 			(add-follower user user-follower)
-			(add-following user-follower user))
+			(add-following user-follower user)
+			(publish-follow-message user-follower user))
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn remove-follower [user-following user-follower]
