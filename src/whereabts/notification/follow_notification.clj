@@ -13,4 +13,5 @@
 (defn publish-follow-message [follower following]
 	(->> 
 		(prepare-follow-message-for-channel follower following)
-		(publish-message follow-channel)))
+		(publish-message follow-channel))
+	follower)
