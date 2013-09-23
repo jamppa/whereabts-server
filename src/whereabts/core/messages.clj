@@ -10,17 +10,15 @@
 		[whereabts.notification.like-notification])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))
 
-(defn- all-messages [messages]
-	{:messages messages})
-
 (defn user-owns-message? [message user]
 	(= (obj-id-as-str user) 
 		(id-as-str :user_id message)))
 
 (defn find-all-messages-by-bbox [bbox]
-	(let [messages (find-messages-by-bbox bbox)
-		  compactified (map compactify-message messages)]
-		(all-messages compactified)))
+	(->>
+		(find-messages-by-bbox bbox) 
+		(compactify-messages)
+		(with-user-profiles)))
 
 (defn save-new-message [msg usr]
 	(compactify-message 

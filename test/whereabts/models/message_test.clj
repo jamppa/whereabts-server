@@ -54,14 +54,11 @@
 (fact "should find fresh messages by bounding box"
 	(find-messages-by-bbox (bounding-box [0 0] [10 10])) => [test-message-b test-message-a])
 
-(fact "should find fresh messages by bounding box and category"
-	(find-messages-by-bbox-and-category (bounding-box [0 0] [10 10]) 1) => [test-message-a])
-
 (fact "should not find messages by bounding box when there isnt any"
 	(find-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
 (fact "should compactify message extracting short-message"
-	(keys (compactify-message existing-message)) => '(:message :category_id :created-at :updated-at :loc :_id))
+	(keys (compactify-message existing-message)) => '(:message :category_id :created-at :updated-at :loc :user_id :_id))
 
 (fact "should create a copy of message"
 	(new-message message) => msg-after-copy)

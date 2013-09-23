@@ -17,7 +17,6 @@
 
 (def message {:_id "123abc" :views 1 :created-at 1})
 (def messages [message])
-(def expected-all-messages {:messages [message]})
 (def message-with-user (merge message {:user_id (:_id user)}))
 (def message-with-user-and-ownership (merge message-with-user {:owns true}))
 (def message-with-user-and-replies (merge message-with-user-and-ownership {:replies []}))
@@ -27,11 +26,12 @@
 
 (def bbox (bounding-box [1 1] [1 1]))
 
-(fact "should find all messages by bounding box and compactify them"
-	(find-all-messages-by-bbox bbox) => expected-all-messages
+(fact "should find messages by bounding box and compactify them with userprofiles"
+	(find-all-messages-by-bbox bbox) => messages
 	(provided 
 		(find-messages-by-bbox bbox) => messages :times 1
-		(compactify-message message) => message :times 1))
+		(compactify-messages messages) => messages :times 1
+		(with-user-profiles messages) => messages :times 1))
 
 (fact "should save new message and return it compactified"
 	(save-new-message message user) => saved-message

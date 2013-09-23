@@ -51,17 +51,12 @@
 		(sort (sorted-map :updated-at -1))
 		(limit messages-in-bbox-limit)))
 
-(defn find-messages-by-bbox-and-category [{ll-vec :lower-left ur-vec :upper-right} category]
-	(with-collection message-coll
-		(find {:loc {"$within" {"$box" [ll-vec ur-vec]}}  
-			:created-at {"$gte" (- (System/currentTimeMillis) message-expiration-time-ms)}
-			:category_id category})
-		(sort (sorted-map :updated-at -1))
-		(limit messages-in-bbox-limit)))
-
 (defn compactify-message [msg]
 	(select-keys msg 
-		[:_id :loc :updated-at :created-at :category_id :message]))
+		[:_id :user_id :loc :updated-at :created-at :category_id :message]))
+
+(defn compactify-messages [coll]
+	(map compactify-message coll))
 
 (defn update-message [msg]
 	(let [msg-to-update (message-to-update msg)]
