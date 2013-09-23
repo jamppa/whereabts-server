@@ -25,3 +25,10 @@
 
 (defn id-as-str [obj field]
 	(.toString (field obj)))
+
+(defn oids-as-str [objs oid-field]
+	(->> 
+		(map oid-field objs)
+		(filter identity)
+		(map #(.toString %))
+		(distinct)))

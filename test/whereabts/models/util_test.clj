@@ -27,3 +27,11 @@
 
 (fact "should update object by merging updated-at timestamp with current time"
 	(keys (updated-now {})) => [:updated-at])
+
+(def objs [
+	{:k (ObjectId. "507f191e810c19729de860ea")} 
+	{:k (ObjectId. "507f191e810c19729de860eb")}
+	{:k (ObjectId. "507f191e810c19729de860ea")}
+	{:other "stuff"}])
+(fact "should extract ObjectIds distinctively from objects"
+	(oids-as-str objs :k) => ["507f191e810c19729de860ea" "507f191e810c19729de860eb"])
