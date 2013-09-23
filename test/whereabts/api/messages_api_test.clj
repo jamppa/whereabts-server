@@ -9,11 +9,11 @@
 		[whereabts.util.geo]))
 
 (def bbox (bounding-box [1.23 1.23] [5.0 5.0]))
-(def messages {:messages []})
+(def messages [])
 (def new-msg-payload {:something "cool"})
 (def message {})
 
-(def expected-res-for-messages (expected-res 200 messages))
+(def expected-res-for-messages (expected-res 200 {:messages messages}))
 (def expected-res-for-new-message (expected-res 201 message))
 (def expected-res-for-message (expected-res 200 message))
 (def expected-res-for-delete-message (expected-res 200 message))

@@ -8,13 +8,19 @@
 		[whereabts.util.geo]
 		[clojure.walk :only [keywordize-keys]]))
 
+(defn- find-messages-response-body [messages]
+	{:messages messages})
+
 (defroutes messages-api-routes
 
 	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat :as req]
 		(with-role req ["email"]
 		(let [ll-vec [(read-string ll-lon) (read-string ll-lat)]
 			  ur-vec [(read-string ur-lon) (read-string ur-lat)]]
-		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec))))))
+			  (-> 
+			  	(find-all-messages-by-bbox (bounding-box ll-vec ur-vec))
+			  	(find-messages-response-body)
+			  	(response)))))
 
 	(GET "/messages/:id" [id :as req]
 		(with-role req ["email" "public"]
