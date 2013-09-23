@@ -61,10 +61,6 @@
 	(:status (http/get (whereabts-api-messages-by-bbox 24.987 60.255 24.989 60.260)
 		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
 
-(fact "should response with HTTP OK when GETing messages by bounding box and cateogory" :functional
-	(:status (http/get (whereabts-api-messages-by-bbox-and-category 24.987 60.255 24.989 60.260 "traffic")
-		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
-
 (fact "should response with HTTP Unauthorized when trying to GET messages by bbox with invalid credentials" :functional
 	(:status (http/get (whereabts-api-messages-by-bbox 24.987 60.255 24.989 60.260)
 		(whereabts-api-request ["invalid@blaa.com" "secret"] ""))) => 401)

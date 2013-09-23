@@ -22,10 +22,6 @@
 	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/1.23/1.23/5.0/5.0")) => expected-res-for-messages
 	(provided (find-all-messages-by-bbox bbox) => messages :times 1))
 
-(fact "should GET all message inside bounding box by category"
-	(messages-api-routes (whereabts-request-as-anonymous-user :get "/messages/1.23/1.23/5.0/5.0/traffic")) => expected-res-for-messages
-	(provided (find-all-messages-by-bbox-and-category bbox "traffic") => messages :times 1))
-
 (fact "should POST new message"
 	(messages-api-routes 
 		(whereabts-request-as-anonymous-user :post "/messages" new-msg-payload)) => expected-res-for-new-message

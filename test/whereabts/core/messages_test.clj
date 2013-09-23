@@ -33,13 +33,6 @@
 		(find-messages-by-bbox bbox) => messages :times 1
 		(compactify-message message) => message :times 1))
 
-(fact "should find all messages by bounding box and category, and return them compactified"
-	(find-all-messages-by-bbox-and-category bbox "traffic") => expected-all-messages
-	(provided 
-		(resolve-category-id "traffic") => 1 :times 1
-		(find-messages-by-bbox-and-category bbox 1) => messages :times 1
-		(compactify-message message) => message :times 1))
-
 (fact "should save new message and return it compactified"
 	(save-new-message message user) => saved-message
 	(provided 

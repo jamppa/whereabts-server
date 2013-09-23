@@ -16,13 +16,6 @@
 			  ur-vec [(read-string ur-lon) (read-string ur-lat)]]
 		(response (find-all-messages-by-bbox (bounding-box ll-vec ur-vec))))))
 
-	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat/:category" [ll-lon ll-lat ur-lon ur-lat category :as req]
-		(with-role req ["email"]
-		(let [ll-vec [(read-string ll-lon) (read-string ll-lat)]
-			  ur-vec [(read-string ur-lon) (read-string ur-lat)]]
-		(response (find-all-messages-by-bbox-and-category 
-			(bounding-box ll-vec ur-vec) category)))))
-
 	(GET "/messages/:id" [id :as req]
 		(with-role req ["email" "public"]
 		(let [user (:basic-authentication req)
