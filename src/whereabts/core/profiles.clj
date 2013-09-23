@@ -12,7 +12,7 @@
 (defn- has-profile? [user]
 	(contains? user :profile_id))
 
-(defn filter-profile-by-user-id [user-id profiles]
+(defn- filter-profile-by-user-id [user-id profiles]
 	(find-first #(= (.toString (:user_id %)) (.toString user-id)) profiles))
 
 (defn update-profile [user profile-details]
@@ -51,11 +51,11 @@
 			(merge obj {:user-profile (find-profile-by-user-id (:user_id obj))})
 			obj))
 	([obj profile]
-		(if (not (nil? profile))
-			(merge obj {:user-profile profile})
-			obj)))
+		(when-not (nil? profile)
+			(merge obj {:user-profile profile}))))
 
 (defn with-user-profiles [objs]
 	(let [user-ids (oids-as-str objs :user_id)
 		  profiles (find-profiles-by-user-ids user-ids)]
-		  (map #(merge % {:user-profile (filter-profile-by-user-id (:user_id %) profiles)}) objs)))
+		  (filter identity 
+		  	(map #(with-user-profile % (filter-profile-by-user-id (:user_id %) profiles)) objs))))

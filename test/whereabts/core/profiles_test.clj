@@ -68,6 +68,11 @@
 	(provided
 		(find-profile-by-user-id anything) => anything :times 0))
 
+(fact "should return nil when trying to merge with nil userprofile"
+	(with-user-profile obj nil) => nil
+	(provided
+		(find-profile-by-user-id anything) => anything :times 0))
+
 (def user-id "123abc")
 (def auth-user {})
 (def user-with-profile (merge user {:user-profile profile}))
