@@ -32,5 +32,7 @@
 		:photo ""})
 
 (def test-profile-b
-	(merge test-profile-a {
-		:_id profile-id-b}))
+	(merge test-profile-a 
+		{
+			:_id profile-id-b
+			:user_id (:_id test-user-b)}))

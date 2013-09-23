@@ -26,9 +26,12 @@
 (defn id-as-str [obj field]
 	(.toString (field obj)))
 
-(defn oids-as-str [objs oid-field]
+(defn oids-as-str [coll oid-field]
 	(->> 
-		(map oid-field objs)
+		(map oid-field coll)
 		(filter identity)
 		(map #(.toString %))
 		(distinct)))
+
+(defn find-first [f coll]
+	(first (filter f coll)))

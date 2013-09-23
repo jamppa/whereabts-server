@@ -35,3 +35,7 @@
 	{:other "stuff"}])
 (fact "should extract ObjectIds distinctively from objects"
 	(oids-as-str objs :k) => ["507f191e810c19729de860ea" "507f191e810c19729de860eb"])
+
+(def objs (subvec objs 0 3))
+(fact "should find first item from collection satistying predicate function"
+	(find-first #(= (.toString (:k %)) "507f191e810c19729de860eb") objs) => (get objs 1))

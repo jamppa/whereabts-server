@@ -5,6 +5,8 @@
 		[whereabts.core.with-util]
 		[whereabts.models.profile]
 		[whereabts.models.user]
+		[whereabts.db.test-fixtures]
+		[whereabts.db.user-test-fixtures]
 		[midje.sweet])
 	(:import 
 		[org.bson.types ObjectId]
@@ -52,12 +54,19 @@
 (def obj-with-user (merge obj {:user-profile profile}))
 (fact "should return object with user-profile when object has user_id"
 	(with-user-profile obj) => obj-with-user
-	(provided (find-profile-by-user-id user-id) => profile))
+	(provided 
+		(find-profile-by-user-id user-id) => profile :times 1))
 
 (def obj-without-user {:some "thing"})
 (fact "should return object without user-profile when object doesnt have user_id "
 	(with-user-profile obj-without-user) => obj-without-user
-	(provided (find-profile-by-user-id nil) => anything :times 0))
+	(provided 
+		(find-profile-by-user-id nil) => anything :times 0))
+
+(fact "should merge object with given userprofile when profile is not nil"
+	(with-user-profile obj profile) => obj-with-user
+	(provided
+		(find-profile-by-user-id anything) => anything :times 0))
 
 (def user-id "123abc")
 (def auth-user {})
@@ -70,3 +79,12 @@
 		(with-followed? user-with-profile auth-user) => user-with-profile :times 1
 		(with-following-as-number user-with-profile) => user-with-profile :times 1
 		(with-followers-as-number user-with-profile) => user-with-profile :times 1))
+
+(def message-a-with-profile (merge test-message-a {:user-profile test-profile-a}))
+(def message-b-with-profile (merge test-message-c {:user-profile test-profile-b}))
+(def messages [test-message-a test-message-c])
+(def messages-with-profiles [message-a-with-profile message-b-with-profile])
+(fact "should map objects with user profiles"
+	(with-user-profiles messages) => messages-with-profiles
+	(provided
+		(find-profiles-by-user-ids anything) => [test-profile-a test-profile-b] :times 1))
