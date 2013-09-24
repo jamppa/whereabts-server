@@ -8,7 +8,7 @@
 		[whereabts.util.geo]
 		[clojure.walk :only [keywordize-keys]]))
 
-(defn- find-messages-response-body [messages]
+(defn- messages-response-body [messages]
 	{:messages messages})
 
 (defroutes messages-api-routes
@@ -19,7 +19,7 @@
 			  ur-vec [(read-string ur-lon) (read-string ur-lat)]]
 			  (-> 
 			  	(find-all-messages-by-bbox (bounding-box ll-vec ur-vec))
-			  	(find-messages-response-body)
+			  	(messages-response-body)
 			  	(response)))))
 
 	(GET "/messages/:id" [id :as req]
@@ -44,5 +44,11 @@
 				(like-message (:basic-authentication req))
 				(response)
 				(status 201))))
+
+	(GET "/messages/following/:page" [page :as req]
+		(with-role req ["email"]
+			(-> []
+				(messages-response-body)
+				(response))))
 )
 

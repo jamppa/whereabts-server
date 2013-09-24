@@ -42,3 +42,7 @@
 		(whereabts-request-as-anonymous-user :post "/messages/123abc/likes" {})) => (expected-res 201 message)
 	(provided
 		(like-message "123abc" email-roled-user) => message :times 1))
+
+(fact "should GET following messages by page number"
+	(messages-api-routes
+		(whereabts-request-as-anonymous-user :get "/messages/following/1")) => expected-res-for-messages)
