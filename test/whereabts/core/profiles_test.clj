@@ -93,3 +93,10 @@
 	(with-user-profiles messages) => messages-with-profiles
 	(provided
 		(find-profiles-by-user-ids anything) => [test-profile-a test-profile-b] :times 1))
+
+(def profiles [test-profile-a test-profile-b])
+(fact "should filter profile by user id from profiles"
+	(filter-profile-by-user-id (:_id test-user-a) profiles) => test-profile-a)
+
+(fact "should not filter profile by user id when one is not found"
+	(filter-profile-by-user-id (ObjectId.) profiles) => nil)

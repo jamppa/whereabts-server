@@ -12,7 +12,7 @@
 (defn- has-profile? [user]
 	(contains? user :profile_id))
 
-(defn- filter-profile-by-user-id [user-id profiles]
+(defn filter-profile-by-user-id [user-id profiles]
 	(find-first #(= (.toString (:user_id %)) (.toString user-id)) profiles))
 
 (defn update-profile [user profile-details]
