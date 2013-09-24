@@ -70,6 +70,6 @@
 
 (defn find-messages-by-users [user-ids page]
 	(with-collection message-coll
-		(find {:user_id {$in user-ids}})
+		(find {:user_id {$in (map obj-id user-ids)}})
 		(sort (sorted-map :created-at -1))
 		(paginate :page page :per-page 20)))
