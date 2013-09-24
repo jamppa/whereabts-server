@@ -62,5 +62,7 @@
 
 (defn find-following-messages [follower page]
 	(if-let [following (:following follower)]
-		(find-messages-by-users following page)
+		(-> (find-messages-by-users following page)
+			(compactify-messages)
+			(with-user-profiles))
 		[]))

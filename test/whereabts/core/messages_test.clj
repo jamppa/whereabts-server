@@ -103,7 +103,9 @@
 (fact "should find following messages of follower with paging"
 	(find-following-messages follower 1) => []
 	(provided
-		(find-messages-by-users following 1) => [] :times 1))
+		(find-messages-by-users following 1) => [] :times 1
+		(compactify-messages []) => [] :times 1
+		(with-user-profiles []) => [] :times 1))
 
 (fact "should not find following messages of follower when followings is nil"
 	(find-following-messages {} 1) => []
