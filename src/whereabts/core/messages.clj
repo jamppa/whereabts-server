@@ -59,3 +59,6 @@
 			(add-user-to-likes user)
 			(update-message)
 			(publish-like-message user))))
+
+(defn find-following-messages [follower page]
+	nil)

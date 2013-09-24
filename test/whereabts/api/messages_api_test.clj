@@ -3,10 +3,10 @@
 		[whereabts.api.messages-api]
 		[whereabts.core.messages]
 		[whereabts.core.with-util]
-		[midje.sweet]
-		[ring.mock.request]
 		[whereabts.api-helper]
-		[whereabts.util.geo]))
+		[whereabts.util.geo]
+		[midje.sweet]
+		[ring.mock.request]))
 
 (def bbox (bounding-box [1.23 1.23] [5.0 5.0]))
 (def messages [])
@@ -45,4 +45,6 @@
 
 (fact "should GET following messages by page number"
 	(messages-api-routes
-		(whereabts-request-as-anonymous-user :get "/messages/following/1")) => expected-res-for-messages)
+		(whereabts-request-as-anonymous-user :get "/messages/following/1")) => expected-res-for-messages
+	(provided
+		(find-following-messages email-roled-user 1) => [] :times 1))

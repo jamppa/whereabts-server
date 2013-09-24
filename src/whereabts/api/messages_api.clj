@@ -11,6 +11,9 @@
 (defn- messages-response-body [messages]
 	{:messages messages})
 
+(defn- page-as-int [page-str]
+	(Integer. page-str))
+
 (defroutes messages-api-routes
 
 	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat :as req]
@@ -47,7 +50,7 @@
 
 	(GET "/messages/following/:page" [page :as req]
 		(with-role req ["email"]
-			(-> []
+			(-> (find-following-messages (:basic-authentication req) (page-as-int page))
 				(messages-response-body)
 				(response))))
 )
