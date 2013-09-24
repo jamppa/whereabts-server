@@ -97,3 +97,10 @@
 
 (fact "should not double add user id to messages likes"
 	(add-user-to-likes liked-message user) => liked-message)
+
+(def follower {:following ["123" "abc"]})
+(def following (:following follower))
+(fact "should find following messages of follower with paging"
+	(find-following-messages follower 1) => anything
+	(provided
+		(find-messages-by-users following 1) => anything :times 1))

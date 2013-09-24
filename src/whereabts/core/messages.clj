@@ -61,4 +61,5 @@
 			(publish-like-message user))))
 
 (defn find-following-messages [follower page]
-	nil)
+	(if-let [following (:following follower)]
+		(find-messages-by-users following page)))
