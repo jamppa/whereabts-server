@@ -16,6 +16,10 @@
 (fact "should instantiate bson object-id with given hex-string"
 	(.toString (obj-id "507f191e810c19729de860ea")) => "507f191e810c19729de860ea")
 
+(def object-id (ObjectId. "507f191e810c19729de860ea"))
+(fact "should instantiate bson object-id with other bson object-id"
+	(obj-id object-id) => object-id)
+
 (fact "should get object-id as string from object"
 	(obj-id-as-str obj-with-id) => "507f191e810c19729de860ea")
 	

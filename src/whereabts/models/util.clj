@@ -4,7 +4,7 @@
 	(:import [org.bson.types ObjectId]))
 		
 (defn obj-id [hex]
-	(ObjectId. hex))
+	(ObjectId. (.toString hex)))
 
 (defn with-obj-id [obj]
 	(assoc obj :_id (util/object-id)))
