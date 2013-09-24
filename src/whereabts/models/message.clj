@@ -1,10 +1,11 @@
 (ns whereabts.models.message
 	(:refer-clojure :exclude [sort find])
 	(:use
-		[whereabts.db]
-		[whereabts.models.util]
-		[validateur.validation]
-		[monger.query]))
+		whereabts.db
+		whereabts.models.util
+		validateur.validation
+		monger.query
+		monger.operators))
 
 (def message-expiration-time-ms (* 1 86400000)) ; 1 day / 24h
 (def messages-in-bbox-limit 20)
@@ -66,3 +67,9 @@
 
 (defn delete-message-by-id [msg-oid]
 	(db-delete message-coll msg-oid))
+
+(defn find-messages-by-users [user-ids page]
+	(with-collection message-coll
+		(find {:user_id {$in user-ids}})
+		(sort (sorted-map :created-at -1))
+		(paginate :page page :per-page 20)))

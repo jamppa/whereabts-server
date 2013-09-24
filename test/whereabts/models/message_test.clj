@@ -79,3 +79,10 @@
 	(let [message (find-message-by-id "509d513f61395f0ebbd5e36a")]
 		(delete-message-by-id (:_id message))
 		(find-message-by-id "509d513f61395f0ebbd5e36a") => nil))
+
+(def user-a-id (:_id test-user-a))
+(fact "should find first page of messages by users"
+	(find-messages-by-users [user-a-id] 1) => [test-message-b test-message-a])
+
+(fact "should find empty page of message by users"
+	(find-messages-by-users [user-a-id] 2) => [])
