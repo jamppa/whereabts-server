@@ -60,9 +60,9 @@
 			(update-message)
 			(publish-like-message user))))
 
-(defn find-following-messages [follower page]
+(defn find-following-messages [follower skipping]
 	(if-let [following (:following follower)]
-		(-> (find-messages-by-users following page)
+		(-> (find-messages-by-users following skipping)
 			(compactify-messages)
 			(with-user-profiles))
 		[]))

@@ -68,8 +68,9 @@
 (defn delete-message-by-id [msg-oid]
 	(db-delete message-coll msg-oid))
 
-(defn find-messages-by-users [user-ids page]
+(defn find-messages-by-users [user-ids skipped]
 	(with-collection message-coll
 		(find {:user_id {$in (map obj-id user-ids)}})
 		(sort (sorted-map :created-at -1))
-		(paginate :page page :per-page 20)))
+		(limit 20)
+		(skip skipped)))

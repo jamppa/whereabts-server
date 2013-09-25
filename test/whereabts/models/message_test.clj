@@ -81,8 +81,11 @@
 		(find-message-by-id "509d513f61395f0ebbd5e36a") => nil))
 
 (def user-a-id (:_id test-user-a))
-(fact "should find first page of messages by users"
-	(find-messages-by-users [user-a-id] 1) => [test-message-b test-message-a])
+(fact "should find messages by users skipping none"
+	(find-messages-by-users [user-a-id] 0) => [test-message-b test-message-a])
 
-(fact "should find empty page of message by users"
+(fact "should find messages by users skipping first"
+	(find-messages-by-users [user-a-id] 1) => [test-message-a])
+
+(fact "should find empty set of message by users when skipping all of them"
 	(find-messages-by-users [user-a-id] 2) => [])
