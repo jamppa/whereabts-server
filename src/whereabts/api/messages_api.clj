@@ -11,9 +11,6 @@
 (defn- messages-response-body [messages]
 	{:messages messages})
 
-(defn- skip-as-int [skip-str]
-	(Integer. skip-str))
-
 (defroutes messages-api-routes
 
 	(GET "/messages/:ll-lon/:ll-lat/:ur-lon/:ur-lat" [ll-lon ll-lat ur-lon ur-lat :as req]
@@ -50,7 +47,13 @@
 
 	(GET "/messages/following/:skip" [skip :as req]
 		(with-role req ["email"]
-			(-> (find-following-messages (:basic-authentication req) (skip-as-int skip))
+			(-> (find-following-messages (:basic-authentication req) (as-int skip))
+				(messages-response-body)
+				(response))))
+
+	(GET "/messages/following/:skip/:older-than" [skip older-than :as req]
+		(with-role req ["email"]
+			(-> (find-following-messages-older-than (:basic-authentication req) (as-int skip) (as-long older-than))
 				(messages-response-body)
 				(response))))
 )

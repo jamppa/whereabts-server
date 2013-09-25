@@ -9,3 +9,9 @@
 
 (defmacro with-role [req roles & form]
     `(let [] (check-role ~req ~roles) ~@form))
+
+(defn as-int [string]
+	(Integer. string))
+
+(defn as-long [string]
+	(Long. string))

@@ -48,3 +48,9 @@
 		(whereabts-request-as-anonymous-user :get "/messages/following/1")) => expected-res-for-messages
 	(provided
 		(find-following-messages email-roled-user 1) => [] :times 1))
+
+(fact "should GET following messages skipping and older than"
+	(messages-api-routes
+		(whereabts-request-as-anonymous-user :get "/messages/following/5/123123")) => expected-res-for-messages
+	(provided
+		(find-following-messages-older-than email-roled-user 5 123123) => [] :times 1))
