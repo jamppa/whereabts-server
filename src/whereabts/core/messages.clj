@@ -66,3 +66,10 @@
 			(compactify-messages)
 			(with-user-profiles))
 		[]))
+
+(defn find-following-messages-older-than [follower skipping older-than]
+	(if-let [following (:following follower)]
+		(-> (find-messages-by-users-older-than following skipping older-than)
+			(compactify-messages)
+			(with-user-profiles))
+		[]))

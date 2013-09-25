@@ -100,7 +100,7 @@
 
 (def follower {:following ["123" "abc"]})
 (def following (:following follower))
-(fact "should find following messages of follower with paging"
+(fact "should find following messages of follower skipping some"
 	(find-following-messages follower 1) => []
 	(provided
 		(find-messages-by-users following 1) => [] :times 1
@@ -111,3 +111,10 @@
 	(find-following-messages {} 1) => []
 	(provided
 		(find-messages-by-users nil 1) => anything :times 0))
+
+(fact "should find following messages of follower skippipng and older than"
+	(find-following-messages-older-than follower 0 123123) => []
+	(provided
+		(find-messages-by-users-older-than following 0 123123) => [] :times 1
+		(compactify-messages []) => [] :times 1
+		(with-user-profiles []) => [] :times 1))
