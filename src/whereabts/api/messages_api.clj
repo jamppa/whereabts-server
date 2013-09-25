@@ -11,8 +11,8 @@
 (defn- messages-response-body [messages]
 	{:messages messages})
 
-(defn- page-as-int [page-str]
-	(Integer. page-str))
+(defn- skip-as-int [skip-str]
+	(Integer. skip-str))
 
 (defroutes messages-api-routes
 
@@ -48,9 +48,9 @@
 				(response)
 				(status 201))))
 
-	(GET "/messages/following/:page" [page :as req]
+	(GET "/messages/following/:skip" [skip :as req]
 		(with-role req ["email"]
-			(-> (find-following-messages (:basic-authentication req) (page-as-int page))
+			(-> (find-following-messages (:basic-authentication req) (skip-as-int skip))
 				(messages-response-body)
 				(response))))
 )

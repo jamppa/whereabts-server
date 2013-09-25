@@ -43,7 +43,7 @@
 	(provided
 		(like-message "123abc" email-roled-user) => message :times 1))
 
-(fact "should GET following messages by page number"
+(fact "should GET following messages skipping some of them"
 	(messages-api-routes
 		(whereabts-request-as-anonymous-user :get "/messages/following/1")) => expected-res-for-messages
 	(provided
