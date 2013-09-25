@@ -89,3 +89,11 @@
 
 (fact "should find empty set of message by users when skipping all of them"
 	(find-messages-by-users [user-a-id] 2) => [])
+
+(def older-than (- (System/currentTimeMillis) (* 1000 60 60 23)))
+(fact "should find messages by users skipping none and older than 23 hours"
+	(find-messages-by-users-older-than [user-a-id] 0 older-than) => [test-message-a])
+
+(def older-than (- (System/currentTimeMillis) (* 1000 60 60 24)))
+(fact "should find empty messages by users skipping none and older than 24 hours"
+	(find-messages-by-users-older-than [user-a-id] 0 older-than) => [])

@@ -74,3 +74,10 @@
 		(sort (sorted-map :created-at -1))
 		(limit 10)
 		(skip skipped)))
+
+(defn find-messages-by-users-older-than [user-ids skipped older-than]
+	(with-collection message-coll
+		(find {:user_id {$in (map obj-id user-ids)} :created-at {$lte older-than}})
+		(sort (sorted-map :created-at -1))
+		(limit 10)
+		(skip skipped)))
