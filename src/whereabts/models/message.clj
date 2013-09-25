@@ -72,5 +72,5 @@
 	(with-collection message-coll
 		(find {:user_id {$in (map obj-id user-ids)}})
 		(sort (sorted-map :created-at -1))
-		(limit 5)
+		(limit 10)
 		(skip skipped)))
