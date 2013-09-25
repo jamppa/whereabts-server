@@ -10,6 +10,7 @@
 (def valid-anonymous-credentials ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"])
 (def whereabts-api-messages (str whereabts-api-testsrv "/messages"))
 (def whereabts-api-following-messages (str whereabts-api-testsrv "/messages/following/1"))
+(def whereabts-api-following-messages-older-than (str whereabts-api-following-messages "/1380113954531"))
 (def whereabts-api-like-message (str whereabts-api-messages "/509d513f61395f0ebbd5e36a/likes"))
 
 (defn- whereabts-api-messages-by-bbox [ll-lon ll-lat ur-lon ur-lat]
@@ -91,4 +92,8 @@
 
 (fact "should GET following messages" :functional
 	(:status (http/get whereabts-api-following-messages
+		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
+
+(fact "should GET following messages older than" :functional
+	(:status (http/get whereabts-api-following-messages-older-than
 		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
