@@ -19,14 +19,14 @@
 		(presence-of :created-at)
 		(presence-of :updated-at)
 		(presence-of :views)
-		(presence-of :category_id)
+		(presence-of :category)
 		(presence-of :likes)
 		(length-of :message :within (range 1 251))))
 
 (defn new-message [msg-candidate]
 	(merge 
 		(select-keys msg-candidate 
-			[:user_id :message :created-at :updated-at :category_id])
+			[:user_id :message :created-at :updated-at :category])
 		{:views 0 :likes []
 		 :loc [
 		 	(get-in msg-candidate [:loc :lon]) 
@@ -34,7 +34,7 @@
 
 (defn message-to-update [msg]
 	(select-keys msg 
-		[:_id :user_id :message :loc :created-at :updated-at :views :likes :category_id]))
+		[:_id :user_id :message :loc :created-at :updated-at :views :likes :category]))
 
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))
@@ -54,7 +54,7 @@
 
 (defn compactify-message [msg]
 	(select-keys msg 
-		[:_id :user_id :loc :updated-at :created-at :category_id :message]))
+		[:_id :user_id :loc :updated-at :created-at :category :message]))
 
 (defn compactify-messages [coll]
 	(map compactify-message coll))

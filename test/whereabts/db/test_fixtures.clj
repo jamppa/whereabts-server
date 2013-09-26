@@ -13,7 +13,7 @@
 	:updated-at (System/currentTimeMillis)
 	:views 10
 	:likes []
-	:category_id 1})
+	:category "happenings"})
 
 (def test-message-b {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36b")
@@ -24,7 +24,7 @@
 	:updated-at (System/currentTimeMillis)
 	:views 11
 	:likes ["509d513f61395f0ebbd5e38a"]
-	:category_id 2})
+	:category "happenings"})
 
 (def test-message-c {
 	:_id (ObjectId. "509d513f61395f0ebbd5e36c")
@@ -35,7 +35,7 @@
 	:updated-at (System/currentTimeMillis)
 	:views 12
 	:likes ["509d513f61395f0ebbd5e38a"]
-	:category_id 2})
+	:category "happenings"})
 
 (def test-message-d 
 	(merge test-message-c {

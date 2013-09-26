@@ -14,7 +14,7 @@
 	:message "This is the content of My Cool Message" 
 	:loc {:lon 45.1 :lat 56.4}
 	:views 0
-	:category_id 1
+	:category "happenings"
 	:likes []})
 
 (def existing-message (with-obj-id (updated-now (created-now message))))
@@ -58,7 +58,7 @@
 	(find-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
 (fact "should compactify message extracting short-message"
-	(keys (compactify-message existing-message)) => '(:message :category_id :created-at :updated-at :loc :user_id :_id))
+	(keys (compactify-message existing-message)) => '(:message :category :created-at :updated-at :loc :user_id :_id))
 
 (fact "should create a copy of message"
 	(new-message message) => msg-after-copy)
