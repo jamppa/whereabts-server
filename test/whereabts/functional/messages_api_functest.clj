@@ -20,7 +20,7 @@
 	(str (whereabts-api-messages-by-bbox ll-lon ll-lat ur-lon ur-lat) "/" category))
 
 (def message 
-	{:message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323} :expire-time 5000 :category-key "traffic"})
+	{:message "yey, cool things!" :loc {:lon 24.1234 :lat 60.2323} :category "traffic"})
 
 (def message-as-json 
 	(json/write-str message))
@@ -28,9 +28,6 @@
 (def invalid-message-as-json 
 	(json/write-str 
 		{:loc {:lon 22.3123 :lat 60.1231}}))
-
-(def message-without-expire-time-as-json
-	(json/write-str (dissoc message :expire-time)))
 
 (defn- post-message-as-user [payload]
 	(http/post whereabts-api-messages
@@ -44,9 +41,6 @@
 
 (fact "should response with HTTP Created when POST new message as an anonymous whereabts user" :functional
 	(:status (post-message-as-user message-as-json)) => 201)
-
-(fact "should response HTTP Created when POSTing new message without expire-time for it" :functional
-	(:status (post-message-as-user message-without-expire-time-as-json)) => 201)
 
 (fact "should response with HTTP Bad Request when trying to POST invalid message" :functional
 	(:status (post-message-as-user invalid-message-as-json)) => 400)

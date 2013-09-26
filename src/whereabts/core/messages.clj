@@ -21,9 +21,10 @@
 		(with-user-profiles)))
 
 (defn save-new-message [msg usr]
-	(compactify-message 
-		(save-message 
-			(with-category (with-user msg usr)))))
+	(-> (with-user msg usr)
+		(save-message)
+		(compactify-message)
+		(with-user-profile)))
 
 (defn view-and-update-message [msg]
 	(update-message 

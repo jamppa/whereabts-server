@@ -36,9 +36,9 @@
 (fact "should save new message and return it compactified"
 	(save-new-message message user) => saved-message
 	(provided 
-		(with-category message-with-user) => message-with-user :times 1
 		(save-message message-with-user) => saved-message :times 1
-		(compactify-message saved-message) => compactified-saved-message :times 1))
+		(compactify-message saved-message) => saved-message :times 1
+		(with-user-profile saved-message) => saved-message :times 1))
 
 (fact "should find a message with user profile and replies by id"
 	(find-message "123abc" user) => message-with-user-and-replies
