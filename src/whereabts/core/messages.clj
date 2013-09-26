@@ -5,7 +5,6 @@
 		[whereabts.models.util]
 		[whereabts.core.with-util]
 		[whereabts.core.replies]
-		[whereabts.core.categories]
 		[whereabts.core.profiles]
 		[whereabts.notification.like-notification])
 	(:import [whereabts.exception WhereabtsResourceNotFoundException]))

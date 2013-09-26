@@ -5,7 +5,6 @@
 		[whereabts.models.reply]
 		[whereabts.core.messages]
 		[whereabts.core.replies]
-		[whereabts.core.categories]
 		[whereabts.core.profiles]
 		[whereabts.core.with-util]
 		[whereabts.notification.like-notification]
