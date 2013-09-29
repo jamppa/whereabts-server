@@ -35,12 +35,14 @@
 (def test-profile-b
 	(merge test-profile-a 
 		{
+			:nick "seppo"
 			:_id profile-id-b
 			:user_id (:_id test-user-b)}))
 
 (def test-profile-c
 	(merge test-profile-a
 	{
+		:nick "man of the year"
 		:_id profile-id-c
 		:user_id (ObjectId.)
 		}))

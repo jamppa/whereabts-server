@@ -69,3 +69,12 @@
 
 (fact "should find most recent profile"
 	(find-profiles-recent 1) => [test-profile-c])
+
+(fact "should find two profiles by user name"
+	(find-profiles-by-name "man") => [test-profile-a test-profile-c])
+
+(fact "should find one profile by user name"
+	(find-profiles-by-name "sEPpo") => [test-profile-b])
+
+(fact "should not find any profile by name when one doesnt exist"
+	(find-profiles-by-name "teppo") => [])

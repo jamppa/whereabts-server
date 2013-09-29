@@ -31,6 +31,11 @@
 		(sort (sorted-map :_id -1))
 		(limit num)))
 
+(defn find-profiles-by-name [name]
+	(with-collection profiles-coll
+		(find {:nick {$regex (str ".*" name ".*") $options "i"}})
+		(limit 25)))
+
 (defn save-profile [profile]
 	(if (valid? profile-validation profile)
 		(db-save profiles-coll profile)
