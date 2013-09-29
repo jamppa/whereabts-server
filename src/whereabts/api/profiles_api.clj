@@ -2,6 +2,7 @@
 	(:use
 		[whereabts.api.api-utils]
 		[whereabts.core.profiles]
+		[whereabts.core.profiles-search]
 		[compojure.core]
 		[ring.util.response]
 		[clojure.walk :only [keywordize-keys]]))
@@ -9,6 +10,9 @@
 (defn- extract-profile [req]
 	(let [body (keywordize-keys (:body req))]
 		(:profile body)))
+
+(defn- users-response-body [users]
+	{:users users})
 
 (defroutes profiles-api-routes
 
@@ -19,7 +23,7 @@
 				  (-> (response (save-user-profile user profile))
 				  	(status 201)))))
 
-	(GET "/users/me" [:as req]
+	(GET "/users" [:as req]
 		(with-role req ["email"]
 			(-> (:basic-authentication req)
 				(find-user-profile)
@@ -29,6 +33,12 @@
 		(with-role req ["email"]
 			(-> id
 				(find-profile-of-user (:basic-authentication req))
+				(response))))
+
+	(GET "/recent/users" [:as req]
+		(with-role req ["email"]
+			(-> (find-recent-profiles (:basic-authentication req))
+				(users-response-body)
 				(response))))
 
 )
