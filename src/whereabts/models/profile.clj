@@ -26,6 +26,11 @@
 	(with-collection profiles-coll
 		(find {:user_id {$in (map obj-id user-ids)}})))
 
+(defn find-profiles-recent [num]
+	(with-collection profiles-coll
+		(sort (sorted-map :_id -1))
+		(limit num)))
+
 (defn save-profile [profile]
 	(if (valid? profile-validation profile)
 		(db-save profiles-coll profile)

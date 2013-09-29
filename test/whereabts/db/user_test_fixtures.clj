@@ -3,6 +3,7 @@
 
 (def profile-id-a (ObjectId. "509d513f61395f0ebbd5e58a"))
 (def profile-id-b (ObjectId. "509d513f61395f0ebbd5e58b"))
+(def profile-id-c (ObjectId.))
 
 (def test-user-a {
 	:_id (ObjectId. "509d513f61395f0ebbd5e38a")
@@ -36,3 +37,12 @@
 		{
 			:_id profile-id-b
 			:user_id (:_id test-user-b)}))
+
+(def test-profile-c
+	(merge test-profile-a
+	{
+		:_id profile-id-c
+		:user_id (ObjectId.)
+		}))
+
+(def test-profiles [test-profile-a test-profile-b test-profile-c])

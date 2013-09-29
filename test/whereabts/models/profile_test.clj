@@ -63,3 +63,9 @@
 
 (fact "should find profiles by user ids"
 	(find-profiles-by-user-ids ["509d513f61395f0ebbd5e38a" "509d513f61395f0ebbd5e38b"]) => [test-profile-a test-profile-b])
+
+(fact "should find 2 most recent profiles"
+	(find-profiles-recent 2) => [test-profile-c test-profile-b])
+
+(fact "should find most recent profile"
+	(find-profiles-recent 1) => [test-profile-c])
