@@ -9,7 +9,6 @@
 		[clojure.data.json :as json]))
 
 (def whereabts-profiles-api (str whereabts-api-testsrv "/users"))
-(def whereabts-me-profile-api (str whereabts-profiles-api "/me"))
 (def profile-payload (json/write-str 
 	{:profile {:nick "jamppa" :country "fi" :description "testman from testland" :photo "me.jpg"}}))
 (def broken-profile-payload (json/write-str 
@@ -32,7 +31,7 @@
 		(whereabts-api-request ["anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000"] payload)))
 
 (defn- get-as-user [email uuid]
-	(http/get whereabts-me-profile-api (whereabts-api-request [email uuid] "")))
+	(http/get whereabts-profiles-api (whereabts-api-request [email uuid] "")))
 
 (defn- get-profile-as-user [userid email uuid]
 	(http/get (str whereabts-profiles-api "/" userid) (whereabts-api-request [email uuid] "")))
