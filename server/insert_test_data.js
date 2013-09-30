@@ -51,6 +51,10 @@ function insertTestUserProfiles() {
 		function(doc) {
 			db.profiles.insert(getUserProfile(doc["_id"], randomNick(), randomDescription()));
 		});
+	db.profiles.find().forEach(
+		function(doc) {
+			db.users.update({_id: doc["user_id"]}, {$set: {profile_id: doc["_id"]}});
+		});
 }
 
 insertTestUsers(100);
