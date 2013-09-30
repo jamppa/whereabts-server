@@ -5,7 +5,7 @@ function getUser(email, createdAt) {
 		"followers": [],
 		"following": [],
 		"created-at": createdAt,
-		"last-seent-at": createdAt,
+		"last-seen-at": createdAt,
 		"role": "email"
 	}
 }
