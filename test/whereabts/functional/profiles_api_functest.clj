@@ -36,6 +36,10 @@
 (defn- get-profile-as-user [userid email uuid]
 	(http/get (str whereabts-profiles-api "/" userid) (whereabts-api-request [email uuid] "")))
 
+(defn- search-profiles-as-user [email uuid]
+	(http/get (str whereabts-profiles-api "_search?search=testman")
+		(whereabts-api-request [email uuid] "")))
+
 (background (before :facts (setup-db)))
 
 (fact "should response http created when posting profile for user without profile" :functional
@@ -61,3 +65,6 @@
 
 (fact "should response http not found when geting a profile of non-existing user" :functional
 	(:status (get-profile-as-user "509d513f61395f0ebbd5e666" "user@test.com" "550e8400-e29b-41d4-a716-446655440001")) => 404)
+
+(fact "should response http ok when searching users" :functional
+	(:status (search-profiles-as-user "anonymous@whereabts.com" "550e8400-e29b-41d4-a716-446655440000")) => 200)
