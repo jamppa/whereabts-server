@@ -32,3 +32,9 @@
 	(profiles-api-routes (whereabts-request-as-anonymous-user :get "/recent/users")) => successfull-get-response-users
 	(provided
 		(find-recent-profiles email-roled-user) => [profile] :times 1))
+
+(fact "should find user profiles by query search string"
+	(profiles-api-routes 
+		(whereabts-request-as-user :get "/users_search?search=jaska" {"search" "jaska"})) => successfull-get-response-users
+	(provided
+		(find-profiles "jaska") => [profile] :times 1))

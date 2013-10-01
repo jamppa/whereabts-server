@@ -13,7 +13,8 @@
         [compojure.core]
         [ring.middleware.json :only [wrap-json-body]]
         [ring.middleware.json :only [wrap-json-response]]
-        [ring.middleware.basic-authentication])
+        [ring.middleware.basic-authentication]
+        [ring.middleware.params])
     (:require 
         [compojure.handler :as handler]
         [compojure.route :as route]))
@@ -44,4 +45,5 @@
         (wrap-exception-logger)
         (wrap-exception-handler)
         (wrap-json-response)
-        (wrap-basic-authentication authenticate)))
+        (wrap-basic-authentication authenticate)
+        (wrap-params)))

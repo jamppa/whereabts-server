@@ -6,3 +6,6 @@
 	(let [session-user-id (.toString user-id)]
 		(filter #(not (= session-user-id (.toString (:user_id %)))) 
 			(find-profiles-recent 25))))
+
+(defn find-profiles [search-str]
+	[])

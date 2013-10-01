@@ -12,4 +12,7 @@
 (defn whereabts-request-as-anonymous-user [method uri & body]
 	(assoc (whereabts-request method uri (first body)) :basic-authentication email-roled-user))
 
+(defn whereabts-request-as-user [method uri params & body]
+	(assoc (whereabts-request method uri (first body)) :query-params params :basic-authentication email-roled-user))
+
 (defn expected-res [status body] {:status status :headers {} :body body})

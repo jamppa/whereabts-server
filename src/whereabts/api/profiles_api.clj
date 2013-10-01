@@ -11,6 +11,9 @@
 	(let [body (keywordize-keys (:body req))]
 		(:profile body)))
 
+(defn- extract-search [req]
+	(get (:query-params req) "search"))
+
 (defn- users-response-body [users]
 	{:users users})
 
@@ -41,4 +44,9 @@
 				(users-response-body)
 				(response))))
 
+	(GET "/users_search*" [:as req]
+		(with-role req ["email"]	
+			(-> (find-profiles (extract-search req))
+				(users-response-body)
+				(response))))
 )
