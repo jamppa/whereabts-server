@@ -16,3 +16,8 @@
 	(find-profiles "asd") => found-profiles
 	(provided
 		(find-profiles-by-name "asd") => found-profiles :times 1))
+
+(fact "should return empty vec when given search string is empty"
+	(find-profiles "") => []
+	(provided
+		(find-profiles-by-name "") => anything :times 0))
