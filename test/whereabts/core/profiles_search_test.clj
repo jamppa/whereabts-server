@@ -11,3 +11,8 @@
 	(find-recent-profiles user) => [{:user_id "456fgh"}]
 	(provided
 		(find-profiles-recent 25) => found-profiles :times 1))
+
+(fact "should find user profiles by given search string"
+	(find-profiles "asd") => found-profiles
+	(provided
+		(find-profiles-by-name "asd") => found-profiles :times 1))
