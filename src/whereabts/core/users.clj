@@ -1,8 +1,9 @@
 (ns whereabts.core.users
 	(:use
-		[whereabts.models.user]
-		[whereabts.models.profile]
-		[whereabts.models.util]))
+		whereabts.models.user
+		whereabts.models.profile
+		whereabts.models.util
+		whereabts.models.message))
 
 (defn with-email-role [user]
 	(merge user {:role "email"}))
@@ -12,6 +13,9 @@
 
 (defn with-empty-followings [user]
 	(merge user {:following []}))
+
+(defn with-messages-count [{user-id :_id :as user}]
+	(merge user {:messages-count (count-messages-by-user user-id)}))
 
 (defn save-user [user]
 	(-> user

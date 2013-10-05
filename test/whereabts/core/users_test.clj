@@ -1,10 +1,11 @@
 (ns whereabts.core.users-test
 	(:use
-		[whereabts.core.users]
-		[whereabts.models.user]
-		[whereabts.models.profile]
-		[whereabts.models.util]
-		[midje.sweet])
+		whereabts.core.users
+		whereabts.models.user
+		whereabts.models.profile
+		whereabts.models.message
+		whereabts.models.util
+		midje.sweet)
 	(:import [org.bson.types ObjectId]))
 
 (def user {:_id "123"})
@@ -46,3 +47,9 @@
 	(delete-user user) => anything
 	(provided
 		(delete-user-by-id "123") => anything :times 1))
+
+(def user-with-messages-count (merge user {:messages-count 1}))
+(fact "should merge user with messages count"
+	(with-messages-count user) => user-with-messages-count
+	(provided
+		(count-messages-by-user "123") => 1 :times 1))
