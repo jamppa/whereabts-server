@@ -117,3 +117,10 @@
 		(find-messages-by-users-older-than following 0 123123) => [] :times 1
 		(compactify-messages []) => [] :times 1
 		(with-user-profiles []) => [] :times 1))
+
+(fact "should find messages of a user skipping some and older than"
+	(find-users-messages-older-than "123qwe" 1 123123) => []
+	(provided
+		(find-messages-by-users-older-than ["123qwe"] 1 123123) => [] :times 1
+		(compactify-messages []) => [] :times 1
+		(with-user-profiles []) => [] :times 1))

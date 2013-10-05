@@ -75,4 +75,6 @@
 		[]))
 
 (defn find-users-messages-older-than [user skipping older-than]
-	nil)
+	(-> (find-messages-by-users-older-than [user] skipping older-than)
+		(compactify-messages)
+		(with-user-profiles)))
