@@ -83,7 +83,8 @@
 		(find-user-profile user) => profile :times 1
 		(with-followed? user-with-profile auth-user) => user-with-profile :times 1
 		(with-following-as-number user-with-profile) => user-with-profile :times 1
-		(with-followers-as-number user-with-profile) => user-with-profile :times 1))
+		(with-followers-as-number user-with-profile) => user-with-profile :times 1
+		(with-messages-count user-with-profile) => user-with-profile :times 1))
 
 (def message-a-with-profile (merge test-message-a {:user-profile test-profile-a}))
 (def message-b-with-profile (merge test-message-c {:user-profile test-profile-b}))

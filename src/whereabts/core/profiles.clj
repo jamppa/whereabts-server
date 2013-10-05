@@ -42,7 +42,8 @@
 			(-> (merge user {:user-profile (find-user-profile user)})
 				(with-followed? auth-user)
 				(with-following-as-number)
-				(with-followers-as-number)))
+				(with-followers-as-number)
+				(with-messages-count)))
 		(throw (WhereabtsResourceNotFoundException.))))
 
 (defn with-user-profile 
