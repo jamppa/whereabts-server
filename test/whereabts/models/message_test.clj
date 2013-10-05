@@ -7,7 +7,9 @@
 		[whereabts.util.geo]
 		[whereabts.db.test-fixtures]
 		[whereabts.db.user-test-fixtures])
-	(:import [com.mongodb MongoException]))
+	(:import 
+		[com.mongodb MongoException]
+		[org.bson.types ObjectId]))
 
 (def message {
 	:user_id (:_id test-user-a)
