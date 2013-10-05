@@ -73,3 +73,6 @@
 			(compactify-messages)
 			(with-user-profiles))
 		[]))
+
+(defn find-users-messages-older-than [user skipping older-than]
+	nil)

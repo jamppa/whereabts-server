@@ -56,5 +56,11 @@
 			(-> (find-following-messages-older-than (:basic-authentication req) (as-int skip) (as-long older-than))
 				(messages-response-body)
 				(response))))
+
+	(GET "/users/:id/messages/:skip/:older-than" [id skip older-than :as req]
+		(with-role req ["email"]
+			(-> (find-users-messages-older-than id (as-int skip) (as-long older-than))
+				(messages-response-body)
+				(response))))
 )
 
