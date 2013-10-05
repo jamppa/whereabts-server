@@ -100,3 +100,6 @@
 
 (fact "should count messages of user"
 	(count-messages-by-user user-a-id) => 2)
+
+(fact "should count messages of nonexisting user as zero"
+	(count-messages-by-user (ObjectId.)) => 0)
