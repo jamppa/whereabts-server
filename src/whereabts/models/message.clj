@@ -5,7 +5,8 @@
 		whereabts.models.util
 		validateur.validation
 		monger.query
-		monger.operators))
+		monger.operators)
+	(:require [monger.collection :as monger]))
 
 (def message-expiration-time-ms (* 1 86400000)) ; 1 day / 24h
 (def messages-in-bbox-limit 20)
@@ -81,3 +82,6 @@
 		(sort (sorted-map :created-at -1))
 		(limit 10)
 		(skip skipped)))
+
+(defn count-messages-by-user [user-id]
+	(monger/count message-coll {:user_id (obj-id user-id)}))
