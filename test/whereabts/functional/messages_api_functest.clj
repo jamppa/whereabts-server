@@ -91,3 +91,7 @@
 (fact "should GET following messages older than" :functional
 	(:status (http/get whereabts-api-following-messages-older-than
 		(whereabts-api-request valid-anonymous-credentials ""))) => 200)
+
+(def messages-of-user-api (str whereabts-api-testsrv "/users/509d513f61395f0ebbd5e38a/messages/0/1380113954531"))
+(fact "should GET messages of a user" :functional
+	(:status (http/get messages-of-user-api (whereabts-api-request valid-anonymous-credentials ""))) => 200)
