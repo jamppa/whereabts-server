@@ -9,7 +9,7 @@
 	(:require [monger.collection :as monger]))
 
 (def message-expiration-time-ms (* 1 86400000)) ; 1 day / 24h
-(def messages-in-bbox-limit 20)
+(def messages-in-bbox-limit 15)
 (def message-coll "messages")
 
 (def message-validation-set
