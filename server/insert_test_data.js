@@ -60,7 +60,7 @@ function randomMessageText() {
 }
 
 function randomLocation() {
-	return [randomInRange(-180, 180, 6), randomInRange(-180, 180, 6)]
+	return [randomInRange(-180, 180, 6), randomInRange(-180, 180, 7)]
 }
 
 function randomCategory(categories) {
@@ -99,6 +99,6 @@ function insertTestMessages() {
 	});
 }
 
-insertTestUsers(1000);
+insertTestUsers(5000);
 insertTestUserProfiles();
 insertTestMessages();
