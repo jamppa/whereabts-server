@@ -60,7 +60,7 @@ function randomMessageText() {
 }
 
 function randomLocation() {
-	return [randomInRange(-180, 180, 6), randomInRange(-180, 180, 7)]
+	return [randomInRange(-179, 179, 6), randomInRange(-179, 179, 7)]
 }
 
 function randomCategory(categories) {
@@ -68,18 +68,25 @@ function randomCategory(categories) {
 }
 
 function randomCreationTime() {
-	return randomInRange((new Date().getTime() - (86400000 * 2)), new Date().getTime(), 0);
+	return randomInRange((new Date().getTime() - (86400000 * 3)), new Date().getTime(), 0);
+}
+
+function insertKnownTestUser() {
+	db.users.insert(getUser("jani.arvonen@gmail.com", new Date().getTime()));
 }
 
 function insertTestUsers(numOfUsers) {
-	db.users.remove();
 	for(i = 0; i < numOfUsers; i++){
 		db.users.insert(getUser(randomEmail(), new Date().getTime()));
 	}
 }
 
+function insertKnownTestUserProfile() {
+	var user = db.users.findOne({email: "jani.arvonen@gmail.com"});
+	db.profiles.insert(getUserProfile(user._id, "Jamppa", "Kouvva jätkä"));
+}
+
 function insertTestUserProfiles() {
-	db.profiles.remove();
 	db.users.find().forEach(
 		function(doc) {
 			db.profiles.insert(getUserProfile(doc["_id"], randomNick(), randomDescription()));
@@ -90,8 +97,14 @@ function insertTestUserProfiles() {
 		});
 }
 
+function insertKnownTestMessage() {
+	var user = db.users.findOne({email: "jani.arvonen@gmail.com"});
+	var message = getMessage(user._id);
+	message._id = new ObjectId("525c11c88fe0db85bb1c12e0");
+	db.messages.insert(message);
+}
+
 function insertTestMessages() {
-	db.messages.remove();
 	db.users.find().forEach(
 		function(doc){
 			db.messages.insert(getMessage(doc["_id"]));
@@ -99,6 +112,17 @@ function insertTestMessages() {
 	});
 }
 
+function cleanCollections() {
+	db.users.remove();
+	db.profiles.remove();
+	db.messages.remove();
+	db.replies.remove();
+}
+
+cleanCollections();
+insertKnownTestUser();
+insertKnownTestUserProfile();
 insertTestUsers(5000);
 insertTestUserProfiles();
+insertKnownTestMessage();
 insertTestMessages();
