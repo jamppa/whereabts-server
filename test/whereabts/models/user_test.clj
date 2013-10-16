@@ -17,6 +17,8 @@
 
 (def new-user-missing-uuid (dissoc new-user :user-uuid))
 (def new-user-missing-email (dissoc new-user :email))
+(def new-user-missing-following (dissoc new-user :following))
+(def new-user-missing-followers (dissoc new-user :followers))
 (def new-user-missing-creationtime (dissoc new-user :created-at))
 (def new-user-too-short-uuid (merge new-user {:user-uuid "123-abc"}))
 (def new-user-too-long-uuid (merge new-user {:user-uuid (clojure.string/join "" (repeat 37 "s"))}))
@@ -45,6 +47,12 @@
 
 (fact "should not save invalid user missing creation time"
 	(save-new-user new-user-missing-creationtime) => (throws IllegalArgumentException))
+
+(fact "should not save invalid user missing following"
+	(save-new-user new-user-missing-following) => (throws IllegalArgumentException))
+
+(fact "should not save invalid user missing followers"
+	(save-new-user new-user-missing-followers) => (throws IllegalArgumentException))
 
 (fact "should find user by uuid and email"
 	(find-user (by-uuid-and-email 
