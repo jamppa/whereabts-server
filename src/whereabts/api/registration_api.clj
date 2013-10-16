@@ -6,7 +6,7 @@
 		[ring.util.response]
 		[clojure.walk :only [keywordize-keys]]))
 
-(def required-client-version {:version-code 7})
+(def required-client-version {:version-code 22})
 
 (defn- extract-user [req]
 	(let [body (keywordize-keys (:body req))]

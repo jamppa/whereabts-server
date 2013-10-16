@@ -34,4 +34,4 @@
 
 (fact "should GET minimum required client version"
 	(registration-api-routes
-		(whereabts-request-as-public-user :get "/required_client_version")) => (expected-res 200 {:version-code 7}))
+		(whereabts-request-as-public-user :get "/required_client_version")) => (expected-res 200 {:version-code 22}))
