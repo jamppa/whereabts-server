@@ -84,6 +84,8 @@ function insertTestUsers(numOfUsers) {
 function insertKnownTestUserProfile() {
 	var user = db.users.findOne({email: "jani.arvonen@gmail.com"});
 	db.profiles.insert(getUserProfile(user._id, "Jamppa", "Kouvva jätkä"));
+	var profile = db.profiles.findOne({user_id: user._id});
+	db.users.update({_id: user._id}, {$set: {profile_id: profile._id}});
 }
 
 function insertTestUserProfiles() {
@@ -120,9 +122,9 @@ function cleanCollections() {
 }
 
 cleanCollections();
+insertTestUsers(1000);
+insertTestUserProfiles();
+insertTestMessages();
 insertKnownTestUser();
 insertKnownTestUserProfile();
-insertTestUsers(5000);
-insertTestUserProfiles();
 insertKnownTestMessage();
-insertTestMessages();
