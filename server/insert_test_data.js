@@ -72,7 +72,11 @@ function randomCreationTime() {
 }
 
 function insertKnownTestUser() {
-	db.users.insert(getUser("jani.arvonen@gmail.com", new Date().getTime()));
+	var knownUser = getUser("jani.arvonen@gmail.com", new Date().getTime());
+	var randomUser = db.users.findOne();
+	knownUser.following = [randomUser._id.valueOf().toString()]
+	knownUser.followers = [randomUser._id.valueOf().toString()]
+	db.users.insert(knownUser);
 }
 
 function insertTestUsers(numOfUsers) {
@@ -122,7 +126,7 @@ function cleanCollections() {
 }
 
 cleanCollections();
-insertTestUsers(1000);
+insertTestUsers(100000);
 insertTestUserProfiles();
 insertTestMessages();
 insertKnownTestUser();
