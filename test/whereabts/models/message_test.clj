@@ -17,7 +17,8 @@
 	:loc {:lon 45.1 :lat 56.4}
 	:views 0
 	:category "happenings"
-	:likes []})
+	:likes []
+	:photo false})
 
 (def existing-message (with-obj-id (updated-now (created-now message))))
 
@@ -37,7 +38,7 @@
 (fact "should not find message by id when one does not exist"
 	(find-message-by-id "509d513f61395f0ebbd5e666") => nil)
 
-(fact "should save valid  message"
+(fact "should save valid message"
 	(let [saved-message (save-message message)]
 		(find-message-by-id (obj-id-as-str saved-message)) => saved-message))
 
@@ -59,7 +60,7 @@
 (fact "should not find messages by bounding box when there isnt any"
 	(find-messages-by-bbox (bounding-box [45 34] [23 56])) => [])
 
-(fact "should compactify message extracting short-message"
+(fact "should compactify message"
 	(keys (compactify-message existing-message)) => '(:message :category :created-at :updated-at :loc :user_id :_id))
 
 (fact "should create a copy of message"
@@ -92,8 +93,8 @@
 (fact "should find empty set of message by users when skipping all of them"
 	(find-messages-by-users [user-a-id] 2) => [])
 
-(def older-than (- (System/currentTimeMillis) (* 1000 60 60 23)))
-(fact "should find messages by users skipping none and older than 23 hours"
+(def older-than (- (System/currentTimeMillis) (* 1000 60 60 10)))
+(fact "should find messages by users skipping none and older than 10 hours"
 	(find-messages-by-users-older-than [user-a-id] 0 older-than) => [test-message-a])
 
 (def older-than (- (System/currentTimeMillis) (* 1000 60 60 24)))

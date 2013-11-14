@@ -8,7 +8,7 @@
 		monger.operators)
 	(:require [monger.collection :as monger]))
 
-(def message-expiration-time-ms (* 1 86400000)) ; 1 day / 24h
+(def message-expiration-time-ms (* 12 3600000)) ; 12h
 (def messages-in-bbox-limit 15)
 (def message-coll "messages")
 
@@ -22,20 +22,21 @@
 		(presence-of :views)
 		(presence-of :category)
 		(presence-of :likes)
+		(presence-of :photo)
 		(length-of :message :within (range 1 251))))
 
 (defn new-message [msg-candidate]
 	(merge 
 		(select-keys msg-candidate 
 			[:user_id :message :created-at :updated-at :category])
-		{:views 0 :likes []
+		{:views 0 :likes [] :photo false
 		 :loc [
 		 	(get-in msg-candidate [:loc :lon]) 
 		 	(get-in msg-candidate [:loc :lat])]}))
 
 (defn message-to-update [msg]
 	(select-keys msg 
-		[:_id :user_id :message :loc :created-at :updated-at :views :likes :category]))
+		[:_id :user_id :message :loc :created-at :updated-at :views :likes :category :photo]))
 
 (defn find-message-by-id [id-str]
 	(db-find-one-by-id message-coll (obj-id id-str)))
