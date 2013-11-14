@@ -126,7 +126,7 @@ function cleanCollections() {
 }
 
 cleanCollections();
-insertTestUsers(100000);
+insertTestUsers(1000);
 insertTestUserProfiles();
 insertTestMessages();
 insertKnownTestUser();
