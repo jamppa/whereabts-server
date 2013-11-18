@@ -13,4 +13,3 @@ mongo whereabtsdb --eval 'db.profiles.ensureIndex({"nick" : 1})'
 
 #add photo field to existing messages
 mongo localhost:27017/whereabtsdb add_photo_field_to_messages.js
-
